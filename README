@@ -1,0 +1,5 @@
+
+http://stas-blogspot.blogspot.com/2010/01/compile-recursively-with-javac.html
+recursive compile:
+	find ./src -name *.java > sources_list.txt
+	javac -classpath "${CLASSPATH}" @sources_list.txt
