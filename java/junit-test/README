@@ -1,0 +1,2 @@
+
+mvn exec:java -Dexec.mainClass="com.knoa.practice.App" -Dexec.args="arg0 arg1"
