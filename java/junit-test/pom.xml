@@ -29,14 +29,68 @@
 					<showWarnings>true</showWarnings>
 				</configuration>
 			</plugin>
+			<!--	execute App#main method using 'mvn test'	-->
+			<plugin>  
+				<groupId>org.codehaus.mojo</groupId>  
+				<artifactId>exec-maven-plugin</artifactId>  
+				<version>1.1.1</version>  
+				<executions>  
+					<execution>  
+						<phase>test</phase>  
+						<goals>  
+							<goal>java</goal>  
+						</goals>  
+						<configuration>  
+							<mainClass>com.knoa.practice.App</mainClass>  
+							<arguments>  
+								<argument>arg0</argument>  
+								<argument>arg1</argument>  
+							</arguments>  
+						</configuration>  
+					</execution>  
+				</executions>  
+			</plugin> 
 		</plugins>
 	</build>
-  <dependencies>
+
+	<!--	http://www.vineetmanohar.com/2009/11/3-ways-to-run-java-main-from-maven/
+			execute App#main method using 'mvn test -Ptest-app'	-->
+	<profiles>  
+		<profile>  
+			<id>test-app</id>  
+		<build>  
+			<plugins>  
+				<plugin>  
+					<groupId>org.codehaus.mojo</groupId>  
+					<artifactId>exec-maven-plugin</artifactId>  
+					<version>1.1.1</version>  
+					<executions>  
+						<execution>  
+							<phase>test</phase>  
+							<goals>  
+								<goal>java</goal>  
+							</goals>  
+							<configuration>  
+								<mainClass>com.knoa.practice.App</mainClass>  
+								<arguments>  
+									<argument>arg0</argument>  
+									<argument>arg1</argument>  
+								</arguments>  
+							</configuration>  
+						</execution>  
+					</executions>  
+				</plugin>  
+			</plugins>  
+		</build>  
+		</profile>  
+	</profiles>
+
+	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.0</version>
 			<scope>test</scope>
 		</dependency>
-  </dependencies>
+	</dependencies>
 </project>
