@@ -7,7 +7,21 @@ import	java.io.*;
 //	http://stackoverflow.com/questions/2597271/easy-to-get-a-test-file-into-junit
 public class AppTest 
 {
+	private static String	fileName;
 	private BufferedReader in = null;
+
+	//	http://www.cavdar.net/2008/07/21/junit-4-in-60-seconds/
+	@BeforeClass
+	public static void runBeforeClass()	{
+		//	run for one time before all test cases
+		fileName	=	"test-resource.txt";
+	}
+
+	@AfterClass
+	public static void runAfterClass() {
+		//	run for one time after all test cases
+		fileName	=	null;
+	} 
 
 	@Before
 	public void setup() throws IOException
@@ -15,7 +29,7 @@ public class AppTest
 		in	=	new BufferedReader(
 					new InputStreamReader(
 						getClass().getClassLoader().getResourceAsStream(
-							"test-resource.txt")));
+							fileName)));
 	}
 
 	@After
@@ -28,7 +42,15 @@ public class AppTest
 	}
 
 	@Test
-	public void testFoo() throws IOException
+	public void testFoo1() throws IOException
+	{
+		String line = in.readLine();
+
+		Assert.assertNotNull(line);
+	}
+
+	@Test
+	public void testFoo2() throws IOException
 	{
 		String line = in.readLine();
 
