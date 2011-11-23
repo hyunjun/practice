@@ -2,6 +2,8 @@ package com.knoa.practice;
 
 import	org.apache.commons.cli.CommandLine;
 import	org.apache.commons.cli.CommandLineParser;
+import	org.apache.commons.cli.HelpFormatter;
+import	org.apache.commons.cli.Option;
 import	org.apache.commons.cli.OptionBuilder;
 import	org.apache.commons.cli.Options;
 import	org.apache.commons.cli.ParseException;
@@ -47,7 +49,9 @@ public class App
 
 		//	create the Options
 		Options	options	=	new Options();
-		options.addOption("a", "all", false, "do not hide entries starting with .");
+		Option	option	=	new Option("a", "all", false, "do not hide entries starting with .");
+		option.setRequired(true);
+		options.addOption(option);
 		options.addOption("A", "almost-all", false, "do not list implied .  and ..");
 		options.addOption("b", "escape", false, "print octal escapes for nongraphic " +
 			"characters");
@@ -55,6 +59,7 @@ public class App
 			.withDescription("use SIZE-byte blocks")
 			.hasArg()
 			.withArgName("SIZE")
+			.isRequired()
 			.create()
 			);
 		options.addOption("B", "ignore-backups", false, "do not list implied entried " +
@@ -65,6 +70,7 @@ public class App
 			"by ctime");
 		options.addOption("C", false, "list entries by columns");
 
+		HelpFormatter	formatter	=	new HelpFormatter();
 		//String[]	arguments	=	new String[]{ "--block-size=10" };
 
 		try	{
@@ -77,7 +83,8 @@ public class App
 				System.out.println(line.getOptionValue("block-size"));
 			}
 		}	catch (ParseException exp)	{
-			System.out.println( "Unexpected exception:" + exp.getMessage());
+			formatter.printHelp("apache-commons-cli", options);
+			System.out.println( "\nUnexpected exception:" + exp.getMessage());
 		}
     }
 }
