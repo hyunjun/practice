@@ -1,0 +1,5 @@
+
+mvn exec:java -Dexec.mainClass="com.knoa.practice.App" -Dexec.args="arg0 arg1"
+
+mvn exec:java -Dexec.mainClass="com.knoa.practice.App" -Dexec.args="-t -c US"
+java -cp ~/.m2/repository/commons-cli/commons-cli/1.2/commons-cli-1.2.jar:./target/apache-commons-test-1.0-SNAPSHOT.jar com.knoa.practice.App -t -c US
