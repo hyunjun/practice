@@ -51,7 +51,8 @@ public class ShowFileStatusTest {
 		 is(lessThanOrEqualTo(System.currentTimeMillis())));
 		assertThat(stat.getReplication(), is((short) 1));
 		assertThat(stat.getBlockSize(), is(64 * 1024 * 1024L));
-		assertThat(stat.getOwner(), is("hchung"));
+		//	http://stackoverflow.com/questions/797549/get-login-username-in-java
+		assertThat(stat.getOwner(), is(System.getProperty("user.name")));
 		assertThat(stat.getGroup(), is("supergroup"));
 		assertThat(stat.getPermission().toString(), is("rw-r--r--"));
 	}
@@ -66,7 +67,7 @@ public class ShowFileStatusTest {
 				is(lessThanOrEqualTo(System.currentTimeMillis())));
 		assertThat(stat.getReplication(), is((short) 0));
 		assertThat(stat.getBlockSize(), is(0L));
-		assertThat(stat.getOwner(), is("hchung"));
+		assertThat(stat.getOwner(), is(System.getProperty("user.name")));
 		assertThat(stat.getGroup(), is("supergroup"));
 		assertThat(stat.getPermission().toString(), is("rwxr-xr-x"));
 	}
