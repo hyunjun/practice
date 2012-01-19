@@ -1,0 +1,14 @@
+http://stackoverflow.com/questions/274185/is-there-a-gzip-merger-that-merges-two-gzip-files-without-decompressing-them
+
+Multiple  compressed  files  can  be concatenated. In this case, gunzip will extract all members at once. For example:
+
+	gzip -c file1  > foo.gz
+	gzip -c file2 >> foo.gz
+
+Then
+
+	gunzip -c foo
+
+is equivalent to
+
+	cat file1 file2
