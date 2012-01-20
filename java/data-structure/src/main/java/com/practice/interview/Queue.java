@@ -1,26 +1,26 @@
 package com.practice.interview;
 
-public class Queue
+public class Queue<T>
 {
-	public class Elem	{
-		private int	data;
+	public class Elem<T>	{
+		private T	data;
 		private Elem	next;
-		public Elem(final int data)	{	this.data	=	data;	}
-		public int getData()	{	return	this.data;	}
+		public Elem(final T data)	{	this.data	=	data;	}
+		public T getData()	{	return	this.data;	}
 		public void setNext(final Elem next)	{	this.next	=	next;	}
 		public Elem getNext()	{	return	this.next;	}
 	}
 
-	private Elem	head;
+	private Elem<T>	head;
 
 	public Queue()	{
-		head	=	new Elem(-1);
+		head	=	new Elem<T>(null);
 		head.setNext(null);
 	}
 
 	public void print()	{
 		System.out.print("head");
-		Elem	cElem	=	head.getNext();
+		Elem<T>	cElem	=	head.getNext();
 		while ( null != cElem )	{
 			System.out.print(" -> " + cElem.getData());
 			cElem	=	cElem.getNext();
@@ -28,23 +28,23 @@ public class Queue
 		System.out.println(" -> null");
 	}
 
-	public Elem getLast()	{
-		Elem	cElem	=	head;
+	public Elem<T> getLast()	{
+		Elem<T>	cElem	=	head;
 		while ( null != cElem.getNext() )	{
 			cElem	=	cElem.getNext();
 		}
 		return	cElem;
 	}
 
-	public void add(final int nData)	{
-		Elem	lElem	=	getLast();
-		Elem	nElem	=	new Elem(nData);
+	public void add(final T nData)	{
+		Elem<T>	lElem	=	getLast();
+		Elem<T>	nElem	=	new Elem<T>(nData);
 		nElem.setNext(lElem.getNext());
 		lElem.setNext(nElem);
 	}
 
 	public void remove()	{
-		Elem	dElem	=	head.getNext();
+		Elem<T>	dElem	=	head.getNext();
 		head.setNext(dElem.getNext());
 		dElem	=	null;
 	}

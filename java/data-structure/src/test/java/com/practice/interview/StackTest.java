@@ -9,7 +9,7 @@ public class StackTest
 	@Test
     public void testStack()
     {
-		Stack	s	=	new Stack(5);
+		Stack<Integer>	s	=	new Stack<Integer>(5);
 		s.push(1);
 		s.print();
 		s.push(2);
@@ -24,17 +24,17 @@ public class StackTest
 		s.print();
 		s.push(5);
 		s.print();
-		assertEquals(5, s.pop());
+		assertEquals(Integer.valueOf(5), s.pop());
 		s.print();
-		assertEquals(4, s.pop());
+		assertEquals(Integer.valueOf(4), s.pop());
 		s.print();
-		assertEquals(3, s.pop());
+		assertEquals(Integer.valueOf(3), s.pop());
 		s.print();
-		assertEquals(2, s.pop());
+		assertEquals(Integer.valueOf(2), s.pop());
 		s.print();
-		assertEquals(1, s.pop());
+		assertEquals(Integer.valueOf(1), s.pop());
 		s.print();
-		assertEquals(-1, s.pop());
+		assertEquals(null, s.pop());
 		s.print();
     }
 }

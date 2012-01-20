@@ -1,24 +1,30 @@
 package com.practice.interview;
 
-public class Stack
+//	Generic Stack
+//	See Effective Java, 2nd edition, Item 26
+public class Stack<T>
 {
 	private int	top;
-	private int[]	data;
+	private T[]	data;
 
 	public Stack(final int size)	{
 		top	=	-1;
-		data	=	new int[size];
+		data	=	(T[]) new Object[size];
 	}
 
-	public void push(final int nData)	{
+	public void push(final T nData)	{
 		if ( top < data.length - 1 )
 			data[++top]	=	nData;
 	}
 
-	public int pop()	{
-		if ( -1 < top )
-			return	data[top--];
-		return	-1;
+	public T pop()	{
+		if ( -1 < top )	{
+			T	result	=	data[top];
+			data[top]	=	null;
+			--top;
+			return	result;
+		}
+		return	null;
 	}
 
 	public void print()	{
