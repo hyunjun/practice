@@ -43,10 +43,15 @@ public class Queue<T>
 		lElem.setNext(nElem);
 	}
 
-	public void remove()	{
+	public T remove()	{
 		Elem<T>	dElem	=	head.getNext();
-		head.setNext(dElem.getNext());
-		dElem	=	null;
+		if ( null != dElem )	{
+			head.setNext(dElem.getNext());
+			T	result	=	dElem.getData();
+			dElem	=	null;
+			return	result;
+		}
+		return	null;
 	}
 
     public static void main( String[] args )
