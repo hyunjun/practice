@@ -7,6 +7,8 @@ import	java.util.List;
 
 //	Generic BinaryTree
 //	See Effective Java, 2nd edition, Item 26
+//	http://groups.engin.umd.umich.edu/CIS/course.des/cis350/treetool/help/help.html
+//	http://groups.engin.umd.umich.edu/CIS/course.des/cis350/treetool/index.html
 public class BinaryTree<T>
 {
 	public class TCNode<T>	{
