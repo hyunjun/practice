@@ -59,56 +59,83 @@ public class Sort
 		return	arr;
 	}
 
-	/*
+	public static int[] quickSort(final int[] arr)	{
+		quickSort(arr, 0, arr.length - 1);
+		return	arr;
+	}
+
 	public static int[] quickSort(final int[] arr, final int start, final int end)	{
-		if ( start < 0 || arr.length - 1 < end || end < 1 )	return	null;
-		int	pivot	=	arr[start];
+		if ( null == arr || 0 == arr.length || 1 == arr.length )	return	arr;
+		int	pivot	=	start;
 		int	left	=	start + 1;
 		int	right	=	end;
-		printArr(arr);
-		do	{
-			while ( arr[left] < pivot )	++left;
-			while ( pivot < arr[right] )	--right;
-			log.debug("left[" + left + "] = " + arr[left] + "\tright[" + right + "] = " + arr[right]);
-			if ( left < right )	{
+		while ( left < right )	{
+			while ( left < right && arr[pivot] < arr[right] )	--right;
+			while ( left < right && arr[pivot] > arr[left] )	++left;
+			if ( left != right && arr[left] > arr[right] )	{
 				int	tmp	=	arr[left];
 				arr[left]	=	arr[right];
 				arr[right]	=	tmp;
 			}
-		}	while ( left <= right );
-		log.debug("start[" + start + "] = " + arr[start] + "\tright[" + right + "] = " + arr[right]);
-		if ( right != start && arr[right] < pivot )	{
-			int	tmp	=	arr[right];
-			arr[right]	=	pivot;
-			arr[start]	=	tmp;
 		}
-		quickSort(arr, start, right - 1);
-		quickSort(arr, right + 1, end);
+		if ( arr[pivot] > arr[left] )	{
+			int	tmp	=	arr[left];
+			arr[left]	=	arr[pivot];
+			arr[pivot]	=	tmp;
+			pivot	=	left;
+		}
+		if ( start < pivot - 1 )	quickSort(arr, start, pivot - 1);
+		if ( pivot + 1 < end )		quickSort(arr, pivot + 1, end);
 
 		return	arr;
-		int	i = 0, j = 0, pivot = 0, temp = 0;
-		if ( start < end )	{
-			i = start;
-			j = end + 1;
-			pivot	=	arr[start];
-			do	{
-				do	{
-					++i;
-				}	while ( arr[i] < pivot );
-				do	{
-					++j;
-				}	while ( pivot < arr[j] );
-				if ( i < j )	{
-					temp	=	arr[j];
-					arr[j]	=	arr[i];
-					arr[i]	=	temp;
-				}
-			}	while ( i <= j );
-			temp	=	arr[j];
-			arr[j]	=	arr[start];
-			arr[start]	=	temp;
-			quickSort(arr, start, j - 1);
-			quickSort(arr, j + 1, end);
+	}
+
+	//	http://www.joinc.co.kr/modules/moniwiki/wiki.php/Site/Database/algorithm/Quick_Sort
+	/*
+	public static int[] quickSort(final int[] arr, final int start, final int end)	{
+		int	left	=	start; 
+		int	right	=	end; 
+		int pivot = arr[left]; // 0번째 원소를 피봇으로 선택 
+		log.debug("start: pivot = " + pivot + "\tstart = " + left + "\tend = " + right);
+		printArr(arr);
+		while (left < right) 
+		{ 
+			// 값이 선택한 피봇과 같거나 크다면, 이동할 필요가 없다 
+			while ((arr[right] >= pivot) && (left < right))	{ 
+				right --; 
+				log.debug("\tright: = " + right);
+			}
+			// 그렇지 않고 값이 피봇보다 작다면, 
+			// 피봇의 위치에 현재 값을 넣는다. 
+			if (left != right) { 
+				arr[left] = arr[right]; 
+			} 
+			// 왼쪽부터 현재 위치까지 값을 읽어들이면서 
+			// 피봇보다 큰 값이 있다면, 값을 이동한다. 
+			while ((arr[left] <= pivot) && (left < right)) 	{
+				left ++; 
+				log.debug("\tleft: = " + left);
+			}
+			if (left != right) { 
+				arr[right] = arr[left]; 
+				right --; 
+			} 
+		} 
+		// 모든 스캔이 끝났다면, 피봇값을 현재 위치에 입력한다. 
+		// 이제 피봇을 기준으로 왼쪽에는 피봇보다 작거나 같은 값만 남았다. 
+		arr[left] = pivot; 
+		pivot = left; 
+		left = start; 
+		right = end; 
+		
+		// 재귀호출을 수행한다. 
+		if (left < pivot)	{
+			log.debug("\trecursive call when left " + left + " < pivot " + pivot + ": start = " + left + "\tend = " + (pivot - 1));
+			quickSort(arr, left, pivot - 1); 
+		}
+		if (right > pivot) 	{
+			log.debug("\trecursive call when pivot " + pivot + " < right " + right + ": start = " + (pivot + 1) + "\tend = " + right);
+			quickSort(arr, pivot+1, right); 
 		}
 		return	arr;
 	}
