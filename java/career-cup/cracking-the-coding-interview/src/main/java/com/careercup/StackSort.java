@@ -20,13 +20,17 @@ public class StackSort	{
 			stack[src].push(data);
 	}
 	public void sort()	{
-		while ( false == stack[src].isEmpty() || false == stack[tmp].isEmpty() )	{
+		while ( false == ( stack[src].isEmpty() && stack[tmp].isEmpty() ) )	{
 			System.out.println("before moving\n" + this);
 			int	min	=	Integer.MAX_VALUE;
 			while ( false == stack[src].isEmpty() )	{
 				int	data	=	stack[src].pop();
-				if ( data < min )	min	=	data;
-				else				stack[tmp].push(data);
+				if ( data < min )	{
+					if ( min != Integer.MAX_VALUE )
+						stack[tmp].push(min);
+					min	=	data;
+				}	else
+					stack[tmp].push(data);
 				System.out.println("min: " + min);
 			}
 			stack[dst].push(min);
