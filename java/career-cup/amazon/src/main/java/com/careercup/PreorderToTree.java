@@ -12,27 +12,7 @@ public class PreorderToTree
 {
 	private static Logger	log	=	Logger.getLogger(PreorderToTree.class);
 
-	public class Node	{
-		private char	data;
-		private int	len;
-		private Node	left;
-		private Node	right;
-		public Node(char data)	{
-			this.data	=	data;
-			len	=	1;
-			left	=	null;
-			right	=	null;
-		}
-		public char getData()	{	return	this.data;	}
-		public int getLen()	{	return	this.len;	}
-		public void setLen(int len)	{	this.len	=	len;	}
-		public void setLeft(Node left)	{	this.left	=	left;	}
-		public Node getLeft()	{	return	this.left;	}
-		public void setRight(Node right)	{	this.right	=	right;	}
-		public Node getRight()	{	return	this.right;	}
-	}
-
-	private Node	root;
+	private CharNode	root;
 	public PreorderToTree()	{	root	=	null;	}
 
 	public void create(String s)	{
@@ -41,12 +21,12 @@ public class PreorderToTree
 		root	=	createNode(s);
 	}
 
-	private Node createNode(String s)	{
-		Node	n	=	null;
+	private CharNode createNode(String s)	{
+		CharNode	n	=	null;
 		switch ( s.charAt(0) )	{
-			case 'L':	n	=	new Node('L');
+			case 'L':	n	=	new CharNode('L');
 						break;
-			case 'N':	n	=	new Node('N');
+			case 'N':	n	=	new CharNode('N');
 						n.setLeft(createNode(s.substring(1)));
 						n.setRight(createNode(s.substring(1 + n.getLeft().getLen())));
 						n.setLen(n.getLen() + n.getLeft().getLen() + n.getRight().getLen());
@@ -62,7 +42,7 @@ public class PreorderToTree
 		System.out.println();
 	}
 
-	private void traversePreorder(Node n)	{
+	private void traversePreorder(CharNode n)	{
 		System.out.print(n.getData());
 		if ( n.getLeft() != null )
 			traversePreorder(n.getLeft());
@@ -70,3 +50,24 @@ public class PreorderToTree
 			traversePreorder(n.getRight());
 	}
 }
+
+class CharNode	{
+	private char	data;
+	private int	len;
+	private CharNode	left;
+	private CharNode	right;
+	public CharNode(char data)	{
+		this.data	=	data;
+		len	=	1;
+		left	=	null;
+		right	=	null;
+	}
+	public char getData()	{	return	this.data;	}
+	public int getLen()	{	return	this.len;	}
+	public void setLen(int len)	{	this.len	=	len;	}
+	public void setLeft(CharNode left)	{	this.left	=	left;	}
+	public CharNode getLeft()	{	return	this.left;	}
+	public void setRight(CharNode right)	{	this.right	=	right;	}
+	public CharNode getRight()	{	return	this.right;	}
+}
+
