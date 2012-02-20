@@ -1,0 +1,7 @@
+1. use environment variable
+2. use full path when executing something
+	WRONG:	hadoop jar ./target/....jar Class ...
+	RIGHT:	/usr/bin/hadoop jar $HOME/project-something/target/....jar Class ...
+3. use escape sequence for log with date or time
+	WRONG:	5 * * * * /home/id/some_script.sh > /some/log/dir/log_`date +%Y%m%d_%H%M` 2>&1
+	RIGHT:	5 * * * * /home/id/some_script.sh > /some/log/dir/log_`date +\%Y\%m\%d_\%H\%M` 2>&1

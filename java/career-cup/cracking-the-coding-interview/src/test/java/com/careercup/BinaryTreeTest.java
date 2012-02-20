@@ -100,4 +100,24 @@ public class BinaryTreeTest
 		bt.insertRight(2, 4);
 		bt.findPath(5);
 	}
+
+	//	http://www.careercup.com/question?id=12374673
+	@Test
+	public void testIsSymetric()	{
+		BinaryTree	bt	=	new BinaryTree(0);
+		bt.insertLeft(0, 1);
+		bt.insertRight(0, 2);
+		bt.insertLeft(1, 4);
+		bt.insertRight(1, 5);
+		bt.insertLeft(2, 3);
+		bt.insertRight(2, 4);
+		assertEquals(true, bt.isSymmetric());
+		BinaryTree	bt1	=	new BinaryTree(0);
+		bt1.insertLeft(0, 1);
+		bt1.insertRight(0, 2);
+		bt1.insertLeft(1, 4);
+		bt1.insertRight(1, 5);
+		bt1.insertLeft(2, 3);
+		assertEquals(false, bt1.isSymmetric());
+	}
 }

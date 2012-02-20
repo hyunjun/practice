@@ -227,6 +227,66 @@ public class BinaryTree
 		findPath(root, pathList, sum);
 	}
 
+	//	http://www.careercup.com/question?id=12374673
+	/*
+	public boolean isSymmetric()	{
+		if ( null == root )	return	false;
+
+		List<TCNode>	node	=	new ArrayList<TCNode>();
+		List<Boolean>	l	=	new ArrayList<Boolean>();
+		TCNode	left	=	root.getLeft();
+		if ( null != left )	{
+			node.add(left);
+			while ( node.size() > 0 )	{
+				TCNode	c	=	node.remove(0);
+				if ( Integer.MIN_VALUE != c.getData() )	l.add(true);
+				else									l.add(false);
+				if ( null != c.getLeft() )	node.add(c.getLeft());
+				else						node.add(new TCNode(Integer.MIN_VALUE));
+				if ( null != c.getRight() )	node.add(c.getRight());
+				else						node.add(new TCNode(Integer.MIN_VALUE));
+			}
+		}
+		node.clear();
+		List<Boolean>	r	=	new ArrayList<Boolean>();
+		TCNode	right	=	root.getRight();
+		if ( null != right )	{
+			node.add(right);
+			while ( node.size() > 0 )	{
+				TCNode	c	=	node.remove(0);
+				if ( Integer.MIN_VALUE != c.getData() )	r.add(true);
+				else									r.add(false);
+				if ( null != c.getRight() )	node.add(c.getRight());
+				else						node.add(new TCNode(Integer.MIN_VALUE));
+				if ( null != c.getLeft() )	node.add(c.getLeft());
+				else						node.add(new TCNode(Integer.MIN_VALUE));
+			}
+		}
+		if ( l.size() != r.size() )	return	false;
+		for ( int i = 0; i < l.size(); ++i )
+			if ( l.get(i) != r.get(i) )
+				return	false;
+		return	true;
+	}
+	*/
+	//	http://puddleofriddles.blogspot.com/2012/01/write-program-to-find-if-tree-is.html
+	public boolean isSymmetric()	{
+		if ( null == root )	return	false;
+		return	isSymmetric(root.getLeft(), root.getRight());
+	}
+
+	private boolean isSymmetric(TCNode l, TCNode r)
+	{
+		if((l == null) && (r == null))
+			return true;
+
+		if(((l == null) && (r != null)) || 
+				((l != null) && (r == null)))
+			return false;
+
+		return isSymmetric(l.getLeft(), r.getRight()) && isSymmetric(l.getRight(), r.getLeft());
+	}
+
 	//////////////////////
 	//	basic features	//
 	//////////////////////
