@@ -1,0 +1,3 @@
+http://www.liferay.com/community/wiki/-/wiki/Main/Javadoc+Guidelines
+
+mvn javadoc:javadoc
