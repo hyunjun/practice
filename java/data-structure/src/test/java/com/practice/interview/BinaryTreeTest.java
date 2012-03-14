@@ -35,4 +35,16 @@ public class BinaryTreeTest
 		bt.traversePreorder();
 		bt.traversePostorder();
     }
+
+	@Test
+	public void testReverse()	{
+		BinaryTree<Integer>	bt	=	new BinaryTree<Integer>(0);
+		assertNotNull(bt.search(0));
+		assertTrue(bt.insertLeft(0, 1));
+		assertTrue(bt.insertRight(0, 2));
+		assertTrue(bt.insertLeft(2, 3));
+		bt.traverseInorder();
+		bt.reverse();
+		bt.traverseInorder();
+	}
 }

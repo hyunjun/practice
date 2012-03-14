@@ -197,6 +197,23 @@ public class BinaryTree<T>
 		if ( null != node.getData() )
 			System.out.printf("[%d]", node.getData());
 	}
+	public void reverse()	{
+		reverse(root);
+	}
+	private void reverse(final TCNode<T> node)	{
+		TCNode	left	=	node.getLeft();
+		TCNode	right	=	node.getRight();
+		node.setLeft(null);
+		node.setRight(null);
+		if ( null != left )	{
+			node.setRight(left);
+			reverse(node.getRight());
+		}
+		if ( null != right )	{
+			node.setLeft(right);
+			reverse(node.getLeft());
+		}
+	}
 
     public static void main( String[] args )
     {
