@@ -4,10 +4,13 @@ if has("gui_running")
 	"한글폰트 지정
 	"set guifontwide=Guseul\ 10
 	"gVim의 배경테마 설정
-	colorscheme desert
+	"colorscheme desert
 	"gVim 시작시 크기지정
 	"set lines=40
 	"set co=85
+	set background=light
+else
+	set background=dark
 endif
 set hls
 set ts=4
@@ -44,11 +47,11 @@ set nocompatible               " be iMproved
 filetype off                   " required!
 
 set rtp+=~/.vim/bundle/vundle/
-"call vundle#rc()
+call vundle#rc()
 
 " let Vundle manage Vundle
 " required! 
-"Bundle 'gmarik/vundle'
+Bundle 'gmarik/vundle'
 
 " My Bundles here:
 "
@@ -63,7 +66,7 @@ set rtp+=~/.vim/bundle/vundle/
 " non github repos
 "Bundle 'git://git.wincent.com/command-t.git'
 " ...
-"Bundle 'Shell.vim'
+Bundle 'Shell.vim'
 "Bundle 'java.vim'
 
 filetype plugin indent on     " required! 
@@ -77,3 +80,7 @@ filetype plugin indent on     " required!
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle command are not allowed..
 
+"	https://github.com/tpope/vim-pathogen
+call pathogen#infect()
+"	https://github.com/altercation/vim-colors-solarized
+colorscheme solarized
