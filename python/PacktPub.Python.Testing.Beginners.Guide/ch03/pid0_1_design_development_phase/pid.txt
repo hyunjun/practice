@@ -1,0 +1,56 @@
+>>> import pid
+
+>>> controller = pid.PID(P=0.5, I=0.5, D=0.5, setpoint=0)
+>>> controller.gains
+(0.5, 0.5, 0.5)
+>>> controller.setpoint
+[0.0]
+>>> controller.previous_time is None
+True
+>>> controller.previous_error
+0.0
+>>> controller.integrated_error
+0.0
+
+>>> import time
+>>> real_time = time.time
+>>> time.time = (float(x) for x in xrange(1, 1000)).next
+>>> pid = reload(pid)
+>>> controller = pid.PID(P=0.5, I=0.5, D=0.5, setpoint=0)
+>>> controller.measure(12)
+-6.0
+>>> controller.measure(6)
+-3.0
+>>> controller.measure(3)
+-4.5
+>>> controller.measure(-1.5)
+-0.75
+>>> controller.measure(-2.25)
+-1.125
+>>> time.time = real_time
+
+>>> pid = reload(pid)
+>>> controller = pid.PID(P = 0.5, I = 0.5, D = 0.5, setpoint = 0)
+
+>>> controller.push_setpoint(7)
+>>> controller.setpoint
+[0.0, 7.0]
+
+>>> controller.push_setpoint(8.5)
+>>> controller.setpoint
+[0.0, 7.0, 8.5]
+
+>>> controller.pop_setpoint()
+8.5
+>>> controller.setpoint
+[0.0, 7.0]
+
+>>> controller.pop_setpoint()
+7.0
+>>> controller.setpoint
+[0.0]
+
+>>> controller.pop_setpoint()
+Traceback (most recent call last):
+ValueError: PID controller must have a setpoint
+

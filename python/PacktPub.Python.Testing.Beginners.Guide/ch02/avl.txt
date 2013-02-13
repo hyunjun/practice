@@ -1,0 +1,94 @@
+>>> from avl_tree import AVL 
+
+>>> def valid_state(node): 
+...     if node is None: 
+...         return 
+...     if node.left is not None: 
+...         assert isinstance(node.left, AVL) 
+...         assert node.left.key < node.key 
+...         left_height = node.left.height + 1 
+...     else: 
+...         left_height = 0 
+... 
+...     if node.right is not None: 
+...         assert isinstance(node.right, AVL) 
+...         assert node.right.key > node.key 
+...         right_height = node.right.height + 1 
+...     else: 
+...         right_height = 0 
+... 
+...     assert abs(left_height - right_height) < 2 
+...     node.key < node.key 
+...     node.value 
+
+>>> def valid_tree(node): 
+...     if node is None: 
+...         return 
+...     valid_state(node) 
+...     valid_tree(node.left) 
+...     valid_tree(node.right)
+
+>>> def make_test_tree(): 
+...     root = AVL(7, 'seven') 
+...     root.height = 2 
+...     root.left = AVL(3, 'three') 
+...     root.left.height = 1 
+...     root.left.right = AVL(4, 'four') 
+...     root.right = AVL(10, 'ten') 
+...     return root 
+>>> tree = make_test_tree() 
+>>> tree.height = 0 
+>>> tree.recalculate_height() 
+>>> tree.height 
+2
+
+>>> tree = make_test_tree() 
+>>> target = tree.make_deletable() 
+>>> (tree.value, tree.height) 
+('four', 2) 
+>>> (target.value, target.height) 
+('seven', 0)
+
+>>> tree = make_test_tree() 
+>>> tree.value 
+'seven' 
+>>> tree.left.value 
+'three'
+
+>>> tree.rotate_counterclockwise() 
+>>> tree.value 
+'three' 
+>>> tree.left 
+None 
+>>> tree.right.value 
+'seven' 
+>>> tree.right.left.value 
+'four' 
+>>> tree.right.right.value 
+'ten' 
+>>> tree.right.left.value 
+'four' 
+>>> tree.left is None 
+True 
+
+>>> tree.rotate_clockwise() 
+>>> tree.value 
+'seven' 
+>>> tree.left.value 
+'three' 
+>>> tree.left.right.value 
+'four' 
+>>> tree.right.value 
+'ten' 
+>>> tree.right.left is None 
+True 
+>>> tree.left.left is None 
+True 
+
+>>> tree = make_test_tree() 
+>>> tree.locate(4).value 
+'four' 
+>>> tree.locate(17) # doctest: +ELLIPSIS 
+Traceback (most recent call last): 
+KeyError: 
+

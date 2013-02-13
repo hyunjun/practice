@@ -1,0 +1,345 @@
+**********************************************************************
+File "avl.txt", line 1, in avl.txt
+Failed example:
+    from avl_tree import AVL 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[0]>", line 1, in <module>
+        from avl_tree import AVL
+    ImportError: No module named avl_tree
+**********************************************************************
+File "avl.txt", line 39, in avl.txt
+Failed example:
+    tree = make_test_tree() 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[4]>", line 1, in <module>
+        tree = make_test_tree()
+      File "<doctest avl.txt[3]>", line 2, in make_test_tree
+        root = AVL(7, 'seven')
+    NameError: global name 'AVL' is not defined
+**********************************************************************
+File "avl.txt", line 40, in avl.txt
+Failed example:
+    tree.height = 0 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[5]>", line 1, in <module>
+        tree.height = 0
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 41, in avl.txt
+Failed example:
+    tree.recalculate_height() 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[6]>", line 1, in <module>
+        tree.recalculate_height()
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 42, in avl.txt
+Failed example:
+    tree.height 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[7]>", line 1, in <module>
+        tree.height
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 45, in avl.txt
+Failed example:
+    tree = make_test_tree() 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[8]>", line 1, in <module>
+        tree = make_test_tree()
+      File "<doctest avl.txt[3]>", line 2, in make_test_tree
+        root = AVL(7, 'seven')
+    NameError: global name 'AVL' is not defined
+**********************************************************************
+File "avl.txt", line 46, in avl.txt
+Failed example:
+    target = tree.make_deletable() 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[9]>", line 1, in <module>
+        target = tree.make_deletable()
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 47, in avl.txt
+Failed example:
+    (tree.value, tree.height) 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[10]>", line 1, in <module>
+        (tree.value, tree.height)
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 49, in avl.txt
+Failed example:
+    (target.value, target.height) 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[11]>", line 1, in <module>
+        (target.value, target.height)
+    NameError: name 'target' is not defined
+**********************************************************************
+File "avl.txt", line 52, in avl.txt
+Failed example:
+    tree = make_test_tree() 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[12]>", line 1, in <module>
+        tree = make_test_tree()
+      File "<doctest avl.txt[3]>", line 2, in make_test_tree
+        root = AVL(7, 'seven')
+    NameError: global name 'AVL' is not defined
+**********************************************************************
+File "avl.txt", line 53, in avl.txt
+Failed example:
+    tree.value 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[13]>", line 1, in <module>
+        tree.value
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 55, in avl.txt
+Failed example:
+    tree.left.value 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[14]>", line 1, in <module>
+        tree.left.value
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 58, in avl.txt
+Failed example:
+    tree.rotate_counterclockwise() 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[15]>", line 1, in <module>
+        tree.rotate_counterclockwise()
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 59, in avl.txt
+Failed example:
+    tree.value 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[16]>", line 1, in <module>
+        tree.value
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 61, in avl.txt
+Failed example:
+    tree.left 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[17]>", line 1, in <module>
+        tree.left
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 63, in avl.txt
+Failed example:
+    tree.right.value 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[18]>", line 1, in <module>
+        tree.right.value
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 65, in avl.txt
+Failed example:
+    tree.right.left.value 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[19]>", line 1, in <module>
+        tree.right.left.value
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 67, in avl.txt
+Failed example:
+    tree.right.right.value 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[20]>", line 1, in <module>
+        tree.right.right.value
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 69, in avl.txt
+Failed example:
+    tree.right.left.value 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[21]>", line 1, in <module>
+        tree.right.left.value
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 71, in avl.txt
+Failed example:
+    tree.left is None 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[22]>", line 1, in <module>
+        tree.left is None
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 74, in avl.txt
+Failed example:
+    tree.rotate_clockwise() 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[23]>", line 1, in <module>
+        tree.rotate_clockwise()
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 75, in avl.txt
+Failed example:
+    tree.value 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[24]>", line 1, in <module>
+        tree.value
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 77, in avl.txt
+Failed example:
+    tree.left.value 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[25]>", line 1, in <module>
+        tree.left.value
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 79, in avl.txt
+Failed example:
+    tree.left.right.value 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[26]>", line 1, in <module>
+        tree.left.right.value
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 81, in avl.txt
+Failed example:
+    tree.right.value 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[27]>", line 1, in <module>
+        tree.right.value
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 83, in avl.txt
+Failed example:
+    tree.right.left is None 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[28]>", line 1, in <module>
+        tree.right.left is None
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 85, in avl.txt
+Failed example:
+    tree.left.left is None 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[29]>", line 1, in <module>
+        tree.left.left is None
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 88, in avl.txt
+Failed example:
+    tree = make_test_tree() 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[30]>", line 1, in <module>
+        tree = make_test_tree()
+      File "<doctest avl.txt[3]>", line 2, in make_test_tree
+        root = AVL(7, 'seven')
+    NameError: global name 'AVL' is not defined
+**********************************************************************
+File "avl.txt", line 89, in avl.txt
+Failed example:
+    tree.locate(4).value 
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[31]>", line 1, in <module>
+        tree.locate(4).value
+    NameError: name 'tree' is not defined
+**********************************************************************
+File "avl.txt", line 91, in avl.txt
+Failed example:
+    tree.locate(17) # doctest: +ELLIPSIS 
+Expected:
+    Traceback (most recent call last): 
+    KeyError: 
+Got:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1289, in __run
+        compileflags, 1) in test.globs
+      File "<doctest avl.txt[32]>", line 1, in <module>
+        tree.locate(17) # doctest: +ELLIPSIS
+    NameError: name 'tree' is not defined
+**********************************************************************
+1 items had failures:
+  30 of  33 in avl.txt
+***Test Failed*** 30 failures.
