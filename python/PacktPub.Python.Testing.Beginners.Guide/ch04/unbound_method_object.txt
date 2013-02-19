@@ -1,0 +1,12 @@
+>>> class foo:
+...     def bar(self):
+...             pass
+...
+>>> foo.bar()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unbound method bar() must be called with foo instance as first
+argument (got nothing instead)
+>>> f = foo()
+>>> f.bar()
+>>> foo.bar.im_func(f)

@@ -1,0 +1,24 @@
+>>> from datetime import datetime
+>>> from mocker import Mocker
+>>> mocker = Mocker()
+
+Here's where your Mocker demonstrations should go.
+>>> mock_datetime = mocker.replace('datetime.datetime')
+>>> mock_now = mock_datetime.now()
+>>> mock_then = mock_now.replace(hour=12)
+>>> mock_then.isocalendar() # doctest: +ELLIPSIS
+<mocker.Mock object at ...>
+>>> mocker.result((2009, 24, 3))
+>>> mock_then.isoformat() # doctest: +ELLIPSIS
+<mocker.Mock object at ...>
+>>> mocker.result('2009-06-10T12:30:39.812555')
+
+>>> mocker.replay()
+>>> now = datetime.now()
+>>> then = now.replace(hour = 12)
+>>> then.isocalendar()
+(2009, 24, 3)
+>>> then.isoformat()
+'2009-06-10T12:30:39.812555'
+>>> mocker.restore()
+>>> mocker.verify()
