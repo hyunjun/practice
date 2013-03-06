@@ -27,19 +27,38 @@ Bundle 'pyflakes'
 " non github repos
 "Bundle 'git://git.wincent.com/command-t.git'
 
-"git://github.com/wesleyche/SrcExpl.git
-"Bundle 'Source-Explorer-srcexpl'
-"nmap <F8> :SrcExplToggle<CR>
-"
+"https://github.com/wesleyche/SrcExpl.git
+Bundle 'Source-Explorer-srcexpl'
+
+"https://github.com/scrooloose/nerdtree.git
 Bundle 'The-NERD-tree'
-let NERDTreeWinPos = "left"
-nmap <F9> :NERDTreeToggle<CR>
 
 "http://vany.tistory.com/entry/Ctags-support-for-Python
 "http://www.vim.org/scripts/script.php?script_id=273
-"Bundle 'taglist'
+Bundle 'taglist.vim'
 
 filetype plugin indent on     " required!
+
+nmap <F7> :TlistToggle<CR>
+let Tlist_Ctags_Cmd = "/usr/bin/ctags"
+let Tlist_Inc_Winwidth = 0		"window width change off
+let Tlist_Exit_OnlyWindow = 0	"taglist window close = off after selecting tag/file
+let Tlist_Auto_Open = 0
+let Tlist_Use_Right_Window = 0
+
+nmap <F8> :SrcExplToggle<CR>
+nmap <C-H> <C-W>h
+nmap <C-J> <C-W>j
+nmap <C-K> <C-W>k
+nmap <C-L> <C-W>l
+let g:SrcExpl_winHeight = 8
+let g:SrcExpl_refreshTime = 100
+let g:SrcExpl_jumpKey = "<Enter>"
+let g:SrcExpl_gobackKey = "<Space>"
+let g:SrcExpl_isUpdateTags = 0		"tag file update = off
+
+let NERDTreeWinPos = "left"
+nmap <F9> :NERDTreeToggle<CR>
 
 set nocompatible               " be iMproved
 filetype on
