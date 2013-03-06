@@ -27,6 +27,18 @@ Bundle 'pyflakes'
 " non github repos
 "Bundle 'git://git.wincent.com/command-t.git'
 
+"git://github.com/wesleyche/SrcExpl.git
+"Bundle 'Source-Explorer-srcexpl'
+"nmap <F8> :SrcExplToggle<CR>
+"
+Bundle 'The-NERD-tree'
+let NERDTreeWinPos = "left"
+nmap <F9> :NERDTreeToggle<CR>
+
+"http://vany.tistory.com/entry/Ctags-support-for-Python
+"http://www.vim.org/scripts/script.php?script_id=273
+"Bundle 'taglist'
+
 filetype plugin indent on     " required!
 
 set nocompatible               " be iMproved
