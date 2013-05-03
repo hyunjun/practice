@@ -17,6 +17,7 @@ for iter = 1:num_iters
     %       of the cost function (computeCost) and gradient here.
     %
 
+	%	http://stackoverflow.com/questions/10479353/gradient-descent-seems-to-fail
 	tmp_j1 = 0;
 	for i = 1:m
 		tmp_j1 = tmp_j1 + ((theta(1,1) + theta(2,1) * X(i,2)) - y(i));
