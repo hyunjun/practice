@@ -14,6 +14,10 @@ Bundle 'gmarik/vundle'
 "	http://www.vim.org/scripts/script.php?script_id=2441
 Bundle 'pyflakes'
 
+"	git clone https://github.com/scala/scala-dist.git
+"	cd scala-dist; mv tool-support/src/vim/* .; rm -rf scala-dist
+Bundle 'vim-scala'
+
 " My Bundles here:
 "
 " original repos on github
