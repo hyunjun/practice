@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- const.xml -->
+<config>
+	<main>
+		<config>config 0</config>
+		<config>config 1</config>
+		<config>config 2</config>
+		<else>something else in main-config</else>
+	</main>
+	2<something>some config in main-config</something>
+</config>

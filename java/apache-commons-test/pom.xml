@@ -66,6 +66,18 @@
 		<profile>  
 			<id>test-app</id>  
 		<build>  
+
+			<!--	for testConfiguration()	-->
+			<resources>
+				<resource>
+					<directory>src/main/resources</directory>
+				</resource>
+				<resource>
+					<directory>src/test/resources</directory>
+				</resource>
+			</resources>
+			<!--	for testConfiguration()	-->
+
 			<plugins>  
 				<plugin>  
 					<groupId>org.codehaus.mojo</groupId>  
@@ -106,5 +118,20 @@
 			<!--<version>2.0-SNAPSHOT</version>-->
 			<version>1.2</version>
 		</dependency>
+
+		<!--	for testConfiguration()	-->
+		<!--    http://www.code-thrill.com/2012/05/configuration-that-rocks-with-apache.html -->
+		<dependency>
+		<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.10</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+		<!--	for testConfiguration()	-->
+
 	</dependencies>
 </project>
