@@ -32,6 +32,7 @@ def get_index_of_max2(arr):
 	if arr is None or len(arr) == 0:
 		return	-1
 	idxHash = {}
+	maxVal = arr[:1][0]
 	for i, a in enumerate(arr):
 		if a not in idxHash:
 			l = []
@@ -41,8 +42,6 @@ def get_index_of_max2(arr):
 			l = idxHash[a]
 			l.append(i)
 			idxHash[a] = l
-	maxVal = arr[:1][0]
-	for a in arr:
 		if maxVal < a:
 			maxVal = a
 	l = idxHash[maxVal]
