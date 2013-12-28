@@ -28,9 +28,33 @@ def get_index_of_max(arr, maximum, num):
 			last_idx = i
 	return	last_idx
 
+def get_index_of_max2(arr):
+	if arr is None or len(arr) == 0:
+		return	-1
+	idxHash = {}
+	for i, a in enumerate(arr):
+		if a not in idxHash:
+			l = []
+			l.append(i)
+			idxHash[a] = l
+		else:
+			l = idxHash[a]
+			l.append(i)
+			idxHash[a] = l
+	maxVal = arr[:1][0]
+	for a in arr:
+		if maxVal < a:
+			maxVal = a
+	l = idxHash[maxVal]
+	cnt = len(l)
+	return	l.pop(random.randint(0, cnt-1))
+
 if __name__ == "__main__":
 	for arr in arrs:
 		maximum, num = get_max_and_num(arr)
 		if maximum != -1:
 			print arr, "=> max %d's index %d" % (maximum, get_index_of_max(arr, maximum, num))
+
+	for arr in arrs:
+		print arr, "=> max value's index %d" % get_index_of_max2(arr)
 
