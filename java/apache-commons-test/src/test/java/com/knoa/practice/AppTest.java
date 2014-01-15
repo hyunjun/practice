@@ -44,6 +44,7 @@ public class AppTest
 			Assert.assertEquals("config 0", config.getString("main.config(0)"));
 			Assert.assertEquals("config 1", config.getString("main.config(1)"));
 			Assert.assertEquals("config 2", config.getString("main.config(2)"));
+			Assert.assertNull(config.getString("main.config(3)"));
 			Assert.assertEquals("something else in main-config", config.getString("main.else"));
 			Assert.assertEquals("some config in main-config", config.getString("something"));
 
