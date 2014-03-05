@@ -1,0 +1,87 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>test.json</groupId>
+  <artifactId>test-json</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>test-json</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<!--<jackson.core.version>2.2.2</jackson.core.version>-->
+		<jackson.core.version>1.8.8</jackson.core.version>
+		<packageVersion.dir>com/fasterxml/jackson/module/guice</packageVersion.dir>
+		<packageVersion.package>${project.groupId}.guice</packageVersion.package>
+		<osgi.export>
+			${project.groupId}.guice
+		</osgi.export>
+		<osgi.import>
+			com.fasterxml.jackson.core
+			,com.fasterxml.jackson.core.type
+			,com.fasterxml.jackson.core.util
+			,com.fasterxml.jackson.databind
+			,com.fasterxml.jackson.databind.type
+			,org.objectweb.asm;resolution:=optional
+		</osgi.import>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+	<!--<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-core</artifactId>
+		<version>${jackson.core.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-databind</artifactId>
+		<version>${jackson.core.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.google.inject</groupId>
+		<artifactId>guice</artifactId>
+		<version>3.0</version>
+	</dependency>-->
+	<dependency>
+		<groupId>org.codehaus.jackson</groupId>
+		<artifactId>jackson-smile</artifactId>
+		<version>1.8.8</version>
+	</dependency>
+	<dependency>
+		<groupId>org.codehaus.jackson</groupId>
+		<artifactId>jackson-mapper-lgpl</artifactId>
+		<version>1.8.8</version>
+	</dependency>
+	<dependency>
+		<groupId>com.alibaba</groupId>
+		<artifactId>fastjson</artifactId>
+		<version>1.1.35</version>
+	</dependency>
+	<dependency>
+		<groupId>commons-io</groupId>
+		<artifactId>commons-io</artifactId>
+		<version>2.4</version>
+	</dependency>
+
+	<!-- http://code.google.com/p/json-path/ -->
+	<dependency>
+		<groupId>com.jayway.jsonpath</groupId>
+		<artifactId>json-path</artifactId>
+		<version>0.9.1</version>
+	</dependency>
+	<dependency>
+		<groupId>com.jayway.jsonpath</groupId>
+		<artifactId>json-path-assert</artifactId>
+		<version>0.9.1</version>
+	</dependency>
+  </dependencies>
+</project>
