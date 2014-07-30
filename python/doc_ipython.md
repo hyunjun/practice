@@ -2,7 +2,7 @@
 
 ## usage
 ```
-$  ipython notebook --ip=[x.y.z.w] --port=[port num] --pylab=inline --notebook-dir=[dir]
+$ ipython notebook --ip=[x.y.z.w] --port=[port num] --pylab=inline --notebook-dir=[dir]
 ```
 
 ## installation
@@ -20,7 +20,6 @@ $  ipython notebook --ip=[x.y.z.w] --port=[port num] --pylab=inline --notebook-d
   # rpm -ivh blas-devel-3.2.1-4.el6.x86_64.rpm
   # yum install lapack
   # rpm -ivh lapack-devel-3.2.1-4.el6.x86_64.rpm
-  # yum install scipy
   ```
   * enthought; failed
     * https://www.enthought.com/products/epd/free/
