@@ -1,4 +1,5 @@
 # gensim
+* https://pypi.python.org/pypi/gensim
 
 ## install
 * proxy if necessary
