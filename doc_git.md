@@ -1,6 +1,10 @@
 # Git
 
 ## Usage
+* remove untracked files
+```
+git clean -f
+```
 * svn revert
 ```
 git checkout -- [src]
