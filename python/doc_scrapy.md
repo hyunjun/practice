@@ -3,31 +3,19 @@
 * http://doc.scrapy.org/en/latest/index.html
 * https://github.com/scrapy/scrapy/wiki
 
-## installation
-* http://doc.scrapy.org/en/latest/intro/install.html
-
-### prerequisite
-* CentOS 6.3 기준
-* cryptography
-  * libffi-devel
-    * situation; cryptography install failure
-    ```
-    pip install Scrapy; InstallationError: Command python setup.py egg_info failed with error code 1 in /tmp/pip_build_root/cryptography
-    easy_install Scrapy; distutils.errors.DistutilsError: Setup script exited with error: command 'gcc' failed with exit status 1
-    ```
-    * cause; missing libffi-devel
-    * solution
-      * install libffi-devel from http://rpmfind.net/linux/rpm2html/search.php?query=libffi-devel
-      * ftp://rpmfind.net/linux/centos/6.5/os/x86_64/Packages/libffi-devel-3.0.5-3.2.el6.x86_64.rpm
-* lxml
-  * libxml2-devel
-    * situation; lxml install failure
-    ```
-    install lxml error: command 'gcc' failed with exit status 1
-    ```
-    * cause; missing libxslt-devel
-    * solution; yum install libxslt-devel
-  * libxslt-devel
+## tip
+* parsing한 url은 response.url로 바로 얻을 수 있음
+  * encoded url이 아니라 utf8로 사용하고 싶으면
+  ``` python
+  def parse(self, response):
+    ...
+    unicode(urllib2.unquote(response.url), 'utf8')
+    ...
+  ```
+* 내부의 값을 url로 변경할 때는
+``` python
+'http://ko.wikipedia.org%s' % urllib2.unquote(url.encode('utf8'))
+```
 
 ## example
 * wiki 정보가 구조화되어 있다면 Scrapy를 통해 더 간단하게 원하는 값을 얻을 수 있다
@@ -100,7 +88,7 @@ $ scrapy shell http://ko.wikipedia.org/wiki/박지성
 >>>
 ```
 * http://doc.scrapy.org/en/latest/intro/overview.html#intro-overview-item
-```
+``` python
 $ scrapy startproject song
 $ cd song/
 $ tree .
@@ -200,3 +188,30 @@ http://ko.wikipedia.org/wiki/%EC%86%A1%EC%A2%85%EA%B5%AD
 $ cat song.json
 [{"url": "http://ko.wikipedia.org/wiki/%EC%86%A1%EC%A2%85%EA%B5%AD", "nationality": "\ub300\ud55c\ubbfc\uad6d"}]
 ```
+
+## installation
+* http://doc.scrapy.org/en/latest/intro/install.html
+
+### prerequisite
+* CentOS 6.3 기준
+* cryptography
+  * libffi-devel
+    * situation; cryptography install failure
+    ```
+    pip install Scrapy; InstallationError: Command python setup.py egg_info failed with error code 1 in /tmp/pip_build_root/cryptography
+    easy_install Scrapy; distutils.errors.DistutilsError: Setup script exited with error: command 'gcc' failed with exit status 1
+    ```
+    * cause; missing libffi-devel
+    * solution
+      * install libffi-devel from http://rpmfind.net/linux/rpm2html/search.php?query=libffi-devel
+      * ftp://rpmfind.net/linux/centos/6.5/os/x86_64/Packages/libffi-devel-3.0.5-3.2.el6.x86_64.rpm
+* lxml
+  * libxml2-devel
+    * situation; lxml install failure
+    ```
+    install lxml error: command 'gcc' failed with exit status 1
+    ```
+    * cause; missing libxslt-devel
+    * solution; yum install libxslt-devel
+  * libxslt-devel
+
