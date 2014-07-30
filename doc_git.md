@@ -5,7 +5,7 @@
 ```
 git checkout -- [src]
 ```
-* 저장소 이전
+* transfer repository
   * git to git
     * create repository to move
     ```
