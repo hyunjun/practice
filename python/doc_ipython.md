@@ -7,11 +7,11 @@ $ ipython notebook --ip=[x.y.z.w] --port=[port num] --pylab=inline --notebook-di
 
 ## installation
 * CentOS6.3
-```
+``` nix
 # pip install numpy scipy matplotlib pandas sympy nose pyzmq jinja2 ipython
 ```
   * prerequisite for scipy
-  ```
+  ``` nix
   # wget http://mirror.centos.org/centos/6/os/x86_64/Packages/atlas-devel-3.8.4-2.el6.x86_64.rpm
   # wget http://mirror.centos.org/centos/6/os/x86_64/Packages/blas-devel-3.2.1-4.el6.x86_64.rpm
   # wget http://mirror.centos.org/centos/6/os/x86_64/Packages/lapack-devel-3.2.1-4.el6.x86_64.rpm
