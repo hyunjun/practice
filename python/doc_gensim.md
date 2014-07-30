@@ -21,6 +21,7 @@
 # pip install gensim
 ```
 * etc
+  * https://github.com/luispedro/BuildingMachineLearningSystemsWithPython
   * http://stackoverflow.com/questions/11863775/python-scipy-install-on-ubuntu
   * https://groups.google.com/forum/#!topic/theano-users/zQAE51j59hk
   * http://stackoverflow.com/questions/11863775/python-scipy-install-on-ubuntu
