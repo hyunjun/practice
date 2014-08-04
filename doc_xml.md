@@ -4,8 +4,7 @@
 
 `The reference to entity "xxx" must end with the ';' delimiter`
 * solution; use escaping
-
-| " | &quot; |
+** " -> &quot;quot;
 | ' | &apos; |
 | < | &lt; |
 | > | &gt; |
