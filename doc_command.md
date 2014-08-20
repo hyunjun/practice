@@ -826,6 +826,8 @@
       * ps - eo user,pid,ppid,rss,size,vsize,pmem,pcpu,time,cmd --sort -size | head -n 11
       * ps -A -o comm,pmem,pid (memory 확인, http://www.fedoraforum.org/forum/showthread.php?p=903678)
       * http://jmnote.com/wiki/리눅스_스왑_메모리_사용량순_프로세스_보기
+      * ps -eLf; 모든 thread 확인
+        * http://superuser.com/questions/80556/how-do-you-view-all-threads-running-on-linux
   * 레벨090 : 프로세스들의 실행구조는 이렇게 확인한다.
     * 레벨090-1 : 실행중인 프로세스들을 트리(tree)구조로 확인하는 pstree사용법
     * 레벨090-2 : 각 프로세스 명령행 옵션들까지 pstree로 확인하기
