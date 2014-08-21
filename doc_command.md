@@ -658,8 +658,9 @@
     * 레벨068-21 : 소유자가 없는 파일 또는 소유그룹이 없는 무적파일 찾기(서버 보안점검시 사용)
     * 레벨068-22 : 특정문자를 포함하는 파일찾기와 그 문자가 속한 행 찾기
       * e.g. 디렉토리의 모든 서브 디렉토리나 파일의 권한을 한 번에 바꾸기
-      * find [YOURDIR] -type d -exec chmod 755 {} \;
-      * find [YOURDIR] -type f -exec chmod 644 {} \;
+      * `find [YOURDIR] -type d -exec chmod 755 {} \;`
+      * `find [YOURDIR] -type f -exec chmod 644 {} \;`
+      * 이틀 이상 된 파일 삭제하기 `find /some/directory/ -type f -mtime +2 -exec /bin/rm -f {} \;`
   * 레벨069 : 이 명령어는 어디에 있을까? 명령어의 절대경로를 확인하자.
     * 레벨069-1 : 특정명령어의 위치를 찾아주는 which 활용
   * 레벨070 : 이 명령어는 어떤 명령어일까? 간단히 답하세요.
