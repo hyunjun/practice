@@ -1152,9 +1152,9 @@
     ```
     $ date
     Thu Aug 21 15:28:30 KST 2014
-    $ date +%Y%m%d%H%m
+    $ date +%Y%m%d%H%M
     201408211508
-    $ for i in {1..3}; do date -d "-$i days" +%Y%m%d%H%m; done
+    $ for i in {1..3}; do date -d "-$i days" +%Y%m%d%H%M; done
     201408201508
     201408191508
     201408181508
