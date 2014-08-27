@@ -8,9 +8,9 @@
   * http://www.electrictoolbox.com/mysql-insert-multiple-records/
 * load data infile; 속도가 느림
   ```
-  mysql -h 10.25.34.10 -u fqa -ppy273 fqa_test_kb -N -e "LOAD DATA local infile \"./answer.result\" REPLACE INTO TABLE test_db_answers (question, question_key, answer, answer_key, atype, answer_link, answer_link_m, source, source_kr, object, attribute, source_url, object_url, object_img_url, answer_url, answer_img_url, insert_at, update_at)"
-  ```
   * http://dev.mysql.com/doc/refman/5.1/en/load-data.html
+  mysql -h xxx.yyy.zzz.www -u [user id] -p[password] [database] -N -e "LOAD DATA local infile \"./[data file]\" REPLACE INTO TABLE [table name] ([column1], [column2],...[columnN])"
+  ```
   * http://ra2kstar.tistory.com/2
 * mysqlimport
   * http://tac.softonnet.com/troubleshoot/viewbody.php?code=troubleshoot&page=1&number=26&keyfield=category&key=db
