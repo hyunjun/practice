@@ -1,5 +1,12 @@
 # MySQL
 
+## Basic
+* ALTER; http://kwon37xi.egloos.com/viewer/1635464
+```
+ALTER TABLE [table name] RENAME [new table name]
+ALTER TABLE [table name] ADD [column name] [type]
+```
+
 ## Usage
 * age가 '만 xx세'로 되어 있을 때 숫자만 뽑아 그 차이를 구하는 경우
 ```
