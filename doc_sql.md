@@ -6,6 +6,11 @@
 ALTER TABLE [table name] RENAME [new table name]
 ALTER TABLE [table name] ADD [column name] [type]
 ```
+* CREATE
+```
+CREATE TABLE [table name] LIKE [org table name]; -- index까지 복사. 물론 데이터는 복사하지 않음
+CREATE TABLE [table name] SELECT * FROM [org table name]; -- 데이터를 복사해서 만들지만 index를 복사하지는 않음
+```
 
 ## Usage
 * age가 '만 xx세'로 되어 있을 때 숫자만 뽑아 그 차이를 구하는 경우
