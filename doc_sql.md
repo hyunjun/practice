@@ -1,7 +1,7 @@
 # MySQL
 
 ## Basic
-* ALTER; http://kwon37xi.egloos.com/viewer/1635464
+* ALTER; http://kwon37xi.egloos.com/viewer/1635464, http://ra2kstar.tistory.com/3
 ```
 ALTER TABLE [table name] RENAME [new table name]
 ALTER TABLE [table name] ADD [column name] [type]
