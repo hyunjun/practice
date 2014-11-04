@@ -84,6 +84,7 @@
   Wed Oct  1 12:42:33 GMT 2008
   ```
 * seq; print a sequence of numbers
+  * http://snoopybox.co.kr/1680
   ```
   $ seq -f "%05g" 0 51
   00000
@@ -92,8 +93,8 @@
   00050
   00051
   ```
-  * http://snoopybox.co.kr/1680
 * service
+  * http://www.cyberciti.biz/faq/check-running-services-in-rhel-redhat-fedora-centoslinux/
   ```
   service --status-all | grep [name]
   service [name] [status|start|stop|restart]
@@ -101,7 +102,6 @@
   chkconfig [name] [on|off]
   netstat -tulpn
   ```
-  * http://www.cyberciti.biz/faq/check-running-services-in-rhel-redhat-fedora-centoslinux/
 * ssh-keygen
   * rsync는 daemon / ssh 방식 두 가지가 있는데, ssh의 경우 ssh public key를 추가해야 접속이 가능
   * ssh-keygen -y: read private key and print public key
