@@ -17,12 +17,17 @@ endif
 * gvim portable; GVimPortable\App\DefaultData\settings\vimrc
 
 ## etc
-* replace½Ã °³Çà ¹®ÀÚ ÀÔ·Â
+* replaceì‹œ ê°œí–‰ ë¬¸ì ì…ë ¥
   * ^M (Ctrl+V, Ctrl+M)
   * http://mwultong.blogspot.com/2007/08/vim-vi-m-m.html
-* syntax highlightingÀÌ µÇÁö ¾Ê´Â °æ¿ì
-  * º¸Åë ±âº» vi³ª vim-minimal¸¸ ¼³Ä¡µÈ °æ¿ì ¹ß»ı
-  * vim-enhanced ¼³Ä¡
+* syntax highlightingì´ ë˜ì§€ ì•ŠëŠ” ê²½ìš°
+  * ë³´í†µ ê¸°ë³¸ vië‚˜ vim-minimalë§Œ ì„¤ì¹˜ëœ ê²½ìš° ë°œìƒ
+  * vim-enhanced ì„¤ì¹˜
+* lowercase <-> uppercase; http://www.linuxquestions.org/questions/linux-newbie-8/change-all-uppercase-to-lowercase-with-vi-633998/
+  ```
+  :%s/.*/\L&/
+  :%s/.*/\U&/
+  ```
 
 ## links
 * http://shinlucky.tistory.com/117
