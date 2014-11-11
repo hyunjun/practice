@@ -23,7 +23,8 @@ endif
 * syntax highlighting이 되지 않는 경우
   * 보통 기본 vi나 vim-minimal만 설치된 경우 발생
   * vim-enhanced 설치
-* lowercase <-> uppercase; http://www.linuxquestions.org/questions/linux-newbie-8/change-all-uppercase-to-lowercase-with-vi-633998/
+* lowercase <-> uppercase
+  * http://www.linuxquestions.org/questions/linux-newbie-8/change-all-uppercase-to-lowercase-with-vi-633998/
   ```
   :%s/.*/\L&/
   :%s/.*/\U&/
