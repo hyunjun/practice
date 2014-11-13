@@ -861,6 +861,7 @@
     * 레벨093-5 : kill명령어에서 사용가능한 시그널들 모두 확인하기
     * 레벨093-6 : kill명령어로 segmentation fault된 프로세스 종료하기
     * 레벨093-7 : kill명령어로 특정프로세스에게 interrupt 시그널로 강제 중지하기
+    * kill -9 isn't enough; http://www.bravenewgeek.com/sometimes-kill-9-isnt-enough/
   * 레벨094 : kill은 몰랐다. 한방에 해결하는 killall이 있다는 사실을.
     * 레벨094-1 : 특정 프로세스를 모두 종료시키는 killall 개론
     * 레벨094-2 : 아파치프로세스(httpd) 모두 종료하기
