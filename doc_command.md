@@ -1078,7 +1078,17 @@
   * 레벨135 : 이거 모르면 시스템관리 절대 못한다. 가끔씩 심심하면 sync하라.
     * 레벨135-1 : 디스크에 저장되어 있지 않은 메모리 버퍼의 데이터를 디스크에 저장하는 sync 활용
       * cache memory를 해제해 free memory를 늘리려면
-  * # sync; echo 3 > /proc/sys/vm/drop_caches
+        ```
+        #  free && sync && echo 3 > /proc/sys/vm/drop_caches && free
+             total       used       free     shared    buffers     cached
+        Mem:      37140848   18258316   18882532          0     148296   15631864
+        -/+ buffers/cache:    2478156   34662692
+        Swap:      2097144    1476432     620712
+                     total       used       free     shared    buffers     cached
+        Mem:      37140848    2400644   34740204          0        744      27684
+        -/+ buffers/cache:    2372216   34768632
+        Swap:      2097144    1476432     620712
+        ```
   * 레벨136 : 일정기간이상 사용되지 않은 파일은 자동삭제되도록 하라.
     * 레벨136-1 : 일정기간이상 사용되지않은 파일 자동삭제하는 tmpwatch 사용법
   * 레벨137 : 특정 쉘과 특정 프로세스에 대한 시스템자원 사용을 제한하는 ulimit
