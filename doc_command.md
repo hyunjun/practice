@@ -1078,6 +1078,7 @@
   * 레벨135 : 이거 모르면 시스템관리 절대 못한다. 가끔씩 심심하면 sync하라.
     * 레벨135-1 : 디스크에 저장되어 있지 않은 메모리 버퍼의 데이터를 디스크에 저장하는 sync 활용
       * cache memory를 해제해 free memory를 늘리려면
+
         ```
         #  free && sync && echo 3 > /proc/sys/vm/drop_caches && free
              total       used       free     shared    buffers     cached
