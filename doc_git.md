@@ -1,6 +1,13 @@
 # Git
 
 ## Usage
+* clone
+  * usage
+  ```
+  git clone git@github.com:[id]/[repository].git
+  git clone https://[id]@github.com:[id]/[repository].git
+  ```
+  * 공용 서버 계정과 각자 git 계정을 가지고 공동 개발을 하는 경우 https://gist.github.com/hyunjun/54fd1254451409c53db4
 * remove untracked files
 ```
 git clean -f
