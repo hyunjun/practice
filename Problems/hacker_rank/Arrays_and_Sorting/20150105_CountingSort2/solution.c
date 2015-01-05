@@ -2,14 +2,14 @@
 #include <stdlib.h>
 
 void counting_sort(int* ar, int n)  {
-  int* counts = (int*) malloc(sizeof(int) * n);
+  int* counts = (int*) malloc(sizeof(int) * 100);
   int i = 0;
   for ( i = 0; i < n; ++i ) {
     ++*(counts + *(ar + i));
   }
   int idx = 0;
-  int* res = (int*) malloc(sizeof(int) * n);
-  for ( i = 0; i < n; ++i ) {
+  int* res = (int*) malloc(sizeof(int) * 100);
+  for ( i = 0; i < 100; ++i ) {
     int c = *(counts + i);
     while ( c-- )  {
       *(res + idx++) = i;

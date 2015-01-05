@@ -2,12 +2,12 @@ import java.util.Scanner;
 
 public class Solution {
   public static int[] countingSort(final int[] ar)  {
-    int[] counts = new int[ar.length];
-    for ( int i = 0; i < counts.length; ++i )  {
+    int[] counts = new int[100];
+    for ( int i = 0; i < ar.length; ++i )  {
       ++counts[ar[i]];
     }
     int idx = 0;
-    int[] res = new int[ar.length];
+    int[] res = new int[100];
     for ( int i = 0; i < counts.length; ++i )  {
       int c = counts[i];
       while ( 0 < c-- )  {

@@ -1,5 +1,5 @@
 def counting_sort(ar):
-  counts = [0] * len(ar)
+  counts = [0] * 100
   for a in ar:
     counts[a] += 1
   res = []

@@ -6,12 +6,12 @@ import java.util.stream.IntStream;
 public class Solution8 {
   public static int[] countingSort(IntStream arStream) {
     final int[] ar = arStream.toArray();
-    int[] counts = new int[ar.length];
-    for ( int i = 0; i < counts.length; ++i )  {
+    int[] counts = new int[100];
+    for ( int i = 0; i < ar.length; ++i )  {
       ++counts[ar[i]];
     }
     int idx = 0;
-    int[] res = new int[ar.length];
+    int[] res = new int[100];
     for ( int i = 0; i < counts.length; ++i ) {
       int c = counts[i];
       while ( 0 < c-- ) {
