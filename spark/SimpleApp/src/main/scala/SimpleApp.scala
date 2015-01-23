@@ -4,7 +4,7 @@ import org.apache.spark.SparkConf
 
 object SimpleApp {
   def main(args: Array[String]) {
-    val logFile = "hdfs://10.15.86.145:8020/user/hanadmin/simple.sbt" // Should be some file on your system
+    val logFile = "hdfs://[name node]:[port, default 8020][hdfs file path]" // Should be some file on your system
     val conf = new SparkConf().setAppName("Simple Application")
     val sc = new SparkContext(conf)
     val logData = sc.textFile(logFile, 2).cache()
