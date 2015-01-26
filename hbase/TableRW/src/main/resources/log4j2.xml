@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug" name="Documents" packages="">
+	<Appenders>
+		<!--<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>-->
+		<!--	http://logging.apache.org/log4j/2.x/manual/appenders.html#RollingFileAppender	-->
+		<RollingFile name="DocumentsLog" fileName="logs/documents.log" filePattern="logs/$${date:yyyy-MM}/documents-%d{yyyy-MM-dd}-%i.log.gz">
+			<PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="250 MB"/>
+			</Policies>
+		</RollingFile>
+		<!--
+		<Socket name="socket" host="localhost" port="28080" immediateFlush="true">
+			<SerializedLayout />
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Socket>
+		-->
+	</Appenders>
+	<Loggers>
+		<Root level="debug">
+			<!--<appender-ref ref="Console" />-->
+			<AppenderRef ref="DocumentsLog" />
+			<!--<appender-ref ref="socket" />-->
+		</Root>
+	</Loggers>
+</Configuration>

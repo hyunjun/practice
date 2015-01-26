@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<zookeeper>
+		<quorum>zookeeper-server1</quorum>
+		<quorum>zookeeper-server2</quorum>
+		<quorum>zookeeper-server3</quorum>
+		<client_port>2181</client_port>
+	</zookeeper>
+	<htable_pool_num>100</htable_pool_num>
+</config>
