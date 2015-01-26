@@ -1,4 +1,5 @@
 # hbase example
+* hdfs <-> hbase by pig and, java
 
 ## environments
 * RedHat 6.4
@@ -9,6 +10,7 @@
 
 ## usage
 * pig
+
   ```
   $ ./create_table.sh
   $ hadoop fs -put population_drift.txt /user/hanadmin
@@ -18,6 +20,7 @@
   $ hadoop fs -ls population_drift
   ```
 * java
+
   ```
   $ ./create_table.sh
 
