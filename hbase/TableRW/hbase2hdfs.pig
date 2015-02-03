@@ -16,5 +16,9 @@ set hbase.zookeeper.quorum 'zookeeper server'
 %default col7 r_net
 %default col8 r_prev
 
-data = LOAD 'hbase://$table' using org.apache.pig.backend.hadoop.hbase.HBaseStorage('$col_fam1:$col1 $col_fam1:$col2 $col_fam1:$col3 $col_fam1:$col4 $col_fam2:$col5 $col_fam2:$col6 $col_fam2:$col7 $col_fam2:$col8');
+data = LOAD 'hbase://$table' using org.apache.pig.backend.hadoop.hbase.HBaseStorage('$col_fam1:$col1 $col_fam1:$col2 $col_fam1:$col3 $col_fam1:$col4 $col_fam2:$col5 $col_fam2:$col6 $col_fam2:$col7 $col_fam2:$col8') AS ($col1, $col2, $col3, $col4, $col5, $col6, $col7, $col8);
 STORE data INTO '/user/hanadmin/$txt' using PigStorage('\t');
+-- filtered = FILTER data BY $col1 MATCHES '18,492';
+-- filtered = FILTER data BY $col1 MATCHES '18.*';
+-- filtered = FILTER data BY $col1 MATCHES '.*92';
+-- STORE filtered INTO '/user/hanadmin/$txt' using PigStorage('\t');
