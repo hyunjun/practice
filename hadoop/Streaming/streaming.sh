@@ -5,7 +5,7 @@ INPUT=test_data
 OUTPUT=test_output
 #HADOOP_STREAMING=/usr/lib/hadoop-0.20-mapreduce/contrib/streaming/hadoop-streaming-2.0.0-mr1-cdh4.5.0.jar
 HADOOP_STREAMING=/usr/lib/hadoop-0.20-mapreduce/contrib/streaming/hadoop-streaming.jar
-MAPPER=mapper2.py
+MAPPER=mapper1.py
 EXTERNAL=external.py
 
 hadoop fs -rm $INPUT
