@@ -11,11 +11,15 @@
   * test_data; 간단한 test용 data
     * test_data_160_194는 utf8 160, 194 값이 있는데 일반적인 whitespace가 아니라 처리 방법을 아직 정확히 모르겠음
 * 주의점
+  * python 환경을 전부 동일하게
+    * 예를 들어 `#!/usr/bin/env python`으로 하면 system default python을 사용
+    * anaconda라면 `#!/anaconda/installed/directory/bin/python`으로 수정
   * python script를 단독으로 실행(ex. `$ ./mapper.py < test_data`)시 무조건 오류가 없어야 함
     * 오류가 없다고 무조건 streaming이 되는 건 아니지만, 오류가 있으면 무조건 실패
     * pig가 hadoop streaming보다 python 오류에 취약함
       * mapper.py는 hadoop streaming/pig 모두 동작
       * mapper2.py는 hadoop streaming만 정상 동작
+  * pig에 ship하는 file들은 full path 사용, directory는 ship할 수 없으므로 모든 클러스터에 동일하게 설치
   * `failed with exit status: 1`
     * print에서 기존의 %s가 아니라 str.format을 사용하는 경우
     * 호출하려고 import한 python file(아래 예제의 external.py)이
