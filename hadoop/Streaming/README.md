@@ -19,6 +19,7 @@
     * pig가 hadoop streaming보다 python 오류에 취약함
       * mapper.py는 hadoop streaming/pig 모두 동작
       * mapper2.py는 hadoop streaming만 정상 동작
+    * 하지만 directory에 어떤 resource가 있고 해당 directory를 사용하는 경우 hadoop streaming은 안 되지만, pig는 되는 걸로 보임(아직 정확하진 않음)
   * pig에 ship하는 file들은 full path 사용, directory는 ship할 수 없으므로 모든 클러스터에 동일하게 설치
   * `failed with exit status: 1`
     * print에서 기존의 %s가 아니라 str.format을 사용하는 경우
