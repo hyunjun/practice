@@ -22,7 +22,7 @@
     * 하지만 directory에 어떤 resource가 있고 해당 directory를 사용하는 경우 hadoop streaming은 안 되지만, pig는 되는 걸로 보임(아직 정확하진 않음)
   * pig에 ship하는 file들은 full path 사용, directory는 ship할 수 없으므로 모든 클러스터에 동일하게 설치
   * `failed with exit status: 1`
-    * print에서 기존의 %s가 아니라 str.format을 사용하는 경우
+    * python2.7이 아닌데 print에서 기존의 %s가 아니라 str.format을 사용하는 경우
     * 호출하려고 import한 python file(아래 예제의 external.py)이
       * streaming의 -files나 pig의 SHIP에 기술되지 않고
       * sys.path.append('.')로 추가 python file을 참조할 위치를 지정하지 않은 경우
