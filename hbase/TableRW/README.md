@@ -17,6 +17,7 @@
   $ pig -f hdfs2hbase.pig
   $ echo "count 'population_drift'" | hbase shell
   $ pig -f hbase2hdfs.pig
+  # or pig -f hbase_columns2hdfs.pig  # specific columns of hbase to hdfs
   $ hadoop fs -ls population_drift
   ```
 * java
