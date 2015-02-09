@@ -1,3 +1,6 @@
+-- set mapreduce.map.memory.mb 3072
+-- set mapreduce.map.java.opts -Xmx2048m
+
 %default txt population_drift
 %default table population_drift
 %default col_fam1 num
