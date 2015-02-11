@@ -1,3 +1,6 @@
 [submodule "java/hashmapTest"]
 	path = java/hashmapTest
 	url = https://github.com/mikvor/hashmapTest
+[submodule "c/musl"]
+	path = c/musl
+	url = git://git.musl-libc.org/musl
