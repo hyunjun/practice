@@ -4,3 +4,6 @@
 [submodule "c/musl"]
 	path = c/musl
 	url = git://git.musl-libc.org/musl
+[submodule "python/280afebf7e8e4f491a66"]
+	path = python/xmlrpc
+	url = https://gist.github.com/280afebf7e8e4f491a66.git
