@@ -7,3 +7,6 @@
 [submodule "python/280afebf7e8e4f491a66"]
 	path = python/xmlrpc
 	url = https://gist.github.com/280afebf7e8e4f491a66.git
+[submodule "websocketd"]
+	path = websocketd
+	url = https://github.com/joewalnes/websocketd.git
