@@ -7,7 +7,7 @@ test-pyev
   $ python test_pyev_client.py test
   test received
   ```
-*dha_ install
+* dha_ install
   * [libev](http://software.schmorp.de/pkg/libev.html)
 
     ```
