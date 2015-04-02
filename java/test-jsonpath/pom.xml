@@ -72,16 +72,17 @@
 		<version>2.4</version>
 	</dependency>
 
-	<!-- http://code.google.com/p/json-path/ -->
+	<!--	http://code.google.com/p/json-path/
+			https://github.com/nebhale/JsonPath	-->
 	<dependency>
 		<groupId>com.jayway.jsonpath</groupId>
 		<artifactId>json-path</artifactId>
-		<version>0.9.1</version>
+		<version>2.0.0</version>
 	</dependency>
 	<dependency>
 		<groupId>com.jayway.jsonpath</groupId>
 		<artifactId>json-path-assert</artifactId>
-		<version>0.9.1</version>
+		<version>2.0.0</version>
 	</dependency>
   </dependencies>
 </project>

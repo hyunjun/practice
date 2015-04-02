@@ -4,6 +4,13 @@ public class InnerClassTest	{
 		obj0.f();
 		Outer.Inner	obj1	=	new Outer().new Inner();
 		obj1.f();
+
+    Outer o = new Outer();
+    o.f();
+    Outer.Inner i = o.new Inner();
+    i.f();
+    Outer.Inner.Third t = i.new Third();
+    t.f();
 	}
 }
 
@@ -21,5 +28,13 @@ class Outer	{
 		int	x;
 
 		void f(){}
+
+    public class Third  {
+      int x;
+
+      void f(){}
+    }
 	}
+
+  void f(){}
 }
