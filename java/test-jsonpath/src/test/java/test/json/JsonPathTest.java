@@ -24,16 +24,18 @@ public class JsonPathTest extends TestCase  {
   }
 
   public void testArray() {
-    final String jsonStr = "[{'test':0}, {'test':1}, {'test':2}]";
-    System.out.println(JsonPath.parse(jsonStr).read("$[1].test"));
+    final String jsonStr = "[{'int':0, 'str':'str0'}, {'int':1, 'str':'str1'}, {'int':2, 'str':'str2'}]";
+    System.out.println(JsonPath.parse(jsonStr).read("$[1].int"));
 
     Object document = Configuration.defaultConfiguration().jsonProvider().parse(jsonStr);
-    System.out.println(JsonPath.read(document, "$[0].test"));
-    System.out.println(JsonPath.read(document, "$[1].test"));
-    System.out.println(JsonPath.read(document, "$[2].test"));
+    System.out.println(JsonPath.read(document, "$[0].int"));
+    System.out.println(JsonPath.read(document, "$[1].str"));
 
     List<Object> tests = JsonPath.read(document, "$[*]");
-    for ( Object t : tests )
-      System.out.println(JsonPath.read(t, "$.test"));
+    for ( Object test : tests )  {
+      int t = JsonPath.read(test, "$.int");
+      String s = JsonPath.read(test, "$.str");
+      System.out.println(t + "\t" + s);
+    }
   }
 }
