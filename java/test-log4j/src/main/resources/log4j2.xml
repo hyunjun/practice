@@ -18,7 +18,7 @@
 		</Socket> -->
 		</Appenders>
 		<Loggers>
-			<Root level="debug">
+			<Root level="trace">
 				<appender-ref ref="Console" />
 				<AppenderRef ref="test-log4j2" />
 				<!--<appender-ref ref="socket" />-->
