@@ -2,6 +2,7 @@ Pig
 ===
 * diff
   * diff2.pig
+    * [A Simple Explanation of COGROUP in Apache Pig](http://joshualande.com/cogroup-in-pig/)
     * 28억행(2877773812 line), 112GB(119496321285 byte) file 비교에 약 1h 52m 소요
     * 실행 전 `sync; echo 3 > /proc/sys/vm/drop_caches`로 memory 확보함
     * pig version 0.12.0-cdh5.2.0
