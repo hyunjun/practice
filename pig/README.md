@@ -12,3 +12,7 @@ Pig
     * 같은 server인데도 diff2.pig와 달리 실패한 요인은 다음 두 가지로 추정
     * memory를 적게 할당
     * 양쪽 file의 결과를 전부 쓰게 코드 작성
+  * cf
+    * [Comparing two files using awk](http://theunixshell.blogspot.kr/2012/12/i-have-two-files-file-1-contains-3.html)
+    * [comparing 2 large unsorted CSV files based on 2 columns](http://stackoverflow.com/questions/6999705/comparing-2-large-unsorted-csv-files-based-on-2-columns)
+    * [Comparing 2 Large Lists (Millions Of Rows) To Identify Shared And Exclusive Elements](https://www.biostars.org/p/63016/)
