@@ -1,8 +1,8 @@
 package net.practice.jun;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -11,8 +11,9 @@ import java.util.List;
 //import io.fastjson.*;
 import static org.boon.json.JsonFactory.fromJson;
 import static org.boon.json.JsonFactory.fromJsonArray;
+import static org.boon.primitive.Chr.*;
 
-public class AppTest extends TestCase {
+public class AppTest  {
 
   public static Class<MyJson> myJson = MyJson.class;
   public static class MyJson  {
@@ -23,13 +24,16 @@ public class AppTest extends TestCase {
     public String toString()  { return String.format("num %d, str %s", num, str); }
   }
 
-  public void testBoon()  {
+  @Test
+  public void testJson()  {
     final String jsonStr = "{'num':0, 'str':'str0'}";
+    //  json/src/main/java/io/advantageous/boon/json/JsonFactory.java
     MyJson mj = fromJson(jsonStr, myJson);
     assertEquals(mj.num, 0);
     assertEquals(mj.str, "str0");
 
     final String jsonStrs = "[{'num':0, 'str':'str0'}, {'num':10, 'str':'str10'}, {'num':20, 'str':'str20'}]";
+    //  json/src/main/java/io/advantageous/boon/json/JsonFactory.java
     List<MyJson> mjs = fromJsonArray(jsonStrs, myJson);
     assertEquals(mjs.get(2).num, 20);
     assertEquals(mjs.get(2).str, "str20");
@@ -60,7 +64,8 @@ public class AppTest extends TestCase {
     }
   }
 
-  public void testBoon2() {
+  @Test
+  public void testJson2() {
     final String jsonStrs = "[{\"w_att\":{\"pos\":0,\"offset\":0},\"input\":\"ES검색은\",\"terms\":[{\"type\":\"NE\",\"str\":\"다음\",\"syn\":{\"m_syn\":\"ES\",\"terms\":[\"ES\"],\"s_syn\":[\"daum\"]}},{\"type\":\"N\",\"str\":\"검색\"},{\"type\":\"SU\",\"str\":\"검색은\"}]},{\"w_att\":{\"pos\":6,\"offset\":16},\"input\":\"정확하고\",\"terms\":[{\"type\":\"RO\",\"str\":\"정확하다\"},{\"type\":\"SU\",\"str\":\"정확하고\"}]},{\"w_att\":{\"pos\":11,\"offset\":29},\"input\":\"빠르다\",\"terms\":[{\"type\":\"RO\",\"str\":\"빠르다\"},{\"type\":\"SU\",\"str\":\"빠르다\"}]}]";
     List<Input> inputs = fromJsonArray(jsonStrs, classInput);
     assertEquals(inputs.get(0).w_att.pos, 0);
@@ -81,5 +86,13 @@ public class AppTest extends TestCase {
     assertEquals(inputs.get(2).w_att.pos, 11);
     assertEquals(inputs.get(2).w_att.offset, 29);
     assertEquals(inputs.get(2).input, "빠르다");
+  }
+
+  @Test
+  public void testArray() {
+    //  reflekt/src/test/java/io/advantageous/boon/primitive/ChrTest.java
+    char[] letters = array( ' ', '\n', 'a', 'b', 'c', ' ', '\n', '\t' );
+    char[] results = trim( letters, 0, letters.length );
+    assertArrayEquals(array( 'a', 'b', 'c' ), results);
   }
 }
