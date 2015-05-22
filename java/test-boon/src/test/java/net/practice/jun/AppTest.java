@@ -37,6 +37,13 @@ public class AppTest  {
     List<MyJson> mjs = fromJsonArray(jsonStrs, myJson);
     assertEquals(mjs.get(2).num, 20);
     assertEquals(mjs.get(2).str, "str20");
+
+    final String brokenJsonStrs = "[{'num':0, 'str':'str0'}, {'num':10,]";
+    List<MyJson> mjsBroken = fromJsonArray(brokenJsonStrs, myJson);
+    assertEquals(mjsBroken.get(0).num, 0);
+    assertEquals(mjsBroken.get(0).str, "str0");
+    assertEquals(mjsBroken.get(1).num, 10);
+    assertNull(mjsBroken.get(1).str);
   }
 
   public static Class<Input> classInput = Input.class;
