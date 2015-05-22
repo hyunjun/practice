@@ -1,0 +1,3 @@
+parent:
+  time: 1432269983889
+  child1: {path1: /a/b/c, path2: /b/c/d, path3: /e/f/c}
