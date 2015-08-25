@@ -1,0 +1,4 @@
+맞춤법 검사기 띄어쓰기 2byte 띄어쓰기 다시 1byte 2byte 띄어쓰기
+
+#1byte: 0x20
+#2byte: U+00A0 (hex 0xC2 0xA0))
