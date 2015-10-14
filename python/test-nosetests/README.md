@@ -20,3 +20,6 @@
   $ nosetests -s tests/test_something.py:TestSomething.test_foo
   $ nosetests -s tests/test_something.py:TestSomething.test_bar
   ```
+* ref
+  * [nose](http://nose.readthedocs.org/en/latest/)
+  * [pythontesting.net](http://pythontesting.net/framework/nose/)
