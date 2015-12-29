@@ -1,4 +1,5 @@
 import org.apache.commons.lang3.StringEscapeUtils
+import com.google.gson._
 
 object Test {
 
@@ -14,12 +15,19 @@ object Test {
     raw.replace("\\", "\\\\").replace("\"", "\\\"").replace("/", "\\/")
   }
 
+  val gson = new Gson
+  def gsonEscapeJson(raw: String): String = {
+    val escaped = gson.toJson(raw)
+    escaped.substring(1, escaped.length - 1)
+  }
+
   def main(args: Array[String]) {
     val s = "test escape sequence \"  \\n \\"
-    println(s)
+    println("original %s".format(s))
     println(StringEscapeUtils.escapeJson(s))
+    println(gsonEscapeJson(s))
     val s1 = "이후 최택의 방으로 들어온 김선우는 \"사랑하는 친구야\"라며 비밀로 해달라고 부탁했다."
-    println(s1)
+    println("original %s".format(s1))
     /*println(StringEscapeUtils.escapeCsv(s1))
     println(StringEscapeUtils.escapeEcmaScript(s1))
     println(StringEscapeUtils.escapeHtml3(s1))
@@ -31,9 +39,11 @@ object Test {
     println(StringEscapeUtils.escapeJson(s1))
     println(new String(StringEscapeUtils.escapeJson(s1).toString.getBytes("UTF-8"), "UTF-8"))
     println(escapeJson(s1))
+    println(gsonEscapeJson(s1))
     val s2 = "('"
-    println(s2)
+    println("original %s".format(s2))
     println(StringEscapeUtils.escapeJson(s2))
     println(escapeJson(s2))
+    println(gsonEscapeJson(s2))
   }
 }
