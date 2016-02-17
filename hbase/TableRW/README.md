@@ -9,11 +9,19 @@
   * HBase 0.98.6-cdh5.3.0
 
 ## usage
+* hbase table
+
+  ```
+  $ echo 'truncate "population_drift"' | hbase shell
+  $ echo 'disable "population_drift"' | hbase shell
+  $ echo 'drop "population_drift"' | hbase shell
+  $ echo "create 'population_drift', 'num', 'ratio'" | hbase shell
+  ```
 * pig
 
   ```
-  $ ./create_table.sh
   $ hadoop fs -put population_drift.txt /user/hanadmin
+  # configure zookeeper server
   $ pig -f hdfs2hbase.pig
   $ echo "count 'population_drift'" | hbase shell
   $ pig -f hbase2hdfs.pig
@@ -23,8 +31,6 @@
 * java
 
   ```
-  $ ./create_table.sh
-
   $ mvn package -DskipTests
   $ hadoop jar ./target/tableRW-1.0-SNAPSHOT-jar-with-dependencies.jar net.jun.practice.Hdfs2TableMR2
   # 다음 오류가 발생하는 경우
