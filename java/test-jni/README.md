@@ -7,6 +7,8 @@
   * [JNI Part1: Java Native Interface Introduction and “Hello World” application](http://electrofriends.com/articles/jni/jni-part1-java-native-interface/)
   * [간단한 Java Native Interface 예제](http://www.hanbit.co.kr/network/view.html?bi_id=1033)
   * [Why am I getting this UnsatisfiedLinkError with native code?](http://stackoverflow.com/questions/761639/why-am-i-getting-this-unsatisfiedlinkerror-with-native-code)
+  * [How to use a jobject array ? (Jni)](http://stackoverflow.com/questions/8079976/how-to-use-a-jobject-array-jni)
+  * [passing string array from java to C with JNI](http://stackoverflow.com/questions/5972207/passing-string-array-from-java-to-c-with-jni)
 * hello world
 
   ```
