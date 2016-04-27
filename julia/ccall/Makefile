@@ -1,11 +1,8 @@
 rosetta.o: rosetta.c
-	gcc -c rosetta.c -o rosetta.o --std=c11 -Wall -fpic
+	gcc -c rosetta.c -o rosetta.o -Wall -fpic
 
-rosetta.dylib: rosetta.o
-	gcc -dynamiclib rosetta.o -o rosetta.dylib
-
-build: rosetta.dylib
+rosetta.so: rosetta.o
+	gcc -shared -o rosetta.so rosetta.o
 
 clean:
-	-rm *.o
-	-rm *.dylib
+	-rm *.o *.so

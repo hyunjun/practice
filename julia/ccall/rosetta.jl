@@ -1,6 +1,7 @@
 function hello_c(n::Int)
 buffer = zeros(Cchar, n)
-val = ccall((:HelloWorld, "rosetta"), Csize_t,
+val = ccall((:HelloWorld, "rosetta"), Csize_t,  # OSX
+# val = ccall((:HelloWorld, "./rosetta"), Csize_t,  # Linux
                                       (Ptr{Cchar}, Csize_t),
                                       buffer, length(buffer))
 val = convert(Int64, val)
