@@ -115,7 +115,7 @@ def cosine_similarity2(v1, v2, v1_sqrt_norm, v2_sqrt_norm):
 
 def cosine_similarity3(v1, v2, v1_sqrt_norm, v2_sqrt_norm):
   # input
-  #   vector 1, 2 (vector의 길이가 다른 경우 없는 key에 대해서는 0을 채워서 같은 길이로 만든 vector임)
+  #   vector 1, 2 (vector의 길이가 다른 경우 없는 key에 대해서는 0을 채워서 같은 길이로 만든 vector이며, np.array type)
   #   vector 1, 2 normalized value
   # output; cosine similarity
 
