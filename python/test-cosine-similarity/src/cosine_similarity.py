@@ -1,7 +1,9 @@
 # -*- coding: utf8 -*-
 from collections import Counter
+from itertools import product
 from scipy import linalg, mat, dot
 import math
+import numpy as np
 import time
 
 # 기사 제목, 형태소 분석 결과 tuple list
@@ -111,6 +113,19 @@ def cosine_similarity2(v1, v2, v1_sqrt_norm, v2_sqrt_norm):
   return cos_sim
 
 
+def cosine_similarity3(v1, v2, v1_sqrt_norm, v2_sqrt_norm):
+  # input
+  #   vector 1, 2 (vector의 길이가 다른 경우 없는 key에 대해서는 0을 채워서 같은 길이로 만든 vector임)
+  #   vector 1, 2 normalized value
+  # output; cosine similarity
+
+  dot_product = np.dot(v1, v2)
+
+  cos_sim = dot_product / (v1_sqrt_norm * v2_sqrt_norm)
+
+  return cos_sim
+
+
 def scipy_cosine_similarity(tf_idf1, tf_idf2):
   # input; vector 1, 2 (vector의 길이가 다른 경우 없는 key에 대해서는 0을 채워서 같은 길이로 만든 vector임)
   # output; cosine similarity
@@ -131,10 +146,20 @@ def scipy_cosine_similarity2(a, b, norm_a, norm_b):
   return c.A1[0]
 
 
+# https://www.huyng.com/posts/faster-numpy-dot-product  # does NOT work
+
+
+def _print(ts, te, result):
+  print '\n%2.8f msec' % ((te - ts) * 1000)
+  for i, j, cos_sim in sorted(result, key=lambda t: t[2], reverse=True)[:5]:
+    print '[{}][{}]\t{}\t{}\t{}'.format(i, j, cos_sim, cluster[i][0], cluster[j][0])
+    # print '[{}][{}]\t{}'.format(i, j, cos_sim)
+
+
 if __name__ == '__main__':
   terms_list, terms_set = [], set()
   for title, parsed in cluster:
-    print '{}\t{}'.format(title, parsed)
+    # print '{}\t{}'.format(title, parsed)
     terms = parse(parsed)
     terms_list.append(terms)
     [terms_set.add(term) for term in terms]
@@ -151,57 +176,51 @@ if __name__ == '__main__':
   #     print term, tf_idf,
   #   print
   tf_idf_dict_list_len = len(tf_idf_dict_list)
+  l = range(0, tf_idf_dict_list_len)
+  loops = [(i, j) for i, j in product(l, l) if i < j]
+
   sqrt_norm_list = [math.sqrt(sum([v * v for v in tf_idf_dict.values()])) for tf_idf_dict in tf_idf_dict_list]
   result = []
   ts = time.time()
-  # for i, j in product(range(0, tf_idf_dict_list_len - 1), range(1, tf_idf_dict_list_len)):
-  for i in range(0, tf_idf_dict_list_len):
-    for j in range(i + 1, tf_idf_dict_list_len):
-      # ts = time.time()
-      cos_sim = cosine_similarity(tf_idf_dict_list[i], tf_idf_dict_list[j], sqrt_norm_list[i], sqrt_norm_list[j])
-      # te = time.time()
-      # print i, j, cos_sim, '\t%2.8f msec' % ((te - ts) * 1000)
-      result.append((i, j, cos_sim))
+  for i, j in loops:
+    cos_sim = cosine_similarity(tf_idf_dict_list[i], tf_idf_dict_list[j], sqrt_norm_list[i], sqrt_norm_list[j])
+    result.append((i, j, cos_sim))
   te = time.time()
-  print '%2.8f msec' % ((te - ts) * 1000)
-  for i, j, cos_sim in sorted(result, key=lambda t: t[2], reverse=True)[:10]:
-    print '[{}][{}]\t{}'.format(i, j, cos_sim)
+  _print(ts, te, result)
 
   all_terms = sorted(list(terms_set))
-  # for term in all_terms:
-  #   print term,
-  # print
   tf_idf_list = []
   for tf_idf_dict in tf_idf_dict_list:
     tf_idf = []
     for term in all_terms:
-      print term, tf_idf_dict.get(term, 0),
+      # print term, tf_idf_dict.get(term, 0),
       tf_idf.append(tf_idf_dict.get(term, 0))
-    print
+    # print
     tf_idf_list.append(tf_idf)
-  sqrt_norm_list = [math.sqrt(sum([v * v for v in tf_idf])) for tf_idf in tf_idf_list]
+  sqrt_norm_list = [math.sqrt(sum([v * v for v in _tf_idf])) for _tf_idf in tf_idf_list]
   result = []
   ts = time.time()
-  for i in range(0, tf_idf_dict_list_len):
-    for j in range(i + 1, tf_idf_dict_list_len):
-      cos_sim = cosine_similarity2(tf_idf_list[i], tf_idf_list[j], sqrt_norm_list[i], sqrt_norm_list[j])
-      # print '[{}][{}]\t{}'.format(i, j, cos_sim)
-      result.append((i, j, cos_sim))
+  for i, j in loops:
+    cos_sim = cosine_similarity2(tf_idf_list[i], tf_idf_list[j], sqrt_norm_list[i], sqrt_norm_list[j])
+    result.append((i, j, cos_sim))
   te = time.time()
-  print '%2.8f msec' % ((te - ts) * 1000)
-  for i, j, cos_sim in sorted(result, key=lambda t: t[2], reverse=True)[:10]:
-    print '[{}][{}]\t{}'.format(i, j, cos_sim)
+  _print(ts, te, result)
+
+  tf_idf_np_array_list = map(np.array, tf_idf_list)
+  result = []
+  ts = time.time()
+  for i, j in loops:
+    cos_sim = cosine_similarity3(tf_idf_np_array_list[i], tf_idf_np_array_list[j], sqrt_norm_list[i], sqrt_norm_list[j])
+    result.append((i, j, cos_sim))
+  te = time.time()
+  _print(ts, te, result)
 
   result = []
-  precalced_list = [(mat(tf_idf), mat(tf_idf).T, linalg.norm(tf_idf)) for tf_idf in tf_idf_list]
+  precalced_list = [(mat(_tf_idf), mat(_tf_idf).T, linalg.norm(_tf_idf)) for _tf_idf in tf_idf_list]
   ts = time.time()
-  for i in range(0, tf_idf_dict_list_len):
-    for j in range(i + 1, tf_idf_dict_list_len):
-      # cos_sim = scipy_cosine_similarity(tf_idf_list[i], tf_idf_list[j])
-      cos_sim = scipy_cosine_similarity2(precalced_list[i][0], precalced_list[j][1], precalced_list[i][2], precalced_list[j][2])
-      # print '[{}][{}]\t{}'.format(i, j, cos_sim)
-      result.append((i, j, cos_sim))
+  for i, j in loops:
+    # cos_sim = scipy_cosine_similarity(tf_idf_list[i], tf_idf_list[j])
+    cos_sim = scipy_cosine_similarity2(precalced_list[i][0], precalced_list[j][1], precalced_list[i][2], precalced_list[j][2])
+    result.append((i, j, cos_sim))
   te = time.time()
-  print '%2.8f msec' % ((te - ts) * 1000)
-  for i, j, cos_sim in sorted(result, key=lambda t: t[2], reverse=True)[:10]:
-    print '[{}][{}]\t{}'.format(i, j, cos_sim)
+  _print(ts, te, result)
