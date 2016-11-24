@@ -12,14 +12,20 @@
     $ gcc -shared -o libtest.so test.o
 
     # OS X
-    $ gcc -I/System/Library/Frameworks/JavaVM.framework/Versions/A/Headers -o libtest.dylib -shared test.c
+    $ gcc -I/System/Library/Frameworks/JavaVM.framework/Versions/A/Headers -o ./lib/libtest.dylib -shared test.c
     ```
   * compile java & execution
 
     ```
-    $ javac -cp ./jna-4.2.2.jar:. TestJNA.java
+    $ javac MyStruct.java
+    $ javac MyStruct.java StringByReference.java
+    $ javac -cp ./lib/jna-4.2.2.jar:. MyStruct.java StringByReference.java
+    $ jar cvf ./lib/mylib.jar MyStruct.class StringByReference.class
+    $ \rm *.class
 
-    $ java -cp .:jna-4.2.2.jar -Djava.library.path=. TestJNA
+    $ javac -cp ./lib/jna-4.2.2.jar:./lib/mylib.jar:. TestJNA.java
+
+    $ java -cp .:./lib/jna-4.2.2.jar:./lib/mylib.jar -Djna.library.path=./lib/ TestJNA
     getpid()        12703
     getppid()       683
     time()  1479954286
