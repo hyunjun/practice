@@ -1,5 +1,7 @@
 # test-jna
-* [loading-a-custom-library-with-jna-on-windows](http://stackoverflow.com/questions/30327006/loading-a-custom-library-with-jna-on-windows)
+* ref
+  * [loading-a-custom-library-with-jna-on-windows](http://stackoverflow.com/questions/30327006/loading-a-custom-library-with-jna-on-windows)
+  * [JAVA native access examples](http://jnaexamples.blogspot.com/2012/03/java-native-access-is-easy-way-to.html)
 * compile & execution
   * [jna-4.2.2.jar](https://maven.java.net/content/repositories/releases/net/java/dev/jna/jna/4.2.2/jna-4.2.2.jar) from [jna](https://github.com/java-native-access/jna)
   * compile C
