@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+//===============================================
+//  simple custom functions
 void exampleMethod(const char* value) {
   printf("%s\n", value);
 }
@@ -25,7 +27,10 @@ int example_of_int(int a, int b)  {
 float example_of_float(float a, float b)  {
   return a + b;
 }
+//===============================================
 
+//===============================================
+//  custom functions with structure
 struct mystruct {
   int a;
   int b;
@@ -66,3 +71,4 @@ int setstring(char *ptr)  {
   ptr[0]='1';
   return 0;
 }
+//===============================================
