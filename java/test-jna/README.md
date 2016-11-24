@@ -9,7 +9,7 @@
     ```
     # Redhat 6.6
     $ gcc -c -Wall -Werror -fPIC test.c
-    $ gcc -shared -o libtest.so test.o
+    $ gcc -shared -o ./lib/libtest.so test.o
 
     # OS X
     $ gcc -I/System/Library/Frameworks/JavaVM.framework/Versions/A/Headers -o ./lib/libtest.dylib -shared test.c
@@ -17,11 +17,9 @@
   * compile java & execution
 
     ```
-    $ javac MyStruct.java
-    $ javac MyStruct.java StringByReference.java
     $ javac -cp ./lib/jna-4.2.2.jar:. MyStruct.java StringByReference.java
     $ jar cvf ./lib/mylib.jar MyStruct.class StringByReference.class
-    $ \rm *.class
+    $ \rm *.class *.o
 
     $ javac -cp ./lib/jna-4.2.2.jar:./lib/mylib.jar:. TestJNA.java
 
