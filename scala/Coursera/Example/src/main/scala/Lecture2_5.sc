@@ -1,3 +1,4 @@
+
 class Rational(x: Int, y: Int)  {
   //  Lecture 2-6
   require(y != 0, "denominator must be non-zero") //  predefined function
