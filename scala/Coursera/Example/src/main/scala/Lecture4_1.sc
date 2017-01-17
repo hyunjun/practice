@@ -54,3 +54,31 @@ class Succ(n: Nat) extends Nat  {
   def + (that: Nat): Nat = new Succ(n + that)
   def - (that: Nat): Nat = if ( that.isZero ) this else n - that.predecessor //  n = this - 1, that.predecessor = that - 1
 }
+
+//  Lecture 4-2
+(x: Int) => x * x
+/*  is expnaded to
+  { class AnonFun extends Function1[Int, Int] {
+    def apply(x: Int) = x * x
+    }
+    new AnnoFun
+  }
+
+  or
+
+  new Function1[Int, Int] {
+    def apply(x: Int) = x * x
+  }
+ */
+val f = (x: Int) => x * x
+f(7)
+val f2 = new Function1[Int, Int]  {
+  def apply(x: Int) = x * x
+}
+f2.apply(7)
+def f3(x: Int): Boolean = if ( x % 2 == 0 ) true else false
+(x: Int) => f3(x)
+new Function1[Int, Boolean] { //  eta expansion
+  def apply(x: Int) = f3(x)
+}
+
