@@ -50,3 +50,28 @@ class Sub extends Base  {
 //  dynamic binding
 Empty contains 1
 (new NonEmpty(7, Empty, Empty)) contains 7
+
+//  Lecture 4-3
+//  S <: T  S is a subtype of T
+def assertAllPos[S <: IntSet](r: S): S
+//  [S >: NonEmpty <: IntSet] //  mix a lower bound with an upper bound
+
+//  NonEmpty <: IntSet
+//  List[NonEmpty] <: List[IntSet]   // covariant
+
+//  Array Typing Problem (Java)
+/*
+NonEmpty[] a = new NonEmpty[]{new NonEmpty(1, Empty, Empty)}
+IntSet[] b = a
+b[0] = Empty
+NonEmpty s = a[0]
+ */
+//  Liskov
+//  Let q(x) be a property provable about objects x of type
+//  Then q(y) should be provable for objects y of type A where A <: B
+/*
+val a: Array[NonEmpty] = Array(new NonEmpty(1, Empty, Empty))
+val b: Array[IntSet] = a  //  error, because scala array is not covariant
+b(0) = Empty
+val s: NonEmpty = a(0)
+*/
