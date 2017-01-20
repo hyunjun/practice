@@ -75,3 +75,31 @@ val b: Array[IntSet] = a  //  error, because scala array is not covariant
 b(0) = Empty
 val s: NonEmpty = a(0)
 */
+
+//  Lecture 4-4
+/*  immutable types can be covariant, if some condition met
+A <: B
+c[A] <: C[B]  covariant
+c[A] >: C[B]  contravariant
+neither C[A] nor C[B] is a subtype of the other nonvariant
+
+class C[+A] covariant
+class C[-A] contravariant
+class C[A] nonavariant
+ */
+type A = IntSet => NonEmpty
+type B = NonEmpty => IntSet
+//  A <: B
+//  내가 이해하기로는
+//  A(NonEmpty, IntSet)으로 호출하는 게 가능하지만 B(NonEmpty)만 가능하기 때문에
+//  A는 B의 subtype이므로 A <: B
+//  NonEmpty <: IntSet, 즉 NonEmpty는 IntSet의 subtype이기 때문에
+//  A는 IntSet의 subtype인 NonEmtpy로 호출 가능
+//  반대로 출력의 경우 NonEmpty는 IntSet의 subtype, 즉 special case이기 때문에
+//  A가 B의 subtype이고 A는 B + more
+//  ban diagram으로 그려보면 이해가 조금 쉬움
+
+/*
+generally, if A2 <: A1 and B1 <: B2, then
+A1 => B1 <: A2 => B2
+ */
