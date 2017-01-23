@@ -102,4 +102,7 @@ type B = NonEmpty => IntSet
 /*
 generally, if A2 <: A1 and B1 <: B2, then
 A1 => B1 <: A2 => B2
+
+Function arguments contravariant
+Function results covariant
  */

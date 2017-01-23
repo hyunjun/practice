@@ -56,3 +56,25 @@ val testList = new Cons(0, new Cons(1, new Cons(2, new Nil)))
 testList.head
 nth(2, testList)
 nth(-1, testList)
+
+//  Lecture 4-4
+trait List[+T] {
+  def isEmpty: Boolean
+  def head: T
+  def tail: List[T]
+  //def prepend(elem: T): List[T] = new Cons(elem, this)
+  def prepend[U >: T](elem: U): List[U] = new Cons(elem, this)
+}
+class Cons[T](val head: T, val tail: List[T]) extends List[T] {
+  def isEmpty = false
+}
+//class Nil[T] extends List[T] {
+object Nil extends List[Nothing] {
+  def isEmpty: Boolean = false
+  def head: Nothing = throw new NoSuchElementException("Nil.head")
+  def tail: Nothing = throw new NoSuchElementException("Nil.tail")
+}
+object test {
+  val x: List[String] = Nil //  error unless trait List[+T]? DOES NOT WORK
+  def f(xs: List[NonEmpty], x: Empty) = xs prepend x
+}
