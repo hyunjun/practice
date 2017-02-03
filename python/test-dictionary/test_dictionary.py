@@ -13,6 +13,11 @@ from itertools import ifilter, izip, chain
 # control group
 from timeit import timeit
 
+# test 대상
+# dict 종류; dict, {}, defaultdict, Counter
+# loop 방법; for, items(), iteritems(), chain.from_iterable
+# 삭제 방법; del, pop
+
 
 def count0(lists) :
   d = dict()
