@@ -106,3 +106,44 @@ val grouped = ages.groupBy { age =>
 //  case class Visitor(ip: String, timestamp: String, duration: String)
 //  val visits: RDD[Visitor] = sc.textFile(...).map(v => (v.ip, v.duration))
 //  val numUniqueVisits = visits.keys.distinct().count()
+
+//*******
+//  Joins
+//  https://www.coursera.org/learn/scala-spark-big-data/lecture/BWWvQ/joins
+//*******
+//  Inner joins(join)
+//  Outer joins(leftOuterJoin/rightOuterJoin)
+
+/*
+val as = List((101, ("Ruetli", AG)), (102, ("Brelaz", DemiTarif)),
+              (103, ("Gress", DemiTarifVisa)), (104, ("Schatten", DemiTarif)))
+val abos = sc.parallelize(as)
+
+val ls = List((101, "Bern"), (101, ("Thun"), (102, "Lausanne"), (102, "Geneve"),
+              (102, "Nyon"), (103, "Zurich"), (103, "St-Gallen"), (103, "Chur"))
+val locations = sc.parallelize(ls)
+*/
+
+//  Inner joins
+//  def join[W](other: RDD[(K, W)]): RDD[(K, (V, W))]
+//  val abos = ...  //  RDD[(Int, (String, Abonnement))]
+//  val locations = ... //  RDD[(Int, String)]
+//  val trackedCustomers = abos.join(locations) //  RDD[(Int, ((String, Abonnement), String))]
+//  trackedCustomers.collect().foreach(println)
+//    (101, ((Ruetli, AG), Bern))
+//    (101, ((Ruetli, AG), Thun))
+//    ...
+//    (103, ((Gress, DemiTarifVisa), Chur))
+//    key 104 doesn't occur in the result
+
+//  Outer joins
+//  def leftOuterJoin[W](other: RDD[(K, W)]): RDD[(K, (V, Option[W]))]
+//  def rightOuterJoin[W](other: RDD[(K, W)]): RDD[(K, (Option[V], W))]
+//  val abosWithOptionalLocations = abos.leftOuterJoin(locations)
+//    //  RDD[(Int, ((String, Abonnement), Option[String]))]
+//  abosWithOptionalLocations.collect().foreach(println)
+//    ...
+//    (104, ((Schatten, DemiTarif), None))
+//  val customersWithLocationDataAndOptionalAbos = abos.rightOuterJoin(locations)
+//    //  RDD[(Int, (Option[(String, Abonnement)], String))]
+//    key 104 doesn't occur in the result
