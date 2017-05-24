@@ -36,4 +36,28 @@ def step_count_general(k, n):
 
   return sum([step_count_general(k, n - i) for i in range(1, k + 1)])
 
-print step_count(4), step_count_general(3, 4)
+def step_iter(n):
+  result, l = 0, [n]
+  while 0 < len(l):
+    cur = l.pop(0)
+    for i in range(1, 4):
+      next = cur - i
+      if next in [0, 1]:
+        result += 1
+      if 1 < next:
+        l.append(next)
+  return result
+
+def step_iter_general(k, n):
+  result, l = 0, [n]
+  while 0 < len(l):
+    cur = l.pop(0)
+    for i in range(1, k + 1):
+      next = cur - i
+      if next in [0, 1]:
+        result += 1
+      if 1 < next:
+        l.append(next)
+  return result
+
+print step_count(4), step_count_general(3, 4), step_iter(4), step_iter_general(3, 4)
