@@ -28,5 +28,16 @@ def getMinMax(n):
     smallest += 1
   return smallest, largest
 
-print getMinMax(3)
-print getMinMax(8)
+def getMinMax2(k):
+  smallest, largest = 1, 1
+  while k > 0:
+    largest *= 2
+    if smallest > 4 and (smallest - 1) % 3 == 0:
+      smallest = (smallest - 1) / 3
+    else:
+      smallest *= 2
+    k -= 1
+  return smallest, largest
+
+for k in [3, 8]:
+    print 'k = ', k, getMinMax(k), getMinMax2(k)
