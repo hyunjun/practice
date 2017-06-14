@@ -32,4 +32,7 @@ Flask API
 
   ```
   $ docker build -t test-flask-api:latest .
+
+  # python3
+  $ docker build -f Dockerfile3 -t test-flask-api:latest .
   ```
