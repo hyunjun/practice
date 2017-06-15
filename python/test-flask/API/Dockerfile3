@@ -5,7 +5,9 @@ RUN apt-get install -y python3-pip python3-dev build-essential
 
 RUN mkdir /app
 COPY ./api_only_flask.py /app
+COPY ./settings.py /app
 COPY ./requirements.txt /app
+COPY ./test /app/test
 WORKDIR /app
 
 RUN pip3 install --upgrade pip

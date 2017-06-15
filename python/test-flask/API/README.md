@@ -4,7 +4,7 @@ Flask API
 * Execution
 
   ```
-  $ docker run -p 59459:5000 test-flask-api
+  $ docker run --rm -p 59459:5000 test-flask-api
    * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
    * Restarting with stat
    * Debugger is active!

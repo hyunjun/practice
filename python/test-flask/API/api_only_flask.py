@@ -1,11 +1,14 @@
 # -*- coding: utf8 -*-
 from flask import Flask
 from flask import request
+from flask_pytest import FlaskPytest
 import logging
 # import socket
 
 
 app = Flask(__name__)
+app.config.from_pyfile('settings.py')
+app = FlaskPytest(app)
 
 
 @app.route('/')
