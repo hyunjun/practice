@@ -23,4 +23,7 @@
   $ curl http://localhost/stop
   stop
   ```
-* Installation `docker build -t apache-flask:latest .`
+* Installation
+  * `docker build -t apache-flask:latest .`
+  * `docker build -f Dockerfile3 -t apache-flask:latest .` for python3
+    * [Getting Flask to use Python3 (Apache/mod_wsgi)](https://stackoverflow.com/questions/30642894/getting-flask-to-use-python3-apache-mod-wsgi)
