@@ -27,10 +27,26 @@ def kth_smallest(root, k):
     return result
 
 
+def kth_smallest_recur(node, k, min_val_vec):
+    if node.left is not None:
+        ret = kth_smallest_recur(node.left, k, min_val_vec)
+        if ret is not None:
+            return ret
+    min_val_vec.append(node.data)
+    if len(min_val_vec) == k:
+        res = min_val_vec[-1]
+        return res
+    if node.right is not None:
+        ret = kth_smallest_recur(node.right, k, min_val_vec)
+        if ret is not None:
+            return ret
+    return None
+
+
 if __name__ == '__main__':
     root = Node(10)
     root.left = Node(5)
     root.right = Node(16)
     root.left.left = Node(3)
     root.left.right = Node(7)
-    print kth_smallest(root, 3)
+    print kth_smallest(root, 3), kth_smallest_recur(root, 3, [])
