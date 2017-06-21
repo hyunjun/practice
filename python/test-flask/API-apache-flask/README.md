@@ -25,5 +25,9 @@
   ```
 * Installation
   * `docker build -t apache-flask:latest .`
-  * `docker build -f Dockerfile3 -t apache-flask:latest .` for python3
+  * `docker build -f Dockerfile3 -t apache-flask:latest .` for python3 on debian
     * [Getting Flask to use Python3 (Apache/mod_wsgi)](https://stackoverflow.com/questions/30642894/getting-flask-to-use-python3-apache-mod-wsgi)
+  * `docker build -f Dockerfile3.ubuntu -t apache-flask:latest .` for python3 on ubuntu
+    * Compare [apache-flask3.wsgi](apache-flask3.wsgi) (for debian) vs. [apache-flask3.ubuntu.wsgi](apache-flask3.ubuntu.wsgi) (for ubuntu)
+      * Without modifying wsgi file like apache-flask3.wsgi, error occurs. see details at [error.log](error.log)
+    * [python3-mod_wsgi: site.addsitedir() fails if multiple directories in python-path](https://bugzilla.redhat.com/show_bug.cgi?id=1345725)

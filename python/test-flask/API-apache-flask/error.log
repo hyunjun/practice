@@ -1,0 +1,21 @@
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.17.0.2. Set the 'ServerName' directive globally to suppress this message
+[Wed Jun 21 08:01:43.149062 2017] [wsgi:warn] [pid 8:tid 140134612658048] mod_wsgi: Compiled for Python/3.5.1+.
+[Wed Jun 21 08:01:43.149113 2017] [wsgi:warn] [pid 8:tid 140134612658048] mod_wsgi: Runtime using Python/3.5.2.
+[Wed Jun 21 08:01:43.150574 2017] [mpm_event:notice] [pid 8:tid 140134612658048] AH00489: Apache/2.4.18 (Ubuntu) mod_wsgi/4.3.0 Python/3.5.2 configured -- resuming normal operations
+[Wed Jun 21 08:01:43.150597 2017] [core:notice] [pid 8:tid 140134612658048] AH00094: Command line: '/usr/sbin/apache2 -D FOREGROUND'
+[Wed Jun 21 08:01:43.182365 2017] [wsgi:error] [pid 9:tid 140134612658048] mod_wsgi (pid=9): Call to 'site.addsitedir()' failed for '(null)', stopping.
+[Wed Jun 21 08:01:43.182411 2017] [wsgi:error] [pid 9:tid 140134612658048] mod_wsgi (pid=9): Call to 'site.addsitedir()' failed for '/usr/bin/python3'.
+[Wed Jun 21 08:01:43.197551 2017] [wsgi:error] [pid 10:tid 140134612658048] mod_wsgi (pid=10): Call to 'site.addsitedir()' failed for '(null)', stopping.
+[Wed Jun 21 08:01:43.197596 2017] [wsgi:error] [pid 10:tid 140134612658048] mod_wsgi (pid=10): Call to 'site.addsitedir()' failed for '/usr/bin/python3'.
+[Wed Jun 21 08:01:43.198568 2017] [wsgi:error] [pid 11:tid 140134612658048] mod_wsgi (pid=11): Call to 'site.addsitedir()' failed for '(null)', stopping.
+[Wed Jun 21 08:01:43.198605 2017] [wsgi:error] [pid 11:tid 140134612658048] mod_wsgi (pid=11): Call to 'site.addsitedir()' failed for '/usr/bin/python3'.
+[Wed Jun 21 08:01:43.203646 2017] [wsgi:error] [pid 12:tid 140134612658048] mod_wsgi (pid=12): Call to 'site.addsitedir()' failed for '(null)', stopping.
+[Wed Jun 21 08:01:43.203676 2017] [wsgi:error] [pid 12:tid 140134612658048] mod_wsgi (pid=12): Call to 'site.addsitedir()' failed for '/usr/bin/python3'.
+[Wed Jun 21 08:01:47.982969 2017] [wsgi:error] [pid 9:tid 140134479476480] mod_wsgi (pid=9): Call to 'site.addsitedir()' failed for '(null)', stopping.
+[Wed Jun 21 08:01:47.983560 2017] [wsgi:error] [pid 9:tid 140134479476480] mod_wsgi (pid=9): Call to 'site.addsitedir()' failed for '/usr/bin/python3'.
+[Wed Jun 21 08:01:47.984289 2017] [wsgi:error] [pid 9:tid 140134479476480] [remote 172.17.0.1:23441] mod_wsgi (pid=9): Target WSGI script '/var/www/apache-flask/apache-flask.wsgi' cannot be loaded as Python module.
+[Wed Jun 21 08:01:47.984326 2017] [wsgi:error] [pid 9:tid 140134479476480] [remote 172.17.0.1:23441] mod_wsgi (pid=9): Exception occurred processing WSGI script '/var/www/apache-flask/apache-flask.wsgi'.
+[Wed Jun 21 08:01:47.984541 2017] [wsgi:error] [pid 9:tid 140134479476480] [remote 172.17.0.1:23441] Traceback (most recent call last):
+[Wed Jun 21 08:01:47.984567 2017] [wsgi:error] [pid 9:tid 140134479476480] [remote 172.17.0.1:23441]   File "/var/www/apache-flask/apache-flask.wsgi", line 3, in <module>
+[Wed Jun 21 08:01:47.984574 2017] [wsgi:error] [pid 9:tid 140134479476480] [remote 172.17.0.1:23441]     from app import app as application
+[Wed Jun 21 08:01:47.984593 2017] [wsgi:error] [pid 9:tid 140134479476480] [remote 172.17.0.1:23441] ImportError: No module named 'app'
