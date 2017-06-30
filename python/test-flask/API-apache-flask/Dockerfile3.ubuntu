@@ -42,6 +42,16 @@ EXPOSE 80
 
 WORKDIR /var/www/apache-flask
 
+ENV PYTHONIOENCODING="utf-8"
+ENV LANG=ko_KR.UTF-8
+ENV LANGUAGE=ko_KR.UTF-8
+ENV LC_ALL=ko_KR.UTF-8
+
+# user configuration
+# http://michal.karzynski.pl/blog/2013/09/14/django-in-virtualenv-on-webfactions-apache-with-mod-wsgi/
+ENV MY_KEY1=MY_VAL1
+ENV MY_KEY2=MY_VAL2
+
 # CMD ["/bin/bash"]
 CMD  /usr/sbin/apache2ctl -D FOREGROUND
 # The commands below get apache running but there are issues accessing it online
