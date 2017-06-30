@@ -3,11 +3,15 @@ from app import app
 from flask import Flask
 from flask import request
 import logging
+import mod_wsgi
 
 
 @app.route('/')
 def api_root():
-  return 'Welcome'
+  # https://stackoverflow.com/questions/20789391/django-referencing-different-settings-files-from-wsgi-depending-on-server
+  # http://modwsgi.readthedocs.io/en/develop/user-guides/quick-configuration-guide.html
+  # mod_wsgi.process_group value comes from WSGIProcessGroup on apache-flask3.conf
+  return 'Welcome {}'.format(mod_wsgi.process_group)
 
 
 @app.route('/count')

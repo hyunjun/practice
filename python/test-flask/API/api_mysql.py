@@ -86,4 +86,6 @@ def stop():
 if __name__ == '__main__':
   IP_ADDRESS = socket.gethostbyname(socket.gethostname())
   app.logger.setLevel(logging.DEBUG)
-  app.run(host=IP_ADDRESS, port=59459, debug=True)
+  app.config.from_pyfile('settings.cfg')
+  DEBUG = app.config['DEBUG']
+  app.run(host=IP_ADDRESS, port=59459, debug=DEBUG)
