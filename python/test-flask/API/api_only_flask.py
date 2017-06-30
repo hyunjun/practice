@@ -16,6 +16,11 @@ def api_root():
   return 'Welcome'
 
 
+@app.route('/add/<int:left>/<int:right>')
+def add(left, right):
+  return str(left + right)
+
+
 @app.route('/count')
 def count():
   return 'count'
