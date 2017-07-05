@@ -11,13 +11,15 @@ import mod_wsgi
 # http://michal.karzynski.pl/blog/2013/09/14/django-in-virtualenv-on-webfactions-apache-with-mod-wsgi/
 MY_VAL1 = os.environ.get('MY_KEY1')
 MY_VAL2 = os.environ.get('MY_KEY2')
+# from app/config.env
+MY_VAL3 = os.environ.get('MY_KEY3')
 
 @app.route('/')
 def api_root():
   # https://stackoverflow.com/questions/20789391/django-referencing-different-settings-files-from-wsgi-depending-on-server
   # http://modwsgi.readthedocs.io/en/develop/user-guides/quick-configuration-guide.html
   # mod_wsgi.process_group value comes from WSGIProcessGroup on apache-flask3.conf
-  return 'Welcome {}\t{}\t{}'.format(mod_wsgi.process_group, MY_VAL1, MY_VAL2)
+  return 'Welcome {}\t{}\t{}\t{}'.format(mod_wsgi.process_group, MY_VAL1, MY_VAL2, MY_VAL3)
 
 
 @app.route('/count')
