@@ -3,7 +3,7 @@
 * Original repo; [https://github.com/Craicerjack/apache-flask](https://github.com/Craicerjack/apache-flask)
 * Execution
   ```
-  $ docker run --rm -p 80:80 --name test-apache-flask apache-flask
+  $ docker run --env-file=app/config.env --rm -p 80:80 --name test-apache-flask apache-flask
 
   $ curl http://localhost
   Welcome
