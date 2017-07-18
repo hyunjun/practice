@@ -4,7 +4,7 @@ Flask API
 * Execution
 
   ```
-  $ docker run --rm -p 59459:5000 test-flask-api
+  $ docker run --env-file=common/config/settings.env --rm -v `pwd`/logs:/app/logs -p 59459:5000 test-flask-api
    * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
    * Restarting with stat
    * Debugger is active!
@@ -31,8 +31,5 @@ Flask API
 * Installation
 
   ```
-  $ docker build -t test-flask-api:latest .
-
-  # python3
   $ docker build -f Dockerfile3 -t test-flask-api:latest .
   ```

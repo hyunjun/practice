@@ -3,7 +3,18 @@ from flask import Flask
 from flask import request
 from flask_pytest import FlaskPytest
 import logging
-# import socket
+import os
+import sys
+
+
+sys.path.append(os.path.join(os.path.dirname('.'), '..'))
+
+
+from common.src import common
+
+
+logger = logging.getLogger('api')
+common.setup_logging(os.environ.get('LOGGING_CONFIG_FILEPATH'))
 
 
 app = Flask(__name__)
@@ -39,21 +50,25 @@ def insert(id):
 def insert(id):
   sentence = request.form['sentence']
   app.logger.debug(sentence)
+  logger.info('insert id {} {}'.format(id, sentence.encode('utf8')))
   return 'insert id {} {}'.format(id, sentence.encode('utf8'))
 
 
 @app.route('/select/<id>')
 def select(id):
+  logger.debug('select id {}'.format(id))
   return 'select id {}'.format(id)
 
 
 @app.route('/update/<id>')
 def update(id):
+  logger.info('update id {}'.format(id))
   return 'update id {}'.format(id)
 
 
 @app.route('/delete/<id>')
 def delete(id):
+  logger.debug('delete id {}'.format(id))
   return 'delete id {}'.format(id)
 
 

@@ -4,9 +4,11 @@ RUN apt-get update -y
 RUN apt-get install -y python3-pip python3-dev build-essential
 
 RUN mkdir /app
+RUN mkdir /app/logs
 COPY ./api_only_flask.py /app
 COPY ./settings.py /app
 COPY ./requirements.txt /app
+COPY ./common /app/common
 COPY ./test /app/test
 WORKDIR /app
 
