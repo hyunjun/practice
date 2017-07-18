@@ -1,7 +1,6 @@
-# -*- coding: utf8 -*-
+from app import app
 from flask import Flask
 from flask import request
-from flask_pytest import FlaskPytest
 import logging
 import os
 import sys
@@ -15,11 +14,6 @@ from common.src import common
 
 logger = logging.getLogger('api')
 common.setup_logging(os.environ.get('LOGGING_CONFIG_FILEPATH'))
-
-
-app = Flask(__name__)
-app.config.from_pyfile('settings.py')
-app = FlaskPytest(app)
 
 
 @app.route('/')
@@ -81,8 +75,8 @@ def stop():
   return 'stop'
 
 
-if __name__ == '__main__':
-  # IP_ADDRESS = socket.gethostbyname(socket.gethostname())
-  app.logger.setLevel(logging.DEBUG)
-  # app.run(host=IP_ADDRESS, port=59459, debug=True)
-  app.run(host='0.0.0.0', debug=True)
+# if __name__ == '__main__':
+#   # IP_ADDRESS = socket.gethostbyname(socket.gethostname())
+#   app.logger.setLevel(logging.DEBUG)
+#   # app.run(host=IP_ADDRESS, port=59459, debug=True)
+#   app.run(host='0.0.0.0', debug=True)

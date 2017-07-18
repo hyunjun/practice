@@ -5,15 +5,14 @@ RUN apt-get install -y python3-pip python3-dev build-essential
 
 RUN mkdir /app
 RUN mkdir /app/logs
-COPY ./api_only_flask.py /app
-COPY ./settings.py /app
-COPY ./requirements.txt /app
+COPY ./run.py /app/run.py
+COPY ./app/* /app/app/
 COPY ./common /app/common
 COPY ./test /app/test
 WORKDIR /app
 
 RUN pip3 install --upgrade pip
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r app/requirements.txt
 
 ENTRYPOINT ["python3"]
-CMD ["api_only_flask.py"]
+CMD ["run.py"]
