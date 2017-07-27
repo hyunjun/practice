@@ -1,5 +1,5 @@
-Test libcur
-===========
+Test libcurl
+============
 
 * Compile
   * [how to install curl and libcurl](https://curl.haxx.se/docs/install.html)
