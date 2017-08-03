@@ -1,0 +1,46 @@
+version: 1
+disable_existing_loggers: False
+formatters:
+    simple:
+        format: "%(asctime)s [%(levelname)s][%(filename)s:%(lineno)s - %(funcName)20s()] %(message)s"
+
+handlers:
+    console:
+        class: logging.StreamHandler
+        level: DEBUG
+        formatter: simple
+        stream: ext://sys.stdout
+    file_handler1:
+        class: logging.handlers.TimedRotatingFileHandler
+        level: DEBUG
+        formatter: simple
+        filename: logs/file_handler1.log
+        backupCount: 100
+        encoding: utf8
+    file_handler2:
+        class: logging.handlers.TimedRotatingFileHandler
+        level: DEBUG
+        formatter: simple
+        filename: logs/file_handler2.log
+        backupCount: 100
+        encoding: utf8
+    error_file_handler:
+        class: logging.handlers.RotatingFileHandler
+        level: ERROR
+        formatter: simple
+        filename: errors.log
+        maxBytes: 10485760
+        backupCount: 20
+        encoding: utf8
+
+loggers:
+    my_module:
+        level: ERROR
+        handlers: [console]
+        propagate: no
+    test_both:
+        level: DEBUG
+        handlers: [console, file_handler1]
+    test_file:
+        level: DEBUG
+        handlers: [file_handler2]
