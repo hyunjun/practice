@@ -17,6 +17,8 @@ def setup_logging(default_path='common/config/logging.yaml'):
 if __name__ == '__main__':
   setup_logging(os.environ.get('LOGGING_CONFIG_FILEPATH'))
   logger1 = logging.getLogger('test_both')
-  logger1.debug('logging test')
+  logger1.debug('logging test 1')
   logger2 = logging.getLogger('test_file')
-  logger2.debug('logging test')
+  logger2.debug('logging test 2')
+  logger3 = logging.getLogger('test_null')
+  logger3.debug('logging test 3')

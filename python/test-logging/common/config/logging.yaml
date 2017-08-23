@@ -10,6 +10,8 @@ handlers:
         level: DEBUG
         formatter: simple
         stream: ext://sys.stdout
+    null_handler:
+        class: logging.NullHandler
     file_handler1:
         class: logging.handlers.TimedRotatingFileHandler
         level: DEBUG
@@ -44,3 +46,6 @@ loggers:
     test_file:
         level: DEBUG
         handlers: [file_handler2]
+    test_null:
+        level: DEBUG
+        handlers: [null_handler]

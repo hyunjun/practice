@@ -31,3 +31,8 @@
     * Compare [apache-flask3.wsgi](apache-flask3.wsgi) (for debian) vs. [apache-flask3.ubuntu.wsgi](apache-flask3.ubuntu.wsgi) (for ubuntu)
       * Without modifying wsgi file like apache-flask3.wsgi, error occurs. see details at [error.log](error.log)
     * [python3-mod_wsgi: site.addsitedir() fails if multiple directories in python-path](https://bugzilla.redhat.com/show_bug.cgi?id=1345725)
+* To use different port except 80
+  * On Dockerfile `COPY ports.conf /etc/apache2/ports.conf`
+  * Use the same port number in ports.conf & apache-flask.conf
+  * ref
+    * [Configure apache to listen on port other than 80](https://stackoverflow.com/questions/3940909/configure-apache-to-listen-on-port-other-than-80)
