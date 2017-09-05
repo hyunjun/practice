@@ -11,3 +11,5 @@ test logging
   2017-08-03 23:34:49,949 [DEBUG][test_logging.py:22 -             <module>()] logging test
   ```
 * requirements `pip3 install PyYAML`
+* ref
+  * https://docs.python.org/3/howto/logging-cookbook.html
