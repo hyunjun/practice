@@ -1,3 +1,6 @@
+#   https://codingblocks.com/resources/binary-search-upper-lower-bound/
+#   http://thushw.blogspot.com/2010/07/why-am-i-writing-lowerbound-in-java.html
+
 def lower_bound(nums, target):
     l, r = 0, len(nums) - 1
     if target == nums[l]:
