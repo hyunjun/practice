@@ -26,6 +26,13 @@ handlers:
         filename: logs/file_handler2.log
         backupCount: 100
         encoding: utf8
+    file_level_handler:
+        class: logging.handlers.TimedRotatingFileHandler
+        level: INFO
+        formatter: simple
+        filename: logs/file_level_handler.log
+        backupCount: 100
+        encoding: utf8
     error_file_handler:
         class: logging.handlers.RotatingFileHandler
         level: ERROR
@@ -46,6 +53,9 @@ loggers:
     test_file:
         level: DEBUG
         handlers: [file_handler2]
+    test_level:
+        level: ERROR
+        handlers: [file_level_handler]
     test_null:
         level: DEBUG
         handlers: [null_handler]

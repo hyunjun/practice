@@ -23,6 +23,12 @@ if __name__ == '__main__':
   logger2.debug('logging test 2')
   logger3 = logging.getLogger('test_null')
   logger3.debug('logging test 3')
+  logger_level = logging.getLogger('test_level')
+  logger_level.debug('logging level debug')
+  logger_level.info('logging level info')
+  logger_level.warning('logging level warning')
+  logger_level.error('logging level error')
+  logger_level.critical('logging level critical')
 
   # https://docs.python.org/3/library/logging.handlers.html#logging.handlers.RotatingFileHandler
   # https://docs.python.org/3/howto/logging-cookbook.html#using-file-rotation
