@@ -1,0 +1,6 @@
+PyYAML
+confluent-kafka
+pyinotify
+redis
+requests
+ujson
