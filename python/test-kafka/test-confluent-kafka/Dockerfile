@@ -11,6 +11,8 @@ RUN apt-get update -y && apt-get install -y python3-pip python3-dev build-essent
 #RUN apt-get install -y librdkafka-dev
 
 # without python soft link, cannot configure librdkafka
+# disabling linker-script since python is not available
+# https://www.bountysource.com/issues/47927927-make-env-can-t-execute-python-no-such-file-or-directory
 RUN ln -sf /usr/bin/python3 /usr/bin/python
 
 ARG BUILD_DIR=/tmp
