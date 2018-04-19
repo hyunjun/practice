@@ -1,7 +1,11 @@
 if __name__ == '__main__':
   from confluent_kafka import Consumer, KafkaError
 
-  c = Consumer({'bootstrap.servers': '<kafka server>', 'group.id': 'mygroup', 'default.topic.config': {'auto.offset.reset': 'smallest'}})
+  # 'enable.partition.eof': False
+  # https://github.com/confluentinc/confluent-kafka-python/issues/283
+  # https://github.com/confluentinc/confluent-kafka-python/issues/176
+  # https://github.com/edenhill/librdkafka/issues/1024
+  c = Consumer({'bootstrap.servers': '<kafka server>', 'group.id': 'mygroup', 'enable.partition.eof': False, 'default.topic.config': {'auto.offset.reset': 'smallest'}})
   c.subscribe(['<topic>'])
   running = True
   while running:
