@@ -47,3 +47,6 @@ Redis
     * dict, list; json loads
   * hmset; 구분하기 귀찮으니 그냥 모든 value에 대해 json dumps
   * hgetall; 역시 구분하기 귀찮으니 decode('utf8') + json loads
+  * result
+    * `h*set`; json dumps
+    * `hget*`; decode('utf8') + json loads
