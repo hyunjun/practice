@@ -21,6 +21,12 @@ class Shape:
     def act(self):
         pass
 
+    def __repr__(self):
+        return 'repr {}/{}'.format(self.__class__, self.msg)
+
+    def __str__(self):
+        return 'str {}/{}'.format(self.__class__, self.msg)
+
 
 class Circle(Shape):
     def __init__(self, msg):
@@ -45,3 +51,5 @@ class Square(Shape):
 for _type, msg in [('Circle', 'draw'), ('Square', 'erase')]:
     shape = Shape.factory(_type, msg)
     shape.act()
+    #   __str__ > __repr__
+    print(shape)
