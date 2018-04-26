@@ -13,6 +13,13 @@ class Shape:
     def __init__(self, msg):
         self.msg = msg
         print('Shape {}'.format(self.msg))
+        if 'draw' == self.msg:
+            self.act = self.draw
+        elif 'erase' == self.msg:
+            self.act = self.erase
+
+    def act(self):
+        pass
 
 
 class Circle(Shape):
@@ -20,9 +27,9 @@ class Circle(Shape):
         super(Circle, self).__init__(msg)
         print('Circle {}'.format(self.msg))
     def draw(self):
-        print('Circle.draw')
+        print('Circle.draw by {}'.format(self.msg))
     def erase(self):
-        print('Circle.erase')
+        print('Circle.erase by {}'.format(self.msg))
 
 
 class Square(Shape):
@@ -30,12 +37,11 @@ class Square(Shape):
         super(Square, self).__init__(msg)
         print('Square {}'.format(self.msg))
     def draw(self):
-        print('Square.draw')
+        print('Square.draw by {}'.format(self.msg))
     def erase(self):
-        print('Square.erase')
+        print('Square.erase by {}'.format(self.msg))
 
 
-for _type in ['Circle', 'Square']:
-    shape = Shape.factory(_type, 'msg: {}'.format(_type.lower()))
-    shape.draw()
-    shape.erase()
+for _type, msg in [('Circle', 'draw'), ('Square', 'erase')]:
+    shape = Shape.factory(_type, msg)
+    shape.act()
