@@ -4,19 +4,25 @@
 class Shape:
     @classmethod
     def factory(cls, _type, msg):
-        if 'Circle' == _type:
-            return Circle(msg)
-        if 'Square' == _type:
-            return Square(msg)
-        return None
+        #if 'Circle' == _type:
+        #    return Circle(msg)
+        #if 'Square' == _type:
+        #    return Square(msg)
+        #return None
+        try:
+            shape = eval(_type)(msg)
+        except NameError:
+            return None
+        shape.act = eval('shape.{}'.format(msg))
+        return shape
 
     def __init__(self, msg):
         self.msg = msg
         print('Shape {}'.format(self.msg))
-        if 'draw' == self.msg:
-            self.act = self.draw
-        elif 'erase' == self.msg:
-            self.act = self.erase
+        #if 'draw' == self.msg:
+        #    self.act = self.draw
+        #elif 'erase' == self.msg:
+        #    self.act = self.erase
 
     def act(self):
         pass
@@ -48,8 +54,9 @@ class Square(Shape):
         print('Square.erase by {}'.format(self.msg))
 
 
-for _type, msg in [('Circle', 'draw'), ('Square', 'erase')]:
+for _type, msg in [('Circle', 'draw'), ('Square', 'erase'), ('NotExist', 'none')]:
     shape = Shape.factory(_type, msg)
-    shape.act()
-    #   __str__ > __repr__
-    print(shape)
+    if shape:
+        shape.act()
+        #   __str__ > __repr__
+        print(shape)
