@@ -30,7 +30,7 @@ class Shape:
 
 class Circle(Shape):
     def __init__(self, msg):
-        super(Circle, self).__init__(msg)
+        super().__init__(msg)
         print('Circle {}'.format(self.msg))
     def draw(self):
         print('Circle.draw by {}'.format(self.msg))
@@ -40,7 +40,7 @@ class Circle(Shape):
 
 class Square(Shape):
     def __init__(self, msg):
-        super(Square, self).__init__(msg)
+        super().__init__(msg)
         print('Square {}'.format(self.msg))
     def draw(self):
         print('Square.draw by {}'.format(self.msg))
