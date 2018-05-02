@@ -2,19 +2,24 @@ from inorder import TreeNode
 from inorder import root
 
 
-def preorder_recur(node, res):
+def postorder_recur(node, res):
     if node is None:
         return
+    postorder_recur(node.left, res)
+    postorder_recur(node.right, res)
     res.append(node.val)
-    preorder_recur(node.left, res)
-    preorder_recur(node.right, res)
 
 
-def preorder(node):
+def postorder(node):
     stack, res = [node], []
     while stack:
         cur = stack.pop()
-        res.append(cur.val)
+        if cur.visited:
+            if cur.val not in res:
+                res.append(cur.val)
+        else:
+            cur.visited = True
+            stack.append(cur)
         if cur.right:
             stack.append(cur.right)
         if cur.left:
@@ -24,6 +29,6 @@ def preorder(node):
 
 if __name__ == '__main__':
     res = []
-    preorder_recur(root, res)
+    postorder_recur(root, res)
     print(res)
-    print(preorder(root))
+    print(postorder(root))
