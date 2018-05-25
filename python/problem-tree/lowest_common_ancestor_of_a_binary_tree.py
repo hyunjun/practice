@@ -83,7 +83,7 @@ class Solution:
         return nodes[max(set(pParentsIndices).intersection(set(qParentsIndices)))]
 
     #   2.39%
-    def lowestCommonAncestor(self, root, p, q):
+    def lowestCommonAncestorByIdx(self, root, p, q):
         if root is None or p is None or q is None:
             return None
         if root is p or root is q:
@@ -132,6 +132,34 @@ class Solution:
                 queue.append((cur.right, 2 * idx + 2))
         return None
 
+    #   97.49%
+    def lowestCommonAncestor(self, root, p, q):
+        if root is None or p is None or q is None:
+            return None
+        if root is p or root is q:
+            return root
+        if p is q:
+            return p
+        queue, nodeParentDict = [(root, None)], {}
+        while not (p in nodeParentDict and q in nodeParentDict):
+            cur, parent = queue[0]
+            del queue[0]
+            nodeParentDict[cur] = parent
+            if cur.left:
+                queue.append((cur.left, cur))
+            if cur.right:
+                queue.append((cur.right, cur))
+        parentSet = set()
+        parentSet.add(p)
+        while p:
+            parent = nodeParentDict[p]
+            parentSet.add(parent)
+            p = parent
+        while q:
+            if q in parentSet:
+                return q
+            q = nodeParentDict[q]
+        return None
 
 '''
         _______3______
