@@ -37,6 +37,32 @@ class TestRedis:
         return self.conn.echo(msg)
 
 
+import requests
+
+
+class TestAPI:
+    def __init__(self, host, port):
+        self.host = host
+        self.port = port
+
+    def call(self):
+        url = '{}:{}'.format(self.host, self.port)
+        r = None
+        try:
+            print('requests url {}'.format(url))
+            r = requests.get(url)
+            print('\trequested url {}'.format(r.url))
+        except requests.exceptions.ConnectionError:
+            print('requests.exceptions.ConnectionError from'.format(url))
+            return {}
+
+        if r is None or r.status_code != 200:
+            print('Error from {}'.format(url))
+            return {}
+
+        return r.json()
+
+
 if __name__ == '__main__':
     testRedis = TestRedis('127.0.0.1', 6379)
     print(testRedis.info())

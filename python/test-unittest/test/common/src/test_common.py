@@ -84,5 +84,34 @@ class TestRedis(TestCase):
         self.assertEqual(testRedis.echo('test'), b'test')
 
 
+class TestRedis2(TestCase):
+
+    def setUp(self):
+        self.patcher = patch('redis.StrictRedis')
+        self.mockedRedis = self.patcher.start()
+        self.mockedRedis.return_value = fakeredis.FakeStrictRedis(singleton=False)
+
+    def tearDown(self):
+        pass
+
+    def testMockRedis(self):
+        testRedis = common.TestRedis('127.0.0.1', 6379)
+        self.assertEqual(testRedis.echo('test2'), b'test2')
+
+
+class TestAPI(TestCase):
+
+    def setUp(self):
+        self.api = common.TestAPI('127.0.0.1', 56789)
+        self.mockReturn = {'msg': 'mocked call'}
+
+    def tearDown(self):
+        pass
+
+    def testCall(self):
+        with patch.object(common.TestAPI, 'call', return_value=self.mockReturn):
+            self.assertEquals(self.mockReturn, self.api.call())
+
+
 if __name__ == '__main__':
   main()
