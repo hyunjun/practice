@@ -1,5 +1,4 @@
-from inorder import TreeNode
-from inorder import root
+from TreeNode import TreeNode2
 
 
 def postorder_recur(node, res):
@@ -28,6 +27,11 @@ def postorder(node):
 
 
 if __name__ == '__main__':
+    root = TreeNode2(1)
+    root.left = TreeNode2(2)
+    root.right = TreeNode2(3)
+    root.left.left = TreeNode2(4)
+    root.left.right = TreeNode2(5)
     res = []
     postorder_recur(root, res)
     print(res)

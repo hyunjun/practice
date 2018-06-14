@@ -1,4 +1,4 @@
-from inorder import TreeNode
+from TreeNode import TreeNode
 from inorder import root
 
 

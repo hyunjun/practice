@@ -1,13 +1,7 @@
 #   https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder
 
 
-class TreeNode:
-
-    def __init__(self, val):
-        self.val = val
-        self.visited = False
-        self.left = None
-        self.right = None
+from TreeNode import TreeNode
 
 
 root = TreeNode(1)

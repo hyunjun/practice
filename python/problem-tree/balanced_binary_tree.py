@@ -2,11 +2,7 @@
 #   77.61%
 
 
-class TreeNode:
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
+from TreeNode import TreeNode
 
 
 class Solution:

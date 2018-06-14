@@ -1,12 +1,7 @@
 #   https://leetcode.com/problems/maximum-depth-of-binary-tree
 
 
-
-class TreeNode:
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
+from TreeNode import TreeNode
 
 
 class Solution:

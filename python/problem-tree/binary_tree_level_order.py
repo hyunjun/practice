@@ -1,10 +1,8 @@
 # https://leetcode.com/problems/binary-tree-level-order-traversal/
 
-class TreeNode(object):
-  def __init__(self, x):
-    self.val = x
-    self.left = None
-    self.right = None
+
+from TreeNode import TreeNode
+
 
 class Solution(object):
   def levelOrder(self, root):

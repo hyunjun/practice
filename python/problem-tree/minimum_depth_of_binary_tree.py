@@ -1,14 +1,8 @@
 #   https://leetcode.com/problems/minimum-depth-of-binary-tree
 
 
+from TreeNode import TreeNode
 import sys
-
-
-class TreeNode:
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
 
 
 class Solution:
