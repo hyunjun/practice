@@ -1,10 +1,9 @@
 # https://leetcode.com/problems/palindrome-linked-list
-
 # 80.95%
-class ListNode(object):
-  def __init__(self, x):
-    self.val = x
-    self.next = None
+
+
+from ListNode import ListNode
+
 
 class Solution(object):
   def isPalindrome(self, head):
@@ -20,6 +19,7 @@ class Solution(object):
       data.append(cur.val)
       cur = cur.next
     return data == data[::-1]
+
 
 # not working e.g. [1, 3, 2, 4, 3, 2, 1]
 class Solution2(object):
@@ -54,11 +54,13 @@ class Solution2(object):
       cur = cur.next
     return half_sum == 0
 
+
 head = ListNode(1)
 head.next = ListNode(2)
 head.next.next = ListNode(3)
 head.next.next.next = ListNode(2)
 head.next.next.next.next = ListNode(1)
+
 
 s = Solution()
 print(s.isPalindrome(head))

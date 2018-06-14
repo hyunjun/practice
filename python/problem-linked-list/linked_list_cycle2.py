@@ -1,16 +1,7 @@
 #   https://leetcode.com/problems/linked-list-cycle-ii
 
 
-# Definition for singly-linked list.
-class ListNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-    def __str__(self):
-        if self.next:
-            return '{} -> {}'.format(self.val, self.next)
-        return '{} -> X'.format(self.val)
+from ListNode import ListNode
 
 
 class Solution:

@@ -2,26 +2,15 @@
 #   46.04%
 
 
+from ListNode import ListNode
+
+
 class Solution:
     def deleteNode(self, node):
         if node is None or node.next is None:
             return
         node.val = node.next.val
         node.next = node.next.next
-
-
-class ListNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-    def __str__(self):
-        res = '({})->'.format(self.val)
-        if self.next:
-            res += str(self.next)
-        else:
-            res += 'None'
-        return res
 
 
 s = Solution()

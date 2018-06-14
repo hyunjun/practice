@@ -3,10 +3,7 @@
 #   https://leetcode.com/problems/intersection-of-two-linked-lists/solution
 
 
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
+from ListNode import ListNode
 
 
 class Solution:

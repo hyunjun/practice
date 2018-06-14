@@ -2,12 +2,7 @@
 #   99.95%
 
 
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-    def __str__(self):
-        return "{}->{}".format(self.val, self.next)
+from ListNode import ListNode
 
 
 class Solution:
