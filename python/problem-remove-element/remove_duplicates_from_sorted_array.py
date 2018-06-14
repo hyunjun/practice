@@ -42,7 +42,7 @@ class Solution(object):
         return firstNoneIdx
 
     #   76.51%
-    def removeDuplicates(self, nums):
+    def removeDuplicates0(self, nums):
         if nums is None or 0 == len(nums):
             return 0
 
@@ -70,12 +70,53 @@ class Solution(object):
         print(nums)
         return dupRemovedLen
 
+    #   45.09%
+    def removeDuplicates1(self, nums):
+        if nums is None or 0 == len(nums):
+            return 0
+        lenNums, l, r = len(nums), 0, 1
+        while r < lenNums:
+            while r < lenNums and nums[r] <= nums[l]:
+                r += 1
+            if r < lenNums:
+                l += 1
+                nums[l], nums[r] = nums[r], nums[l]
+        print(nums)
+        return l + 1
+
+    #   https://leetcode.com/problems/remove-duplicates-from-sorted-array/solution/
+    def removeDuplicates(self, nums):
+        if nums is None or 0 == len(nums):
+            return 0
+        i = 0
+        for j in range(1, len(nums)):
+            if nums[i] != nums[j]:
+                i += 1
+                nums[i] = nums[j]
+        return i + 1
+
 
 s = Solution()
 data = [([1, 1], [1]),
         ([1, 1, 2], [1, 2]),
+        ([1, 2, 3], [1, 2, 3]),
         ([0, 0, 1, 1, 1, 2, 2, 3, 3, 4], [0, 1, 2, 3, 4]),
        ]
 for nums, expected in data:
   real = s.removeDuplicates(nums)
   print('nums {}\texpected {}\treal {}\tresult {}'.format(nums, expected, real, expected == nums[:real]))
+'''
+0, 0, 1, 1, 1, 2, 2, 3, 3, 4
+l  r
+   l  r
+0, 1, 0, 1, 1, 2, 2, 3, 3, 4
+   l           r
+      l        r
+0, 1, 2, 1, 1, 0, 2, 3, 3, 4
+      l              r
+         l           r
+0, 1, 2, 3, 1, 0, 2, 1, 3, 4
+         l                 r
+            l              r
+0, 1, 2, 3, 4, 0, 2, 1, 3, 1
+'''
