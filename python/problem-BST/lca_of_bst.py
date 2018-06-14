@@ -1,13 +1,11 @@
 # https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree
 # 10.40%
+
 import sys
 
-# Definition for a binary tree node.
-class TreeNode(object):
-  def __init__(self, x):
-    self.val = x
-    self.left = None
-    self.right = None
+
+from TreeNode import TreeNode
+
 
 class Solution(object):
   def lowestCommonAncestor(self, root, p, q):

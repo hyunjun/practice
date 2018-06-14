@@ -1,13 +1,8 @@
 #   https://leetcode.com/problems/binary-search-tree-iterator
 #   12.92%
 
-class Node:
-    def __init__(self, val):
-        self.val = val
-        self.left = None
-        self.right = None
-    def __repr__(self):
-        return '[{}]'.format(self.val)
+
+from TreeNode import TreeNode
 
 
 class Solution:
@@ -46,11 +41,11 @@ if __name__ == '__main__':
     /  \
     3  7
     '''
-    root = Node(10)
-    root.left = Node(5)
-    root.right = Node(16)
-    root.left.left = Node(3)
-    root.left.right = Node(7)
+    root = TreeNode(10)
+    root.left = TreeNode(5)
+    root.right = TreeNode(16)
+    root.left.left = TreeNode(3)
+    root.left.right = TreeNode(7)
 
     s = Solution(root)
     while s.hasNext():
