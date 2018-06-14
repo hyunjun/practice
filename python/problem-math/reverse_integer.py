@@ -1,5 +1,7 @@
-#   https://leetcode.com/problems/reverse-integer/
+#   https://leetcode.com/problems/reverse-integer
 #   78.62%
+
+#   https://leetcode.com/articles/reverse-integer
 
 class Solution:
     MIN_INT = -2147483648
