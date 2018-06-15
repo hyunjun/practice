@@ -50,3 +50,13 @@ Redis
   * result
     * `h*set`; json dumps
     * `hget*`; decode('utf8') + json loads
+
+# [rq](http://python-rq.org)
+* Usage
+
+  ```
+  $ pip install rq
+  $ docker run -p 56379:6379 redis
+  $ python3 test_rq_worker.py
+  $ python3 test_rq_job.py
+  ```
