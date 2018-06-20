@@ -41,7 +41,7 @@ class Solution(object):
       return 0
 
     cols, rows = len(grid[0]), len(grid)
-    print(cols, rows)
+    #print(cols, rows)
     boards, visited = [], []
     row_mul = (cols // 10 + 1) * 10
     for r in range(rows):
@@ -53,8 +53,8 @@ class Solution(object):
       for c in range(cols):
         cur.append(0)
       visited.append(cur)
-    print(boards)
-    print(visited)
+    #print(boards)
+    #print(visited)
 
     if grid[0][0] == '0':
       boards[0][0] = -1
@@ -62,7 +62,7 @@ class Solution(object):
     for r in range(rows):
       for c in range(cols):
         spread(r, c, boards[r][c])
-    print(boards)
+    #print(boards)
 
     result = []
     for r in range(rows):
@@ -73,39 +73,8 @@ class Solution(object):
     return len(result)
 
 
-grid0 = [ ['0'] ]
-grid1 = [ ['1', '1', '1', '1', '0'],
-          ['1', '1', '0', '1', '0'],
-          ['1', '1', '0', '0', '0'],
-          ['0', '0', '0', '0', '0'] ]
-grid2 = [ ['1', '1', '0', '0', '0'],
-          ['1', '1', '0', '0', '0'],
-          ['0', '0', '1', '0', '0'],
-          ['0', '0', '0', '1', '1'] ]
-grid3 = [ ['1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '1'],
-          ['1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '1'],
-          ['0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '1'],
-          ['0', '0', '0', '1', '1', '0', '0', '0', '0', '0', '1'] ]
-grid4 = [ ['1', '1', '0', '0', '0'],
-          ['1', '1', '0', '0', '0'],
-          ['0', '0', '1', '0', '0'],
-          ['0', '0', '1', '0', '0'],
-          ['0', '0', '1', '0', '0'],
-          ['0', '0', '1', '0', '0'],
-          ['0', '0', '0', '0', '0'],
-          ['0', '0', '1', '0', '0'],
-          ['1', '1', '1', '1', '1'],
-          ['0', '0', '1', '0', '0'],
-          ['0', '0', '1', '0', '0'],
-          ['0', '0', '0', '1', '1'] ]
-grid5 = [ ['1', '0', '1', '1', '1'],
-          ['1', '0', '1', '0', '1'],
-          ['1', '1', '1', '0', '1'] ]
-
 s = Solution()
-print('[0]', s.numIslands(grid0))
-print('[1]', s.numIslands(grid1))
-print('[2]', s.numIslands(grid2))
-print('[3]', s.numIslands(grid3))
-print('[4]', s.numIslands(grid4))
-print('[5]', s.numIslands(grid5))
+from data import data
+for i, (grid, expected) in enumerate(data):
+    real = s.numIslands(grid)
+    print('[{}], expected {}, real {}, result {}'.format(i, expected, real, expected == real))
