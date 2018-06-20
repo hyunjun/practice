@@ -27,7 +27,31 @@ def removeParenthesis(exp):
                     exp[i - 1] = '-'
                 elif exp[i - 1] == '-':
                     exp[i - 1] = '+'
-    return [e for e in exp if e is not None]
+    res_dict = {}
+    for i, e in enumerate(exp):
+        if e is None:
+            continue
+        if ord('a') <= ord(e) <= ord('z'):
+            if i == 0 or exp[i - 1] is None or exp[i - 1] == '+':
+                if e in res_dict:
+                    res_dict[e] += 1
+                else:
+                    res_dict[e] = 1
+            elif exp[i - 1] == '-':
+                if e in res_dict:
+                    res_dict[e] -= 1
+                else:
+                    res_dict[e] = -1
+    res = []
+    for c, cnt in sorted(res_dict.items()):
+        if 0 == cnt:
+            continue
+        if 0 < cnt:
+            res.extend([c] * cnt)
+        else:
+            res.extend(['-{}'.format(c)] * cnt)
+    return sorted(res)
+
 
 def areSameExpressions(exp1, exp2):
     if exp1 and exp2 is None or exp1 is None and exp2:
@@ -43,6 +67,10 @@ data = [("-(a+b+c)", "-a-b-c", True),
         ("-(c+b+a)", "-c-b-a", True),
         ("a-b-(c-d)", "a-b-c-d", False),
         ('-(a+b-(c+d))', '-a-b+c+d', True),
+        ('a', 'a', True),
+        ('a+b', 'b+a', True),
+        ('a+b-b', 'a', True),
+        ('a-a', 'b-b', True),
         ]
 for exp1, exp2, expected in data:
     real = areSameExpressions(exp1, exp2)
