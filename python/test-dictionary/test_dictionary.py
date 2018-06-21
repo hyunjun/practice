@@ -7,7 +7,7 @@ import re
 import time
 import sys
 from collections import defaultdict, Counter
-from itertools import ifilter, izip, chain
+from itertools import chain
 
 
 # control group
@@ -29,7 +29,7 @@ def count0(lists) :
         d[i] = 1
 
   # remove value 1
-  for k in d.keys() :
+  for k in d.copy().keys() :
     if d[k] == 1 :
       del d[k]
 
@@ -45,7 +45,7 @@ def count1(lists) :
       else :
         d[i] = 1
 
-  for k in d.keys() :
+  for k in d.copy().keys() :
     if d[k] == 1 :
       del d[k]
 
@@ -58,7 +58,7 @@ def count2(lists) :
     for i in l :
       d[i] += 1
 
-  for k in d.keys() :
+  for k in d.copy().keys() :
     if d[k] == 1 :
       del d[k]
 
@@ -71,7 +71,7 @@ def count3(lists) :
     for i in l :
       d[i] += 1
 
-  for k in d.keys() :
+  for k in d.copy().keys() :
     if d[k] == 1 :
       del d[k]
 
@@ -82,7 +82,7 @@ def count3(lists) :
 def print_inter_item( inter_item ) :
   for idx, cnt in inter_item.items() :
     key = str(idx) + '-' + str(cnt)
-    print key
+    print(key)
 
 # https://github.daumkakao.com/pin-park/test_intersection
 # https://partofthething.com/thoughts/?p=513
@@ -107,7 +107,7 @@ def counts2(lists):
   for l in lists:
     for k, v in Counter(l).items():
       d[k] += v
-  return ifilter(lambda t: t[1] > 1, d.items())
+  return filter(lambda t: t[1] > 1, d.items())
 
 MAX_ID = 2300000
 result = [0] * MAX_ID
@@ -115,7 +115,7 @@ def counts3(lists):
   for l in lists:
     for i in l:
       result[i] += 1
-  return dict(ifilter(lambda t: t[1] > 1, izip(range(MAX_ID), result)))
+  return dict(filter(lambda t: t[1] > 1, zip(range(MAX_ID), result)))
 
 def counts4(lists):
   l = lists[0]
@@ -157,14 +157,14 @@ if __name__ == '__main__':
     # s = time.time()
     # f(lists)
     # e = time.time()
-    # print '{}\t{}'.format(f.__name__, e - s)
-    print f.__name__, timeit("{}(lists)".format(f.__name__), setup="from __main__ import {}, lists".format(f.__name__))
+    # print('{}\t{}'.format(f.__name__, e - s))
+    print(f.__name__, timeit("{}(lists)".format(f.__name__), setup="from __main__ import {}, lists".format(f.__name__)))
   '''
   inp = sys.stdin.readline()
-  d6 = dict(izip(range(MAX_ID), [0] * MAX_ID))
+  d6 = dict(zip(range(MAX_ID), [0] * MAX_ID))
   s = time.time()
   r0 = counts6(d6, inp)
-  print time.time() - s
+  print(time.time() - s)
   lists = json.loads(inp)
   times = []
   times.append(time.time())
@@ -181,11 +181,11 @@ if __name__ == '__main__':
   r6 = counts5(lists)
   times.append(time.time())
   for i in range(1, len(times)):
-    print times[i] - times[i - 1]
-  #print r1
-  #print r2
-  #print r3
-  #print r4
-  #print r5
-  #print r6
+    print(times[i] - times[i - 1])
+  #print(r1)
+  #print(r2)
+  #print(r3)
+  #print(r4)
+  #print(r5)
+  #print(r6)
   '''
