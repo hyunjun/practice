@@ -1,4 +1,3 @@
-# -*- coding: utf8 -*-
 import requests
 import bs4
 
@@ -27,4 +26,4 @@ if __name__ == '__main__':
     html_content = response.text.encode(response.encoding)
     parsed_html = bs4.BeautifulSoup(html_content, 'html.parser')
     for i in parsed_html.tbody.find_all('td'):
-      print i.string
+      print(i.string)

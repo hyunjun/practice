@@ -1,4 +1,3 @@
-# -*- coding: utf8 -*-
 from __future__ import unicode_literals
 from gevent import monkey; monkey.patch_all() # pip install greenlet; http://www.lfd.uci.edu/~gohlke/pythonlibs/#gevent for win64bit
 from gevent.pool import Pool
@@ -60,4 +59,3 @@ url = 'http://www.ted.com/talks/browse'
 
 from pprint import pprint
 pprint(latest_talks())
-

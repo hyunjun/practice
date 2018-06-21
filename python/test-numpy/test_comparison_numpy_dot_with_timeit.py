@@ -12,7 +12,7 @@ Va = map(np.array, V)
 loops = [(i, j) for i, j in product(range(len(V)), range(len(V))) if i < j]
 
 for i, j in loops:
-  print '[{}][{}]\t{}\t{}'.format(i, j, dot_product(V[i], V[j]), np.dot(Va[i], Va[j]))
+  print('[{}][{}]\t{}\t{}'.format(i, j, dot_product(V[i], V[j]), np.dot(Va[i], Va[j])))
 
 
 def foo(loops, V):
@@ -22,5 +22,5 @@ def foo(loops, V):
 def bar(loops, V):
   return [np.dot(V[i], V[j]) for i, j in loops]
 
-print timeit.timeit("foo(loops, V)", setup="from __main__ import foo, loops, V")
-print timeit.timeit("bar(loops, Va)", setup="from __main__ import bar, loops, Va")
+print(timeit.timeit("foo(loops, V)", setup="from __main__ import foo, loops, V"))
+print(timeit.timeit("bar(loops, Va)", setup="from __main__ import bar, loops, Va"))

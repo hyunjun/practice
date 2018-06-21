@@ -9,7 +9,8 @@ def is_prime(n):
     s += '1'
   return None == re.match(re.compile('^1?$|^(11+?)\\1+$'), s)
 
+
 if __name__ == '__main__':
   if len(sys.argv) == 2:
     n = int(sys.argv[1])
-    print n, is_prime(n)
+    print(n, is_prime(n))
