@@ -1,17 +1,31 @@
-if __name__ == '__main__':
-    target = 3
-    left = target / 2.0
-    right = target / 4.0 * 3
+# https://leetcode.com/problems/sqrtx
 
-    answer = right
-    squared = answer * answer
-    while abs(squared - target) > 0.001:
-        print("%d, estimation %f, squared %f, squared - target %f" % (target, answer, squared, squared - target))
-        if abs(target - left * left) < abs(target - right * right):
-            right = (left + right) / 2.0
-            answer = right
-        else:
-            left = (left + right) / 2.0
-            answer = left
-        squared = answer * answer
-    print("%d, answer %f, squared %f, squared - target %f" % (target, answer, squared, squared - target))
+
+class Solution:
+  def mySqrt(self, x):
+    if x == 0 or x == 1:
+      return x
+    if x == 2 or x == 3:
+      return 1
+
+    for i in range(2, x // 2 + 1):
+      if i * i == x:
+        return i
+      if x < i * i:
+        return i - 1
+    return i
+
+class Solution2:
+  def mySqrt(self, x):
+    # newton's method
+    r = x
+    while r * r > x:
+      r = (r + x / r) / 2
+    return r
+
+
+
+s, s2 = Solution(), Solution2()
+for x in [2, 3, 4, 9, 8, 5, 15, 98, 10000092, 2147395599]:
+  expected, real = s2.mySqrt(x), s.mySqrt(x)
+  print('{}\texpected {}\treal {}\tresult {}'.format(x, expected, real, expected == real))

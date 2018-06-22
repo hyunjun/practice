@@ -1,8 +1,11 @@
 # https://leetcode.com/problems/move-zeroes
-# 7.54%
+
+# https://leetcode.com/problems/move-zeroes/solution
+
 
 class Solution(object):
-  def moveZeroes(self, nums):
+  # 7.54%
+  def moveZeroes0(self, nums):
     """
     :type nums: List[int]
     :rtype: void Do not return anything, modify nums in-place instead.
@@ -27,6 +30,31 @@ class Solution(object):
       while nonZeroIdx < l and nums[nonZeroIdx] == 0:
         nonZeroIdx += 1
       print('zero idx {}\tnon zero idx {}\t{}'.format(zeroIdx, nonZeroIdx, nums))
+
+  # 31.68%
+  def moveZeroes1(self, nums):
+    if nums is None or 0 == len(nums):
+      return
+
+    dst = 0
+    for src in range(len(nums)):
+      if 0 != nums[src]:
+        nums[dst] = nums[src]
+        dst += 1
+    for i in range(dst, len(nums)):
+      nums[i] = 0
+
+  # 32.31%
+  def moveZeroes(self, nums):
+    if nums is None or 0 == len(nums):
+      return
+
+    dst = 0
+    for src in range(len(nums)):
+      if 0 != nums[src]:
+        nums[dst], nums[src] = nums[src], nums[dst]
+        dst += 1
+
 
 nums = [0, 1, 0, 3, 12] # [1, 3, 12, 0, 0]
 nums = [0]
