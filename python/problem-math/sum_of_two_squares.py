@@ -7,18 +7,20 @@ Hint: brute force: O(n^2), optimal: O(n)
 '''
 import math
 
+
 def is_sum_of_two_squares(a):
   start = math.sqrt(a)
   if int(start) == start:
     start = int(start) - 1
   else:
     start = int(start)
-  for i in range(start, -1, -1):
-    cand = math.sqrt(a - i * i)
-    if int(cand) == cand:
-      # print i, cand
+  for i in range(start, 1, -1):
+    rest = a - i * i
+    sqrt_rest = math.sqrt(rest)
+    if int(sqrt_rest) == sqrt_rest and i != sqrt_rest:
       return True
   return False
 
-for num in [25, 32, 34, 35]:
-  print num, is_sum_of_two_squares(num)
+
+for num in [25, 17, 32, 34, 35]:
+  print(num, is_sum_of_two_squares(num))
