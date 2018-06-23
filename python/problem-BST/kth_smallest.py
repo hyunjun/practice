@@ -1,4 +1,3 @@
-
 class Node:
     def __init__(self, data):
         self.data = data
@@ -49,4 +48,4 @@ if __name__ == '__main__':
     root.right = Node(16)
     root.left.left = Node(3)
     root.left.right = Node(7)
-    print kth_smallest(root, 3), kth_smallest_recur(root, 3, [])
+    print(kth_smallest(root, 3), kth_smallest_recur(root, 3, []))
