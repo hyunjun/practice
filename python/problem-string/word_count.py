@@ -38,7 +38,7 @@ def word_count(s):
    
    return sorted_counter_s
 
-print word_count("practice makes perfect. get perfect by practice. just practice!")
+print(word_count("practice makes perfect. get perfect by practice. just practice!"))
 # { practice: 3, perfect: 2,  makes: 1, get: 1, by: 1, just: 1 }
 # let M be the number of UNIQUE words
 # time = O(n + mlogm)
