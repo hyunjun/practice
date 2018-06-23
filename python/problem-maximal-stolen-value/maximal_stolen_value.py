@@ -26,4 +26,4 @@ def maximal_stolen_value(cur_sum, arr, i):
 
 
 for d in [[6, 1, 2, 7], [6, 1, 2, 9, 10], [6, 1, 2, 3, 4, 10]]:
-    print d, maximal_stolen_value(0, d, 0)
+    print(d, maximal_stolen_value(0, d, 0))
