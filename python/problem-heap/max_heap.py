@@ -1,5 +1,6 @@
 l = [1, 23, 12, 9, 30, 2, 50]
 
+
 def heapify(arr, n, i):
     largest = i
     l, r = 2 * i + 1, 2 * i + 2
@@ -10,6 +11,7 @@ def heapify(arr, n, i):
     if largest != i:
         arr[i], arr[largest] = arr[largest], arr[i]
         heapify(arr, n, largest)
+
 
 def heapsort(arr):
     n = len(arr)
@@ -23,10 +25,11 @@ def kth_largest(arr, k):
 
     for i in range(k):
         arr[0], arr[len(arr) - 1] = arr[len(arr) - 1], arr[0]
-        print arr.pop()
+        print(arr.pop())
         heapify(arr, len(arr), 0)
 
-print l
+
+print(l)
 heapsort(l)
-print l
+print(l)
 kth_largest(l, 3)
