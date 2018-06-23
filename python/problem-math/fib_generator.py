@@ -10,4 +10,4 @@ def fib():
 
 
 f = fib()
-print list(islice(f, 0, 10))
+print(list(islice(f, 0, 10)))

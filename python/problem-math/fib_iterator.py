@@ -10,8 +10,8 @@ class fib:
   def __iter__(self):
     return self
 
-  # def __next__(self): # python3
-  def next(self): # python2
+  def __next__(self): # python3
+  # def next(self): # python2
     value = self.curr
     self.curr += self.prev
     self.prev = value
@@ -19,4 +19,4 @@ class fib:
 
 
 f = fib()
-print list(islice(f, 0, 10))
+print(list(islice(f, 0, 10)))

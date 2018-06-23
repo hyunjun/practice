@@ -6,6 +6,7 @@ e.g.  f(1) = 0
       f(6) = 8, because 6 > 3 > 10 > 5 > 16 > 8 > 4 > 2 > 1
 '''
 
+
 def getCount(n):
   if n == 1:
     return 0
@@ -18,6 +19,7 @@ def getCount(n):
     cnt += 1
   return cnt
 
+
 def getMinMax(n):
   largest = pow(2, n)
   smallest = 1
@@ -27,6 +29,7 @@ def getMinMax(n):
       break
     smallest += 1
   return smallest, largest
+
 
 def getMinMax2(k):
   smallest, largest = 1, 1
@@ -39,5 +42,6 @@ def getMinMax2(k):
     k -= 1
   return smallest, largest
 
+
 for k in [3, 8]:
-    print 'k = ', k, getMinMax(k), getMinMax2(k)
+    print('k = ', k, getMinMax(k), getMinMax2(k))
