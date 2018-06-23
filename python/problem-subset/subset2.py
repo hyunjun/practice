@@ -27,6 +27,6 @@ def indices2(n):
 arr = ['a', 'b', 'c']
 for a in indices(len(arr)):
   print([arr[i] for i in a])
-  #print map(lambda t: arr[t], a)
+  #print(map(lambda t: arr[t], a))
 for a in indices2(len(arr)):
   print([arr[i] for i in a])

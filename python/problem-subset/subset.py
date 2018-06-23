@@ -1,6 +1,7 @@
 #   https://www.youtube.com/watch?v=eRvn5g9jOh0&list=PLVNY1HnUlO24RlncfRjfoZHnD0YWVsvhq&index=22
 from copy import deepcopy
 
+
 def subset(arr):
     if 0 == len(arr):
         return [[]]
@@ -13,5 +14,6 @@ def subset(arr):
         prev.extend(cur)
         return prev
 
+
 for d in [ [], [0], [0, 1], [0, 1, 2] ]:
-    print '{}\t{}'.format(d, subset(d))
+    print('{}\t{}'.format(d, subset(d)))
