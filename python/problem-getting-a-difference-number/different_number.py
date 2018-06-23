@@ -2,12 +2,13 @@
 from collections import Counter
 import sys
 
+
 def different_number(arr):
     if arr is None or 0 == len(arr):
         return None
 
-    arr_len = length(arr)
-    if arr_len == sys.maxint + 1:
+    arr_len = len(arr)
+    if arr_len == sys.maxsize + 1:
         return None
 
     counter = Counter(arr)
@@ -16,4 +17,5 @@ def different_number(arr):
             return i
     return None
 
-print different_number([1, 2, 3])
+
+print(different_number([1, 2, 3]))
