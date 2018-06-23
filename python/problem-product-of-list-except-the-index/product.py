@@ -1,5 +1,6 @@
 # https://www.interviewcake.com/question/python/product-of-other-numbers
 
+
 def product(arr):
   result = [1] * len(arr)
   acc = 1
@@ -12,4 +13,5 @@ def product(arr):
     result[i] *= acc
   return result
 
-print product([1, 7, 3, 4])
+
+print(product([1, 7, 3, 4]))
