@@ -12,7 +12,7 @@ data = [([5, 6, 7, 8, 9, 10, 1, 2, 3], 10, 5),
 def search(arr, n):
   l, r = 0, len(arr) - 1
   while l <= r:
-    i = (l + r) / 2
+    i = (l + r) // 2
     if arr[i] == n:
       return i
     if arr[l] < arr[i]: # ascending left, rotating right
@@ -29,4 +29,4 @@ def search(arr, n):
 
 for arr, n, i in data:
   answer = search(arr, n)
-  print arr, n, i, answer, i == answer
+  print(arr, n, i, answer, i == answer)
