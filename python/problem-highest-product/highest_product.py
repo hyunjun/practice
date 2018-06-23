@@ -1,4 +1,6 @@
 # https://www.interviewcake.com/question/python/highest-product-of-3
+
+
 def highest_product(arr):
   a, b, c = arr[0], arr[1], arr[2]
   ab, ac, bc = a * b, a * c, b * c
@@ -10,5 +12,6 @@ def highest_product(arr):
     abc = max(abc, _a * _b * _c)
   return max([a, b, c, ab, ac, bc, abc])
 
-print highest_product([-10, -10, 3])
-print highest_product([1, 200, 0, -10, -10, 3])
+
+print(highest_product([-10, -10, 3]))
+print(highest_product([1, 200, 0, -10, -10, 3]))
