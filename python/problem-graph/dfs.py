@@ -14,4 +14,4 @@ while 0 < len(visiting_list):
         if adj not in visiting_list and adj not in visited_list:
             visiting_list.append(adj)
     visited_list.append(cur)
-print visited_list
+print(visited_list)
