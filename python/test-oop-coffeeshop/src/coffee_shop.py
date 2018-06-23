@@ -44,7 +44,7 @@ class MenuItem:
 
 if __name__ == '__main__':
   menu, barista, customer = Menu(), Barista(), Customer()
-  print customer.order("Americano", menu, barista)
-  print customer.order("Cappuccino", menu, barista)
-  print customer.order("Caramel Macchiato", menu, barista)
-  print customer.order("Espresso", menu, barista)
+  print(customer.order("Americano", menu, barista))
+  print(customer.order("Cappuccino", menu, barista))
+  print(customer.order("Caramel Macchiato", menu, barista))
+  print(customer.order("Espresso", menu, barista))
