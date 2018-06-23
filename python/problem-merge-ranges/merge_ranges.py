@@ -1,4 +1,6 @@
 # https://www.interviewcake.com/question/python/merging-ranges
+
+
 def merge_ranges(arr):
   arr = sorted(arr, key=lambda t: t[0])
   result = []
@@ -15,8 +17,9 @@ def merge_ranges(arr):
   result.append((prev_s, prev_e))
   return result
 
-print merge_ranges([(0, 1), (3, 5), (4, 8), (10, 12), (9, 10)])
-print merge_ranges([(0, 1), (3, 5), (4, 8), (5, 9), (10, 12), (9, 10)])
-print merge_ranges([(1, 2), (2, 3)])
-print merge_ranges([(1, 5), (2, 3)])
-print merge_ranges([(1, 10), (2, 6), (3, 5), (7, 9)])
+
+print(merge_ranges([(0, 1), (3, 5), (4, 8), (10, 12), (9, 10)]))
+print(merge_ranges([(0, 1), (3, 5), (4, 8), (5, 9), (10, 12), (9, 10)]))
+print(merge_ranges([(1, 2), (2, 3)]))
+print(merge_ranges([(1, 5), (2, 3)]))
+print(merge_ranges([(1, 10), (2, 6), (3, 5), (7, 9)]))
