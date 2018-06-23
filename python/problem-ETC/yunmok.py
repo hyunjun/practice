@@ -12,7 +12,7 @@ def get_count(avg):
 
 
 def get_nums(nums, target_sum, cur_num, cur_cnt):
-  # print nums, target_sum, cur_num, cur_cnt
+  # print(nums, target_sum, cur_num, cur_cnt)
   if cur_num == 0 or cur_cnt == 0:
     return []
 
@@ -101,7 +101,7 @@ def get_nums3(target_sum, cnt):
 for i in [5.0, 4.5, 3.2]:
   cnt = get_count(i)
   target_sum = cnt * i
-  print i, cnt, target_sum, get_nums([0, 0, 0, 0, 0], target_sum, 5, cnt), get_nums2(0, 0, 0, 0, 0, target_sum, cnt), get_nums3(target_sum, cnt)
+  print(i, cnt, target_sum, get_nums([0, 0, 0, 0, 0], target_sum, 5, cnt), get_nums2(0, 0, 0, 0, 0, target_sum, cnt), get_nums3(target_sum, cnt))
 
   target_sum = (int) (target_sum)
   target_sum -= cnt
@@ -110,4 +110,4 @@ for i in [5.0, 4.5, 3.2]:
   if target_sum > 0:
     nums[target_sum] += 1
   nums[0] = cnt - nums[1] - nums[2] - nums[3] - nums[4]
-  print nums
+  print(nums)
