@@ -61,4 +61,4 @@ def step_iter_general(k, n):
   return result
 
 i = 4
-print step_count(i), step_count_general(3, i), step_iter(i), step_iter_general(3, i)
+print(step_count(i), step_count_general(3, i), step_iter(i), step_iter_general(3, i))
