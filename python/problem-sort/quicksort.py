@@ -5,6 +5,7 @@ data = [ [4, 5, 6, 7, 8, 9, 1, 2, 3],
          [1, 4, 9, 8, 7, 2, 5, 3, 6]
        ]
 
+
 def quicksort1(arr):
   def _quicksort(arr):
     n = len(arr) - 1
@@ -19,5 +20,6 @@ def quicksort1(arr):
     return sorted_arr
   return _quicksort(arr)
 
+
 for arr in data:
-  print arr, quicksort1(arr)
+  print(arr, quicksort1(arr))
