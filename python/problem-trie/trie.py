@@ -22,5 +22,5 @@ def search(root, s):
 strs = ['bye', 'any', 'answer', 'there', 'their']
 trie_root = str2trie(strs)
 for s in strs:
-    print s, search(trie_root, s)
-print 'and', search(trie_root, 'and')
+    print(s, search(trie_root, s))
+print('and', search(trie_root, 'and'))
