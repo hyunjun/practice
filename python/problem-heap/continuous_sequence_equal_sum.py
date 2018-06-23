@@ -21,12 +21,12 @@ def foo(A, T):
     l = r - 1
     while 0 <= l and sum_list[r] - sum_list[l] <= T:
         if sum_list[r] - sum_list[l] == T:
-            print 'result {}\t{} ~ {} == {}'.format(A, A[l], A[r], T)
+            print('result {}\t{} ~ {} == {}'.format(A, A[l], A[r], T))
             break
         l -= 1
 
 foo(l1, s1)
-print
+print()
 foo(l2, s2)
-print
+print()
 foo(l3, s3)
