@@ -18,8 +18,8 @@ def quad_combination(s, arr):
         continue
       result.add((sorted_arr[i], sorted_arr[j], sorted_arr[k], sorted_arr[l]))
 
-  print result
+  print(result)
 
 
 inp, s = [0, 7, 5, 1, 8, 9, 2, 3], 17
-print quad_combination(s, inp)
+quad_combination(s, inp)

@@ -1,5 +1,6 @@
 # https://www.pramp.com/question/gKQ5zA52mySBOA5GALj9
 
+
 def quad_combination(s, acc, arr):
   if 4 == len(acc):
     if s == sum(acc):
@@ -15,6 +16,7 @@ def quad_combination(s, acc, arr):
       acc.pop()
     return tmp
 
+
 inp, s = [0, 7, 5, 1, 8, 9, 2, 3], 17
 sorted_inp = sorted(inp, reverse=True)
-print quad_combination(s, [], sorted_inp)
+print(quad_combination(s, [], sorted_inp))
