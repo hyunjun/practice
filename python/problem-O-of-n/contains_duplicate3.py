@@ -96,7 +96,7 @@ class Solution:
         return False
 
     #   33.87%
-    def containsNearbyAlmostDuplicate5(self, nums, k, t):
+    def containsNearbyAlmostDuplicate(self, nums, k, t):
         if nums is None or len(nums) <= 1 or 0 == k or t < 0:
             return False
         numIdxDict = {}
