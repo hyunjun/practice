@@ -273,7 +273,7 @@ if __name__ == '__main__':
     if Protocol.HTTP == option.command:
         items.append({Item.URL: option.url})
 
-    #   python3 downloader.py ftp ftp://speedtest.tele2.net --filename 512KB.zip
+    #   python3 downloader.py ftp ftp://demo.wftpserver.com --path download --filename manual_en.pdf --user demo-user --password demo-user
     #   python3 downloader.py ftp sftp://demo.wftpserver.com --port 2222 --path download --filename manual_en.pdf --user demo-user --password demo-user
     elif Protocol.FTP == option.command:
         items.append({Item.URL: option.url, Item.PORT: option.port, Item.PATH: option.path, Item.FILENAME: option.filename, Item.USER: option.user, Item.PASSWORD: option.password})
