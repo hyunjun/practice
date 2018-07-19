@@ -44,15 +44,32 @@ class TestHttpDownloader(TestCase):
         dirs = os.listdir('.')
         if self.local in dirs:
             shutil.rmtree(self.local)
+        self.expectedFilesize = 11065
 
-    def testDownload(self):
+    #   Download to current directory
+    def testDownload0(self):
+        item = {downloader.Item.URL: self.url}
+        d = downloader.Downloader.factory(item)
+        try:
+            os.remove(d.filename)
+        except FileNotFoundError:
+            pass
+        if d:
+            d.download()
+        with open(d.filename) as f:
+            f.seek(0, os.SEEK_END)
+            self.assertEqual(self.expectedFilesize, f.tell())
+        os.remove(d.filename)
+
+    #   Download to specific local directory
+    def testDownload1(self):
         item = {downloader.Item.URL: self.url, downloader.Item.LOCAL_PATH: self.local}
         d = downloader.Downloader.factory(item)
         if d:
             d.download()
         with open(os.path.join(d.local, d.filename)) as f:
             f.seek(0, os.SEEK_END)
-            self.assertEqual(11065, f.tell())
+            self.assertEqual(self.expectedFilesize, f.tell())
         shutil.rmtree(d.local)
 
 
@@ -68,15 +85,32 @@ class TestFtpDownloader(TestCase):
         dirs = os.listdir('.')
         if self.local in dirs:
             shutil.rmtree(self.local)
+        self.expectedFilesize = 10187202
 
-    def testDownload(self):
+    #   Download to current directory
+    def testDownload0(self):
+        item = {downloader.Item.URL: self.url, downloader.Item.REMOTE_PATH: self.remote, downloader.Item.FILENAME: self.filename, downloader.Item.USER: self.user, downloader.Item.PASSWORD: self.password}
+        d = downloader.Downloader.factory(item)
+        try:
+            os.remove(d.filename)
+        except FileNotFoundError:
+            pass
+        if d:
+            d.download()
+        with open(d.filename) as f:
+            f.seek(0, os.SEEK_END)
+            self.assertEqual(self.expectedFilesize, f.tell())
+        os.remove(d.filename)
+
+    #   Download to specific local directory
+    def testDownload1(self):
         item = {downloader.Item.URL: self.url, downloader.Item.REMOTE_PATH: self.remote, downloader.Item.FILENAME: self.filename, downloader.Item.LOCAL_PATH: self.local, downloader.Item.USER: self.user, downloader.Item.PASSWORD: self.password}
         d = downloader.Downloader.factory(item)
         if d:
             d.download()
         with open(os.path.join(d.local, d.filename)) as f:
             f.seek(0, os.SEEK_END)
-            self.assertEqual(10187202, f.tell())
+            self.assertEqual(self.expectedFilesize, f.tell())
         shutil.rmtree(d.local)
 
 
@@ -93,15 +127,32 @@ class TestSftpDownloader(TestCase):
         dirs = os.listdir('.')
         if self.local in dirs:
             shutil.rmtree(self.local)
+        self.expectedFilesize = 10187202
 
-    def testDownload(self):
+    #   Download to current directory
+    def testDownload0(self):
+        item = {downloader.Item.URL: self.url, downloader.Item.PORT: self.port, downloader.Item.REMOTE_PATH: self.remote, downloader.Item.FILENAME: self.filename, downloader.Item.USER: self.user, downloader.Item.PASSWORD: self.password}
+        d = downloader.Downloader.factory(item)
+        try:
+            os.remove(d.filename)
+        except FileNotFoundError:
+            pass
+        if d:
+            d.download()
+        with open(d.filename) as f:
+            f.seek(0, os.SEEK_END)
+            self.assertEqual(self.expectedFilesize, f.tell())
+        os.remove(d.filename)
+
+    #   Download to specific local directory
+    def testDownload1(self):
         item = {downloader.Item.URL: self.url, downloader.Item.PORT: self.port, downloader.Item.REMOTE_PATH: self.remote, downloader.Item.FILENAME: self.filename, downloader.Item.LOCAL_PATH: self.local, downloader.Item.USER: self.user, downloader.Item.PASSWORD: self.password}
         d = downloader.Downloader.factory(item)
         if d:
             d.download()
         with open(os.path.join(d.local, d.filename)) as f:
             f.seek(0, os.SEEK_END)
-            self.assertEqual(10187202, f.tell())
+            self.assertEqual(self.expectedFilesize, f.tell())
         shutil.rmtree(d.local)
 
 

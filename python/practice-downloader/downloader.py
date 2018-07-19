@@ -86,6 +86,10 @@ class Downloader:
         self.password = password
 
         self.parsedUrl = urlparse(self.url)
+        if self.filename is None:
+            self.filename = getFilename(self.parsedUrl.path)
+        self.localFilepath = os.path.join(self.local, self.filename)
+        self.downloadingLocalFilepath = '{}.{}_downloading'.format(self.localFilepath, self.parsedUrl.scheme)
         self.logger = self.get_logger()
 
     def download(self):
@@ -107,13 +111,12 @@ class HttpDownloader(Downloader):
     def __init__(self, url, local='.'):
         super(self.__class__, self).__init__(url, None, None, None, local, None, None)
 
-        self.filename = getFilename(self.parsedUrl.path)
         self.CHUNK_SIZE = 512   #   TODO: very small number on purpose
 
     def getFilesize(self):
         size = 0
         try:
-            with open(os.path.join(self.local, self.filename), 'r') as f:
+            with open(self.downloadingLocalFilepath, 'r') as f:
                 f.seek(0, os.SEEK_END)
                 size = f.tell()
         except FileNotFoundError:
@@ -133,10 +136,11 @@ class HttpDownloader(Downloader):
         else:
             self.logger.debug('Start downloading {} from size 0'.format(self.filename))
             r, mode = requests.get(self.url, stream=True), 'wb'
-        with open(os.path.join(self.local, self.filename), mode) as f:
+        with open(self.downloadingLocalFilepath, mode) as f:
             for chunk in r.iter_content(chunk_size=self.CHUNK_SIZE):
                 if chunk:
                     f.write(chunk)
+        os.rename(self.downloadingLocalFilepath, self.localFilepath)
 
         elapsedTime = time.time() - startTime
         self.logger.debug('Downloading {} completed'.format(self.filename))
@@ -196,8 +200,9 @@ class FtpDownloader(Downloader):
             ftpAddr = '{}:{}/{}'.format(self.url, self.port, self.filename)
         resp = self.s.get(ftpAddr, auth=(self.user, self.password))
         if resp.status_code == requests.codes.ok:
-            with open(os.path.join(self.local, self.filename), 'wb') as f:
+            with open(self.downloadingLocalFilepath, 'wb') as f:
                 f.write(resp.content)
+        os.rename(self.downloadingLocalFilepath, self.localFilepath)
 
         elapsedTime = time.time() - startTime
         self.logger.debug('Downloading {} completed'.format(self.filename))
@@ -230,7 +235,8 @@ class SftpDownloader(Downloader):
         sftp = self.client.open_sftp()
         if self.remote:
             sftp.chdir(self.remote)
-        sftp.get(self.filename, os.path.join(self.local, self.filename))
+        sftp.get(self.filename, self.downloadingLocalFilepath)
+        os.rename(self.downloadingLocalFilepath, self.localFilepath)
         self.client.close()
 
         elapsedTime = time.time() - startTime
