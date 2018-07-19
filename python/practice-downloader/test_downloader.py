@@ -59,6 +59,19 @@ class TestHttpDownloader(TestCase):
         with open(d.filename) as f:
             f.seek(0, os.SEEK_END)
             self.assertEqual(self.expectedFilesize, f.tell())
+
+        #   Continuous download, an existing file is 3128 bytes
+        partialFilename = '{}.https_downloading'.format(d.filename)
+        with open(partialFilename, 'wb') as dst:
+            with open(d.filename, 'rb') as src:
+                dst.write(src.read(3128))
+        d = downloader.Downloader.factory(item)
+        if d:
+            d.download()
+        with open(d.filename) as f:
+            f.seek(0, os.SEEK_END)
+            self.assertEqual(self.expectedFilesize, f.tell())
+
         os.remove(d.filename)
 
     #   Download to specific local directory
