@@ -21,7 +21,26 @@ class Protocol:
 
 
 class Item:
-    URL, PORT, PATH, FILENAME, USER, PASSWORD = 'url', 'port', 'path', 'filename', 'user', 'password'
+    URL, PORT, REMOTE_PATH, FILENAME, USER, PASSWORD = 'url', 'port', 'remote', 'filename', 'user', 'password'
+
+
+def mkdirIfNotExist(path):
+    try:
+        os.listdir(path)
+    except FileNotFoundError:
+        os.mkdir(path)
+
+
+def getFilename(filename):
+    if filename is None:
+        return None
+    try:
+        slashIdx = filename.rindex(os.path.sep)
+        if -1 < slashIdx:
+            return filename[slashIdx + 1:]
+    except ValueError:
+        pass
+    return filename
 
 
 class Downloader:
@@ -32,7 +51,7 @@ class Downloader:
 
         url = getKeyValue(Item.URL)
         port = getKeyValue(Item.PORT)
-        path = getKeyValue(Item.PATH)
+        remote = getKeyValue(Item.REMOTE_PATH)
         filename = getKeyValue(Item.FILENAME)
         user = getKeyValue(Item.USER)
         password = getKeyValue(Item.PASSWORD)
@@ -47,16 +66,16 @@ class Downloader:
         if scheme in [Protocol.HTTP, Protocol.HTTPS]:
             return HttpDownloader(url)
         elif Protocol.FTP == scheme:
-            return FtpDownloader(url, port, path, filename, user, password)
+            return FtpDownloader(url, port, remote, filename, user, password)
         elif Protocol.SFTP == scheme:
-            return SftpDownloader(url, port, path, filename, user, password)
+            return SftpDownloader(url, port, remote, filename, user, password)
         return None
 
-    def __init__(self, url, port, path, filename, user, password):
+    def __init__(self, url, port, remote, filename, user, password):
         self.url = url
         self.port = port
-        self.path = path
-        self.filename = filename
+        self.remote = remote
+        self.filename = getFilename(filename)
         self.user = user
         self.password = password
 
@@ -82,14 +101,8 @@ class HttpDownloader(Downloader):
     def __init__(self, url):
         super(self.__class__, self).__init__(url, None, None, None, None, None)
 
-        self.filename = self.getFilename()
+        self.filename = getFilename(self.parsedUrl.path)
         self.CHUNK_SIZE = 512   #   TODO: very small number on purpose
-
-    def getFilename(self):
-        slashIdx = self.parsedUrl.path.rindex(os.path.sep)
-        if -1 < slashIdx:
-            return self.parsedUrl.path[slashIdx + 1:]
-        return None
 
     def getFilesize(self):
         size = 0
@@ -126,8 +139,8 @@ class HttpDownloader(Downloader):
 
 #   https://gist.github.com/hyunjun/11f8c7ee9d5a5c4dd2804071dd4f5ab2#file-ftp-md
 class FtpDownloader(Downloader):
-    def __init__(self, url, port=21, path=None, filename=None, user='anonymous', password='anonymous'):
-        super(self.__class__, self).__init__(url, port, path, filename, user, password)
+    def __init__(self, url, port=21, remote=None, filename=None, user='anonymous', password='anonymous'):
+        super(self.__class__, self).__init__(url, port, remote, filename, user, password)
 
         if self.port is None:
             self.port = 21
@@ -147,8 +160,8 @@ class FtpDownloader(Downloader):
     #        self.ftp.login(self.user, self.password)
     #    except EOFError:
     #        pass
-    #    if self.path:
-    #        self.ftp.cwd(self.path)
+    #    if self.remote:
+    #        self.ftp.cwd(self.remote)
     #    self.ftp.sock.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
     #    self.ftp.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPINTVL, 75)
     #    #self.ftp.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPIDLE, 60)
@@ -171,8 +184,8 @@ class FtpDownloader(Downloader):
         #            self.logger.debug('Reconnect to ftp')
         #self.ftp.quit()
 
-        if self.path:
-            ftpAddr = '{}:{}/{}/{}'.format(self.url, self.port, self.path, self.filename)
+        if self.remote:
+            ftpAddr = '{}:{}/{}/{}'.format(self.url, self.port, self.remote, self.filename)
         else:
             ftpAddr = '{}:{}/{}'.format(self.url, self.port, self.filename)
         resp = self.s.get(ftpAddr, auth=(self.user, self.password))
@@ -187,8 +200,8 @@ class FtpDownloader(Downloader):
 
 #   https://gist.github.com/hyunjun/11f8c7ee9d5a5c4dd2804071dd4f5ab2#file-sftp-md
 class SftpDownloader(Downloader):
-    def __init__(self, url, port=22, path=None, filename=None, user='anonymous', password='anonymous'):
-        super(self.__class__, self).__init__(url, port, path, filename, user, password)
+    def __init__(self, url, port=22, remote=None, filename=None, user='anonymous', password='anonymous'):
+        super(self.__class__, self).__init__(url, port, remote, filename, user, password)
 
         if self.port is None:
             self.port = 22
@@ -209,8 +222,8 @@ class SftpDownloader(Downloader):
         self.client.set_missing_host_key_policy(AllowAnythingPolicy())
         self.client.connect(self.parsedUrl.netloc, port=self.port, username=self.user, password=self.password)
         sftp = self.client.open_sftp()
-        if self.path:
-            sftp.chdir(self.path)
+        if self.remote:
+            sftp.chdir(self.remote)
         sftp.get(self.filename, self.filename)
         self.client.close()
 
@@ -238,7 +251,7 @@ def options(argv):
     ftp_parser = subparsers.add_parser(Protocol.FTP, help='Download file from (s)ftp address')
     ftp_parser.add_argument(Item.URL, action='store', help='Ftp address to download file')
     ftp_parser.add_argument('--port', action='store', dest=Item.PORT, default=21)
-    ftp_parser.add_argument('--path', action='store', dest=Item.PATH, default=None)
+    ftp_parser.add_argument('--remote-path', action='store', dest=Item.REMOTE_PATH, default=None)
     ftp_parser.add_argument('--filename', action='store', dest=Item.FILENAME, default=None)
     ftp_parser.add_argument('--user', action='store', dest=Item.USER, default='anonymous')
     ftp_parser.add_argument('--password', action='store', dest=Item.PASSWORD, default='anonymous')
@@ -263,20 +276,17 @@ if __name__ == '__main__':
         sys.exit(1)
 
     #   create log directory if it does NOT exist
-    try:
-        os.listdir(LOG_PATH)
-    except FileNotFoundError:
-        os.mkdir(LOG_PATH)
+    mkdirIfNotExist(LOG_PATH)
 
     print(option)
     #   python3 downloader.py http https://t1.daumcdn.net/daumtop_chanel/op/20170315064553027.png
     if Protocol.HTTP == option.command:
         items.append({Item.URL: option.url})
 
-    #   python3 downloader.py ftp ftp://demo.wftpserver.com --path download --filename manual_en.pdf --user demo-user --password demo-user
-    #   python3 downloader.py ftp sftp://demo.wftpserver.com --port 2222 --path download --filename manual_en.pdf --user demo-user --password demo-user
+    #   python3 downloader.py ftp ftp://demo.wftpserver.com --remote-path download --filename manual_en.pdf --user demo-user --password demo-user
+    #   python3 downloader.py ftp sftp://demo.wftpserver.com --port 2222 #   --remote-path download --filename manual_en.pdf --user demo-user --password demo-user
     elif Protocol.FTP == option.command:
-        items.append({Item.URL: option.url, Item.PORT: option.port, Item.PATH: option.path, Item.FILENAME: option.filename, Item.USER: option.user, Item.PASSWORD: option.password})
+        items.append({Item.URL: option.url, Item.PORT: option.port, Item.REMOTE_PATH: option.remote, Item.FILENAME: option.filename, Item.USER: option.user, Item.PASSWORD: option.password})
 
     #   python3 downloader.py file urls.dat
     elif FILE == option.command:
