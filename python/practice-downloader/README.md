@@ -8,6 +8,7 @@
   $ source .venv/bin/activate
   $ pip install -r requirements.txt
   ```
+* Test `python3 test_downloader.py`
 * Execution
 
   ```
