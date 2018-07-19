@@ -21,7 +21,7 @@ class Protocol:
 
 
 class Item:
-    URL, PORT, REMOTE_PATH, FILENAME, USER, PASSWORD = 'url', 'port', 'remote', 'filename', 'user', 'password'
+    URL, PORT, REMOTE_PATH, FILENAME, LOCAL_PATH, USER, PASSWORD = 'url', 'port', 'remote', 'filename', 'local', 'user', 'password'
 
 
 def mkdirIfNotExist(path):
@@ -53,6 +53,7 @@ class Downloader:
         port = getKeyValue(Item.PORT)
         remote = getKeyValue(Item.REMOTE_PATH)
         filename = getKeyValue(Item.FILENAME)
+        local = getKeyValue(Item.LOCAL_PATH)
         user = getKeyValue(Item.USER)
         password = getKeyValue(Item.PASSWORD)
 
@@ -64,18 +65,23 @@ class Downloader:
         scheme = urlparse(url).scheme
 
         if scheme in [Protocol.HTTP, Protocol.HTTPS]:
-            return HttpDownloader(url)
+            return HttpDownloader(url, local)
         elif Protocol.FTP == scheme:
-            return FtpDownloader(url, port, remote, filename, user, password)
+            return FtpDownloader(url, port, remote, filename, local, user, password)
         elif Protocol.SFTP == scheme:
-            return SftpDownloader(url, port, remote, filename, user, password)
+            return SftpDownloader(url, port, remote, filename, local, user, password)
         return None
 
-    def __init__(self, url, port, remote, filename, user, password):
+    def __init__(self, url, port, remote, filename, local, user, password):
         self.url = url
         self.port = port
         self.remote = remote
         self.filename = getFilename(filename)
+        self.local = local
+        if self.local:
+            mkdirIfNotExist(self.local)
+        else:
+            self.local = '.'
         self.user = user
         self.password = password
 
@@ -98,8 +104,8 @@ class Downloader:
 
 #   https://gist.github.com/hyunjun/11f8c7ee9d5a5c4dd2804071dd4f5ab2#file-file_download-md
 class HttpDownloader(Downloader):
-    def __init__(self, url):
-        super(self.__class__, self).__init__(url, None, None, None, None, None)
+    def __init__(self, url, local='.'):
+        super(self.__class__, self).__init__(url, None, None, None, local, None, None)
 
         self.filename = getFilename(self.parsedUrl.path)
         self.CHUNK_SIZE = 512   #   TODO: very small number on purpose
@@ -107,7 +113,7 @@ class HttpDownloader(Downloader):
     def getFilesize(self):
         size = 0
         try:
-            with open(self.filename, 'r') as f:
+            with open(os.path.join(self.local, self.filename), 'r') as f:
                 f.seek(0, os.SEEK_END)
                 size = f.tell()
         except FileNotFoundError:
@@ -127,7 +133,7 @@ class HttpDownloader(Downloader):
         else:
             self.logger.debug('Start downloading {} from size 0'.format(self.filename))
             r, mode = requests.get(self.url, stream=True), 'wb'
-        with open(self.filename, mode) as f:
+        with open(os.path.join(self.local, self.filename), mode) as f:
             for chunk in r.iter_content(chunk_size=self.CHUNK_SIZE):
                 if chunk:
                     f.write(chunk)
@@ -139,8 +145,8 @@ class HttpDownloader(Downloader):
 
 #   https://gist.github.com/hyunjun/11f8c7ee9d5a5c4dd2804071dd4f5ab2#file-ftp-md
 class FtpDownloader(Downloader):
-    def __init__(self, url, port=21, remote=None, filename=None, user='anonymous', password='anonymous'):
-        super(self.__class__, self).__init__(url, port, remote, filename, user, password)
+    def __init__(self, url, port=21, remote=None, filename=None, local='.', user='anonymous', password='anonymous'):
+        super(self.__class__, self).__init__(url, port, remote, filename, local, user, password)
 
         if self.port is None:
             self.port = 21
@@ -190,7 +196,7 @@ class FtpDownloader(Downloader):
             ftpAddr = '{}:{}/{}'.format(self.url, self.port, self.filename)
         resp = self.s.get(ftpAddr, auth=(self.user, self.password))
         if resp.status_code == requests.codes.ok:
-            with open(self.filename, 'wb') as f:
+            with open(os.path.join(self.local, self.filename), 'wb') as f:
                 f.write(resp.content)
 
         elapsedTime = time.time() - startTime
@@ -200,8 +206,8 @@ class FtpDownloader(Downloader):
 
 #   https://gist.github.com/hyunjun/11f8c7ee9d5a5c4dd2804071dd4f5ab2#file-sftp-md
 class SftpDownloader(Downloader):
-    def __init__(self, url, port=22, remote=None, filename=None, user='anonymous', password='anonymous'):
-        super(self.__class__, self).__init__(url, port, remote, filename, user, password)
+    def __init__(self, url, port=22, remote=None, filename=None, local='.', user='anonymous', password='anonymous'):
+        super(self.__class__, self).__init__(url, port, remote, filename, local, user, password)
 
         if self.port is None:
             self.port = 22
@@ -224,7 +230,7 @@ class SftpDownloader(Downloader):
         sftp = self.client.open_sftp()
         if self.remote:
             sftp.chdir(self.remote)
-        sftp.get(self.filename, self.filename)
+        sftp.get(self.filename, os.path.join(self.local, self.filename))
         self.client.close()
 
         elapsedTime = time.time() - startTime
@@ -246,6 +252,7 @@ def options(argv):
 
     http_parser = subparsers.add_parser(Protocol.HTTP, help='Download file from http(s) url')
     http_parser.add_argument(Item.URL, action='store', help='Url to download file')
+    http_parser.add_argument('--local-path', action='store', dest=Item.LOCAL_PATH, default='.')
     http_parser.set_defaults(command=Protocol.HTTP)
 
     ftp_parser = subparsers.add_parser(Protocol.FTP, help='Download file from (s)ftp address')
@@ -253,6 +260,7 @@ def options(argv):
     ftp_parser.add_argument('--port', action='store', dest=Item.PORT, default=21)
     ftp_parser.add_argument('--remote-path', action='store', dest=Item.REMOTE_PATH, default=None)
     ftp_parser.add_argument('--filename', action='store', dest=Item.FILENAME, default=None)
+    ftp_parser.add_argument('--local-path', action='store', dest=Item.LOCAL_PATH, default='.')
     ftp_parser.add_argument('--user', action='store', dest=Item.USER, default='anonymous')
     ftp_parser.add_argument('--password', action='store', dest=Item.PASSWORD, default='anonymous')
     ftp_parser.set_defaults(command=Protocol.FTP)
@@ -279,16 +287,12 @@ if __name__ == '__main__':
     mkdirIfNotExist(LOG_PATH)
 
     print(option)
-    #   python3 downloader.py http https://t1.daumcdn.net/daumtop_chanel/op/20170315064553027.png
     if Protocol.HTTP == option.command:
-        items.append({Item.URL: option.url})
+        items.append({Item.URL: option.url, Item.LOCAL_PATH: option.local})
 
-    #   python3 downloader.py ftp ftp://demo.wftpserver.com --remote-path download --filename manual_en.pdf --user demo-user --password demo-user
-    #   python3 downloader.py ftp sftp://demo.wftpserver.com --port 2222 #   --remote-path download --filename manual_en.pdf --user demo-user --password demo-user
     elif Protocol.FTP == option.command:
-        items.append({Item.URL: option.url, Item.PORT: option.port, Item.REMOTE_PATH: option.remote, Item.FILENAME: option.filename, Item.USER: option.user, Item.PASSWORD: option.password})
+        items.append({Item.URL: option.url, Item.PORT: option.port, Item.REMOTE_PATH: option.remote, Item.FILENAME: option.filename, Item.LOCAL_PATH: option.local, Item.USER: option.user, Item.PASSWORD: option.password})
 
-    #   python3 downloader.py file urls.dat
     elif FILE == option.command:
         with open(option.filename, 'r') as f:
             for line in f.readlines():
