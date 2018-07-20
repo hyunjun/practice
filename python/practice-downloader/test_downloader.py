@@ -51,28 +51,28 @@ class TestHttpDownloader(TestCase):
         item = {downloader.Item.URL: self.url}
         d = downloader.Downloader.factory(item)
         try:
-            os.remove(d.filename)
+            os.remove(d.localFilepath)
         except FileNotFoundError:
             pass
         if d:
             d.download()
-        with open(d.filename) as f:
+        with open(d.localFilepath) as f:
             f.seek(0, os.SEEK_END)
             self.assertEqual(self.expectedFilesize, f.tell())
 
         #   Continuous download, an existing file is 3128 bytes
-        partialFilename = '{}.https_downloading'.format(d.filename)
+        partialFilename = '{}.https_downloading'.format(d.localFilepath)
         with open(partialFilename, 'wb') as dst:
-            with open(d.filename, 'rb') as src:
+            with open(d.localFilepath, 'rb') as src:
                 dst.write(src.read(3128))
         d = downloader.Downloader.factory(item)
         if d:
             d.download()
-        with open(d.filename) as f:
+        with open(d.localFilepath) as f:
             f.seek(0, os.SEEK_END)
             self.assertEqual(self.expectedFilesize, f.tell())
 
-        os.remove(d.filename)
+        os.remove(d.localFilepath)
         os.remove(partialFilename)
 
     #   Download to specific local directory
@@ -81,7 +81,7 @@ class TestHttpDownloader(TestCase):
         d = downloader.Downloader.factory(item)
         if d:
             d.download()
-        with open(os.path.join(d.local, d.filename)) as f:
+        with open(d.localFilepath) as f:
             f.seek(0, os.SEEK_END)
             self.assertEqual(self.expectedFilesize, f.tell())
         shutil.rmtree(d.local)
@@ -113,15 +113,15 @@ class TestFtpDownloader(TestCase):
         item = {downloader.Item.URL: self.url, downloader.Item.REMOTE_PATH: self.remote, downloader.Item.FILENAME: self.filename, downloader.Item.USER: self.user, downloader.Item.PASSWORD: self.password}
         d = downloader.Downloader.factory(item)
         try:
-            os.remove(d.filename)
+            os.remove(d.localFilepath)
         except FileNotFoundError:
             pass
         if d:
             d.download()
-        with open(d.filename) as f:
+        with open(d.localFilepath) as f:
             f.seek(0, os.SEEK_END)
             self.assertEqual(self.expectedFilesize, f.tell())
-        os.remove(d.filename)
+        os.remove(d.localFilepath)
 
     #   Download to specific local directory
     def testDownload1(self):
@@ -129,7 +129,7 @@ class TestFtpDownloader(TestCase):
         d = downloader.Downloader.factory(item)
         if d:
             d.download()
-        with open(os.path.join(d.local, d.filename)) as f:
+        with open(d.localFilepath) as f:
             f.seek(0, os.SEEK_END)
             self.assertEqual(self.expectedFilesize, f.tell())
         shutil.rmtree(d.local)
@@ -162,15 +162,15 @@ class TestSftpDownloader(TestCase):
         item = {downloader.Item.URL: self.url, downloader.Item.PORT: self.port, downloader.Item.REMOTE_PATH: self.remote, downloader.Item.FILENAME: self.filename, downloader.Item.USER: self.user, downloader.Item.PASSWORD: self.password}
         d = downloader.Downloader.factory(item)
         try:
-            os.remove(d.filename)
+            os.remove(d.localFilepath)
         except FileNotFoundError:
             pass
         if d:
             d.download()
-        with open(d.filename) as f:
+        with open(d.localFilepath) as f:
             f.seek(0, os.SEEK_END)
             self.assertEqual(self.expectedFilesize, f.tell())
-        os.remove(d.filename)
+        os.remove(d.localFilepath)
 
     #   Download to specific local directory
     def testDownload1(self):
@@ -178,7 +178,7 @@ class TestSftpDownloader(TestCase):
         d = downloader.Downloader.factory(item)
         if d:
             d.download()
-        with open(os.path.join(d.local, d.filename)) as f:
+        with open(d.localFilepath) as f:
             f.seek(0, os.SEEK_END)
             self.assertEqual(self.expectedFilesize, f.tell())
         shutil.rmtree(d.local)
