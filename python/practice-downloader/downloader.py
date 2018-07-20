@@ -272,6 +272,14 @@ class SftpDownloader(Downloader):
             sftp = self.client.open_sftp()
         except TimeoutError:
             self.logger.error('TimeoutError happened while downloading {}'.format(self.filename))
+        except paramiko.ssh_exception.BadHostKeyException:
+            self.logger.error('BadHostKeyException happened while downloading {}'.format(self.filename))
+        except paramiko.ssh_exception.AuthenticationException:
+            self.logger.error('AuthenticationException happened while downloading {}'.format(self.filename))
+        except paramiko.ssh_exception.SSHException:
+            self.logger.error('SSHException happened while downloading {}'.format(self.filename))
+        except socket.error:
+            self.logger.error('Socket error happened while downloading {}'.format(self.filename))
 
         if sftp:
             if self.remote:
