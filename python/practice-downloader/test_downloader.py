@@ -85,6 +85,13 @@ class TestHttpDownloader(TestCase):
             self.assertEqual(self.expectedFilesize, f.tell())
         shutil.rmtree(d.local)
 
+    def testConnectionError(self):
+        item = {downloader.Item.URL: 'http://not_existing_url/somefile'}
+        d = downloader.Downloader.factory(item)
+        if d:
+            d.download()
+        self.assertFalse(d.filename is os.listdir('.'))
+
 
 class TestFtpDownloader(TestCase):
 

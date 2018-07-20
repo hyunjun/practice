@@ -1,5 +1,6 @@
 {'url': 'https://t1.daumcdn.net/daumtop_chanel/op/20170315064553027.png'}
 {'url': 'https://t1.daumcdn.net/daumtop_chanel/op/20170315064553027.png"}
+{'url': 'http://not_existing_url/somefile'}
 {"url": "ftp://demo.wftpserver.com", "remote": "download", "filename": "manual_en.pdf", "user": "demo-user", "password": "demo-user"}
 {"url": "sftp://demo.wftpserver.com", "remote": "download", "filename": "manual_en.pdf", "local": "from_sftp", "port": 2222, "user": "demo-user", "password": "demo-user"}
 {"url": "xyz://and.also.this/ending"}

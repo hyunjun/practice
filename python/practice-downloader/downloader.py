@@ -112,6 +112,7 @@ class HttpDownloader(Downloader):
         super(self.__class__, self).__init__(url, None, None, None, local, None, None)
 
         self.CHUNK_SIZE = 512   #   TODO: very small number on purpose
+        self.TIMEOUT = 1   #   TODO: what is proper timeout?
 
     def getFilesize(self):
         size = 0
@@ -130,21 +131,32 @@ class HttpDownloader(Downloader):
         if 0 < filesize:
             resumeHeader = {'Range': 'bytes={}-'.format(filesize)}
 
-        if resumeHeader:
-            self.logger.debug('Resume downloading {} from size {}'.format(self.filename, filesize))
-            r, mode = requests.get(self.url, headers=resumeHeader, stream=True), 'ab'
-        else:
-            self.logger.debug('Start downloading {} from size 0'.format(self.filename))
-            r, mode = requests.get(self.url, stream=True), 'wb'
-        with open(self.downloadingLocalFilepath, mode) as f:
-            for chunk in r.iter_content(chunk_size=self.CHUNK_SIZE):
-                if chunk:
-                    f.write(chunk)
-        os.rename(self.downloadingLocalFilepath, self.localFilepath)
+        r, mode = None, None
+        try:
+            if resumeHeader:
+                self.logger.debug('Resume downloading {} from size {}'.format(self.filename, filesize))
+                r, mode = requests.get(self.url, headers=resumeHeader, stream=True, timeout=self.TIMEOUT), 'ab'
+            else:
+                self.logger.debug('Start downloading {} from size 0'.format(self.filename))
+                r, mode = requests.get(self.url, stream=True, timeout=self.TIMEOUT), 'wb'
+        except requests.exceptions.Timeout:
+            self.logger.error('Timeout happened while downloading {}'.format(self.filename))
+        except requests.exceptions.ConnectionError:
+            self.logger.error('ConnectionError happened while downloading {}'.format(self.filename))
 
-        elapsedTime = time.time() - startTime
-        self.logger.debug('Downloading {} completed'.format(self.filename))
-        self.logger.debug('Elapsed time {0:.2f} sec'.format(elapsedTime))
+        if r:
+            if requests.codes.ok == r.status_code:
+                with open(self.downloadingLocalFilepath, mode) as f:
+                    for chunk in r.iter_content(chunk_size=self.CHUNK_SIZE):
+                        if chunk:
+                            f.write(chunk)
+                os.rename(self.downloadingLocalFilepath, self.localFilepath)
+
+                elapsedTime = time.time() - startTime
+                self.logger.debug('Downloading {} completed'.format(self.filename))
+                self.logger.debug('Elapsed time {0:.2f} sec'.format(elapsedTime))
+            else:
+                self.logger.error('Something wrong while downloading {}. Status code is {}'.format(self.filename, r.status_code))
 
 
 #   https://gist.github.com/hyunjun/11f8c7ee9d5a5c4dd2804071dd4f5ab2#file-ftp-md
