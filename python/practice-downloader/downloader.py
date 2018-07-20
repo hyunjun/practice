@@ -131,23 +131,23 @@ class HttpDownloader(Downloader):
         if 0 < filesize:
             resumeHeader = {'Range': 'bytes={}-'.format(filesize)}
 
-        r, mode = None, None
+        resp, mode = None, None
         try:
             if resumeHeader:
                 self.logger.debug('Resume downloading {} from size {}'.format(self.filename, filesize))
-                r, mode = requests.get(self.url, headers=resumeHeader, stream=True, timeout=self.TIMEOUT), 'ab'
+                resp, mode = requests.get(self.url, headers=resumeHeader, stream=True, timeout=self.TIMEOUT), 'ab'
             else:
                 self.logger.debug('Start downloading {} from size 0'.format(self.filename))
-                r, mode = requests.get(self.url, stream=True, timeout=self.TIMEOUT), 'wb'
+                resp, mode = requests.get(self.url, stream=True, timeout=self.TIMEOUT), 'wb'
         except requests.exceptions.Timeout:
             self.logger.error('Timeout happened while downloading {}'.format(self.filename))
         except requests.exceptions.ConnectionError:
             self.logger.error('ConnectionError happened while downloading {}'.format(self.filename))
 
-        if r:
-            if requests.codes.ok == r.status_code:
+        if resp:
+            if requests.codes.ok == resp.status_code:
                 with open(self.downloadingLocalFilepath, mode) as f:
-                    for chunk in r.iter_content(chunk_size=self.CHUNK_SIZE):
+                    for chunk in resp.iter_content(chunk_size=self.CHUNK_SIZE):
                         if chunk:
                             f.write(chunk)
                 os.rename(self.downloadingLocalFilepath, self.localFilepath)
@@ -156,7 +156,7 @@ class HttpDownloader(Downloader):
                 self.logger.debug('Downloading {} completed'.format(self.filename))
                 self.logger.debug('Elapsed time {0:.2f} sec'.format(elapsedTime))
             else:
-                self.logger.error('Something wrong while downloading {}. Status code is {}'.format(self.filename, r.status_code))
+                self.logger.error('Something wrong while downloading {}. Status code is {}'.format(self.filename, resp.status_code))
 
 
 #   https://gist.github.com/hyunjun/11f8c7ee9d5a5c4dd2804071dd4f5ab2#file-ftp-md
@@ -210,15 +210,24 @@ class FtpDownloader(Downloader):
             ftpAddr = '{}:{}/{}/{}'.format(self.url, self.port, self.remote, self.filename)
         else:
             ftpAddr = '{}:{}/{}'.format(self.url, self.port, self.filename)
-        resp = self.s.get(ftpAddr, auth=(self.user, self.password))
-        if resp.status_code == requests.codes.ok:
-            with open(self.downloadingLocalFilepath, 'wb') as f:
-                f.write(resp.content)
-        os.rename(self.downloadingLocalFilepath, self.localFilepath)
 
-        elapsedTime = time.time() - startTime
-        self.logger.debug('Downloading {} completed'.format(self.filename))
-        self.logger.debug('Elapsed time {0:.2f} sec'.format(elapsedTime))
+        resp = None
+        try:
+            resp = self.s.get(ftpAddr, auth=(self.user, self.password))
+        except requests.exceptions.ConnectionError:
+            self.logger.error('ConnectionError happened while downloading {}'.format(self.filename))
+
+        if resp:
+            if requests.codes.ok == resp.status_code:
+                with open(self.downloadingLocalFilepath, 'wb') as f:
+                    f.write(resp.content)
+                os.rename(self.downloadingLocalFilepath, self.localFilepath)
+
+                elapsedTime = time.time() - startTime
+                self.logger.debug('Downloading {} completed'.format(self.filename))
+                self.logger.debug('Elapsed time {0:.2f} sec'.format(elapsedTime))
+            else:
+                self.logger.error('Something wrong while downloading {}. Status code is {}'.format(self.filename, resp.status_code))
 
 
 #   https://gist.github.com/hyunjun/11f8c7ee9d5a5c4dd2804071dd4f5ab2#file-sftp-md
@@ -243,17 +252,23 @@ class SftpDownloader(Downloader):
         startTime = time.time()
 
         self.client.set_missing_host_key_policy(AllowAnythingPolicy())
-        self.client.connect(self.parsedUrl.netloc, port=self.port, username=self.user, password=self.password)
-        sftp = self.client.open_sftp()
-        if self.remote:
-            sftp.chdir(self.remote)
-        sftp.get(self.filename, self.downloadingLocalFilepath)
-        os.rename(self.downloadingLocalFilepath, self.localFilepath)
-        self.client.close()
+        sftp = None
+        try:
+            self.client.connect(self.parsedUrl.netloc, port=self.port, username=self.user, password=self.password)
+            sftp = self.client.open_sftp()
+        except TimeoutError:
+            self.logger.error('TimeoutError happened while downloading {}'.format(self.filename))
 
-        elapsedTime = time.time() - startTime
-        self.logger.debug('Downloading {} completed'.format(self.filename))
-        self.logger.debug('Elapsed time {0:.2f} sec'.format(elapsedTime))
+        if sftp:
+            if self.remote:
+                sftp.chdir(self.remote)
+            sftp.get(self.filename, self.downloadingLocalFilepath)
+            os.rename(self.downloadingLocalFilepath, self.localFilepath)
+            self.client.close()
+
+            elapsedTime = time.time() - startTime
+            self.logger.debug('Downloading {} completed'.format(self.filename))
+            self.logger.debug('Elapsed time {0:.2f} sec'.format(elapsedTime))
 
 
 def download(item):

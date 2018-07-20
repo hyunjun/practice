@@ -73,6 +73,7 @@ class TestHttpDownloader(TestCase):
             self.assertEqual(self.expectedFilesize, f.tell())
 
         os.remove(d.filename)
+        os.remove(partialFilename)
 
     #   Download to specific local directory
     def testDownload1(self):
@@ -86,7 +87,7 @@ class TestHttpDownloader(TestCase):
         shutil.rmtree(d.local)
 
     def testConnectionError(self):
-        item = {downloader.Item.URL: 'http://not_existing_url/somefile'}
+        item = {downloader.Item.URL: 'http://not.existing.com/somefile'}
         d = downloader.Downloader.factory(item)
         if d:
             d.download()
@@ -133,6 +134,13 @@ class TestFtpDownloader(TestCase):
             self.assertEqual(self.expectedFilesize, f.tell())
         shutil.rmtree(d.local)
 
+    def testError(self):
+        item = {downloader.Item.URL: 'ftp://not.existing.com', downloader.Item.REMOTE_PATH: self.remote, downloader.Item.FILENAME: self.filename, downloader.Item.LOCAL_PATH: self.local, downloader.Item.USER: self.user, downloader.Item.PASSWORD: self.password}
+        d = downloader.Downloader.factory(item)
+        if d:
+            d.download()
+        self.assertFalse(d.filename is os.listdir('.'))
+
 
 class TestSftpDownloader(TestCase):
 
@@ -174,6 +182,13 @@ class TestSftpDownloader(TestCase):
             f.seek(0, os.SEEK_END)
             self.assertEqual(self.expectedFilesize, f.tell())
         shutil.rmtree(d.local)
+
+    def testError(self):
+        item = {downloader.Item.URL: 'ftp://not.existing.com', downloader.Item.REMOTE_PATH: self.remote, downloader.Item.FILENAME: self.filename, downloader.Item.LOCAL_PATH: self.local, downloader.Item.USER: self.user, downloader.Item.PASSWORD: self.password}
+        d = downloader.Downloader.factory(item)
+        if d:
+            d.download()
+        self.assertFalse(d.filename is os.listdir('.'))
 
 
 if __name__ == '__main__':
