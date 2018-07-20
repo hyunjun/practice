@@ -124,12 +124,26 @@ class HttpDownloader(Downloader):
             pass
         return size
 
+    def getRemoteFilesize(self):
+        try:
+            return int(requests.get(self.url, stream=True).headers['Content-length'])
+        except:
+            pass
+        return None
+
     def download(self):
         startTime = time.time()
 
-        resumeHeader, filesize = None, self.getFilesize()
-        if 0 < filesize:
+        resumeHeader, filesize, remoteFilesize = None, self.getFilesize(), self.getRemoteFilesize()
+        if remoteFilesize is None:
+            self.logger.error('Exception happened while get the remote file size of {}'.format(self.filename))
+            return
+
+        if 0 < filesize < remoteFilesize:
             resumeHeader = {'Range': 'bytes={}-'.format(filesize)}
+        elif 0 != filesize:
+            self.logger.error('Did you already download {}? A local file size is {}, while the remote one {}'.format(self.filename, filesize, remoteFilesize))
+            return
 
         resp, mode = None, None
         try:

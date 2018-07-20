@@ -50,6 +50,7 @@ class TestHttpDownloader(TestCase):
     def testDownload0(self):
         item = {downloader.Item.URL: self.url}
         d = downloader.Downloader.factory(item)
+        self.assertEqual(self.expectedFilesize, d.getRemoteFilesize())
         try:
             os.remove(d.localFilepath)
         except FileNotFoundError:
@@ -87,8 +88,9 @@ class TestHttpDownloader(TestCase):
         shutil.rmtree(d.local)
 
     def testConnectionError(self):
-        item = {downloader.Item.URL: 'http://not.existing.com/somefile'}
+        item = {downloader.Item.URL: 'http://not._existing.com/somefile'}
         d = downloader.Downloader.factory(item)
+        self.assertIsNone(d.getRemoteFilesize())
         if d:
             d.download()
         self.assertFalse(d.filename is os.listdir('.'))
@@ -135,7 +137,7 @@ class TestFtpDownloader(TestCase):
         shutil.rmtree(d.local)
 
     def testError(self):
-        item = {downloader.Item.URL: 'ftp://not.existing.com', downloader.Item.REMOTE_PATH: self.remote, downloader.Item.FILENAME: self.filename, downloader.Item.LOCAL_PATH: self.local, downloader.Item.USER: self.user, downloader.Item.PASSWORD: self.password}
+        item = {downloader.Item.URL: 'ftp://not._existing.com', downloader.Item.REMOTE_PATH: self.remote, downloader.Item.FILENAME: self.filename, downloader.Item.LOCAL_PATH: self.local, downloader.Item.USER: self.user, downloader.Item.PASSWORD: self.password}
         d = downloader.Downloader.factory(item)
         if d:
             d.download()
@@ -184,7 +186,7 @@ class TestSftpDownloader(TestCase):
         shutil.rmtree(d.local)
 
     def testError(self):
-        item = {downloader.Item.URL: 'ftp://not.existing.com', downloader.Item.REMOTE_PATH: self.remote, downloader.Item.FILENAME: self.filename, downloader.Item.LOCAL_PATH: self.local, downloader.Item.USER: self.user, downloader.Item.PASSWORD: self.password}
+        item = {downloader.Item.URL: 'ftp://not._existing.com', downloader.Item.REMOTE_PATH: self.remote, downloader.Item.FILENAME: self.filename, downloader.Item.LOCAL_PATH: self.local, downloader.Item.USER: self.user, downloader.Item.PASSWORD: self.password}
         d = downloader.Downloader.factory(item)
         if d:
             d.download()
