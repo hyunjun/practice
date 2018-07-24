@@ -47,4 +47,4 @@ name = 'lang#python'
 enable = true
 
 [[layers]]
-  name = "colorscheme"
+name = "colorscheme"
