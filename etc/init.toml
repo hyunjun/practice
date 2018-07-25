@@ -24,6 +24,7 @@
     buffer_index_type = 4
     enable_tabline_filetype_icon = true
     enable_statusline_display_mode = false
+    vimcompatible = true
 
 norelativenumber = true
 
