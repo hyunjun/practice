@@ -21,11 +21,11 @@ class Solution:
         return -1
 
     #   82.63%
-    def repeatedStringMatch(self, A, B):
+    def repeatedStringMatch0(self, A, B):
         if A is None or 0 == len(A) or B is None or 0 == len(B):
             return -1
         def match(s):
-            print(s)
+            #print(s)
             if 0 < len(s):
                 if A == s or s in A:
                     return 1
@@ -42,6 +42,23 @@ class Solution:
             return 0
         return match(B)
 
+    #   18.04%
+    def repeatedStringMatch(self, A, B):
+        if A == B or B in A:
+            return 1
+        a, cnt = A, 0
+        while len(a) <= len(B):
+            cnt += 1
+            a = A * cnt
+            #print('{} {} {}'.format(a, B, a in B))
+            if B in a:
+                return cnt
+        if B in A * (cnt + 1):
+            return cnt + 1
+        if B in A * (cnt + 2):
+            return cnt + 2
+        return -1
+
 
 s = Solution()
 data = [('abcd', 'cdabcdab', 3),
@@ -55,6 +72,7 @@ data = [('abcd', 'cdabcdab', 3),
         ('abcd', 'cdabcdacdabcda', -1),
         ]
 for A, B, expected in data:
-    real = s.repeatedStringMatch(A, B)
-    print('{}, {}, expected {}, real {}, result {}'.format(A, B, expected, real, expected == real))
+    real = s.repeatedStringMatch0(A, B)
+    real2 = s.repeatedStringMatch(A, B)
+    print('{}, {}, expected {}, real {}, real2 {}, result {}'.format(A, B, expected, real, real2, expected == real == real2))
 
