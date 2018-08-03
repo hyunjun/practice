@@ -40,7 +40,7 @@ class Solution:
         return ''
 
     #   63.44%
-    def longestWord(self, words):
+    def longestWord1(self, words):
         if words is None or 0 == len(words):
             return ''
         trie = {}
@@ -60,6 +60,35 @@ class Solution:
 
         for word in sorted(words, key=lambda w: (-len(w), w)):
             if isValid(word):
+                return word
+        return ''
+
+    #   10.00%
+    def longestWord(self, words):
+        if words is None or 0 == len(words):
+            return ''
+
+        trie = {}
+        def input2trie(prev, word):
+            if word is None or 0 == len(word):
+                prev[True] = True
+            else:
+                if word[0] not in prev:
+                    prev[word[0]] = {}
+                input2trie(prev[word[0]], word[1:])
+        for word in words:
+            input2trie(trie, word)
+
+        print(trie)
+
+        for word in sorted(words, key=lambda w: (-len(w), w)):
+            valid, d = True, trie
+            for c in word:
+                print(d[c])
+                if c not in d or True not in d[c]:
+                    valid = False
+                d = d[c]
+            if valid:
                 return word
         return ''
 
