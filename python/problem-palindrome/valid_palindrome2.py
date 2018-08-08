@@ -1,6 +1,5 @@
 #   https://leetcode.com/problems/valid-palindrome-ii
 
-#   https://leetcode.com/problems/valid-palindrome-ii/solution
 
 class Solution:
     def isPalindrome(self, s):
@@ -129,7 +128,8 @@ class Solution:
 
         return False
 
-    def validPalindrome(self, s):
+    #   https://leetcode.com/problems/valid-palindrome-ii/solution
+    def validPalindromeSol(self, s):
         def is_pali_range(i, j):
             return all(s[k] == s[j - k + i] for k in range(i, j))
 
@@ -138,6 +138,18 @@ class Solution:
                 j = len(s) - 1 - i
                 return is_pali_range(i + 1, j) or is_pali_range(i, j - 1)
         return True
+
+    #   64.86%
+    def validPalindrome(self, s):
+        l, r = 0, len(s) - 1
+        while l < r and s[l] == s[r]:
+            l += 1
+            r -= 1
+
+        def isPalindrome(s):
+            return s == s[::-1]
+
+        return isPalindrome(s[l:r]) or isPalindrome(s[l + 1:r + 1])
 
 
 solution = Solution()
