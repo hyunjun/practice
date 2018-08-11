@@ -59,19 +59,3 @@ data = [([100, 4, 200, 1, 3, 2], 4),
 for nums, expected in data:
     real = s.longestConsecutive(nums)
     print('{}, expected {}, real {}, result {}'.format(nums, expected, real, expected == real))
-'''
-_min = 1, _max = 200
-arr = [None, None, ... None] (200 - 1 + 1)
-arr[99] = 100
-arr[3] = 4
-arr[199] = 200
-arr[0] = 1
-arr[2] = 3
-arr[1] = 2
-maxCnt  i   a   cur
-0       0   1   1
-        1   2   2
-        2   3   3
-        3   4   4
-4       5
-'''
