@@ -1,6 +1,7 @@
 #   https://leetcode.com/problems/shortest-unsorted-continuous-subarray
 
 #   https://leetcode.com/problems/shortest-unsorted-continuous-subarray/solution
+import sys
 
 
 class Solution:
@@ -40,8 +41,8 @@ class Solution:
             return 0
         return r - l + 1
 
-    #   55.84%
-    def findUnsortedSubarray(self, nums):
+    #   55.84%  O(NlogN)
+    def findUnsortedSubarray2(self, nums):
         if nums is None or 0 == len(nums):
             return 0
         sortedNums = sorted(nums)
@@ -52,6 +53,34 @@ class Solution:
             r -= 1
         if l >= r:
             return 0
+        return r - l + 1
+
+    #   65.35%  O(N)
+    def findUnsortedSubarray(self, nums):
+        if nums is None or len(nums) <= 1:
+            return 0
+        lastInc, incs = nums[0], [False] * len(nums)
+        for i, n in enumerate(nums):
+            if 0 == i:
+                continue
+            if lastInc <= n:
+                incs[i] = True
+                lastInc = n
+        incs[0] = incs[1]
+        l, lNum = -1, sys.maxsize
+        for i, inc in enumerate(incs):
+            if not inc and nums[i] < lNum:
+                l = i
+                lNum = nums[i]
+        if -1 == l:
+            return 0
+        while 0 <= l - 1 and nums[l - 1] > lNum:
+            l -= 1
+        r = -1
+        for i in range(len(incs) - 1, -1, -1):
+            if not incs[i]:
+                r = i
+                break
         return r - l + 1
 
 
