@@ -3,19 +3,13 @@ import sys
 
 
 class Solution:
-    '''
-    def __init__(self):
-        self.result = -1
-        self.coins = []
-    '''
-
     def recur3(self, lastCoinNum, amount, num):
         #print(f'\n{self.coins}, {amount}, {num}')
         for i, c in enumerate(self.coins):
             if i < lastCoinNum or amount < c:
                 continue
             elif amount == c:
-                print(f'matched {num + 1}')
+                print('matched {}'.format(num + 1))
                 if self.result == -1:
                     self.result = num + 1
                 else:
@@ -31,7 +25,7 @@ class Solution:
             if amount < c:
                 continue
             elif amount == c:
-                print(f'matched {num + 1}')
+                print('matched {}'.format(num + 1))
                 if self.result == -1:
                     self.result = num + 1
                 else:
@@ -46,7 +40,7 @@ class Solution:
             if amount < c:
                 continue
             elif amount == c:
-                print(f'matched {num + 1}')
+                print('matched {}'.format(num + 1))
                 if self.result == -1:
                     self.result = num + 1
                 else:
@@ -61,7 +55,7 @@ class Solution:
             if amount < c:
                 continue
             elif amount == c:
-                print(f'matched {num + 1}, {acc + [c]}')
+                print('matched {}, {}'.format(num + 1, acc + [c]))
                 if self.result == -1:
                     self.result = num + 1
                 else:
@@ -132,9 +126,9 @@ class Solution:
             return 0
         return self.coinChangeRe(coins, amount, [0] * amount)
 
-    #   solution #3 from https://leetcode.com/problems/coin-change/solution/
+    #   solution #3 from  https://leetcode.com/problems/coin-change/solution
     #   위의 recursive solution의 대략 2배 속도
-    def coinChange(self, coins, amount):
+    def coinChange0(self, coins, amount):
         _max = amount + 1
         dp = [_max] * (amount + 1)
         dp[0] = 0
@@ -146,31 +140,24 @@ class Solution:
             return -1
         return dp[amount]
 
-    def myCoinChange(self, coins, target):
-        dp = [target + 1] * (target + 1)
+    #   17.63%
+    def coinChange(self, coins, amount):
+        if amount <= 0:
+            return 0
+        dp = [amount + 1] * (amount + 1)
         dp[0] = 0
-        #print(dp)
-
-        for i in range(1, target + 1):
-            #print(dp)
-            for c in coins:
-                if i < c:
+        for i in range(1, len(dp)):
+            for coin in coins:
+                if i < coin:
                     continue
-                num = dp[i - c] + 1
-                #print('dp[{}] = {}\tnum = {}'.format(i - c, dp[i - c], num))
-                if 0 < num:
-                    if 0 == dp[i]:
-                        dp[i] = num
-                    else:
-                        dp[i] = min(dp[i], num)
-        #print(dp)
-        if target < dp[-1]:
+                dp[i] = min(dp[i], dp[i - coin] + 1)
+        if amount < dp[-1]:
             return -1
         return dp[-1]
 
 
+
 s = Solution()
-#   [1], 0의 expected가 왜 0이지?
 data = [([1, 2, 5], 11, 3), ([1, 2, 5], 13, 4), ([2], 3, -1), ([1], 0, 0),
         ([186, 419, 83, 408], 6249, 20), ([470, 35, 120, 81, 121], 9825, 30),
         ([3, 7, 405, 436], 8839, 25), ([190, 80, 457, 111, 240], 6159, 17),
@@ -178,5 +165,5 @@ data = [([1, 2, 5], 11, 3), ([1, 2, 5], 13, 4), ([2], 3, -1), ([1], 0, 0),
         ([235, 326, 180, 11, 61, 483, 464, 125, 403, 241], 5926, 14)
         ]
 for coins, amount, expected in data:
-    real = s.myCoinChange(coins, amount)
-    print(f'coins {coins}, amount {amount}\texpected {expected} real {real} result {expected == real}')
+    real = s.coinChange(coins, amount)
+    print('coins {}, amount {}\texpected {} real {} result {}'.format(coins, amount, expected, real, expected == real))
