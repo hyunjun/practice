@@ -10,8 +10,8 @@ class Solution:
             return None
         row, column = len(matrix), len(matrix[0])
         oup = [[row * column] * column for _ in range(row)]
-        for r in range(row):
-            print(oup[r])
+        #for r in range(row):
+        #    print(oup[r])
         lastZero = row * column
         if 0 == matrix[0][0]:
             lastZero = 0
@@ -37,8 +37,8 @@ class Solution:
                     oup[r][c] = 0
                 else:
                     oup[r][c] = min(oup[r - 1][c] + 1, oup[r][c - 1] + 1, oup[r - 1][c - 1] + 2)
-        for r in range(row):
-            print(oup[r])
+        #for r in range(row):
+        #    print(oup[r])
         lastZero = row - 1 if 0 == matrix[row - 1][column - 1] else row * column
         for r in range(row - 2, -1, -1):
             if 0 == matrix[r][column - 1]:
@@ -74,8 +74,8 @@ class Solution:
                     oup[r][c] = 0
                     continue
                 oup[r][c] = min(oup[r][c], oup[r + 1][c] + 1, oup[r][c - 1] + 1, oup[r + 1][c - 1] + 2)
-        for r in range(row):
-            print(oup[r])
+        #for r in range(row):
+        #    print(oup[r])
         return oup
 
 
@@ -120,19 +120,14 @@ oup4 = [[2, 1, 0, 0, 1, 0, 0, 1, 1, 0],
         [1, 2, 1, 2, 1, 0, 0, 1, 1, 2],
         [0, 1, 0, 1, 1, 0, 1, 2, 2, 3],
         [1, 2, 1, 0, 1, 0, 1, 2, 3, 4]]
-print([[0]] == s.updateMatrix([[0]]))
-print([[1]] == s.updateMatrix([[1]]))
-print([[0, 1]] == s.updateMatrix([[0, 1]]))
-print(oup1 == s.updateMatrix(inp1))
-print(oup2 == s.updateMatrix(inp2))
-print(oup3 == s.updateMatrix(inp3))
-print(oup4 == s.updateMatrix(inp4))
-'''
-0 0 0
-0 1 0
-0 0 0
-
-0 0 0
-0 1 0
-1 1 1
-'''
+data = [([[0]], [[0]]),
+        ([[1]], [[1]]),
+        ([[0, 1]], [[0, 1]]),
+        (inp1, oup1),
+        (inp2, oup2),
+        (inp3, oup3),
+        (inp4, oup4),
+        ]
+for inp, expected in data:
+    real = s.updateMatrix(inp)
+    print(expected == real)
