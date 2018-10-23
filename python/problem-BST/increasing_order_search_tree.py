@@ -1,5 +1,7 @@
 #   https://leetcode.com/problems/increasing-order-search-tree
 
+#   https://leetcode.com/problems/increasing-order-search-tree/solution
+
 
 from TreeNode import TreeNode
 
@@ -8,7 +10,7 @@ class Solution:
     #   Could NOT submit because there is a weird test case such as below;
     #   [379
     #    826]
-    def increasingBST(self, root):
+    def increasingBST0(self, root):
         if root is None:
             return None
         cur, stack, res = root, [], []
@@ -27,6 +29,19 @@ class Solution:
             res[i - 1].left = None
             res[i - 1].right = r
         return res[0]
+
+    def increasingBST(self, root):
+        def inorder(node):
+            if node:
+                yield from inorder(node.left)
+                yield node.val
+                yield from inorder(node.right)
+
+        ans = cur = TreeNode(None)
+        for v in inorder(root):
+            cur.right = TreeNode(v)
+            cur = cur.right
+        return ans.right
 
 
 s = Solution()
