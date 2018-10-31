@@ -1,4 +1,6 @@
-# https://leetcode.com/problems/valid-parentheses
+#   https://leetcode.com/problems/valid-parentheses
+#   https://www.hackerrank.com/challenges/ctci-balanced-brackets/problem
+
 
 class Solution(object):
   def isValid(self, s):
@@ -25,7 +27,18 @@ class Solution(object):
     return True
 
 
-cases = [("[", False), ("]", False), ("()", True), ("()[]{}", True), ("([{}])", True), ("(]", False), ("([)]", False)]
+cases = [("[", False),
+         ("]", False),
+         ("()", True),
+         ("()[]{}", True),
+         ("([{}])", True),
+         ("(]", False),
+         ("([)]", False),
+         ("{[()]}", True),
+         ("{[(])}", False),
+         ("{{[[(())]]}}", True),
+         ]
 s = Solution()
 for case, expected in cases:
-  print('{}\texpected {}\treal {}'.format(case, expected, s.isValid(case)))
+  real = s.isValid(case)
+  print('{}\texpected {}\treal {}\tresult {}'.format(case, expected, real, expected == real))
