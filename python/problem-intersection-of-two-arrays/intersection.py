@@ -1,15 +1,30 @@
 #   https://leetcode.com/problems/intersection-of-two-arrays
-#   71.76%
 
 
 class Solution:
     #   O(n^2)
 
     #   set이나 기타 자료구조 이용
-    def intersection(self, nums1, nums2):
+    #   26.03%
+    def intersection0(self, nums1, nums2):
         return list(set(nums1).intersection(set(nums2)))
 
     #   1. sort & merge sort처럼 비교 O(nlogn + mlogm + n + m)
+    #   55.76%
+    def intersection(self, nums1, nums2):
+        sortedNums1, sortedNums2 = sorted(nums1), sorted(nums2)
+        print(sortedNums1, sortedNums2)
+        i, j, res = 0, 0, set()
+        while i < len(nums1) and j < len(nums2):
+            if sortedNums1[i] == sortedNums2[j]:
+                res.add(sortedNums1[i])
+                i += 1
+                j += 1
+            elif sortedNums1[i] < sortedNums2[j]:
+                i += 1
+            else:
+                j += 1
+        return list(res)
 
     #   2. 한 쪽은 sort & 다른 쪽 순회하면서 binary search O(nlogn + mlogn) = O((n + m)logn)
     #   긴 쪽과 짧은 쪽 중 어느 쪽을 정렬해야 하는가?
@@ -21,5 +36,11 @@ class Solution:
 
 
 s = Solution()
-print(s.intersection([1, 2, 2, 1], [2, 2]))
-print(s.intersection([], [2, 2]))
+data = [([1, 2, 2, 1], [2, 2], [2]),
+        ([], [2, 2], []),
+        ([1], [1, 2], [1]),
+        ([3, 1, 2], [1, 3], [3, 1])
+        ]
+for nums1, nums2, expected in data:
+    real = s.intersection(nums1, nums2)
+    print('{}, {}, expected {}, real {}, result {}'.format(nums1, nums2, expected, real, expected == real))
