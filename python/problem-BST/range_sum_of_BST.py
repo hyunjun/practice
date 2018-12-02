@@ -8,7 +8,7 @@ from TreeNode import TreeNode
 
 class Solution:
     #   540ms, 9.17%
-    def rangeSumBST(self, root, L, R):
+    def rangeSumBST0(self, root, L, R):
         self._sum = 0
         def add(node):
             if node is None:
@@ -19,6 +19,21 @@ class Solution:
             add(node.right)
         add(root)
         return self._sum
+
+    #   572ms, 5.37%
+    def rangeSumBST(self, root, L, R):
+        if root is None:
+            return 0
+        q, _sum = [root], 0
+        while q:
+            n = q.pop(0)
+            if L <= n.val <= R:
+                _sum += n.val
+            if n.left:
+                q.append(n.left)
+            if n.right:
+                q.append(n.right)
+        return _sum
 
 
 s = Solution()
