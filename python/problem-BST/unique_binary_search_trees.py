@@ -3,6 +3,7 @@
 #   https://en.wikipedia.org/wiki/Catalan_number
 #   결과의 갯수가 catalan number
 
+
 from TreeNode import TreeNode
 from collections import defaultdict
 
