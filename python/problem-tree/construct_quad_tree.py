@@ -32,6 +32,7 @@ class Solution:
             else:
                 bottomLeftGrid.append(grid[r][:COL // 2])
                 bottomRightGrid.append(grid[r][COL // 2:])
+        '''
         print('top left')
         for r in range(len(topLeftGrid)):
             print(topLeftGrid[r])
@@ -44,6 +45,7 @@ class Solution:
         print('bottom right')
         for r in range(len(bottomRightGrid)):
             print(bottomRightGrid[r])
+        '''
         return Node(True, False, self.construct(topLeftGrid), self.construct(topRightGrid), self.construct(bottomLeftGrid), self.construct(bottomRightGrid))
 
 
