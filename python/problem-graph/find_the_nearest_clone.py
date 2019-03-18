@@ -3,7 +3,7 @@
 
 from collections import defaultdict
 
-def findShortest(graph_nodes, graph_from, graph_to, ids, val):
+def findShortest0(graph_nodes, graph_from, graph_to, ids, val):
     edgeDict = defaultdict(list)
     for i, src in enumerate(graph_from):
         edgeDict[src].append(graph_to[i])
@@ -32,6 +32,29 @@ def findShortest(graph_nodes, graph_from, graph_to, ids, val):
                 minDist = min(minDist, d + dists[j])
     if minDist == float('inf'):
         return -1
+    return minDist
+
+def findShortest(graph_nodes, graph_from, graph_to, ids, val):
+    edgeDict = defaultdict(list)
+    for i, src in enumerate(graph_from):
+        edgeDict[src].append(graph_to[i])
+        edgeDict[graph_to[i]].append(src)
+    sameValNodes = set()
+    for i, _id in enumerate(ids):
+        if _id == val:
+            sameValNodes.add(i + 1)
+    if len(sameValNodes) < 2:
+        return -1
+    minDist, visited, stack = float('inf'), set(), [(0, None, list(sameValNodes)[0])]
+    while stack:
+        d, p, n = stack.pop()
+        if p is not None and n in sameValNodes:
+            minDist = min(minDist, d)
+        visited.add(n)
+        for neighbor in edgeDict[n]:
+            if neighbor in visited:
+                continue
+            stack.append((d + 1, n if n in sameValNodes else p, neighbor))
     return minDist
 
 
