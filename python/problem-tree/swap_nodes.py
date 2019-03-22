@@ -2,6 +2,7 @@
 
 
 from TreeNode import TreeNode
+#sys.setrecursionlimit(15000)
 
 
 def construct(indexes):
@@ -29,7 +30,7 @@ def inorder(node):
     return res
 
 
-def swapNodes(indexes, queries):
+def swapNodes0(indexes, queries):
     res, head = [], construct(indexes)
     for query in queries:
         q = [(1, head)]
@@ -41,6 +42,20 @@ def swapNodes(indexes, queries):
                 q.append((d + 1, n.left))
             if n.right:
                 q.append((d + 1, n.right))
+        res.append(inorder(head))
+    return res
+
+def swapNodes(indexes, queries):
+    def _swap(n, d, k):
+        if n:
+            if d % k == 0:
+                n.left, n.right = n.right, n.left
+            _swap(n.left, d + 1, k)
+            _swap(n.right, d + 1, k)
+
+    res, head = [], construct(indexes)
+    for query in queries:
+        _swap(head, 1, query)
         res.append(inorder(head))
     return res
 
