@@ -1,6 +1,18 @@
 #   https://leetcode.com/problems/remove-duplicates-from-sorted-list
 #   100.00%
 
+#   https://www.hackerrank.com/challenges/delete-duplicate-value-nodes-from-a-sorted-linked-list
+
+
+def removeDuplicates(head):
+    n = head
+    while n and n.next:
+        if n.data == n.next.data:
+            n.next = n.next.next
+        else:
+            n = n.next
+    return head
+
 
 from ListNode import ListNode
 
