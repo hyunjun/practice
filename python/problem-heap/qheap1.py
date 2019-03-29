@@ -96,6 +96,58 @@ class MinHeap1:
             print(self.heap[1])
 
 
+import heapq
+
+
+#   Timeout for 2/18 test cases
+class MinHeap2:
+    def __init__(self):
+        self.heap = []
+        heapq.heapify(self.heap)
+
+    def add(self, val):
+        heapq.heappush(self.heap, val)
+        print(self.heap)
+
+    def delete(self, val):
+        if len(self.heap) < 1:
+            return
+        tmp = []
+        while self.heap[0] != val:
+            tmp.append(heapq.heappop(self.heap))
+        heapq.heappop(self.heap)
+        for t in tmp:
+            heapq.heappush(self.heap, t)
+        print(self.heap)
+            
+    def print(self):
+        if 0 < len(self.heap):
+            print(self.heap[0])
+
+
+class MinHeap:
+    def __init__(self):
+        self.heap = []
+        heapq.heapify(self.heap)
+
+    def add(self, val):
+        heapq.heappush(self.heap, val)
+
+    def delete(self, val):
+        if len(self.heap) < 1:
+            return
+        idx = self.heap.index(val)
+        if 1 == len(self.heap) or idx == len(self.heap) - 1:
+            self.heap.pop()
+        else:
+            self.heap[idx] = self.heap.pop()
+            heapq.heapify(self.heap)
+            
+    def print(self):
+        if 0 < len(self.heap):
+            print(self.heap[0])
+
+
 s = MinHeap()
 N = int(input())
 while 0 < N:
