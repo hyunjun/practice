@@ -55,7 +55,8 @@ import operator
 
 class MinHeap(Heap):
     def __init__(self):
-        Heap.__init__(self, operator.gt)
+        #Heap.__init__(self, operator.gt)
+        Heap.__init__(self, lambda a, b: a > b)
 
     '''
     def add(self, val):
@@ -92,7 +93,8 @@ class MinHeap(Heap):
 
 class MaxHeap(Heap):
     def __init__(self):
-        Heap.__init__(self, operator.lt)
+        #Heap.__init__(self, operator.lt)
+        Heap.__init__(self, lambda a, b: a < b)
 
     '''
     def add(self, val):
@@ -161,6 +163,9 @@ def runningMedian(a):
 
 
 data = [([12, 4, 5, 3, 8, 7], [12.0, 8.0, 5.0, 4.5, 5.0, 6.0]),
+        ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5]),
+        ([5, 15, 1, 3], [5, 10, 5, 4]),
+        ([1, 2, 3], [1, 1.5, 2]),
         ]
 for a, expected in data:
     real = runningMedian(a)
