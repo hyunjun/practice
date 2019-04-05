@@ -40,7 +40,7 @@ class Solution:
                     ret += 1
         return ret
 
-    #   runtime; 640ms, 5.02%
+    #   runtime; 640ms, 5.02% -> 마지막 bfs에 if 추가 후 500ms, 9.96%
     #   memory; 14MB, 100.00%
     def numEnclaves1(self, A):
         if A is None or 0 == len(A) or 0 == len(A[0]):
@@ -75,6 +75,8 @@ class Solution:
         ret = 0
         for r in range(1, R - 1):
             for c in range(1, C - 1):
+                if 0 == A[r][c]:    #   추가
+                    continue
                 ret += bfs(r, c)
         return ret
 
