@@ -7,7 +7,7 @@ from TreeNode import TreeNode
 class Solution:
     #   runtime; 48ms, 100.00%
     #   memory; 13.4MB, 100.00%
-    def sumRootToLeaf(self, root):
+    def sumRootToLeaf0(self, root):
         if root is None:
             return 0
         q, _sum = [([], root)], 0
@@ -26,6 +26,34 @@ class Solution:
                     if 0 == b:
                         continue
                     _sum += 2 ** (depth - i - 1)
+        return _sum
+
+    #   runtime; 48ms, 100.00%
+    #   memory; 13.4MB, 100.00%
+    def sumRootToLeaf(self, root):
+        if root is None:
+            return 0
+        root.parent = None
+        q, leaves = [root], []
+        while q:
+            n = q.pop(0)
+            if n.left or n.right:
+                if n.left:
+                    n.left.parent = n
+                    q.append(n.left)
+                if n.right:
+                    n.right.parent = n
+                    q.append(n.right)
+            else:
+                leaves.append(n)
+        _sum = 0
+        for leaf in leaves:
+            n, times = leaf, 1
+            while n:
+                if 1 == n.val:
+                    _sum += times
+                times *= 2
+                n = n.parent
         return _sum
 
 
