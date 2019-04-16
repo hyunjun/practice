@@ -7,7 +7,7 @@ from TreeNode import TreeNode
 class Solution:
     #   runtime; 336ms, 5.34%
     #   memory; 13.5MB, 100.00%
-    def recoverFromPreorder(self, S):
+    def recoverFromPreorder0(self, S):
         if S is None or 0 == len(S):
             return None
 
@@ -33,6 +33,33 @@ class Solution:
             return node
 
         return construct(S, 1)
+
+    #   runtime; 80ms, 81.98%
+    #   memory; 13.6MB, 100.00%
+    def recoverFromPreorder(self, S):
+        if S is None or 0 == len(S):
+            return None
+        root, i, d = None, 0, {}
+        while i < len(S):
+            numDashes = 0
+            while i < len(S) and S[i] == '-':
+                numDashes += 1
+                i += 1
+            numDigits = 0
+            while i < len(S) and S[i] != '-':
+                numDigits += 1
+                i += 1
+            n = TreeNode(S[i - numDigits:i])
+            if 0 < numDashes:
+                p = d[numDashes - 1]
+                if p.left is None:
+                    p.left = n
+                else:
+                    p.right = n
+            else:
+                root = n
+            d[numDashes] = n
+        return root
 
 
 s = Solution()
