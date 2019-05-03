@@ -62,7 +62,7 @@ def kruskals1(g_nodes, g_from, g_to, g_weight):
 
 #   Timeout for 2/6
 #   Not kruskal, prim's algorithm
-def kruskals(g_nodes, g_from, g_to, g_weight):
+def kruskals2(g_nodes, g_from, g_to, g_weight):
     vSet, edgeDict = set(), defaultdict(dict)
     for i, weight in enumerate(g_weight):
         edgeDict[g_from[i]][g_to[i]] = weight
@@ -85,6 +85,44 @@ def kruskals(g_nodes, g_from, g_to, g_weight):
         selected[c] = True
         total += edgeDict[r][c]
         edgeNum += 1
+
+    return total
+
+
+def kruskals(g_nodes, g_from, g_to, g_weight):
+    edges = []
+    for i, weight in enumerate(g_weight):
+        edges.append((g_from[i], g_to[i], weight))
+    sortedEdges = sorted(edges, key=lambda t: t[2])
+
+    parent = {i: i for i in range(1, g_nodes + 1)}
+    def getParent(v):
+        p = parent[v]
+        while p != parent[p]:
+            p = parent[p]
+        return p
+
+    def hasCycle(v1, v2):
+        p1, p2 = getParent(v1), getParent(v2)
+        if p1 == p2:
+            return True
+        return False
+
+    def union(v1, v2):
+        p1, p2 = getParent(v1), getParent(v2)
+        if p1 < p2:
+            parent[p2] = p1
+        else:
+            parent[p1] = p2
+
+    numEdges, idx, total = 0, 0, 0
+    while numEdges < g_nodes - 1 and idx < len(edges):
+        src, dst, weight = sortedEdges[idx]
+        if not hasCycle(src, dst):
+            union(src, dst)
+            total += weight
+            numEdges += 1
+        idx += 1
 
     return total
 
