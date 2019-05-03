@@ -26,7 +26,7 @@ from collections import defaultdict
 
 
 #   Wrong Answer for 1/6
-def kruskals(g_nodes, g_from, g_to, g_weight):
+def kruskals1(g_nodes, g_from, g_to, g_weight):
     edges = []
     for i, weight in enumerate(g_weight):
         edges.append((g_from[i], g_to[i], weight))
@@ -56,6 +56,35 @@ def kruskals(g_nodes, g_from, g_to, g_weight):
             connected[s].add(t)
             connected[t].add(s)
         idx += 1
+
+    return total
+
+
+#   Timeout for 2/6
+#   Not kruskal, prim's algorithm
+def kruskals(g_nodes, g_from, g_to, g_weight):
+    vSet, edgeDict = set(), defaultdict(dict)
+    for i, weight in enumerate(g_weight):
+        edgeDict[g_from[i]][g_to[i]] = weight
+        edgeDict[g_to[i]][g_from[i]] = weight
+        vSet.add(g_from[i])
+        vSet.add(g_to[i])
+
+    numV = len(vSet)
+    edgeNum, selected = 1, [False] * (numV + 1)
+    total, selected[1] = 0, True
+    while edgeNum < numV:
+        curMin, r, c = float('inf'), 0, 0
+        for i in range(1, numV + 1):
+            if selected[i]:
+                for j in range(1, numV + 1):
+                    if not selected[j] and i in edgeDict and j in edgeDict[i] and 0 < edgeDict[i][j]:
+                        if edgeDict[i][j] < curMin:
+                            curMin, r, c = edgeDict[i][j], i, j
+        #print('{} - {}: {}'.format(r, c, edgeDict[r][c]))
+        selected[c] = True
+        total += edgeDict[r][c]
+        edgeNum += 1
 
     return total
 
