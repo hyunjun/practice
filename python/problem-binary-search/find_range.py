@@ -1,9 +1,12 @@
 #   https://www.geeksforgeeks.org/amazon-sde-ii-interview-experience
 
 
+#   https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array
+#   runtime; 36ms, 98.94%
+#   memory; 13.8MB, 5.06%
 def find_range(nums, k):
     if nums is None or 0 == len(nums):
-        return [None, None]
+        return [-1, -1]
 
     def lower_bound():
         l, r = 0, len(nums) - 1
