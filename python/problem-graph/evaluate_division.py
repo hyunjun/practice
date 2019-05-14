@@ -5,6 +5,8 @@ from collections import defaultdict
 
 
 class Solution:
+    #   runtime; 52ms, 9.89%
+    #   memory; 13.3MB, 5.35MB
     def calcEquation(self, equations, values, queries):
         if equations is None or 0 == len(equations) or values is None or 0 == len(values) or queries is None or 0 == len(queries):
             return []
