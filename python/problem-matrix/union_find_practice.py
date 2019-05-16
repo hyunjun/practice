@@ -32,12 +32,9 @@ def number_of_largest_contiguous_block(grid):
             union(0, c, 0, c - 1)
     for r in range(1, R):
         for c in range(1, C):
-            if grid[r][c] == grid[r - 1][c] == grid[r][c - 1]:
+            if grid[r][c] == grid[r][c - 1]:
                 union(r, c, r, c - 1)
-                union(r, c, r - 1, c)
-            elif grid[r][c] == grid[r][c - 1]:
-                union(r, c, r, c - 1)
-            elif grid[r][c] == grid[r - 1][c]:
+            if grid[r][c] == grid[r - 1][c]:
                 union(r, c, r - 1, c)
     d = defaultdict(int)
     #for r in range(R):
