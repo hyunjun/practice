@@ -40,8 +40,7 @@ def reorder(head):
     i1, i2, c = 0, len(l) - 1, head
     for i in range(len(l)):
         if i % 2 == 0:
-            if 0 < i:
-                c.val = l[i1]
+            c.val = l[i1]
             i1 += 1
         else:
             c.val = l[i2]
