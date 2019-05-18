@@ -1,5 +1,7 @@
 #   https://leetcode.com/problems/insert-interval
 
+#   https://leetcode.com/problems/insert-interval/discuss/21753/O(n)-Python-solution
+
 
 class Solution:
     #   runtime; 44ms, 98.47%
