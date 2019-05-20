@@ -2,8 +2,9 @@
 
 
 class Solution:
-    #   runtime; 844ms, 9.12%
-    #   memory; 15MB, 50.86%
+    #   recur 호출 전 length check if 추가로 속도 대폭 향상
+    #   runtime; 844ms, 9.12% -> 144ms, 76.76%
+    #   memory; 15MB, 50.86% -> 14.9MB, 76.47%
     def combine(self, n, k):
         if n == 0 or k == 0:
             return []
@@ -15,7 +16,8 @@ class Solution:
             else:
                 for i, c in enumerate(cur):
                     prev.append(c)
-                    recur(prev[:], cur[i + 1:])
+                    if k <= len(prev) + len(cur[i + 1:]):
+                        recur(prev[:], cur[i + 1:])
                     prev.pop()
         recur([], [i for i in range(1, n + 1)])
         return self.res
