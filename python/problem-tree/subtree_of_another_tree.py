@@ -117,8 +117,10 @@ class Solution:
                     return False
         return True
 
-    #   68.98%
-    def isSubtree(self, s, t):
+    #   isSame 호출 전에 cur.val == t.val 비교를 추가했더니 오히려 느려짐
+    #   runtime; 212ms -> 260ms, 71.67%
+    #   memory; 14MB, 81.07%
+    def isSubtree3(self, s, t):
         def isSame(l, r):
             if not l and not r:
                 return True
@@ -135,56 +137,82 @@ class Solution:
                 cur = cur.left
             else:
                 cur = stack.pop()
-                if isSame(cur, t):
+                if cur.val == t.val and isSame(cur, t):
                     return True
                 cur = cur.right
         return False
 
+    #   runtime; 108ms, 85.28%
+    #   memory; 14.8MB, 7.33%
+    def isSubtree(self, s, t):
+        def preorder(n):
+            if n is None:
+                return ''
+            return '{},{},{}'.format(n.val, preorder(n.left), preorder(n.right))
+        def inorder(n):
+            if n is None:
+                return ''
+            return '{},{},{}'.format(inorder(n.left), n.val, inorder(n.right))
+        def postorder(n):
+            if n is None:
+                return ''
+            return '{},{},{}'.format(postorder(n.left), postorder(n.right), n.val)
+
+        preS, preT = preorder(s), preorder(t)
+        inS, inT = inorder(s), inorder(t)
+        postS, postT = postorder(s), postorder(t)
+
+        return preT in preS and inT in inS and postT in postS
 
 
 solution = Solution()
 
-s = TreeNode(3)
-s.left = TreeNode(4)
-s.right = TreeNode(5)
-s.left.left = TreeNode(1)
-s.left.right = TreeNode(2)
-t = TreeNode(4)
-t.left = TreeNode(1)
-t.right = TreeNode(2)
-print(solution.isSubtree(s, t)) #   True
+s1 = TreeNode(3)
+s1.left = TreeNode(4)
+s1.right = TreeNode(5)
+s1.left.left = TreeNode(1)
+s1.left.right = TreeNode(2)
+t1 = TreeNode(4)
+t1.left = TreeNode(1)
+t1.right = TreeNode(2)
 
-s = TreeNode(3)
-s.left = TreeNode(4)
-s.right = TreeNode(5)
-s.left.left = TreeNode(1)
-s.left.right = TreeNode(2)
-s.left.right.left = TreeNode(0)
-print(solution.isSubtree(s, t)) #   False
+s2 = TreeNode(3)
+s2.left = TreeNode(4)
+s2.right = TreeNode(5)
+s2.left.left = TreeNode(1)
+s2.left.right = TreeNode(2)
+s2.left.right.left = TreeNode(0)
 
-s = TreeNode(3)
-s.left = TreeNode(4)
-s.right = TreeNode(5)
-s.left.left = TreeNode(1)
-s.left.right = TreeNode(2)
-s.left.left.left = TreeNode(0)
-print(solution.isSubtree(s, t)) #   False
+s3 = TreeNode(3)
+s3.left = TreeNode(4)
+s3.right = TreeNode(5)
+s3.left.left = TreeNode(1)
+s3.left.right = TreeNode(2)
+s3.left.left.left = TreeNode(0)
 
-s = TreeNode(1)
-t = TreeNode(0)
-print(solution.isSubtree(s, t)) #   False
+s4 = TreeNode(1)
+t2 = TreeNode(0)
 
-s = TreeNode(1)
-s.left = TreeNode(1)
-t = TreeNode(1)
-print(solution.isSubtree(s, t)) #   True
+s5 = TreeNode(1)
+s5.left = TreeNode(1)
+t3 = TreeNode(1)
 
-s = TreeNode(1)
-s.left = TreeNode(2)
-s.right = TreeNode(3)
-t = TreeNode(1)
-t.left = TreeNode(2)
-print(solution.isSubtree(s, t)) #   False
+s6 = TreeNode(1)
+s6.left = TreeNode(2)
+s6.right = TreeNode(3)
+t4 = TreeNode(1)
+t4.left = TreeNode(2)
+
+data = [(s1, t1, True),
+        (s2, t1, False),
+        (s3, t1, False),
+        (s4, t2, False),
+        (s5, t3, True),
+        (s6, t4, False),
+        ]
+for s, t, expected in data:
+    real = solution.isSubtree(s, t)
+    print('{}, {}, expected {}, real {}, result {}'.format(s, t, expected, real, expected == real))
 
 #[1,null,1,null,1,null,1,null,1,null,1,null,1,null,1,null,1,null,1,null,1,2]
 #[1,null,1,null,1,null,1,null,1,null,1,2]
