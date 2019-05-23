@@ -19,6 +19,9 @@ def closest_higher_temperatures(temps):
 
 
 data = [([73, 74, 75, 71, 69, 72, 76, 73], [1, 1, 4, 2, 1, 1, 0, 0]),
+        ([1, 2, 3, 4, 5], [1, 1, 1, 1, 0]),
+        ([5, 4, 3, 2, 1], [0, 0, 0, 0, 0]),
+        ([], []),
         ]
 for temperatures, expected in data:
     real = closest_higher_temperatures(temperatures)
