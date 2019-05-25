@@ -1,5 +1,4 @@
 #   https://leetcode.com/problems/reverse-linked-list
-#   68.56%
 
 #   https://leetcode.com/problems/reverse-linked-list/solution
 
@@ -8,7 +7,8 @@ from ListNode import ListNode
 
 
 class Solution:
-    def reverseList(self, head):
+    #   68.56%
+    def reverseList0(self, head):
         stack, cur = [], head
         while cur:
             stack.append(cur)
@@ -24,6 +24,34 @@ class Solution:
         if cur:
             cur.next = None
         return head
+
+    #   runtime; 28ms, 99.98%
+    #   memory; 14.5MB, 45.42%
+    def reverseList1(self, head):
+        stack, cur = [], head
+        while cur:
+            stack.append(cur.val)
+            cur = cur.next
+        cur = head
+        while stack:
+            cur.val = stack.pop()
+            cur = cur.next
+        return head
+
+    #   runtime; 56ms, 17.87%
+    #   memory; 20.4MB, 5.05%
+    def reverseList(self, head):
+        if head is None:
+            return head
+        def reverse(node):
+            if node.next is None:
+                return node, node
+            h, prev = reverse(node.next)
+            prev.next = node
+            return h, node
+        newHead, last = reverse(head)
+        last.next = None
+        return newHead
 
 
 s = Solution()
