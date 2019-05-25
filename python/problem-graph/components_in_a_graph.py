@@ -5,7 +5,7 @@ from collections import defaultdict
 
 
 #   Timeout for 1/39
-def componentsInGraph(gb):
+def componentsInGraph0(gb):
     edgeDict, nodeSet = defaultdict(list), set()
     for s, e in gb:
         edgeDict[s].append(e)
@@ -35,6 +35,35 @@ def componentsInGraph(gb):
         maxCnt = max(maxCnt, cnt)
         visited = visited.union(curVisited)
     return [minCnt, maxCnt]
+
+
+def componentsInGraph(gb):
+    nodeSet = set()
+    for s, e in gb:
+        nodeSet.add(s)
+        nodeSet.add(e)
+
+    parentDict = {n: n for n in nodeSet}
+    def getParent(n):
+        p = n
+        while p != parentDict[p]:
+            p = parentDict[p]
+        return p
+    def union(a, b):
+        if a < b:
+            parentDict[b] = a
+        elif b < a:
+            parentDict[a] = b
+
+    for s, e in gb:
+        ps, pe = getParent(s), getParent(e)
+        if ps != pe:
+            union(ps, pe)
+
+    pCount = defaultdict(int)
+    for p in parentDict.values():
+        pCount[getParent(p)] += 1
+    return [min(pCount.values()), max(pCount.values())]
 
 
 data = [([[1, 6], [2, 7], [3, 8], [4, 9], [2, 6]], [2, 4])]
