@@ -1,5 +1,7 @@
 #   https://www.hackerrank.com/challenges/ctci-is-binary-search-tree
 
+#   http://www.ardendertat.com/2011/10/10/programming-interview-questions-7-binary-search-tree-check
+
 
 def checkBST(root):
     
