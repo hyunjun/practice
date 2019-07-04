@@ -30,6 +30,16 @@ class Solution:
 
 s = Solution()
 
+'''
+          _______1_______                    1
+         /               \                  / \
+       _2_              __3__              2   3
+      /   \            /      \           /     \
+     4    -99       -99      _7_         4       7
+    / \   /  \     /   \    /   \       / \       \
+   8   9 -99 -99   12  13  -99  14     8   9       14
+limit 1
+'''
 root1 = TreeNode(1)
 root1.left = TreeNode(2)
 root1.right = TreeNode(3)
@@ -47,6 +57,16 @@ root1.right.right.left = TreeNode(-99)
 root1.right.right.right = TreeNode(14)
 print(s.sufficientSubset(root1, 1))
 
+'''
+          _5_                  _5_
+         /   \                /   \
+        4    8               4    8
+       /    / \             /    / \
+      11  17   4           11   17  4
+     / \      / \         /        /
+    7  1     5   3       7        5
+limit 22
+'''
 root2 = TreeNode(5)
 root2.left = TreeNode(4)
 root2.right = TreeNode(8)
@@ -59,6 +79,14 @@ root2.right.right.left = TreeNode(5)
 root2.right.right.right = TreeNode(3)
 print(s.sufficientSubset(root2, 22))
 
+'''
+       1      1
+      / \      \
+     2  -3     -3
+    /   /      /
+   -5  4      4
+limit -1
+'''
 root3 = TreeNode(1)
 root3.left = TreeNode(2)
 root3.right = TreeNode(-3)
