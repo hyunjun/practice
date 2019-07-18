@@ -37,13 +37,32 @@ class Solution:
 
 
 s = Solution()
+'''
+    1
+   / \
+  2   3
+'''
 root1 = TreeNode(1)
 root1.left = TreeNode(2)
 root1.right = TreeNode(3)
+'''
+    1
+   / \
+  2   3
+ /
+4
+'''
 root2 = TreeNode(1)
 root2.left = TreeNode(2)
 root2.right = TreeNode(3)
 root2.left.left = TreeNode(4)
+'''
+    1
+   / \
+  2   3
+ / \
+4  5
+'''
 root3 = TreeNode(1)
 root3.left = TreeNode(2)
 root3.right = TreeNode(3)
