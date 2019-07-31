@@ -56,7 +56,7 @@ class Solution:
 
     #   runtime; 76ms, 59.26%
     #   memory; 13.9MB, 100.00%
-    def addNegabinary(self, arr1: List[int], arr2: List[int]) -> List[int]:
+    def addNegabinary1(self, arr1: List[int], arr2: List[int]) -> List[int]:
         if arr1 == [0]:
             return arr2
         if arr2 == [0]:
@@ -101,6 +101,49 @@ class Solution:
         #print(f'{l}, {s}, {a1}, {a2}, {sArr}')
         return sArr[::-1]
 
+    #   runtime; 68ms, 86.67%
+    #   memory; 13.9MB, 100.00%
+    def addNegabinary(self, arr1: List[int], arr2: List[int]) -> List[int]:
+        if arr1 == [0]:
+            return arr2
+        if arr2 == [0]:
+            return arr1
+        l1, l2 = len(arr1), len(arr2)
+        if l1 < l2:
+            l, s = arr2, arr1
+        else:
+            l, s = arr1, arr2
+        ll, ls = len(l), len(s)
+        a1, a2, sArr = [0] * (ll + 2), [0] * (ll + 2), [0] * (ll + 2)
+        j = 0
+        for i in range(ll - 1, -1, -1):
+            a1[j] = l[i]
+            j += 1
+        j = 0
+        for i in range(ls - 1, -1, -1):
+            a2[j] = s[i]
+            j += 1
+        for i in range(ll + 2):
+            _sum = sum([a1[i], a2[i], sArr[i]])
+            if _sum == 0:
+                continue
+            if _sum == 1:
+                sArr[i] = 1
+                continue
+            if _sum == 2:
+                sArr[i] = 0
+            elif _sum == 3:
+                sArr[i] = 1
+            if sArr[i + 1] == 1:
+                sArr[i + 1] = 0
+            else:
+                sArr[i + 1] = 1
+                sArr[i + 2] += 1
+        i = ll + 1
+        while 1 < len(sArr) and sArr[i] == 0:
+            sArr.pop()
+            i -= 1
+        return sArr[::-1]
 
 s = Solution()
 data = [([1, 1, 1, 1, 1], [1, 0, 1], [1, 0, 0, 0, 0]),
