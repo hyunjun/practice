@@ -29,7 +29,7 @@ class Solution:
         return maxArea
 
     #   72.15%
-    def maxAreaOfIsland(self, grid):
+    def maxAreaOfIsland1(self, grid):
         if grid is None or 0 == len(grid) or grid[0] is None or 0 == len(grid[0]):
             return 0
         row, column = len(grid), len(grid[0])
@@ -74,6 +74,27 @@ class Solution:
         if 0 == len(countDict.values()):
             return 0
         return max([v for v in countDict.values()])
+
+    #   runtime; 132ms, 47.81%
+    #   memory; 15.5MB, 5.88%
+    def maxAreaOfIsland(self, grid):
+        if grid is None or 0 == len(grid) or grid[0] is None or 0 == len(grid[0]):
+            return 0
+        maxArea, row, column = 0, len(grid), len(grid[0])
+
+        def getArea(r, c):
+            if r < 0 or row <= r or c < 0 or column <= c or 0 == grid[r][c]:
+                return 0
+            grid[r][c] = 0
+            return 1 + sum([getArea(nr, nc) for nr, nc in [(r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)]])
+
+        for r in range(row):
+            for c in range(column):
+                if 0 == grid[r][c]:
+                    continue
+                maxArea = max(maxArea, getArea(r, c))
+
+        return maxArea
 
 
 s = Solution()
