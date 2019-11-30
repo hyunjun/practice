@@ -1,12 +1,12 @@
 #   https://leetcode.com/problems/validate-binary-search-tree
-#   51.98%
 
 
 from TreeNode import TreeNode
 
 
 class Solution(object):
-    def isValidBST(self, root):
+    #   runtime; 69ms, 51.98%
+    def isValidBST0(self, root):
         """
         :type root: TreeNode
         :rtype: bool
@@ -29,28 +29,63 @@ class Solution(object):
         return True
 
     _MIN, _MAX = -99999999, 99999999
-    def isValidBST2(self, root):
+    def isValidBST1(self, root):
         def isValidBSTRecur(node, _min, _max):
             if node is None:
                 return True
             lResult = True
             if node.left is not None:
-                print(node.left.val, node.val, _max)
                 if node.left.val < node.val < _max:
                     lResult = isValidBSTRecur(node.left, Solution._MIN, node.val)
                 else:
                     return False
             rResult = True
             if node.right is not None:
-                print(_min, node.val, node.right.val)
                 if _min < node.val < node.right.val:
                     rResult = isValidBSTRecur(node.right, node.val, Solution._MAX)
                 else:
                     return False
-            print('l result {}\tr result {}\tl result and r result {}'.format(lResult, rResult, lResult and rResult))
             return lResult and rResult
 
         return isValidBSTRecur(root, Solution._MIN, Solution._MAX)
+
+    #   runtime; 28ms, 94.05%
+    #   memory; 16.5MB, 50.94%
+    def isValidBST2(self, root):
+
+        def _isBST(node, _min, _max):
+            if node is None:
+                return True
+            if not (_min < node.val < _max):
+                return False
+            if node.left and node.left.val >= node.val:
+                return False
+            if node.right and node.val >= node.right.val:
+                return False
+            return _isBST(node.left, _min, node.val) and _isBST(node.right, node.val, _max)
+
+        return _isBST(root, -float('inf'), float('inf'))
+
+    #   runtime; 40ms, 31.90%
+    #   memory; 16.1MB, 100.00%
+    def isValidBST(self, root):
+        if root is None:
+            return True
+
+        q = [(root, -float('inf'), float('inf'))]
+        while q:
+            node, _min, _max = q.pop(0)
+            if not (_min < node.val < _max):
+                return False
+            if node.left:
+                if node.left.val >= node.val:
+                    return False
+                q.append((node.left, _min, node.val))
+            if node.right:
+                if node.val >= node.right.val:
+                    return False
+                q.append((node.right, node.val, _max))
+        return True
 
 
 s = Solution()
@@ -77,6 +112,11 @@ root3.right = TreeNode(15)
 root3.right.left = TreeNode(6)
 root3.right.right = TreeNode(20)
 
-roots = [root0, root1, root2, root3]
-for root in roots:
-  print(s.isValidBST(root), s.isValidBST2(root))
+data = [(root0, True),
+        (root1, False),
+        (root2, True),
+        (root3, False),
+        ]
+for root, expected in data:
+  real = s.isValidBST(root)
+  print(f'{root}, expected {expected}, real {real}, result {expected == real}')
