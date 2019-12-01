@@ -3,7 +3,7 @@
 
 class Solution(object):
     #   98.02%
-    def exist(self, board, word):
+    def exist0(self, board, word):
         """
         :type board: List[List[str]]
         :type word: str
@@ -14,7 +14,7 @@ class Solution(object):
                 return False
             visited[r][c] = 1
             #print('visited[{}][{}] = {}\tboard[{}][{}] = {} from {}'.format(r, c, visited[r][c], r, c, board[r][c], s))
-            print('board = {}\tboard[{}][{}] = {} from {}'.format(board, r, c, board[r][c], s))
+            #print('board = {}\tboard[{}][{}] = {} from {}'.format(board, r, c, board[r][c], s))
             if 1 == len(s):
                 return True
             if 0 < r:
@@ -51,23 +51,98 @@ class Solution(object):
                         return result
         return False
 
+    #   runtime; 360ms, 68.70%
+    #   memory; 14.6MB, 31.91%
+    def exist1(self, board, word):
 
-board = [ ['A','B','C','E'],
+        R, C = len(board), len(board[0])
+
+        def isValid(r, c, visited):
+            if r < 0 or R <= r or c < 0 or C <= c or (r, c) in visited:
+                return False
+            return True
+
+        def isIncluded(w, visited, r, c):
+            visited.add((r, c))
+            if 0 == len(w):
+                return True
+            for nr, nc in [(r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)]:
+                if isValid(nr, nc, visited) and w[0] == board[nr][nc]:
+                    if isIncluded(w[1:], visited, nr, nc):
+                        return True
+                    visited.remove((nr, nc))
+            return False
+
+        for r in range(R):
+            for c in range(C):
+                if word[0] == board[r][c]:
+                    if isIncluded(word[1:], set(), r, c):
+                        return True
+        return False
+
+    #   위의 code에서 visited만 set 대신 2d list 사용
+    #   runtime; 348ms, 74.81%
+    #   memory; 14.5MB, 31.91%
+    def exist(self, board, word):
+
+        R, C = len(board), len(board[0])
+        visited = [[False] * C for _ in range(R)]
+
+        def isValid(r, c):
+            if r < 0 or R <= r or c < 0 or C <= c or visited[r][c]:
+                return False
+            return True
+
+        def isIncluded(w, r, c):
+            visited[r][c] = True
+            if 0 == len(w):
+                return True
+            for nr, nc in [(r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)]:
+                if isValid(nr, nc) and w[0] == board[nr][nc]:
+                    if isIncluded(w[1:], nr, nc):
+                        return True
+            visited[r][c] = False
+            return False
+
+        for r in range(R):
+            for c in range(C):
+                if word[0] == board[r][c]:
+                    if isIncluded(word[1:], r, c):
+                        return True
+        return False
+
+
+board0 = [['A','B','C','E'],
           ['S','F','C','S'],
-          ['A','D','E','E'] ]
-data = [("ABCCED", True), ("SEE", True), ("ABCB", False)]
+          ['A','D','E','E']
+          ]
+board1 = [['A', 'B', 'C', 'E'],
+          ['S', 'F', 'E', 'S'],
+          ['A', 'D', 'E', 'E']
+          ]
+board2 = [["a","a","a","a"],
+          ["a","a","a","a"],
+          ["a","a","a","a"],
+          ["a","a","a","a"],
+          ["a","a","a","b"],
+          ]
+board3 = [["C","A","A"],
+          ["A","A","A"],
+          ["B","C","D"]
+          ]
+data = [(board0, "ABCCED", True),
+        (board0, "SEE", True),
+        (board0, "ABCB", False),
+        (board1, "ABCESEEEFS", True),
+        (board2, "aaaaaaaaaaaaaaaaaaaa", False),
+        (board3, "AAB", True),
+        ]
 s = Solution()
-for word, expected in data:
+for board, word, expected in data:
+    for b in board:
+        print(b)
     real = s.exist(board, word)
-    print('word {}\texpected {}\treal {}\tresult {}'.format(word, expected, real, expected == real))
-
-board2 = [ ['A', 'B', 'C', 'E'],
-           ['S', 'F', 'E', 'S'],
-           ['A', 'D', 'E', 'E'] ]
-data = [("ABCESEEEFS", True)]
-for word, expected in data:
-    real = s.exist(board2, word)
-    print('word {}\texpected {}\treal {}\tresult {}'.format(word, expected, real, expected == real))
+    print(f'{word}, expected {expected}, real {real}, result {expected == real}')
 
 
 '''
