@@ -99,7 +99,7 @@ class Solution(object):
 
     #   runtime; 124ms, 24.06%
     #   memory; 12.3MB, 100.00%
-    def maxScoreWords(self, words, letters, score):
+    def maxScoreWords3(self, words, letters, score):
 
         def getScore(word):
             return sum([score[ord(c) - ord('a')] for c in word])
@@ -123,6 +123,43 @@ class Solution(object):
                 acc += score
                 accWordCntDict[word] += 1
                 curSum = max(acc, getMaxSum(cntDict - wordCntDict, wordScores[:i] + wordScores[i + 1:], accWordCntDict, acc))
+                subSum = max(subSum, curSum)
+                acc -= score
+                accWordCntDict[word] -= 1
+            self._memo[keywords] = subSum
+            return subSum
+
+        return getMaxSum(Counter(letters), [(w, wcDict, s) for w, wcDict, s in wordScores if 0 < s], Counter(), 0)
+
+    #   runtime; 52ms, 67.35%
+    #   memory; 12MB, 100.00%
+    def maxScoreWords(self, words, letters, score):
+
+        def getScore(word):
+            return sum([score[ord(c) - ord('a')] for c in word])
+
+        def isIncluded(totalCountDict, wordCountDict):
+            for c, cnt in wordCountDict.items():
+                if totalCountDict[c] < cnt:
+                    return False
+            return True
+
+        self._sum, self._memo, wordScores = 0, {}, sorted([(word, Counter(word), getScore(word)) for word in words], key=lambda t: t[2], reverse=True)
+
+        def getMaxSum(cntDict, wordScores, accWordCntDict, acc):
+            candidates = [(word, wordCntDict, score) for word, wordCntDict, score in wordScores if isIncluded(cntDict, wordCntDict)]
+
+            keywordSet = set([w for w, c in accWordCntDict.items() if 0 < c])
+            [keywordSet.add(w) for w, _, _ in candidates]
+            keywords = ' '.join(sorted(keywordSet))
+            if keywords in self._memo:
+                return self._memo[keywords]
+
+            subSum = acc
+            for i, (word, wordCntDict, score) in enumerate(candidates):
+                acc += score
+                accWordCntDict[word] += 1
+                curSum = max(acc, getMaxSum(cntDict - wordCntDict, candidates[:i] + candidates[i + 1:], accWordCntDict, acc))
                 subSum = max(subSum, curSum)
                 acc -= score
                 accWordCntDict[word] -= 1
