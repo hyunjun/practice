@@ -1,6 +1,7 @@
 #   https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii
 
 #   https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/discuss/447282/Simple-Python-Solution-using-Stack
+#   https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/discuss/393118/Two-Solutions-in-Python-3-(With-and-Without-Stack)
 
 
 class Solution:
@@ -42,7 +43,7 @@ class Solution:
 
     #   runtime; 1308ms, 5.02%
     #   memory; 13.7MB, 100.00%
-    def removeDuplicates(self, s: str, k: int) -> str:
+    def removeDuplicates2(self, s: str, k: int) -> str:
         if s is None or not (1 <= len(s) <= 10 ** 5) or not (2 <= k <= 10 ** 4):
             return ''
 
@@ -55,6 +56,22 @@ class Solution:
         if k <= len(stack) and all(stack[-1] == stack[i] for i in range(len(stack) - k, len(stack))):
             [stack.pop() for _ in range(k)]
         return ''.join(stack)
+
+    #   runtime; 100ms, 37.80%
+    #   memory; 14.4MB, 100.00%
+    def removeDuplicates(self, s: str, k: int) -> str:
+        if s is None or not (1 <= len(s) <= 10 ** 5) or not (2 <= k <= 10 ** 4):
+            return ''
+
+        stack = []
+        for c in s:
+            if 0 < len(stack) and stack[-1][0] == c:
+                stack[-1][1] += 1
+            else:
+                stack.append([c, 1])
+            while 0 < len(stack) and stack[-1][1] == k:
+                stack.pop()
+        return ''.join([ch * cnt for ch, cnt in stack])
 
 
 solution = Solution()
@@ -70,10 +87,3 @@ for s, k, expected in data:
         print(f'{s[:20]}..., {k}, expected {expected[:20]}..., real {real[:20]}..., result {expected == real}')
     else:
         print(f'{s}, {k}, expected {expected}, real {real}, result {expected == real}')
-'''
-    d eee d bb ccc bdaa
-    d ___ d bb ccc bdaa
-    d ___ d bb ___ bdaa
-    d ___ d __ ___ _daa
-    _ ___ _ __ ___ __aa
-'''
