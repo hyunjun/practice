@@ -2,6 +2,7 @@
 
 
 from TreeNode import TreeNode
+from collections import defaultdict
 
 
 class Solution:
@@ -46,7 +47,7 @@ class Solution:
 
     #   runtime; 100ms, 48.64%
     #   memory; 16.1MB, 100.00%
-    def deepestLeavesSum(self, root: TreeNode) -> int:
+    def deepestLeavesSum2(self, root: TreeNode) -> int:
         if root is None:
             return 0
         self.res, self.maxDepth = 0, 0
@@ -62,6 +63,22 @@ class Solution:
                 inorder(node.right, depth + 1)
         inorder(root, 0)
         return self.res
+
+    #   runtime; 92ms, 75.37%
+    #   memory; 16.2MB, 100.00%
+    def deepestLeavesSum(self, root: TreeNode) -> int:
+        if root is None:
+            return 0
+        d, q = defaultdict(int), [(0, root)]
+        while q:
+            depth, n = q.pop(0)
+            if n.left is None and n.right is None:
+                d[depth] += n.val
+            if n.left:
+                q.append((depth + 1, n.left))
+            if n.right:
+                q.append((depth + 1, n.right))
+        return sorted(d.items(), key=lambda t: t[0])[-1][1]
 
 
 s = Solution()
