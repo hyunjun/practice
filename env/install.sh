@@ -14,3 +14,5 @@ sudo xattr -dr com.apple.quarantine /Applications/Dropbox.app
 sudo xattr -dr com.apple.quarantine /Applications/Calendars.app
 sudo xattr -dr com.apple.quarantine /Applications/LINE.app
 sudo xattr -dr com.apple.quarantine /Applications/KakaoTalk.app
+sudo xattr -dr com.apple.quarantine /Applications/JetBrains\ Toolbox.app
+sudo xattr -dr com.apple.quarantine /Applications/Docker.app

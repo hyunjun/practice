@@ -31,6 +31,8 @@ cask "appcleaner"
 cask "spectacle"
 cask "dropbox"
 #cask "onedrive"
+cask "jetbrains-toolbox"
+cask "docker-toolbox"
 mas "Xcode", id: 497799835
 mas "Calendar", id: 415181149
 mas "LINE", id: 539883307
