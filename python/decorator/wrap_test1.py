@@ -8,12 +8,12 @@ from unittest import TestCase
 from functools import wraps
 
 def specialTest(fn):
-	@wraps(fn)
-	def test_wrapper(self,*args,**kwargs):
-		pass
-	return test_wrapper
+    @wraps(fn)
+    def test_wrapper(self,*args,**kwargs):
+        pass
+    return test_wrapper
 
 class Test_special_stuff(TestCase):
-	@specialTest
-	def test_something_special(self):
-		pass
+    @specialTest
+    def test_something_special(self):
+        pass
