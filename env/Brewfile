@@ -1,9 +1,12 @@
-tap "caskroom/fonts"
+tap "homebrew/cask-fonts"	#	test 더 필요
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
+#tap "homebrew/nodejs"
+tap "homebrew/neovim"
 #tap "mongodb/brew"
+
 brew "ffmpeg"
 brew "git"
 brew "git-lfs"
@@ -14,13 +17,14 @@ brew "node"
 brew "p7zip"
 brew "sbt"
 #brew "tcl-tk"
-brew "zsh"
+#brew "zsh"	#	Catalina는 default zsh
 brew "zsh-completions"
 brew "mas"
 #brew "mongodb/brew/mongodb-community"
+
 cask "anaconda"
 #cask "dbeaver-community"
-cask "font-hack-nerd-font"
+#cask "font-hack-nerd-font"	#	failed
 cask "iterm2"
 cask "keepingyouawake"
 #cask "powershell"
