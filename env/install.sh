@@ -15,8 +15,7 @@ sudo xattr -dr com.apple.quarantine /Applications/CalendarFree.app
 sudo xattr -dr com.apple.quarantine /Applications/LINE.app
 sudo xattr -dr com.apple.quarantine /Applications/KakaoTalk.app
 sudo xattr -dr com.apple.quarantine /Applications/JetBrains\ Toolbox.app
-sudo xattr -dr com.apple.quarantine /Applications/Docker/Docker\ Quickstart\ Terminal.app
-sudo xattr -dr com.apple.quarantine /Applications/Docker/Kitematic.app
+sudo xattr -dr com.apple.quarantine /Applications/Docker.app
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
