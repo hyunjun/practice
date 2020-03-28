@@ -19,16 +19,20 @@ class Solution:
                 result[i] = cnt
         return result
 
-    #   runtime; 56ms, 72.91%
-    #   memory; 14.1MB, 100.00%
+    #   runtime; 56ms, 72.91% -> 52ms, 88.07%
+    #   memory; 14.1MB, 100.00% -> 14MB, 100.00%
+    #   실수로 사용했던 max 함수 제거 후 조금 더 향상
     def smallerNumbersThanCurrent(self, nums: List[int]) -> List[int]:
         if nums is None or not (2 <= len(nums) <= 500):
             return []
-        counts, result = [0] * 102, [None] * len(nums)
+        counts, result, maxRange = [0] * 102, [None] * len(nums), nums[0]
         for n in nums:
             counts[n] += 1
+            if maxRange < n:
+                maxRange = n
+        maxRange += 1
         prev = 0
-        for i, c in enumerate(counts[:max(nums) + 1]):
+        for i, c in enumerate(counts[:maxRange]):
             counts[i] = prev
             prev += c
         for i, n in enumerate(nums):
