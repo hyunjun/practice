@@ -7,7 +7,7 @@ from typing import List
 class Solution:
     #   runtime; 2268ms, 13.01%
     #   memory; 13.8MB, 100.00%
-    def numTeams(self, rating: List[int]) -> int:
+    def numTeams0(self, rating: List[int]) -> int:
         if rating is None or not (1 <= len(rating) <= 10 ** 5):
             return 0
 
@@ -44,6 +44,31 @@ class Solution:
                 self.cnt += 1
                 return
             for i in range(s, len(rating)):
+                if 0 == len(acc) or op(acc[-1], rating[i]):
+                    acc.append(rating[i])
+                    accFunc(acc, i + 1, op)
+                    acc.pop()
+
+        accFunc([], 0, lambda a, b: a < b)
+        accFunc([], 0, lambda a, b: a > b)
+
+        return self.cnt
+
+    #   runtime; 2320ms, 11.88%
+    #   memory; 14.1MB, 100.00%
+    def numTeams(self, rating: List[int]) -> int:
+        if rating is None or not (1 <= len(rating) <= 10 ** 5):
+            return 0
+
+        self.cnt, ratingLen = 0, len(rating)
+
+        def accFunc(acc, s, op):
+            if len(acc) == 3:
+                self.cnt += 1
+                return
+            if s == ratingLen - 2 + len(acc):
+                return
+            for i in range(s, ratingLen):
                 if 0 == len(acc) or op(acc[-1], rating[i]):
                     acc.append(rating[i])
                     accFunc(acc, i + 1, op)
