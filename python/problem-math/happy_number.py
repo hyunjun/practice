@@ -1,12 +1,12 @@
 #   https://leetcode.com/problems/happy-number
-#   21.14%
 
 
 import math
 
 
 class Solution:
-    def isHappy(self, n):
+    #   21.14%
+    def isHappy0(self, n):
         digitSum, digitSumSet = 0, set()
         while 1 != digitSum:
             digitSum = 0
@@ -18,6 +18,22 @@ class Solution:
                 return False
             digitSumSet.add(digitSum)
             n = digitSum
+        return True
+
+    #   https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/528/week-1/3284
+    #   runtime; 36ms, 42.10%
+    #   memory; 13.8MB
+    def isHappy(self, n: int) -> bool:
+        res, s = 0, set()
+        while res != 1:
+            res = 0
+            for c in str(n):
+                c = int(c)
+                res += c * c
+            if res in s:
+                return False
+            s.add(res)
+            n = res
         return True
 
 
