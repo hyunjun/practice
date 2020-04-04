@@ -17,7 +17,7 @@ class Solution:
 
     #   runtime; 44ms, 91.63%
     #   memory; 13.6MB, 5.50%
-    def maxSubArray(self, nums):
+    def maxSubArray1(self, nums):
         if nums is None or 0 == len(nums):
             return 0
         curSum, maxSum = 0, -float('inf')
@@ -26,6 +26,22 @@ class Solution:
             maxSum = max(maxSum, curSum)
             if curSum <= 0:
                 curSum = 0
+        return maxSum
+
+    #   https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/528/week-1/3285
+    #   runtime; 68ms, 58.59%
+    #   memory; 14.5MB
+    def maxSubArray(self, nums: List[int]) -> int:
+        curSum = maxSum = float('-inf')
+        #s = e = -1
+        for i, n in enumerate(nums):
+            curSum += n
+            if curSum < n:
+                curSum = n
+                #s = e = i
+            if maxSum < curSum:
+                maxSum = curSum
+                #e = i
         return maxSum
 
 
