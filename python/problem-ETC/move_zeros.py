@@ -16,7 +16,6 @@ class Solution:
                 nums[l], nums[r] = nums[r], nums[l]
             l += 1
             r -= 1
-        return nums
 
 
 s = Solution()
@@ -27,5 +26,5 @@ data = [([1, 0, 8, -1, 10, 0], [1, 10, 8, -1, 0, 0]),
         ]
 for nums, expected in data:
     print(nums)
-    real = s.moveZeroes(nums)
-    print('\texpected {}, real {}, result {}'.format(nums, expected, real, expected == real))
+    s.moveZeroes(nums)
+    print(f'\texpected {expected}, real {nums}, result {expected == nums}')
