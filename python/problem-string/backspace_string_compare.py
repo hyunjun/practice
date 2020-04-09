@@ -5,7 +5,7 @@
 
 class Solution:
     #   66.82%
-    def backspaceCompare(self, S, T):
+    def backspaceCompare0(self, S, T):
         def applyBackspace(s):
             i, stack = 0, []
             while i < len(s):
@@ -19,6 +19,28 @@ class Solution:
 
         return applyBackspace(S) == applyBackspace(T)
 
+    #   https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/529/week-2/3291
+    #   runtime; 20ms, 98.37%
+    #   memory; 13.9MB
+    def backspaceCompare(self, S: str, T: str) -> bool:
+        if (S is None and T) or (S and T is None) or S == T:
+            return True
+        if S is None or T is None or not (1 <= len(S) <= 200) or not (1 <= len(T) <= 200):
+            return False
+
+        def remove(s):
+            l, c = list(s), 0
+            for i in range(len(s) - 1, -1, -1):
+                if l[i] == '#':
+                    c += 1
+                else:
+                    if 0 < c:
+                        l[i] = None
+                        c -= 1
+            return [c for c in l if c and 'a' <= c <= 'z']
+
+        return remove(S) == remove(T)
+
 
 s = Solution()
 data = [('ab#c', 'ad#c', True),
@@ -28,4 +50,4 @@ data = [('ab#c', 'ad#c', True),
         ]
 for S, T, expected in data:
     real = s.backspaceCompare(S, T)
-    print('{}, {}, expected {}, real {}, result {}'.format(S, T, expected, real, expected == real))
+    print(f'{S}, {T}, expected {expected}, real {real}, result {expected == real}')
