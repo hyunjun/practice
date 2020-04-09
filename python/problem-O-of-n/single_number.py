@@ -1,9 +1,12 @@
 #   https://leetcode.com/problems/single-number
 
 #   https://leetcode.com/problems/single-number/solution/
+#   https://www.youtube.com/watch?v=Wf1ixMjtbcs
 
 
 from collections import Counter
+from functools import reduce
+from typing import List
 
 
 class Solution:
@@ -18,7 +21,7 @@ class Solution:
     #   without extra space
     #   runtime; 96ms, 23.85%
     #   memory; 16.4MB
-    def singleNumber(self, nums: List[int]) -> int:
+    def singleNumber1(self, nums: List[int]) -> int:
         if nums is None or 0 == len(nums):
             return None
         if 1 == len(nums):
@@ -33,9 +36,18 @@ class Solution:
                 return n
         return None
 
+    #   runtime; 84ms, 83.54%
+    #   memory; 16.4MB, 6.56%
+    def singleNumber(self, nums: List[int]) -> int:
+        if nums is None or 0 == len(nums):
+            return None
+        return reduce(lambda a, b: a ^ b, nums)
+
 
 s = Solution()
-data = [([2, 2, 1], 1), ([4, 1, 2, 1, 2], 4)]
+data = [([2, 2, 1], 1),
+        ([4, 1, 2, 1, 2], 4),
+        ]
 for nums, expected in data:
     real = s.singleNumber(nums)
-    print('{}, expected {}, real {}, result {}'.format(nums, expected, real, expected == real))
+    print(f'{nums}, expected {expected}, real {real}, result {expected == real}')
