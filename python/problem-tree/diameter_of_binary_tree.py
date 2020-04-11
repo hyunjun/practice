@@ -62,7 +62,7 @@ class Solution:
         return maxDepth
 
     #   https://leetcode.com/problems/diameter-of-binary-tree/solution
-    def diameterOfBinaryTree(self, root):
+    def diameterOfBinaryTree2(self, root):
         self.ans = 1
         def depth(node):
             if not node:
@@ -74,6 +74,21 @@ class Solution:
             return max(L, R) + 1
         depth(root)
         return self.ans - 1
+
+    #   https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/529/week-2/3293
+    #   runtime; 36ms, 96.53%
+    #   memory; 15.9MB
+    def diameterOfBinaryTree(self, root):
+        self.max = 0
+        def depthSum(n):
+            if n is None:
+                return 0
+            lDepth, rDepth = depthSum(n.left), depthSum(n.right)
+            self.max = max(self.max, lDepth + rDepth)
+            return 1 + max(lDepth, rDepth)
+
+        depthSum(root)
+        return self.max
 
 
 s = Solution()
