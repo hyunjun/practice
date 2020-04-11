@@ -1,11 +1,11 @@
 #   https://leetcode.com/problems/min-stack
-#   76.79%
 
 
 import sys
 
 
-class MinStack(object):
+#   76.79%
+class MinStack0(object):
 
     def __init__(self):
         self.stack = []
@@ -32,6 +32,41 @@ class MinStack(object):
         if 0 < len(self.minValues):
             return self.minValues[-1]
         return -sys.maxsize
+
+
+#   https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/529/week-2/3292
+#   runtime; 60ms, 77.04%
+#   memory; 17.6MB
+class MinStack:
+
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.stack = []
+        self.mins = []
+
+    def push(self, x: int) -> None:
+        if 0 < len(self.stack):
+            self.mins.append(min(self.mins[-1], x))
+        else:
+            self.mins.append(x)
+        self.stack.append(x)
+
+    def pop(self) -> None:
+        if 0 < len(self.stack):
+            self.stack.pop()
+            self.mins.pop()
+
+    def top(self) -> int:
+        if 0 < len(self.stack):
+            return self.stack[-1]
+        return None
+        
+    def getMin(self) -> int:
+        if 0 < len(self.stack):
+            return self.mins[-1]
+        return None
 
 
 minStack = MinStack()
