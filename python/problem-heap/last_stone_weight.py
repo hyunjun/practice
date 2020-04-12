@@ -51,7 +51,7 @@ class MaxHeap:
 class Solution:
     #   runtime; 44ms, 9.04%
     #   memory; 13.2MB, 100.00%
-    def lastStoneWeight(self, stones):
+    def lastStoneWeight0(self, stones):
         if stones is None or 0 == len(stones):
             return 0
         heap = MaxHeap()
@@ -65,9 +65,26 @@ class Solution:
             return 0
         return heap.pop()
 
+    #   https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/529/week-2/3297
+    #   runtime; 32ms, 40.92%
+    #   memory; 14MB
+    def lastStoneWeight(self, stones):
+        if stones is None or 0 == len(stones):
+            return 0
+        while len(stones) > 1:
+            arr = sorted(stones)
+            a, b = arr.pop(), arr.pop()
+            if a > b:
+                arr.append(a - b)
+            else:
+                arr.append(0)
+            stones = arr
+        return stones[0]
+
 
 s = Solution()
 data = [([2, 7, 4, 1, 8, 1], 1),
+        ([2, 2], 0),
         ]
 for stones, expected in data:
     real = s.lastStoneWeight(stones)
