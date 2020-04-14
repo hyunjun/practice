@@ -12,6 +12,7 @@ class Trie0:
                 if ch not in cur:
                     cur[ch] = {}
                 cur = cur[ch]
+            cur['$'] = True
 
     def search(self, s):
         cur = self.root
@@ -19,7 +20,7 @@ class Trie0:
             if ch not in cur:
                 return False
             cur = cur[ch]
-        return True
+        return '$' in cur
 
 
 class Trie1:
@@ -30,6 +31,7 @@ class Trie1:
         cur = self.trie
         for w in word:
             cur = cur.setdefault(w, {})
+        cur['$'] = True
 
     def search(self, word):
         cur = self.trie
@@ -37,7 +39,7 @@ class Trie1:
             if w not in cur:
                 return False
             cur = cur[w]
-        return True
+        return '$' in cur
 
 
 from collections import defaultdict
@@ -52,6 +54,7 @@ class Trie2:
         n = self.trie
         for c in word:
             n = n[c]
+        n['$'] = True
 
     def search(self, word):
         n = self.trie
@@ -59,10 +62,10 @@ class Trie2:
             if c not in n:
                 return False
             n = n[c]
-        return True
+        return '$' in n
 
 
-strs = ['bye', 'any', 'answer', 'there', 'their']
+strs = ['bye', 'any', 'answer', 'there', 'their', 'the']
 trie0 = Trie0()
 trie0.str2trie(strs)
 
@@ -77,5 +80,6 @@ for s in strs:
 
 for s in strs:
     print(s, trie0.search(s), trie1.search(s), trie2.search(s))
+print()
 for word in ['by', 'the', 'and']:
     print(word, trie0.search(word), trie1.search(word), trie2.search(word))
