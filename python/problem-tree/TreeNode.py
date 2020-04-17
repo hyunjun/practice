@@ -14,6 +14,9 @@ class TreeNode:
             rVal = self.right
         return '({} {} {})'.format(lVal, self.val, rVal)
 
+    def __eq__(self, other):
+        return self.val == other.val and self.left == other.left and self.right == other.right
+
 
 class TreeNode2(TreeNode):
     def __init__(self, x):
