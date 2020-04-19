@@ -9,7 +9,7 @@ from typing import List
 class Solution:
     #   runtime; 84ms, 25.43%
     #   memory; 14.2MB, 6.29%
-    def search(self, nums: List[int], target: int) -> int:
+    def search0(self, nums: List[int], target: int) -> int:
         if nums is None or 0 == len(nums):
             return -1
 
@@ -44,6 +44,41 @@ class Solution:
             return -1
 
         return _search(0, len(nums) - 1)
+
+    #   https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/530/week-3/3304
+    #   runtime; 28ms, 99.54%
+    #   memory; 14.2MB
+    def search(self, nums: List[int], target: int) -> int:
+        if nums is None or 0 == len(nums):
+            return -1
+
+        def binarySearch(l, r):
+            while l <= r:
+                m = (l + r) // 2
+                if nums[m] == target:
+                    return m
+                if nums[m] < target:
+                    l = m + 1
+                else:
+                    r = m - 1
+            return -1
+
+        def search(l, r):
+            while l <= r:
+                m = (l + r) // 2
+                if nums[m] == target:
+                    return m
+                if l <= m - 1 and nums[l] <= target <= nums[m - 1]:
+                    return binarySearch(l, m - 1)
+                if m + 1 <= r and nums[m + 1] <= target <= nums[r]:
+                    return binarySearch(m + 1, r)
+                lRes = search(l, m - 1)
+                if lRes != -1:
+                    return lRes
+                return search(m + 1, r)
+            return -1
+
+        return search(0, len(nums) - 1)
 
 
 s = Solution()
