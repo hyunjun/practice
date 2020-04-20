@@ -41,6 +41,21 @@ class Solution:
             return node
         return construct(preorder)
 
+    #   https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/530/week-3/3305
+    #   runtime; 40ms, 28.18%
+    #   memory; 13.8MB
+    def bstFromPreorder(self, preorder):
+        if preorder is None or not (1 <= len(preorder) <= 100):
+            return None
+
+        def nodes(pres):
+            if 0 == len(pres):
+                return None
+            node = TreeNode(pres[0])
+            node.left, node.right = nodes([p for p in pres if p < pres[0]]), nodes([p for p in pres if p > pres[0]])
+            return node
+
+        return nodes(preorder)
 
 s = Solution()
 print(s.bstFromPreorder([8, 5, 1, 7, 10, 12]))
