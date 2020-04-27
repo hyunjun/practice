@@ -1,5 +1,8 @@
-#   https://leetcode.com/problems/maximal-square/description/
-#   6.23%
+#   https://leetcode.com/problems/maximal-square
+
+
+from typing import List
+
 
 class Solution:
     def getMaximalSquare(self, matrix, r, c):
@@ -21,7 +24,8 @@ class Solution:
             cc += 1
         return result * result
 
-    def maximalSquare(self, matrix):
+    #   6.23%
+    def maximalSquare0(self, matrix):
         if matrix is None or 0 == len(matrix) or 0 == len(matrix[0]):
             return 0
 
@@ -31,6 +35,46 @@ class Solution:
                 if matrix[r][c] == '1':
                     result = max(result, self.getMaximalSquare(matrix, r, c))
         return result
+
+    #   https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/531/week-4/3312
+    #   runtime 320ms, 20.39%
+    #   memory; 14.6MB
+    def maximalSquare(self, matrix: List[List[str]]) -> int:
+        if matrix is None or 0 == len(matrix) or 0 == len(matrix[0]):
+            return 0
+        R, C, maxSqrSize = len(matrix), len(matrix[0]), 0
+
+        def getMaxSqrSize(r, c):
+            d = 1
+            while r + d < R and c + d < C:
+                isSquare = True
+                if matrix[r + d][c + d] == '0':
+                    isSquare = False
+                    break
+                if not isSquare:
+                    break
+                for nr in range(r, r + d):
+                    if matrix[nr][c + d] == '0':
+                        isSquare = False
+                        break
+                if not isSquare:
+                    break
+                for nc in range(c, c + d):
+                    if matrix[r + d][nc] == '0':
+                        isSquare = False
+                        break
+                if not isSquare:
+                    break
+                d += 1
+            return d ** 2
+
+        for r in range(R):
+            for c in range(C):
+                if '0' == matrix[r][c]:
+                    continue
+                maxSqrSize = max(maxSqrSize, getMaxSqrSize(r, c))
+
+        return maxSqrSize
 
 
 matrix0 = [ ['1', '0', '1', '0', '0'],
@@ -58,7 +102,11 @@ matrix3 = [ ['0', '0', '0', '1', '0', '1', '1', '1'],
           ]
 
 s = Solution()
-print(s.maximalSquare(matrix0))
-print(s.maximalSquare(matrix1))
-print(s.maximalSquare(matrix2))
-print(s.maximalSquare(matrix3))
+data = [(matrix0, 4),
+        (matrix1, 0),
+        (matrix2, 9),
+        (matrix3, 1),
+        ]
+for matrix, expected in data:
+    real = s.maximalSquare(matrix)
+    print(f'expected {expected} real {real} result {expected == real}')
