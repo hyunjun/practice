@@ -6,7 +6,7 @@ from TreeNode import TreeNode
 class Solution:
     #   runtime; 88ms, 99.51%
     #   memory; 21.3MB, 100.00%
-    def maxPathSum(self, root):
+    def maxPathSum0(self, root):
         if root is None:
             return 0
 
@@ -34,6 +34,35 @@ class Solution:
 
         nodeSum(0, root)
         return self.res
+
+    #   https://leetcode.com/submissions/detail/331729239/?from=/explore/challenge/card/30-day-leetcoding-challenge/532/week-5/3314
+    #   runtime; 80ms, 97.00%
+    #   memory; 21.5MB
+    def maxPathSum(self, root):
+        if root is None:
+            return 0
+
+        self.maxSum = float('-inf')
+        def getMaxPath(node):
+            if node is None:
+                return 0
+            lRes, rRes = getMaxPath(node.left), getMaxPath(node.right)
+            if 0 < lRes and 0 < rRes:
+                self.maxSum = max(self.maxSum, lRes + node.val + rRes)
+            elif 0 < lRes:
+                self.maxSum = max(self.maxSum, lRes + node.val)
+            elif 0 < rRes:
+                self.maxSum = max(self.maxSum, node.val + rRes)
+            else:
+                self.maxSum = max(self.maxSum, node.val)
+            if lRes > rRes and lRes > 0:
+                return node.val + lRes
+            if lRes < rRes and rRes > 0:
+                return node.val + rRes
+            return node.val
+
+        getMaxPath(root)
+        return self.maxSum
 
 
 s = Solution()
