@@ -54,6 +54,21 @@ class Solution:
         last.next = None
         return newHead
 
+    #   https://leetcode.com/explore/featured/card/recursion-i/251/scenario-i-recurrence-relation/2378
+    #   runtime; 32ms, 83.38%
+    #   memory; 15.4MB
+    def reverseList(self, head):
+        if head is None or head.next is None:
+            return head
+        p, c, n = None, head, head.next
+        while c:
+            c.next = p
+            p = c
+            c = n
+            if n:
+                n = n.next
+        return p
+
 
 s = Solution()
 h1 = ListNode(1)
