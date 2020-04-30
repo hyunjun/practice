@@ -4,7 +4,7 @@
 class Solution:
 
     #   98.22%
-    def getRow(self, rowIndex):
+    def getRow0(self, rowIndex):
         if rowIndex < 0:
             return []
         if 0 == rowIndex:
@@ -23,6 +23,20 @@ class Solution:
         for _ in range(rowIndex):
             row = [x + y for x, y in zip([0]+row, row+[0])]
         return row
+
+    #   https://leetcode.com/explore/featured/card/recursion-i/251/scenario-i-recurrence-relation/3234
+    #   runtime; 24ms, 91.82%
+    #   memory; 13.8MB
+    def getRow(self, rowIndex):
+        if 0 == rowIndex:
+            return [1]
+        ret = [1, 1]
+        for i in range(1, rowIndex):
+            n = [1] * (len(ret) + 1)
+            for i in range(1, len(n) - 1):
+                n[i] = ret[i - 1] + ret[i]
+            ret = n
+        return ret
 
 
 s = Solution()
