@@ -6,7 +6,7 @@ from TreeNode import TreeNode
 
 class Solution:
     #   0.0%?
-    def searchBST(self, root, val):
+    def searchBST0(self, root, val):
         if root is None:
             return None
         cur = root
@@ -18,6 +18,21 @@ class Solution:
             else:
                 cur = cur.left
         return None
+
+    #   runtime; 76ms, 68.77%
+    #   memory; 15.8MB
+    def searchBST(self, root, val):
+
+        def search(node):
+            if node is None:
+                return None
+            if node.val == val:
+                return node
+            if node.val < val:
+                return search(node.right)
+            return search(node.left)
+
+        return search(root)
 
 
 s = Solution()
