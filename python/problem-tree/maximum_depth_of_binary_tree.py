@@ -5,7 +5,7 @@ from TreeNode import TreeNode
 
 
 class Solution:
-    def maxDepth(self, root):
+    def maxDepth0(self, root):
         #return self.maxDepthRecur(root)
         return self.maxDepthIter(root)
 
@@ -30,6 +30,17 @@ class Solution:
             if cur.right:
                 queue.append((cur.right, curLevel + 1))
         return maxLevel
+
+    #   https://leetcode.com/explore/featured/card/recursion-i/256/complexity-analysis/2375
+    #   runtime; 36ms, 89.85%
+    #   memory; 15.8MB
+    def maxDepth(self, root):
+        def getDepth(n):
+            if n is None:
+                return 0
+            return 1 + max(getDepth(n.left), getDepth(n.right))
+
+        return getDepth(node)
 
 
 s = Solution()
