@@ -10,7 +10,7 @@ class Solution:
 
     #   runtime; 48ms, 79.19%
     #   memory; 14.9MB, 100.00%
-    def generateTrees(self, n):
+    def generateTrees0(self, n):
         if n <= 0:
             return []
 
@@ -46,13 +46,40 @@ class Solution:
 
         return generateNumTrees([i for i in range(1, n + 1)])
 
+    #   https://leetcode.com/explore/featured/card/recursion-i/253/conclusion/2384
+    #   runtime; 56ms, 84.15%
+    #   memory; 15.2MB
+    def generateTrees(self, n):
+        if n is 0:
+            return []
+
+        nums = [i for i in range(1, n + 1)]
+
+        def getTree(nums):
+            if 0 == len(nums):
+                return [None]
+            if 1 == len(nums):
+                return [TreeNode(nums[0])]
+            if 2 == len(nums):
+                n1 = TreeNode(nums[0])
+                n1.right = TreeNode(nums[1])
+                n2 = TreeNode(nums[1])
+                n2.left = TreeNode(nums[0])
+                return [n1, n2]
+            res = []
+            for i, n in enumerate(nums):
+                lefts, rights = getTree(nums[:i]), getTree(nums[i + 1:])
+                for l in lefts:
+                    for r in rights:
+                        node = TreeNode(n)
+                        node.left = l
+                        node.right = r
+                        res.append(node)
+            return res
+
+        return getTree(nums)
+
 
 s = Solution()
 for root in s.generateTrees(3):
     print(root)
-'''
-f([1, 2, 3])
-[1] - f([2, 3])
-f([2]) - [1] - f([3])
-[1, 2] - f([3])
-'''
