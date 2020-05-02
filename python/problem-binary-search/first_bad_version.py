@@ -1,5 +1,4 @@
 # https://leetcode.com/problems/first-bad-version
-# 20.44%
 
 # The isBadVersion API is already defined for you.
 # @param version, an integer
@@ -36,21 +35,33 @@ def firstBadVersion(self, n):
 
 
 class Solution(object):
-  def firstBadVersion(self, n):
-    """
-    :type n: int
-    :rtype: int
-    """
-    if n <= 0:
-      return 0
-    s, e, mid, midResult = 1, n, 0, None
-    while s <= e:
-      mid = (s + e) // 2
-      midResult = isBadVersion(mid)
-      if midResult:
-        e = mid - 1
-      else:
-        s = mid + 1
-    if midResult:
-      return mid
-    return mid + 1
+    #   20.44%
+    def firstBadVersion0(self, n):
+        if n <= 0:
+            return 0
+        s, e, mid, midResult = 1, n, 0, None
+        while s <= e:
+            mid = (s + e) // 2
+            midResult = isBadVersion(mid)
+            if midResult:
+                e = mid - 1
+            else:
+                s = mid + 1
+        if midResult:
+            return mid
+        return mid + 1
+
+    #   https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3316
+    #   runtime; 36ms, 7.42%
+    #   memory; 13.9MB
+    def firstBadVersion(self, n):
+        if n < 1:
+            return 0
+        l, r = 1, n
+        while l < r:
+            m = l + (r - l) // 2
+            if isBadVersion(m):
+                r = m
+            else:
+                l = m + 1
+        return l
