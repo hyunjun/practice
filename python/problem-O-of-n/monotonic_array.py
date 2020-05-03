@@ -3,9 +3,12 @@
 #   https://leetcode.com/problems/monotonic-array/solution
 
 
+from typing import List
+
+
 class Solution:
-    #   87.34%
-    def isMonotonic(self, A):
+    #   runtime; 104ms, 87.34%
+    def isMonotonic0(self, A):
         if A is None or 0 == len(A):
             return False
 
@@ -26,6 +29,23 @@ class Solution:
         if isIncreasing() or isDecreasing():
             return True
         return False
+
+    #   runtime; 516ms, 56.96%
+    #   memory; 19.8MB, 5.26%
+    def isMonotonic(self, A: List[int]) -> bool:
+        if A is None or not (1 <= len(A) <= 50000):
+            return False
+        
+        def isM(func, arr):
+            return all(func(arr[i - 1], arr[i]) for i in range(1, len(arr)))
+        
+        def isMInc(arr):
+            return isM(lambda a, b: a <= b, arr)
+        
+        def isMDec(arr):
+            return isM(lambda a, b: a >= b, arr)
+        
+        return isMInc(A) or isMDec(A)
 
 
 s = Solution()
