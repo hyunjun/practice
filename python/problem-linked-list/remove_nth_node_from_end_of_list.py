@@ -7,7 +7,7 @@ from ListNode import ListNode
 
 
 class Solution:
-    #   99.95%
+    #   runtime; 40ms, 99.95%
     def removeNthFromEnd0(self, head, n):
         if head is None:
             return None
@@ -30,8 +30,8 @@ class Solution:
             nodes[totalLen - (n + 1)].next = nodes[totalLen - (n - 1)]
         return head
 
-    #   99.95%
-    def removeNthFromEnd(self, head, n):
+    #   runtime; 40ms, 99.95%
+    def removeNthFromEnd1(self, head, n):
         if head is None:
             return None
         cur, cnt = head, 0
@@ -48,6 +48,28 @@ class Solution:
             cur.next = cur.next.next
         return head
 
+    #   runtime; 24ms, 96.97%
+    #   memory; 13.9MB, 6.06%
+    def removeNthFromEnd(self, head, n):
+        stack, node = [], head
+        while node:
+            stack.append(node)
+            node = node.next
+        if 0 == len(stack):
+            return head
+        tIdx = len(stack) - n
+        if tIdx < 0:
+            return None
+        if tIdx == 0:
+            if 0 < len(stack[1:]):
+                return stack[1]
+            return None
+        if 0 < tIdx < len(stack) - 1:
+            stack[tIdx - 1].next = stack[tIdx + 1]
+        if tIdx == len(stack) - 1:
+            stack[tIdx - 1].next = None
+        return stack[0]
+
 
 s = Solution()
 head = ListNode(1)
@@ -59,3 +81,4 @@ print(head)
 print(s.removeNthFromEnd(head, 2))
 #print(s.removeNthFromEnd(head, 1))
 #print(s.removeNthFromEnd(head, 5))
+print(s.removeNthFromEnd(ListNode(1), 1))
