@@ -18,7 +18,8 @@ from ListNode import ListNode
 
 
 class Solution:
-    def deleteDuplicates(self, head):
+    #   runtime; 48ms
+    def deleteDuplicates0(self, head):
         if head is None:
             return None
         prev = head
@@ -29,6 +30,20 @@ class Solution:
             else:
                 prev = cur
             cur = cur.next
+        return head
+
+    #   runtime; 40ms, 75.43%
+    #   memory; 13.9MB, 6.45%
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        if head is None:
+            return None
+        p = n = head
+        while n:
+            if p.val != n.val:
+                p.next = n
+                p = n
+            n = n.next
+        p.next = None
         return head
 
 
