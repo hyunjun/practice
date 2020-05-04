@@ -1,11 +1,14 @@
 #   https://leetcode.com/problems/ransom-note
-#   74.65%
 
 #   https://leetcode.com/problems/ransom-note/discuss/132701/Python-One-Line-(beats-over-98-of-solutions)
 
 
+from collections import Counter
+
+
 class Solution:
-    def canConstruct(self, ransomNote, magazine):
+    #   runtime; 91ms, 74.65%
+    def canConstruct0(self, ransomNote, magazine):
         if ransomNote is None or 0 == len(ransomNote):
             return True
         if magazine is None or 0 == len(magazine):
@@ -28,6 +31,21 @@ class Solution:
                     return False
             else:
                 return False
+        return True
+
+    #   https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3318
+    #   runtime; 48ms, 67.18%
+    #   memory; 14.1MB
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        if ransomNote is None or 0 == len(ransomNote):
+            return True
+        if magazine is None or 0 == len(magazine):
+            return False
+        mCounter = Counter(magazine)
+        for c in ransomNote:
+            if c not in mCounter or mCounter[c] <= 0:
+                return False
+            mCounter[c] -= 1
         return True
 
 
