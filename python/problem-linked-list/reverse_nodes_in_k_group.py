@@ -7,7 +7,7 @@ from ListNode import ListNode
 class Solution:
     #   runtime; 52ms, 94.20%
     #   memory; 14MB, 81.45%
-    def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
+    def reverseKGroup0(self, head: ListNode, k: int) -> ListNode:
         if head is None:
             return head
         fst, snd, stack = head, head, []
@@ -23,6 +23,27 @@ class Solution:
                     snd = snd.next
         return head
 
+    #   https://codebasil.com/problems/reverse-a-linked-list-in-groups
+    #   runtime; 52ms, 51.88%
+    #   memory; 14.8MB, 5.88%
+    def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
+        if head is None:
+            return None
+        n, nodes = head, []
+        while n:
+            nodes.append(n)
+            n = n.next
+        i = 0
+        while i < len(nodes):
+            l, r = i, i + k - 1
+            if len(nodes) - 1 < r:
+                break
+            while l < r:
+                nodes[l].val, nodes[r].val = nodes[r].val, nodes[l].val
+                l += 1
+                r -= 1
+            i += k
+        return nodes[0]
 
 s = Solution()
 
