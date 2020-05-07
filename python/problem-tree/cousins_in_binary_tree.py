@@ -9,7 +9,7 @@ from collections import defaultdict
 class Solution:
     #   runtime; 52ms, 100.00%
     #   memory; 12.5MB, 100.00%
-    def isCousins(self, root, x, y):
+    def isCousins0(self, root, x, y):
         if root is None:
             return True
         if x == root.val or y == root.val:
@@ -33,6 +33,27 @@ class Solution:
                 q.append((depth + 1, node, node.left))
             if node.right:
                 q.append((depth + 1, node, node.right))
+        return False
+
+    #   https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3322
+    #   runtime; 32ms, 64.35%
+    #   memory; 13.7MB
+    def isCousins(self, root: TreeNode, x: int, y: int) -> bool:
+        if root is None:
+            return False
+        q, xp, xd, yp, yd = [(None, root, 0)], None, -1, None, -1
+        while q:
+            p, n, d = q.pop(0)
+            if x == n.val:
+                xp, xd = p, d
+            elif y == n.val:
+                yp, yd = p, d
+            if xp and yp and xp.val != yp.val and xd == yd:
+                return True
+            if n.left:
+                q.append((n, n.left, d + 1))
+            if n.right:
+                q.append((n, n.right, d + 1))
         return False
 
 
