@@ -29,6 +29,23 @@ class Solution:
                     cnt += 1
         return cnt
 
+    #   https://codebasil.com/problems/palindromic-substring
+    def palindromicSubstring(self, s):
+        if s is None or 0 == len(s):
+            return s
+        d, maxLen, ss, ee = defaultdict(list), 0, -1, -1
+        for i, c in enumerate(s):
+            d[c].append(i)
+        for indices in d.values():
+            if 1 == len(indices) and 0 == maxLen:
+                maxLen, ss, ee = 1, indices[0], indices[0]
+            for l in range(len(indices) - 1, 0, -1):
+                for i in range(len(indices) - l):
+                    sIdx, eIdx = indices[i], indices[i + l]
+                    if maxLen < eIdx - sIdx + 1 and s[sIdx:eIdx + 1] == s[sIdx:eIdx + 1][::-1]:
+                        maxLen, ss, ee = eIdx - sIdx + 1, sIdx, eIdx
+        return s[ss:ee + 1]
+
 
 s = Solution()
 data = [('abc', 3),
@@ -36,4 +53,9 @@ data = [('abc', 3),
         ]
 for _s, expected in data:
     real = s.countSubstrings(_s)
+    print('{}, expected {}, real {}, result {}'.format(_s, expected, real, expected == real))
+data = [('abcabbabc', 'abba'),
+        ]
+for _s, expected in data:
+    real = s.palindromicSubstring(_s)
     print('{}, expected {}, real {}, result {}'.format(_s, expected, real, expected == real))
