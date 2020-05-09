@@ -43,7 +43,8 @@ class Solution:
                     i = (mini + i) // 2
         return False
 
-    def isPerfectSquare(self, num):
+    #   runtime; 30ms, 9.88%
+    def isPerfectSquare2(self, num):
         if 0 == num:
             return False
         if 1 == num:
@@ -70,6 +71,26 @@ class Solution:
                 if i in s:
                     maxi = i
                     i = (mini + i) // 2
+        return False
+
+    #   https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3324
+    #   runtime; 28ms, 75.96%
+    #   memory; 13.6MB
+    def isPerfectSquare(self, num: int) -> bool:
+        if num < 1:
+            return False
+        if num == 1:
+            return True
+        l, r = 1, num // 2
+        while l <= r:
+            m = (l + r) // 2
+            cand = m ** 2
+            if cand == num:
+                return True
+            if cand < num:
+                l = m + 1
+            else:
+                r = m - 1
         return False
 
 
