@@ -41,7 +41,7 @@ class Solution:
 
     #   runtime; 104ms, 46.25%
     #   memory; 13.3MB, 100.00%
-    def removeDuplicates(self, S):
+    def removeDuplicates2(self, S):
         if S is None or 0 == len(S):
             return S
         l = list(S)
@@ -56,6 +56,17 @@ class Solution:
             else:
                 i += 1
         return ''.join(l)
+
+    #   runtime; 92ms, 40.39%
+    #   memory; 14MB, 100.00%
+    def removeDuplicates(self, S: str) -> str:
+        stack = []
+        for c in S:
+            if 0 < len(stack) and stack[-1] == c:
+                stack.pop()
+            else:
+                stack.append(c)
+        return ''.join(stack)
 
 
 s = Solution()
