@@ -3,6 +3,10 @@
 #   https://leetcode.com/problems/minimum-window-substring/solution
 
 
+from collections import Counter
+from collections import defaultdict
+
+
 class Solution:
     #   Wrong Answer
     def minWindow0(self, s, t):
@@ -24,7 +28,7 @@ class Solution:
 
     #   runtime; 308ms, 18.56%
     #   memory; 12.8MB, 35.16%
-    def minWindow(self, s, t):
+    def minWindow1(self, s, t):
         if s is None or 0 == len(s) or t is None or 0 == len(t) or len(s) < len(t):
             return ''
         if t in s:
@@ -55,6 +59,57 @@ class Solution:
         if minLen is None:
             return ''
         return s[minPair[0]:minPair[1] + 1]
+
+    def minWindow2(self, s, t):
+        if s is None or 0 == len(s) or t is None or 0 == len(t) or len(s) < len(t):
+            return ''
+        if t in s:
+            return t
+        minLen, si, ei, sIdxDict, sDict, tDict = float('inf'), None, None, defaultdict(list), Counter(), Counter(t)
+        for i, c in enumerate(s):
+            if c in tDict.keys():
+                if sDict[c] == tDict[c]:
+                    sIdxDict[c].pop(0)
+                sIdxDict[c].append(i)
+                st, et = float('inf'), float('inf')
+                for v in sIdxDict.values():
+                    st = min(st, min(v))
+                    et = max(et, max(v))
+                if et - st + 1 < minLen:
+                    minLen, si, ei = et - st + 1, st, et
+        return s[si:ei + 1]
+
+    #   runtime; 504ms, 13.30%
+    #   memory; 14.7MB, 5.55%
+    def minWindow(self, s: str, t: str) -> str:
+        if s is None or 0 == len(s):
+            return ''
+        if t is None or 0 == len(t):
+            return ''
+        d, tDict, indices, minCnt, minIndices = defaultdict(int), Counter(t), [], float('inf'), []
+        for i, c in enumerate(s):
+            if c in t:
+                indices.append(i)
+                d[c] += 1
+                while d[s[indices[0]]] > tDict[s[indices[0]]]:
+                    d[s[indices[0]]] -= 1
+                    indices.pop(0)
+                if all(d[c] >= cnt for c, cnt in tDict.items()) and indices[-1] - indices[0] + 1 < minCnt:
+                    minCnt, minIndices = indices[-1] - indices[0] + 1, [indices[0], indices[-1]]
+        if 0 == len(minIndices):
+            return ''
+        return s[minIndices[0]:minIndices[1] + 1]
+
+'''
+a d o b e c o d e b a n c
+0     3   5       9 10  12
+a     b   c       b a   c
+
+b b a a
+0 1 2 3
+a b c가 다 채워지면 그 때부터는 하나 채워질 때마다 min, max 체크?
+'''
+
 
 solution = Solution()
 data = [("ADOBECODEBANC", "ABC", "BANC"),
