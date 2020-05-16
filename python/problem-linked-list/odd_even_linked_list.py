@@ -65,7 +65,7 @@ class Solution:
         return head
 
     #   0.0%
-    def oddEvenList(self, head):
+    def oddEvenList1(self, head):
         if head is None or head.next is None:
             return head
         cur, totalLen = head.next, 0
@@ -90,6 +90,46 @@ class Solution:
                 cur = cur.next.next
             loopCnt -= 1
             start = start.next
+        return head
+
+    #   https://leetcode.com/explore/featured/card/may-leetcoding-challenge/536/week-3-may-15th-may-21st/3331
+    #   runtime; 80ms, 5.14%
+    #   memory; 15.7MB
+    def oddEvenList2(self, head: ListNode) -> ListNode:
+        if head is None or head.next is None or head.next.next is None:
+            return head
+        peven, even, odd, hn, cnt = None, head, head.next, head.next, 0
+        while even and odd:
+            if cnt % 2 == 0:
+                peven = even
+                even.next = odd.next
+                even = odd.next
+            else:
+                odd.next = even.next
+                odd = even.next
+            cnt += 1
+        if even:
+            even.next = hn
+        else:
+            peven.next = hn
+        return head
+
+    #   runtime; 60ms, 9.62%
+    #   memory; 15.8MB
+    def oddEvenList(self, head: ListNode) -> ListNode:
+        if head is None or head.next is None or head.next.next is None:
+            return head
+        p, c, n, hn, cnt = None, head, head.next, head.next, 0
+        while c and n:
+            p = c
+            c.next = n.next
+            c = n.next
+            c, n = n, c
+            cnt += 1
+        if cnt % 2 == 0:
+            c.next = hn
+        else:
+            p.next = hn
         return head
 
 
