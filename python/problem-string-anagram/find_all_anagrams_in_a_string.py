@@ -2,7 +2,10 @@
 
 #   https://leetcode.com/problems/find-all-anagrams-in-a-string/discuss/132699/Beat-99.06-Python3
 
+
+from collections import Counter
 from copy import copy
+from typing import List
 
 
 class Solution:
@@ -40,7 +43,7 @@ class Solution:
         return True
 
     #   65.03%
-    def findAnagrams(self, s, p):
+    def findAnagrams1(self, s, p):
         if (s and p is None) or (s is None and p) or len(s) < len(p):
             return []
         result, sCounts, pCounts = [], [0] * 26, [0] * 26
@@ -66,6 +69,45 @@ class Solution:
             sCounts[ord(s[i]) - 97] -= 1
             i += 1
         return result
+
+    #   https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/536/week-3-may-15th-may-21st/3332
+    #   runtime; 7468ms, 9.26%
+    #   memory; 15MB
+    def findAnagrams2(self, s: str, p: str) -> List[int]:
+        if s is None or not (0 <= len(s) <= 20100) or p is None or not (0 < len(p) <= 20100):
+            if s is not None and 0 == len(s) and p is not None:
+                return [i for i in range(len(p))]
+            return []
+        pLen, pCounter, res = len(p), Counter(p), []
+        for i, c in enumerate(s):
+            if c not in pCounter.keys() or i - pLen < -1:
+                continue
+            cCounter = Counter(s[i - pLen + 1:i + 1])
+            if cCounter == pCounter:
+                res.append(i - pLen + 1)
+        return res
+
+    #   runtime; 5076ms, 14.34%
+    #   memory; 14.6MB
+    def findAnagrams3(self, s: str, p: str) -> List[int]:
+        if s is None or not (0 <= len(s) <= 20100) or p is None or not (0 < len(p) <= 20100):
+            if s is not None and 0 == len(s) and p is not None:
+                return [i for i in range(len(p))]
+            return []
+        pLen, pCounter, res = len(p), Counter(p), []
+        sLen, sCounter = len(s), Counter()
+        i = 0
+        while i < sLen - pLen + 1:
+            if s[i] in pCounter.keys():
+                if Counter(s[i:i + pLen]) == pCounter:
+                    res.append(i)
+                if i + pLen < sLen and s[i + pLen] in pCounter.keys():
+                    i += 1
+                else:
+                    i += pLen
+            else:
+                i += 1
+        return res
 
 
 solution = Solution()
