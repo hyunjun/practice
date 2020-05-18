@@ -76,7 +76,7 @@ class Solution:
         return False
 
     #   156ms, 19.19%
-    def checkInclusion(self, s1, s2):
+    def checkInclusion3(self, s1, s2):
         if len(s1) > len(s2):
             return False
 
@@ -97,6 +97,20 @@ class Solution:
                 break
             cd2[s2[i - len(s1)]] -= 1
             cd2[s2[i]] += 1
+        return False
+
+    #   https://leetcode.com/explore/featured/card/may-leetcoding-challenge/536/week-3-may-15th-may-21st/3333
+    #   runtime; 1384ms, 20.37%
+    #   memory; 14MB
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        if s1 is None or s2 is None or not (1 <= len(s1) <= 10000) or not (1 <= len(s2) <= 10000) or len(s1) > len(s2):
+            return False
+        c = Counter(s1)
+        for i in range(len(s1) - 1, len(s2)):
+            if s2[i] not in c.keys():
+                continue
+            if Counter(s2[i - len(s1) + 1:i + 1]) == c:
+                return True
         return False
 
 
