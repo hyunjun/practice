@@ -1,10 +1,11 @@
 #   https://leetcode.com/problems/kth-smallest-element-in-a-bst
 
+#   https://leetcode.com/problems/kth-smallest-element-in-a-bst/solution
+
 
 from TreeNode import TreeNode
 
 
-#   45.15%
 class Solution:
     def kthSmallest0(self, root, k):
         cur, stack, res = root, [], []
@@ -18,6 +19,7 @@ class Solution:
                 cur = cur.right
         return res[k - 1]
 
+    #   runtime; 72ms, 45.15%
     def kthSmallest(self, root, k):
         cur, stack = root, []
         while cur or stack:
@@ -31,6 +33,25 @@ class Solution:
                     return cur.val
                 cur = cur.right
         return -1
+
+    #   https://leetcode.com/explore/featured/card/may-leetcoding-challenge/536/week-3-may-15th-may-21st/3335
+    #   runtime; 48ms, 84.25%
+    #   memory; 17.7M
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+        if root is None:
+            return float('-inf')
+        node, stack, res = root, [], []
+        while node or stack:
+            if node:
+                stack.append(node)
+                node = node.left
+            else:
+                node = stack.pop()
+                res.append(node.val)
+                if k == len(res):
+                    return res[-1]
+                node = node.right
+        return float('-inf')
 
 
 s = Solution()
