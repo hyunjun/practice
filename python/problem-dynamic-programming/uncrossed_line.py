@@ -1,6 +1,9 @@
 #   https://leetcode.com/problems/uncrossed-lines
 
 
+from typing import List
+
+
 class Solution:
     #   Time Limit Exceeded
     def maxUncrossedLines0(self, A, B):
@@ -83,6 +86,23 @@ class Solution:
                     dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
         return dp[-1][-1]
 
+    #   https://leetcode.com/explore/featured/card/may-leetcoding-challenge/537/week-4-may-22nd-may-28th/3340
+    #   runtime; 80ms, 99.53%
+    #   memory; 14MB
+    def maxUncrossedLines(self, A: List[int], B: List[int]) -> int:
+        if A is None or not (1 <= len(A) <= 500) or B is None or not (1 <= len(B) <= 500):
+            return 0
+        aOnly, bOnly = set(A) - set(B), set(B) - set(A)
+        A, B = [a for a in A if a not in aOnly], [b for b in B if b not in bOnly]
+        dp = [[0] * (len(B) + 1) for _ in range(len(A) + 1)]
+        for r in range(1, len(dp)):
+            for c in range(1, len(dp[0])):
+                if A[r - 1] == B[c - 1]:
+                    dp[r][c] = 1 + dp[r - 1][c - 1]
+                else:
+                    dp[r][c] = max(dp[r - 1][c], dp[r][c - 1])
+        return dp[-1][-1]
+
 
 s = Solution()
 data = [([1, 4, 2], [1, 2, 4], 2),
@@ -91,43 +111,6 @@ data = [([1, 4, 2], [1, 2, 4], 2),
         ([3,1,2,1,4,1,2,2,5,3,2,1,1,4,5,2,3,2,5,5], [2,4,1,2,3,4,2,4,5,5,1,1,2,1,1,1,5,4,1,4,2,1,5,4,2,3,1,5,2,1], 14),
         ([1], [3], 0),
         ]
-'''
-    1 1 5
-1   1 1 0
-5   0 1 2
-1   1 2 2
-    3 1 2 1 4 1 2 2 5 3 2 1 1 4 5 2 3 2 5 5
-2   0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-4   0 0 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-1   0 1 1 2 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
-2   0 1 2 2 2 2 4 4 4 4 4 4 4 4 4 4 4 4 4 4
-3   1 1 1 2 2 2 4 4 4 5 5 5 5 5 5 5 5 5 5 5
-4   1 1 1 1 3 3 4 4 4 5 5 5 5 6 6 6 6 6 6 6
-2   1
-4   1
-5   1
-5   1
-1   1
-1   1
-2   1
-1   1
-1   1
-1   1
-5   1
-4   1
-1   1
-4   1
-2   1
-1   1
-5   1
-4   1
-2   1
-3   1
-1   1
-5   1
-2   1
-1   1
-'''
 for A, B, expected in data:
     real = s.maxUncrossedLines(A, B)
     print('{}, {}, expected {}, real {}, result {}'.format(A, B, expected, real, expected == real))
