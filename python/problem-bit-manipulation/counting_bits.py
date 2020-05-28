@@ -29,6 +29,14 @@ class Solution:
                 res[i] = 1 + res[i - twos // 2]
         return res
 
+    #   https://leetcode.com/explore/featured/card/may-leetcoding-challenge/537/week-4-may-22nd-may-28th/3343
+    #   runtime; 84ms, 75.93%
+    #   memory; 20.7MB
+    def countBits(self, num):
+        if num < 0:
+            return []
+        return [bin(i).count('1') for i in range(num + 1)]
+
 
 s = Solution()
 data = [(2, [0, 1, 1]),
