@@ -25,7 +25,7 @@ class Solution(object):
 
     #   runtime; 32ms, 78.10%
     #   memory; 12.7MB, 100.00%
-    def sortColors(self, nums: List[int]) -> None:
+    def sortColors1(self, nums: List[int]) -> None:
         if nums is None or 0 == len(nums):
             return None
         z, o, t = 0, 0, 0
@@ -46,6 +46,19 @@ class Solution(object):
                 nums[i] = 2
             i += 1
 
+    #   https://leetcode.com/explore/featured/card/june-leetcoding-challenge/540/week-2-june-8th-june-14th/3357
+    #   runtime; 28ms, 89.96%
+    #   memory; 14MB
+    def sortColors(self, nums: List[int]) -> None:
+        counts = [0, 0, 0]
+        for n in nums:
+            counts[n] += 1
+        s = 0
+        for n, c in enumerate(counts):
+            for i in range(s, s + c):
+                nums[i] = n
+            s += c
+        
 
 s = Solution()
 data = [([0], [0]),
