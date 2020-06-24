@@ -69,7 +69,7 @@ class Solution:
 
     #   runtime; 20ms, 90.35%
     #   memory; 10.8MB, 100.00%
-    def numTrees(self, n):
+    def numTrees2(self, n):
         if n <= 0:
             return 0
 
@@ -94,6 +94,43 @@ class Solution:
             return cnt
 
         return getNumTrees(n)
+
+    #   https://leetcode.com/explore/featured/card/june-leetcoding-challenge/542/week-4-june-22nd-june-28th/3370
+    #   runtime; 24ms, 92.98%
+    #   memory; 13.7MB, 88.61%
+    def numTrees3(self, n: int) -> int:
+        if n <= 0:
+            return 0
+        
+        d = {i: 0 for i in range(n + 1)}
+        d[0] = d[1] = 1
+        def numTree(arr):
+            num = len(arr)
+            if d[num] != 0:
+                return d[num]
+            res = sum(numTree(arr[:i]) * numTree(arr[i + 1:]) for i, a in enumerate(arr))
+            d[num] = res
+            return res
+        
+        return numTree([i for i in range(1, n + 1)])
+
+    #   https://leetcode.com/explore/featured/card/june-leetcoding-challenge/542/week-4-june-22nd-june-28th/3370
+    #   runtime; 28ms, 76.14%
+    #   memory; 13.9MB, 27.04%
+    def numTrees(self, n: int) -> int:
+        if n <= 0:
+            return 0
+        
+        d = {i: 0 for i in range(n + 1)}
+        d[0] = d[1] = 1
+        def numTree(m):
+            if d[m] != 0:
+                return d[m]
+            res = sum(numTree(i) * numTree(m - (i + 1)) for i in range(m))
+            d[m] = res
+            return res
+        
+        return numTree(n)
 
 
 s = Solution()
