@@ -1,6 +1,9 @@
 #   https://leetcode.com/problems/ugly-number-ii
 
 
+import heapq
+
+
 class Solution:
 
     #   6.98%
@@ -20,7 +23,7 @@ class Solution:
         return uglyNumber
 
     #   48.06%
-    def nthUglyNumber(self, n):
+    def nthUglyNumber1(self, n):
         uglyNumber = 1
         if 1 == n:
             return uglyNumber
@@ -38,9 +41,38 @@ class Solution:
             q5.append(uglyNumber * 5)
         return uglyNumber
 
+    #   https://leetcode.com/explore/featured/card/july-leetcoding-challenge/544/week-1-july-1st-july-7th/3380
+    #   runtime; 296ms, 28.61%
+    #   memory; 14.1MB, 18.97%
+    def nthUglyNumber(self, n: int) -> int:
+        if n < 1:
+            return 0
+        l, s = [1], set()
+        heapq.heapify(l)
+        while n > 0:
+            res = heapq.heappop(l)
+            for num in [2, 3, 5]:
+                if res * num in s:
+                    continue
+                s.add(res * num)
+                heapq.heappush(l, res * num)
+            n -= 1
+        return res
+
 
 s = Solution()
-data = [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 8), (8, 9), (9, 10), (10, 12), (1690, 2123366400)]
+data = [(1, 1),
+        (2, 2),
+        (3, 3),
+        (4, 4),
+        (5, 5),
+        (6, 6),
+        (7, 8),
+        (8, 9),
+        (9, 10),
+        (10, 12),
+        (1690, 2123366400),
+        ]
 for n, expected in data:
     real = s.nthUglyNumber(n)
     print('{}, expected {}, real {}, result {}'.format(n, expected, real, expected == real))
