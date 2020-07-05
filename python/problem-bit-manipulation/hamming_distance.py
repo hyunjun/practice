@@ -1,12 +1,12 @@
 #   https://leetcode.com/problems/hamming-distance
-#   49.53%
 
 #   https://leetcode.com/problems/hamming-distance/discuss/144971/simple-python-answer
 #   https://leetcode.com/problems/hamming-distance/discuss/144245/Simple-Python-3-Solution
 
 
 class Solution:
-    def hammingDistance(self, x, y):
+    #   49.53%
+    def hammingDistance0(self, x, y):
         n, cnt, b = x ^ y, 0, 0x1
         for i in range(32):
             if 1 == n & 0x1:
@@ -14,6 +14,20 @@ class Solution:
             n >>= 1
         return cnt
 
+    #   https://leetcode.com/explore/featured/card/july-leetcoding-challenge/544/week-1-july-1st-july-7th/3381
+    #   runtime; 40ms, 16.11%
+    #   memory; 13.8MB, 55.96%
+    def hammingDistance(self, x: int, y: int) -> int:
+        cnt, x, y = 0, bin(x)[2:], bin(y)[2:]
+        if len(x) < len(y):
+            x = '0' * (len(y) - len(x)) + x
+        elif len(x) > len(y):
+            y = '0' * (len(x) - len(y)) + y
+        for i in range(len(y)):
+            if x[i] != y[i]:
+                cnt += 1
+        return cnt
+            
 
 s = Solution()
 data = [(1, 4, 2),
