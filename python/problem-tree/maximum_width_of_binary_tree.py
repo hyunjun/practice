@@ -3,7 +3,9 @@
 #   https://leetcode.com/problems/maximum-width-of-binary-tree/solution
 
 
+from collections import defaultdict
 from TreeNode import TreeNode
+
 
 class Solution:
     #   Wrong Answer
@@ -67,7 +69,7 @@ class Solution:
 
     #   runtime; 40ms, 100.00%
     #   memory; 13MB, 100.00%
-    def widthOfBinaryTree(self, root):
+    def widthOfBinaryTree2(self, root):
         if root is None:
             return 0
 
@@ -85,6 +87,25 @@ class Solution:
                 q.append((depth + 1, pos * 2 + 1, node.right))
         print(nodesDict)
         return max([maxPos - minPos + 1 for minPos, maxPos in nodesDict.values()])
+
+    #   https://leetcode.com/explore/featured/card/july-leetcoding-challenge/545/week-2-july-8th-july-14th/3385
+    #   runtime; 40ms, 56.94%
+    #   memory; 14.4MB, 43.28%
+    def widthOfBinaryTree(self, root: TreeNode) -> int:
+        minD, maxD, q = {}, {}, [(root, 0, 0)]
+        while q:
+            node, depth, position = q.pop(0)
+            if depth in minD and depth in maxD:
+                minD[depth] = min(minD[depth], position)
+                maxD[depth] = max(maxD[depth], position)
+            else:
+                minD[depth] = maxD[depth] = position
+            if node.left:
+                q.append((node.left, depth + 1, position * 2))
+            if node.right:
+                q.append((node.right, depth + 1, position * 2 + 1))
+        return max(maxD[d] - minPos for d, minPos in minD.items()) + 1
+
 
 s = Solution()
 root1 = TreeNode(1)
@@ -115,6 +136,20 @@ root7 = TreeNode(1)
 root7.left = TreeNode(3)
 root7.right = TreeNode(2)
 root7.left.left = TreeNode(5)
+root8 = TreeNode(1)
+root8.left = TreeNode(1)
+root8.left.right = TreeNode(1)
+root8.left.right.right = TreeNode(1)
+root8.left.right.right.left = TreeNode(2)
+root8.left.right.right.left.left = TreeNode(2)
+root8.left.right.right.left.left.left = TreeNode(2)
+root8.left.right.right.left.right = TreeNode(2)
+root8.left.right.right.left.right.left = TreeNode(2)
+root8.left.right.right.right = TreeNode(2)
+root8.left.right.right.right.left = TreeNode(2)
+root8.left.right.right.right.left.right = TreeNode(2)
+root8.left.right.right.right.right = TreeNode(2)
+root8.left.right.right.right.right.right = TreeNode(2)
 data = [(root1, 4),
         (root2, 2),
         (root3, 2),
@@ -122,7 +157,8 @@ data = [(root1, 4),
         (root5, 1),
         (root6, 1),
         (root7, 2),
+        (root8, 8),
         ]
-for root, expected in data:
+for root, expect in data:
     real = s.widthOfBinaryTree(root)
-    print('{}, expected {}, real {}, result {}'.format(root, expected, real, expected == real))
+    print('{}, expect {}, real {}, result {}'.format(root, expect, real, expect == real))
