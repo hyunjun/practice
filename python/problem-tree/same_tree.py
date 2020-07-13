@@ -1,12 +1,12 @@
 #   https://leetcode.com/problems/same-tree
-#   98.97%
 
 
 from TreeNode import TreeNode
 
 
 class Solution:
-    def isSameTree(self, p, q):
+    #   98.97%
+    def isSameTree0(self, p, q):
         pQueue = [p]
         qQueue = [q]
         while 0 < len(pQueue) and 0 < len(qQueue):
@@ -25,27 +25,42 @@ class Solution:
                 qQueue.append(r.right)
         return True
 
+    #   https://leetcode.com/explore/featured/card/july-leetcoding-challenge/545/week-2-july-8th-july-14th/3389
+    #   runtime; 32ms, 60.40%
+    #   memory; 13.8MB, 76.71%
+    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+        
+        def isSameNode(l, r):
+            if not l and not r:
+                return True
+            if l and r and l.val == r.val:
+                return isSameNode(l.left, r.left) and isSameNode(l.right, r.right)
+            return False
+        
+        return isSameNode(p, q)
+
 
 s = Solution()
-
-p = TreeNode(1)
-p.left = TreeNode(2)
-p.right = TreeNode(3)
-q = TreeNode(1)
-q.left = TreeNode(2)
-q.right = TreeNode(3)
-print(s.isSameTree(p, q))
-
-p = TreeNode(1)
-p.left = TreeNode(2)
-q = TreeNode(1)
-q.right = TreeNode(2)
-print(s.isSameTree(p, q))
-
-p = TreeNode(1)
-p.left = TreeNode(2)
-p.right = TreeNode(1)
-q = TreeNode(1)
-q.left = TreeNode(1)
-q.right = TreeNode(2)
-print(s.isSameTree(p, q))
+p1 = TreeNode(1)
+p1.left = TreeNode(2)
+p1.right = TreeNode(3)
+q1 = TreeNode(1)
+q1.left = TreeNode(2)
+q1.right = TreeNode(3)
+p2 = TreeNode(1)
+p2.left = TreeNode(2)
+q2 = TreeNode(1)
+q2.right = TreeNode(2)
+p3 = TreeNode(1)
+p3.left = TreeNode(2)
+p3.right = TreeNode(1)
+q3 = TreeNode(1)
+q3.left = TreeNode(1)
+q3.right = TreeNode(2)
+data = [(p1, q1, True),
+        (p2, q2, False),
+        (p3, q3, False),
+        ]
+for p, q, expect in data:
+    real = s.isSameTree(p, q)
+    print(f'{p} {q} expect {expect} real {real} result {expect == real}')
