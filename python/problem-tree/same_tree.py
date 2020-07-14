@@ -28,7 +28,7 @@ class Solution:
     #   https://leetcode.com/explore/featured/card/july-leetcoding-challenge/545/week-2-july-8th-july-14th/3389
     #   runtime; 32ms, 60.40%
     #   memory; 13.8MB, 76.71%
-    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+    def isSameTree1(self, p: TreeNode, q: TreeNode) -> bool:
         
         def isSameNode(l, r):
             if not l and not r:
@@ -38,6 +38,26 @@ class Solution:
             return False
         
         return isSameNode(p, q)
+
+    #   runtime; 68ms
+    #   memory; 13.6MB, 93.71%
+    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+        
+        pNode, pStack, qNode, qStack = p, [], q, []
+        while (pNode or pStack) and (qNode or qStack):
+            if pNode and qNode:
+                pStack.append(pNode)
+                qStack.append(qNode)
+                pNode, qNode = pNode.left, qNode.left
+            elif not pNode and not qNode and pStack and qStack:
+                pNode, qNode = pStack.pop(), qStack.pop()
+                if pNode and qNode and pNode.val == qNode.val:
+                    pNode, qNode = pNode.right, qNode.right
+                else:
+                    return False
+            else:
+                return False
+        return not pNode and not qNode and not pStack and not qStack
 
 
 s = Solution()
@@ -60,6 +80,7 @@ q3.right = TreeNode(2)
 data = [(p1, q1, True),
         (p2, q2, False),
         (p3, q3, False),
+        (None, TreeNode(0), False),
         ]
 for p, q, expect in data:
     real = s.isSameTree(p, q)
