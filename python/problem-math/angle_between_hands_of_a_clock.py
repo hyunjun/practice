@@ -5,11 +5,19 @@ class Solution:
     #   https://leetcode.com/explore/featured/card/july-leetcoding-challenge/545/week-2-july-8th-july-14th/3390
     #   runtime; 56ms, 7.28%
     #   memory; 13.9MB, 43.72%
-    def angleClock(self, hour: int, minutes: int) -> float:
+    def angleClock0(self, hour: int, minutes: int) -> float:
         if not (1 <= hour <= 12) or not (0 <= minutes <= 59):
             return float('-inf')
         ret = abs(30 * ((0 if hour == 12 else hour) + minutes / 60) - 6 * minutes)
         return ret if ret < 180 else 360 - ret
+
+    #   runtime; 32ms, 52.48%
+    #   memory; 13.8MB, 53.49%
+    def angleClock(self, hour: int, minutes: int) -> float:
+        if not (1 <= hour <= 12) or not (0 <= minutes <= 59):
+            return float('-inf')
+        ret = abs(30 * (hour % 12 + minutes / 60) - 6 * minutes)
+        return min(ret, 360 - ret)
 
 
 s = Solution()
