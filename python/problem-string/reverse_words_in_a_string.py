@@ -1,7 +1,10 @@
 #   https://leetcode.com/problems/reverse-words-in-a-string
 
 
-class Solution(object):
+import re
+
+
+class Solution:
     #   97.88%
     def reverseWords0(self, s):
         """
@@ -19,7 +22,7 @@ class Solution(object):
     #   https://www.youtube.com/watch?v=aotBpjJUqJo
     #   runtime; 64ms, 6.77%
     #   memory; 13.8MB, 5.16%
-    def reverseWords(self, s):
+    def reverseWords1(self, s):
         l = []
         for i, c in enumerate(s.strip()):
             if c == ' ' and l[-1] == ' ':
@@ -40,7 +43,19 @@ class Solution(object):
                 s = i + 1
         reverse(s, len(l) - 1)
         return ''.join(l)
-        
+
+    #   https://leetcode.com/explore/featured/card/july-leetcoding-challenge/546/week-3-july-15th-july-21st/3391
+    #   runtime; 48ms, 25.05%
+    #   memory; 14.2MB, 95.62%
+    def reverseWords2(self, s: str) -> str:
+        return ' '.join(re.sub('\s+', ' ', s.strip()).split(' ')[::-1])
+
+    #   runtime; 28ms, 83.77%
+    #   memory; 14.6MB, 12.96%
+    def reverseWords(self, s: str) -> str:
+        return ' '.join(s.strip().split()[::-1])
+
+
 s = Solution()
 data = [("the sky is blue", "blue is sky the"),
         ('perfect makes practice', 'practice makes perfect'),
