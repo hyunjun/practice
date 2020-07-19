@@ -97,13 +97,39 @@ class Solution:
 
     #   runtime; 36ms, 59.78%
     #   memory; 13.9MB, 25.97%
-    def addBinary(self, a: str, b: str) -> str:
+    def addBinary2(self, a: str, b: str) -> str:
         l, s = b, a
         if len(a) > len(b):
             l, s = a, b
         s = '0' * (len(l) - len(s)) + s
         carry, l, s, res = '0', l[::-1], s[::-1], []
         for i in range(len(l)):
+            nums = sorted([l[i], s[i], carry])
+            if nums == ['0', '0', '0']:
+                carry = '0'
+                res.append('0')
+            elif nums == ['0', '0', '1']:
+                carry = '0'
+                res.append('1')
+            elif nums == ['0', '1', '1']:
+                carry = '1'
+                res.append('0')
+            else:
+                carry = '1'
+                res.append('1')
+        if carry == '1':
+            res.append('1')
+        return ''.join(res[::-1])
+
+    #   runtime; 44ms, 31.30%
+    #   memory; 13.9MB, 46.03%
+    def addBinary(self, a: str, b: str) -> str:
+        l, s = b, a
+        if len(a) > len(b):
+            l, s = a, b
+        s = '0' * (len(l) - len(s)) + s
+        carry, res = '0', []
+        for i in range(len(l) - 1, -1, -1):
             nums = sorted([l[i], s[i], carry])
             if nums == ['0', '0', '0']:
                 carry = '0'
@@ -129,6 +155,7 @@ cases = [('11', '1', '100'),
          ('111', '1', '1000'),
          ('1010', '1011', '10101'),
          ('100', '110010', '110110'),
+         ('11', '1', '100'),
          ]
 for a, b, expect in cases:
     real = s.addBinary(a, b)
