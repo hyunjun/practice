@@ -1,12 +1,12 @@
 #   https://leetcode.com/problems/remove-linked-list-elements
-#   18.37%
 
 
 from ListNode import ListNode
 
 
 class Solution(object):
-    def removeElements(self, head, val):
+    #   18.37%
+    def removeElements0(self, head, val):
         if head is None:
             return head
         prev, cur = head, head.next
@@ -22,6 +22,24 @@ class Solution(object):
                 prev = cur
             cur = cur.next
         return head
+
+    #   https://leetcode.com/explore/featured/card/july-leetcoding-challenge/546/week-3-july-15th-july-21st/3396
+    #   runtime; 72ms, 73.47%
+    #   memory; 16.8MB, 68.52%
+    def removeElements(self, head: ListNode, val: int) -> ListNode:
+        nodes, n = [], head
+        while n:
+            if n.val != val:
+                nodes.append(n)
+            n = n.next
+        if 0 == len(nodes):
+            return None
+        for i, n in enumerate(nodes):
+            if 0 == i:
+                continue
+            nodes[i - 1].next = n
+        nodes[-1].next = None
+        return nodes[0]
 
 
 s = Solution()
