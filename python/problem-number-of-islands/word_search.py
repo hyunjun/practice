@@ -1,6 +1,10 @@
 #   https://leetcode.com/problems/word-search
 
 
+from copy import deepcopy
+from typing import List
+
+
 class Solution(object):
     #   98.02%
     def exist0(self, board, word):
@@ -83,7 +87,7 @@ class Solution(object):
     #   위의 code에서 visited만 set 대신 2d list 사용
     #   runtime; 348ms, 74.81%
     #   memory; 14.5MB, 31.91%
-    def exist(self, board, word):
+    def exist2(self, board, word):
 
         R, C = len(board), len(board[0])
         visited = [[False] * C for _ in range(R)]
@@ -111,6 +115,31 @@ class Solution(object):
                         return True
         return False
 
+    #   https://leetcode.com/explore/featured/card/july-leetcoding-challenge/546/week-3-july-15th-july-21st/3397
+    #   runtime; 460ms, 33.79%
+    #   memory; 15.5MB, 16.28%
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        R, C = len(board), len(board[0])
+        
+        def getChar(w, r, c):
+            if board[r][c] == w[0]:
+                if len(w) == 1:
+                    return True
+                board[r][c] = ''
+                for nr, nc in [(r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)]:
+                    if 0 <= nr < R and 0 <= nc < C:
+                        if getChar(w[1:], nr, nc):
+                            return True
+                board[r][c] = w[0]
+            return False
+        
+        for r in range(R):
+            for c in range(C):
+                if board[r][c] == word[0]:
+                    if getChar(word, r, c):
+                        return True
+        return False
+
 
 board0 = [['A','B','C','E'],
           ['S','F','C','S'],
@@ -130,12 +159,13 @@ board3 = [["C","A","A"],
           ["A","A","A"],
           ["B","C","D"]
           ]
-data = [(board0, "ABCCED", True),
-        (board0, "SEE", True),
+data = [(deepcopy(board0), "ABCCED", True),
+        (deepcopy(board0), "SEE", True),
         (board0, "ABCB", False),
         (board1, "ABCESEEEFS", True),
         (board2, "aaaaaaaaaaaaaaaaaaaa", False),
         (board3, "AAB", True),
+        ([['a']], 'a', True),
         ]
 s = Solution()
 for board, word, expected in data:
