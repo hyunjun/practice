@@ -2,7 +2,9 @@
 
 
 class Solution:
-    #   50.26%
+    #   https://leetcode.com/explore/featured/card/july-leetcoding-challenge/547/week-4-july-22nd-july-28th/3402
+    #   runtime; 36ms, 50.83%
+    #   memory; 14MB, 19.65%
     def addDigitsRecur(self, num):
         strNum = str(num)
         if 1 == len(strNum):
@@ -31,7 +33,9 @@ class Solution:
 
 
 s = Solution()
-data = [(38, 2), (23456, 2)]
-for num, expected in data:
+data = [(38, 2),
+        (23456, 2),
+        ]
+for num, expect in data:
     real = s.addDigits(num)
-    print('{}, expected {}, real {}, result {}'.format(num, expected, real, expected == real))
+    print('{}, expect {}, real {}, result {}'.format(num, expect, real, expect == real))
