@@ -2,6 +2,8 @@
 
 
 from TreeNode import TreeNode
+from typing import List
+
 
 class Solution:
     #   runtime; 220ms, 52.16%
