@@ -5,11 +5,13 @@
 
 from TreeNode import TreeNode
 from collections import defaultdict
+from typing import List
+
 
 class Solution:
     #   runtime; 36ms, 100.00%
     #   memory; 12.8MB, 100.00%
-    def verticalTraversal(self, root):
+    def verticalTraversal0(self, root):
         if root is None:
             return []
         levelOrderTraverse, q = defaultdict(list), [(0, 0, root)]
@@ -23,6 +25,20 @@ class Solution:
                 q.append((x + 1, y - 1, node.right))
         print(levelOrderTraverse)
         return [[v for _, v in sorted(val, key=lambda t: (-t[0], t[1]))] for _, val in sorted(levelOrderTraverse.items(), key=lambda t: t[0])]
+
+    #   https://leetcode.com/explore/featured/card/august-leetcoding-challenge/549/week-1-august-1st-august-7th/3415
+    #   runtime; 24ms, 99.12%
+    #   memory; 14.1MB, 27.62%
+    def verticalTraversal(self, root: TreeNode) -> List[List[int]]:
+        d, q = defaultdict(list), [(root, 0, 0)]
+        while q:
+            n, x, y = q.pop(0)
+            d[x].append((n.val, x, y))
+            if n.left:
+                q.append((n.left, x - 1, y + 1))
+            if n.right:
+                q.append((n.right, x + 1, y + 1))
+        return [[val for val, _, _ in sorted(v, key=lambda t: (t[2], t[0]))] for _, v in sorted(d.items())]
 
 
 s = Solution()
