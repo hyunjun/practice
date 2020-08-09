@@ -25,8 +25,8 @@ class Solution:
                 queue.append((cur.right, prevList[:]))
         return result
 
-    #   67.76%
-    def pathSum(self, root, _sum):
+    #   runtime; 244ms, 67.76%
+    def pathSum1(self, root, _sum):
         if root is None:
             return 0
         queue, result = [(root, [0])], 0
@@ -43,6 +43,28 @@ class Solution:
             if cur.right:
                 queue.append((cur.right, prevList[:]))
         return result
+
+    #   https://leetcode.com/explore/featured/card/august-leetcoding-challenge/550/week-2-august-8th-august-14th/3417
+    #   runtime; 408ms, 46.21%
+    #   memory; 38.9MB
+    def pathSum(self, root: TreeNode, sum: int) -> int:
+        self.cnt = 0
+        
+        def getSum(acc, node):
+            if node is None:
+                return
+            acc = [a + node.val for a in acc]
+            acc.append(node.val)
+            print(acc, node.val)
+            for a in acc:
+                if a == sum:
+                    self.cnt += 1
+            getSum(acc[:], node.left)
+            getSum(acc[:], node.right)
+        
+        getSum([], root)
+        
+        return self.cnt
 
 
 s = Solution()
