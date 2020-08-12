@@ -1,11 +1,9 @@
 #   https://leetcode.com/problems/h-index
-#   37.05%
-
-#from collections import Counter
 
 
 class Solution:
-    def hIndex(self, citations):
+    #   37.05%
+    def hIndex0(self, citations):
         if citations is None or 0 == len(citations):
             return 0
 
@@ -30,9 +28,25 @@ class Solution:
                 return tot_cnt - i
         return 0
 
+    #   https://leetcode.com/explore/featured/card/august-leetcoding-challenge/550/week-2-august-8th-august-14th/3420
+    #   runtime; 36ms, 76.92%
+    #   memory; 14.2MB, 25.48%
+    def hIndex(self, citations: List[int]) -> int:
+        total = len(citations)
+        citations.sort()
+        for i, c in enumerate(citations):
+            if total - i <= c:
+                return total - i
+        return 0
 
-cases = [([3, 0, 6, 1, 5], 3), ([0, 0, 0], 0), ([6, 6, 6], 3), ([1, 1], 1), ([100], 1)]
+
+cases = [([3, 0, 6, 1, 5], 3),
+         ([0, 0, 0], 0),
+         ([6, 6, 6], 3),
+         ([1, 1], 1),
+         ([100], 1),
+         ]
 s = Solution()
-for citations, expected in cases:
+for citations, expect in cases:
     real = s.hIndex(citations)
-    print('{}\texpected {}\treal {}\tresult {}'.format(citations, expected, real, expected == real))
+    print(f'{citations} expect {expect} real {real} result {expect == real}')
