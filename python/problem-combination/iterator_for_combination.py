@@ -5,7 +5,7 @@
 
 #   runtime; 48ms, 76.75%
 #   memory; 15.1MB, 100.00%
-class CombinationIterator:
+class CombinationIterator0:
 
     def __init__(self, characters: str, combinationLength: int):
         self.combis, self.idx = [], 0
@@ -26,7 +26,42 @@ class CombinationIterator:
 
     def hasNext(self) -> bool:
         return self.idx < len(self.combis)
-        
+
+#   https://leetcode.com/explore/featured/card/august-leetcoding-challenge/550/week-2-august-8th-august-14th/3422
+#   runtime; 52ms, 86.77%
+#   memory; 15.9MB, 58.70%
+class CombinationIterator:
+
+    def __init__(self, characters: str, combinationLength: int):
+        self.combinations, self.hasMore = self.combi(set(), combinationLength, characters), True
+        self.nextVal = next(self.combinations)
+
+    def combi(self, used, left, s):
+        if left == 1:
+            for c in s:
+                if c in used:
+                    continue
+                yield c
+        else:
+            for i, c in enumerate(s):
+                if c in used:
+                    continue
+                used.add(c)
+                for n in self.combi(used, left - 1, s[i + 1:]):
+                    yield c + n
+                used.remove(c)
+                
+    def next(self) -> str:
+        ret = None
+        try:
+            ret = self.nextVal
+            self.nextVal = next(self.combinations)
+        except StopIteration:
+            self.nextVal, self.hasMore = None, False
+        return ret
+
+    def hasNext(self) -> bool:
+        return self.hasMore        
 
 
 # Your CombinationIterator object will be instantiated and called as such:
