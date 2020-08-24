@@ -26,7 +26,7 @@ class Solution:
     #   https://leetcode.com/explore/featured/card/august-leetcoding-challenge/552/week-4-august-22nd-august-28th/3435
     #   runtime; 36ms, 60.61%
     #   memory; 13.9MB, 97.49%
-    def sumOfLeftLeaves(self, root: TreeNode) -> int:
+    def sumOfLeftLeaves1(self, root: TreeNode) -> int:
         if root is None:
             return 0
         res, q = 0, [(root, False)]
@@ -38,6 +38,28 @@ class Solution:
                 q.append((n.left, True))
             if n.right:
                 q.append((n.right, False))
+        return res
+
+    #   runtime; 24ms, 98.37%
+    #   memory; 14.2MB, 77.91%
+    def sumOfLeftLeaves(self, root: TreeNode) -> int:
+        if root is None:
+            return 0
+        res, stack, node = 0, [], root
+        node.isLeft = False
+        while stack or node:
+            if node:
+                stack.append(node)
+                node = node.left
+                if node:
+                    node.isLeft = True
+            else:
+                node = stack.pop()
+                if node and node.isLeft and node.left is None and node.right is None:
+                    res += node.val
+                node = node.right
+                if node:
+                    node.isLeft = False
         return res
 
 
