@@ -56,7 +56,7 @@ class Solution:
         return root
 
     #   0.0%
-    def deleteNode(self, root, key):
+    def deleteNode1(self, root, key):
         if root is None:
             return None
 
@@ -92,6 +92,33 @@ class Solution:
         nodes[idx].right = self.linkNode(nodes[idx + 1:], (len(nodes) - idx - 1 - 1) // 2)
         return nodes[idx]
 
+    #   https://leetcode.com/explore/featured/card/august-leetcoding-challenge/553/week-5-august-29th-august-31st/3443
+    #   runtime; 112ms, 27.32%
+    #   memory; 17.7MB, 99.62%
+    def deleteNode(self, root: TreeNode, key: int) -> TreeNode:
+        stack, node, res = [], root, []
+        while stack or node:
+            if node:
+                stack.append(node)
+                node = node.left
+            else:
+                node = stack.pop()
+                if node.val != key:
+                    res.append(node)
+                node = node.right
+
+        if 0 == len(res):
+            return None
+
+        def reconstruct(nodes, s, e):
+            if s >= e:
+                return None
+            m = (s + e) // 2
+            nodes[m].left, nodes[m].right = reconstruct(nodes, s, m), reconstruct(nodes, m + 1, e)
+            return nodes[m]
+
+        return reconstruct(res, 0, len(res))
+
 
 s = Solution()
 
@@ -103,23 +130,29 @@ root.right = TreeNode(6)
 root.right.right = TreeNode(7)
 print(root)
 deleted = s.deleteNode(root, 3)
-print(deleted)
+print(deleted, '\t3 is removed')
 
 root = TreeNode(0)
 print(root)
 deleted = s.deleteNode(root, 0)
-print(deleted)
+print(deleted, '\t0 is removed')
 
 root = TreeNode(1)
 print(root)
 deleted = s.deleteNode(root, 0)
-print(deleted)
+print(deleted, '\t0 is removed')
 
 root = TreeNode(1)
 root.right = TreeNode(2)
 print(root)
 deleted = s.deleteNode(root, 2)
-print(deleted)
+print(deleted, '\t2 is removed')
+
+root = TreeNode(1)
+root.right = TreeNode(2)
+print(root)
+deleted = s.deleteNode(root, 1)
+print(deleted, '\t1 is removed')
 
 root = TreeNode(3)
 root.left = TreeNode(1)
@@ -127,4 +160,4 @@ root.left.right = TreeNode(2)
 root.right = TreeNode(4)
 print(root)
 deleted = s.deleteNode(root, 3)
-print(deleted)
+print(deleted, '\t3 is removed')
