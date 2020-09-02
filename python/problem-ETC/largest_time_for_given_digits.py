@@ -1,6 +1,9 @@
 #   https://leetcode.com/problems/largest-time-for-given-digits
 
 
+from itertools import product
+
+
 class Solution:
     #   Wrong Answer
     def largestTimeFromDigits0(self, A):
@@ -39,7 +42,7 @@ class Solution:
         return '{}{}:{}{}'.format(res[0], res[1], res[2], res[3])
 
     #   212ms, 100.00%
-    def largestTimeFromDigits(self, A):
+    def largestTimeFromDigits1(self, A):
         sortedA = sorted(A)
         for h in range(23, -1, -1):
             if h < 10:
@@ -54,6 +57,21 @@ class Solution:
                 if sorted([h0, h1, m0, m1]) == sortedA:
                     return '{}{}:{}{}'.format(h0, h1, m0, m1)
         return ''
+
+    #   https://leetcode.com/explore/featured/card/september-leetcoding-challenge/554/week-1-september-1st-september-7th/3445
+    #   runtime; 100ms
+    #   memory; 13.8MB, 74.68%
+    def largestTimeFromDigits(self, A):
+        sortedA, m0, m1 = sorted(A), range(5, -1, -1), range(9, -1, -1)
+        
+        def makeTime(h0, h1):
+            for (((a, b), c), d) in product(product(product(h0, h1), m0), m1):
+                if sorted([a, b, c, d]) == sortedA:
+                    return f'{a}{b}:{c}{d}'
+            return ''
+        
+        ret = makeTime([2], range(3, -1, -1))
+        return ret if 0 < len(ret) else makeTime([1, 0], range(9, -1, -1))
 
 
 s = Solution()
