@@ -30,7 +30,7 @@ class Solution:
 
     #   runtime; 48ms, 100.00%
     #   memory; 13.4MB, 100.00%
-    def sumRootToLeaf(self, root):
+    def sumRootToLeaf1(self, root):
         if root is None:
             return 0
         root.parent = None
@@ -56,6 +56,24 @@ class Solution:
                 n = n.parent
         return _sum
 
+    #   https://leetcode.com/explore/challenge/card/september-leetcoding-challenge/555/week-2-september-8th-september-14th/3453
+    #   runtime; 48ms, 33.94%
+    #   memory; 14.1MB, 33.41%
+    def sumRootToLeaf(self, root: TreeNode) -> int:
+        self.res = 0
+        def getLeafSum(acc, node):
+            acc.append(node.val)
+            if node.left is None and node.right is None:
+                self.res += sum(v *  2 ** (len(acc) - i - 1) for i, v in enumerate(acc))
+            else:
+                if node.left:
+                    getLeafSum(acc[:], node.left)
+                if node.right:
+                    getLeafSum(acc[:], node.right)
+        if root:
+            getLeafSum([], root)
+        return self.res
+
 
 s = Solution()
 root = TreeNode(1)
@@ -65,4 +83,8 @@ root.left.right = TreeNode(1)
 root.right = TreeNode(1)
 root.right.left = TreeNode(0)
 root.right.right = TreeNode(1)
-print(s.sumRootToLeaf(root) == 22)
+data = [(root, 22),
+        ]
+for root, expect in data:
+    real = s.sumRootToLeaf(root)
+    print(f'{root} expect {expect} real {real} result {expect == real}')
