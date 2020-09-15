@@ -3,10 +3,14 @@
 #   https://leetcode.com/problems/partition-labels/solution
 
 
+from collections import defaultdict
+from typing import List
+
+
 class Solution:
     #   runtime; 32ms, 62.68%
     #   memory; 10.7MB, 90.99%
-    def partitionLabels(self, S):
+    def partitionLabels0(self, S):
         if S is None or 0 == len(S):
             return []
 
@@ -38,6 +42,48 @@ class Solution:
         for groupKey, (minIdx, maxIdx) in sorted(groupValDict.items(), key=lambda t: t[0]):
             res.append(maxIdx - minIdx + 1)
         return res
+
+    #   https://leetcode.com/explore/challenge/card/september-leetcoding-challenge/554/week-1-september-1st-september-7th/3448
+    #   runtime; 496ms
+    #   memory; 13.9MB, 26.83%
+    def partitionLabels1(self, S: str) -> List[int]:
+        d = defaultdict(list)
+        for i, c in enumerate(S):
+            d[c].append(i)
+        idxDict = defaultdict(set)
+        for i, c in enumerate(S):
+            for j in range(d[c][0], d[c][-1] + 1):
+                idxDict[j].add(c)
+        minMaxes = set()
+        for i, c in enumerate(S):
+            minIdx, maxIdx = float('inf'), float('-inf')
+            for ch in idxDict[i]:
+                minIdx, maxIdx = min(minIdx, d[ch][0]), max(maxIdx, d[ch][-1])
+            minMaxes.add((minIdx, maxIdx))
+        partitions = sorted(minMaxes)
+        for i, partition in enumerate(partitions):
+            if 0 == i:
+                continue
+            if partitions[i - 1][1] > partition[0]:
+                partitions[i - 1], partitions[i] = [None, None], [min(partitions[i - 1][0], partition[0]), max(partitions[i - 1][1], partition[1])]
+        return [partition[1] - partition[0] + 1 for partition in partitions if partition[0] is not None and partition[1] is not None]
+
+    #   runtime; 64ms, 14.91%
+    #   memory; 13.8MB, 69.04%
+    def partitionLabels(self, S: str) -> List[int]:
+        d = {}
+        for i, c in enumerate(S):
+            if c in d:
+                d[c][1] = i
+            else:
+                d[c] = [i, i]
+        partitions = sorted(d.values())
+        for i, partition in enumerate(partitions):
+            if 0 == i:
+                continue
+            if partitions[i - 1][1] > partition[0]:
+                partitions[i - 1], partitions[i] = [None, None], [min(partitions[i - 1][0], partition[0]), max(partitions[i - 1][1], partition[1])]
+        return [partition[1] - partition[0] + 1 for partition in partitions if partition[0] is not None and partition[1] is not None]
 
 
 s = Solution()
