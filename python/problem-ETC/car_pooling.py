@@ -11,7 +11,7 @@ class Solution:
     #   https://leetcode.com/explore/challenge/card/september-leetcoding-challenge/556/week-3-september-15th-september-21st/3467
     #   runtime; 400ms, 5.09%
     #   memory; 14.3MB, 54.07%
-    def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
+    def carPooling0(self, trips: List[List[int]], capacity: int) -> bool:
         d = defaultdict(int)
         for trip in trips:
             passenger, start, end = trip
@@ -19,6 +19,21 @@ class Solution:
                 d[i] += passenger
                 if d[i] > capacity:
                     return False
+        return True
+
+    #   runtime; 64ms, 76.39%
+    #   memory; 14.2MB, 73.66%
+    def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
+        d, maxDst = defaultdict(int), 0
+        for trip in trips:
+            d[trip[1]] += trip[0]
+            d[trip[2]] -= trip[0]
+            maxDst = max(maxDst, trip[2])
+        curCapacity = 0
+        for i in range(maxDst + 1):
+            curCapacity += d[i]
+            if curCapacity > capacity:
+                return False
         return True
 
 
