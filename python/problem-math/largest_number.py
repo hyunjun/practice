@@ -3,6 +3,7 @@
 #   https://leetcode.com/problems/largest-number/solution
 
 
+from functools import cmp_to_key
 from typing import List
 
 
@@ -52,7 +53,7 @@ class Solution:
     #   https://leetcode.com/explore/challenge/card/september-leetcoding-challenge/557/week-4-september-22nd-september-28th/3472
     #   runtime; 36ms, 84.93%
     #   memory; 14.1MB
-    def largestNumber(self, nums: List[int]) -> str:
+    def largestNumber2(self, nums: List[int]) -> str:
         maxLen = max(len(str(n)) for n in nums)
         sortedNums = sorted([(n, int(str(n) + str(n)[-1] * (maxLen - len(str(n))))) for n in nums], key=lambda t: -t[1])
         for i, (n, modified) in enumerate(sortedNums):
@@ -62,6 +63,26 @@ class Solution:
             if str(prevNum)[0] == str(n)[0] and int(str(prevNum) + str(n)) < int(str(n) + str(prevNum)):
                 sortedNums[i - 1], sortedNums[i] = sortedNums[i], sortedNums[i - 1]
         return str(int(''.join(str(n) for n, _ in sortedNums)))
+
+    #   runtime; 44ms, 52.70%
+    #   memory; 14.1MB, 5.29%
+    def largestNumber(self, nums: List[int]) -> str:
+
+        def comparator(a, b):
+            strA, strB = str(a), str(b)
+            firstA, firstB = int(strA[0]), int(strB[0])
+            if firstA > firstB:
+                return -1
+            if firstA < firstB:
+                return 1
+            numAB, numBA = int(strA + strB), int(strB + strA)
+            if numAB > numBA:
+                return -1
+            if numAB < numBA:
+                return 1
+            return 0
+
+        return str(int(''.join([str(n) for n in sorted(nums, key=cmp_to_key(comparator))])))
 
 
 s = Solution()
