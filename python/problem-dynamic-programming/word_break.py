@@ -4,8 +4,11 @@
 #   https://leetcode.com/problems/word-break/discuss/141492/Python-backtracking-with-pruning-93
 
 
-#from collections import defaultdict
-#INF_DICT = lambda: defaultdict(INF_DICT)
+from collections import defaultdict
+from typing import List
+
+
+INF_DICT = lambda: defaultdict(INF_DICT)
 
 
 class Solution:
@@ -97,7 +100,7 @@ class Solution:
 
     #   94.16%
     #   dynamic programming
-    def wordBreak(self, s, wordDict):
+    def wordBreak2(self, s, wordDict):
         if s is None or 0 == len(s) or wordDict is None or 0 == len(wordDict):
             return False
 
@@ -121,6 +124,49 @@ class Solution:
         #print(counts)
         return 0 < counts[-1]
 
+    #   https://leetcode.com/explore/challenge/card/september-leetcoding-challenge/558/week-5-september-29th-september-30th/3477
+    #   Time Limit Exceeded
+    def wordBreak3(self, s: str, wordDict: List[str]) -> bool:
+        
+        t = lambda: defaultdict(t)
+        trie = t()
+        
+        for word in wordDict:
+            _trie = trie
+            for c in word:
+                _trie = _trie[c]
+            _trie['$'] = True
+            
+        def isIncluded(subStr):
+            _trie = trie
+            for c in subStr:
+                if c not in _trie:
+                    return False
+                _trie = _trie[c]
+            return '$' in _trie and _trie['$'] == True
+        
+        def consume(subStr):
+            if 0 == len(subStr):
+                return True
+            for i in range(1, len(subStr) + 1):
+                if isIncluded(subStr[:i]):
+                    if consume(subStr[i:]):
+                        return True
+            return False
+        
+        return consume(s)
+
+    #   runtime; 40ms, 71.18%
+    #   memory; 14.3MB, 6.73%
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        dp = [False] * (len(s) + 1)
+        dp[0] = True
+        for i in range(1, len(dp)):
+            for word in wordDict:
+                if dp[i - 1] and s[i - 1:i - 1 + len(word)] == word:
+                    dp[i - 1 + len(word)] = True
+        return dp[-1]
+
 
 solution = Solution()
 data = [('leecode', ['leet', 'code'], False),
@@ -137,6 +183,6 @@ data = [('leecode', ['leet', 'code'], False),
 for s, wordDict, expected in data:
     real = solution.wordBreak(s, wordDict)
     if len(s) < 10:
-        print('{}, {}, expected {}, real {}, result {}'.format(s, wordDict, expected, real, expected == real))
+        print(f'{s}, {wordDict}, expected {expected}, real {real}, result {expected == real}')
     else:
-        print('{}..., {}, expected {}, real {}, result {}'.format(s[:10], wordDict, expected, real, expected == real))
+        print(f'{s[:10]}..., {wordDict}, expected {expected}, real {real}, result {expected == real}')
