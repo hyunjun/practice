@@ -6,7 +6,7 @@ import math
 class Solution:
     #   runtime; 36ms, 100.00%
     #   memory; 13.1MB, 100.00%
-    def bitwiseComplement(self, N):
+    def bitwiseComplement0(self, N):
         if N == 0:
             return 1
         powerOf2 = 1
@@ -25,6 +25,12 @@ class Solution:
         print(res)
         print([0 if r == 1 else math.pow(2, len(res) - i - 1) for i, r in enumerate(res)])
         return int(sum([0 if r == 1 else math.pow(2, len(res) - i - 1) for i, r in enumerate(res)]))
+
+    #   https://leetcode.com/explore/challenge/card/october-leetcoding-challenge/559/week-1-october-1st-october-7th/3484
+    #   runtime; 24ms, 92.83%
+    #   memory; 14.1MB, 7.89%
+    def bitwiseComplement(self, N: int) -> int:
+        return int(''.join(str(int(b) ^ 1) for b in bin(N)[2:]), 2)
 
 
 s = Solution()
