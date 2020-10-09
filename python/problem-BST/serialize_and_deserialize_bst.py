@@ -1,11 +1,11 @@
 #   https://leetcode.com/problems/serialize-and-deserialize-bst
-#   2.89%
 
 
 from TreeNode import TreeNode
 
 
-class Codec:
+#   2.89%
+class Codec0:
     def serialize(self, root):
         if root is None:
             return ''
@@ -36,14 +36,35 @@ class Codec:
                 d[(idx - 2) // 2].right = d[idx]
         return d[0]
 
+#   https://leetcode.com/explore/challenge/card/october-leetcoding-challenge/560/week-2-october-8th-october-14th/3489
+#   runtime; 96ms, 38.82%
+#   memory; 18.2MB
+class Codec:
+    def serialize(self, root: TreeNode) -> str:
+        def convert(node):
+            if node is None:
+                return ''
+            return '|'.join([str(node.val), convert(node.left), convert(node.right)])
+        return convert(root)
 
-root = TreeNode(5)
-root.left = TreeNode(3)
-root.left.right = TreeNode(4)
-root.right = TreeNode(9)
-root.right.left = TreeNode(7)
+    def deserialize(self, data: str) -> TreeNode:
+        def convert(arr):
+            if 0 == len(arr):
+                return None
+            node = TreeNode(arr[0])
+            node.left, node.right = convert([a for a in arr if a < arr[0]]), convert([a for a in arr if a > arr[0]])
+            return node
+        return convert([int(d) for d in data.split('|') if d != ''])
+
+
+root = TreeNode(51)
+root.left = TreeNode(32)
+root.left.right = TreeNode(43)
+root.right = TreeNode(94)
+root.right.left = TreeNode(75)
 
 codec = Codec()
+print(codec.serialize(root))
 real = codec.deserialize(codec.serialize(root))
 print(root)
 print(real)
