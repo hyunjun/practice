@@ -3,9 +3,12 @@
 #   https://leetcode.com/problems/buddy-strings/solution
 
 
+from collections import Counter
+
+
 class Solution:
-    #   5.15%
-    def buddyStrings(self, A, B):
+    #   runtime; 60ms, 5.15%
+    def buddyStrings0(self, A, B):
         if (A is None or 0 == len(A)) and (B is None or 0 == len(B)) or len(A) != len(B):
             return False
 
@@ -37,6 +40,26 @@ class Solution:
                 return True
 
         return False
+
+    #   https://leetcode.com/explore/challenge/card/october-leetcoding-challenge/560/week-2-october-8th-october-14th/3492
+    #   runtime; 32ms, 75.76%
+    #   memory; 14.1MB
+    def buddyStrings1(self, A: str, B: str) -> bool:
+        if A is None or B is None or len(A) < 2 or len(B) < 2 or len(A) != len(B):
+            return False
+        diffs = []
+        for i, c in enumerate(A):
+            if c != B[i]:
+                diffs.append(i)
+        return (len(diffs) == 0 and any(cnt >= 2 for cnt in Counter(A).values())) or (len(diffs) == 2 and A[diffs[0]] == B[diffs[1]] and A[diffs[1]] == B[diffs[0]])
+
+    #   runtime; 28ms, 91.67%
+    #   memory; 14.2MB, 100.00%
+    def buddyStrings(self, A: str, B: str) -> bool:
+        if A is None or B is None or len(A) < 2 or len(B) < 2 or len(A) != len(B):
+            return False
+        diffs = [i for i, c in enumerate(A) if c != B[i]]
+        return (len(diffs) == 0 and any(cnt >= 2 for cnt in Counter(A).values())) or (len(diffs) == 2 and A[diffs[0]] == B[diffs[1]] and A[diffs[1]] == B[diffs[0]])
 
 
 s = Solution()
