@@ -25,7 +25,7 @@ class Solution:
 
     #   runtime; 96ms, 95.78%
     #   memory; 19.8MB, 100.00%
-    def sortList(self, head: ListNode) -> ListNode:
+    def sortList1(self, head: ListNode) -> ListNode:
         if head is None:
             return None
         node, nodes = head, []
@@ -37,6 +37,21 @@ class Solution:
             nodes[i].next = nodes[i + 1]
         nodes[-1].next = None
         return nodes[0]
+
+    #   https://leetcode.com/explore/challenge/card/october-leetcoding-challenge/560/week-2-october-8th-october-14th/3493
+    #   runtime; 80ms, 99.30%
+    #   memory; 21.4MB
+    def sortList(self, head: ListNode) -> ListNode:
+        n, vals = head, []
+        while n:
+            vals.append(n.val)
+            n = n.next
+        vals.sort()
+        n = head
+        for val in vals:
+            n.val = val
+            n = n.next
+        return head
 
 
 s = Solution()
