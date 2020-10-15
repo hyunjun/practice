@@ -5,7 +5,7 @@
 
 
 class Solution:
-    def rotate(self, nums, k):
+    def rotate0(self, nums, k):
         if nums is None or 0 == len(nums) or k < 0:
             return
         n = len(nums)
@@ -33,6 +33,19 @@ class Solution:
             r -= 1
         print('[3]', nums)
 
+    #   https://leetcode.com/explore/challenge/card/october-leetcoding-challenge/561/week-3-october-15th-october-21st/3496
+    #   runtime; 52ms, 98.25%
+    #   memory; 15.5MB
+    def rotate(self, nums, k):
+        if nums is None or 0 == len(nums) or k <= 0:
+            return
+        print(len(nums), k, k % len(nums))
+        k = k % len(nums) if k >= len(nums) else k
+        if k == 0:
+            return
+        for i, a in enumerate(nums[-k:] + nums[:len(nums) - k]):
+            nums[i] = a
+
 
 s = Solution()
 data = [([1, 2, 3, 4, 5, 6, 7], 3, [5, 6, 7, 1, 2, 3, 4]),
@@ -41,7 +54,8 @@ data = [([1, 2, 3, 4, 5, 6, 7], 3, [5, 6, 7, 1, 2, 3, 4]),
         ([1, 2], 3, [2, 1]),
         ([1, 2], 2, [1, 2]),
         ([1, 2], 0, [1, 2]),
-        ([1, 2, 3, 4, 5, 6], 1, [6, 1, 2, 3, 4, 5])
+        ([1, 2, 3, 4, 5, 6], 1, [6, 1, 2, 3, 4, 5]),
+        ([1, 2, 3, 4, 5, 6, 7], 100, [6, 7, 1, 2, 3, 4, 5]),
         ]
 for nums, k, expected in data:
     s.rotate(nums, k)
