@@ -36,7 +36,7 @@ class Solution:
     #   https://leetcode.com/explore/challenge/card/october-leetcoding-challenge/561/week-3-october-15th-october-21st/3496
     #   runtime; 52ms, 98.25%
     #   memory; 15.5MB
-    def rotate(self, nums, k):
+    def rotate1(self, nums, k):
         if nums is None or 0 == len(nums) or k <= 0:
             return
         print(len(nums), k, k % len(nums))
@@ -45,6 +45,25 @@ class Solution:
             return
         for i, a in enumerate(nums[-k:] + nums[:len(nums) - k]):
             nums[i] = a
+
+    #   runtime; 56ms, 93.55%
+    #   memory; 15.4MB
+    def rotate(self, nums, k):
+        if nums is None or 0 == len(nums) or k <= 0:
+            return
+        k = k % len(nums) if k >= len(nums) else k
+        if k == 0:
+            return
+
+        def swaps(l, r):
+            while l < r:
+                nums[l], nums[r] = nums[r], nums[l]
+                l += 1
+                r -= 1
+
+        swaps(0, len(nums) - k - 1)
+        swaps(len(nums) - k, len(nums) - 1)
+        swaps(0, len(nums) - 1)
 
 
 s = Solution()
