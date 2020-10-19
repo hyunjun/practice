@@ -1,10 +1,14 @@
 #   https://leetcode.com/problems/minimum-domino-rotations-for-equal-row
 
 
+from collections import defaultdict
+from typing import List
+
+
 class Solution:
     #   runtime; 128ms, 100.00%
     #   memory; 13.8MB, 100.00%
-    def minDominoRotations(self, A, B):
+    def minDominoRotations0(self, A, B):
         if A is None or 0 == len(A) or B is None or 0 == len(B) or len(A) != len(B):
             return -1
         aElem, bElem = A[0], B[0]
@@ -28,6 +32,21 @@ class Solution:
             return min(aSwapCnt0, aSwapCnt1)
         if bSwapCnt0 + bSwapCnt1 == bSwapExpect:
             return min(bSwapCnt0, bSwapCnt1)
+        return -1
+
+    #   https://leetcode.com/explore/challenge/card/october-leetcoding-challenge/561/week-3-october-15th-october-21st/3500
+    #   runtime; 1256ms, 40.49%
+    #   memory; 23.1MB
+    def minDominoRotations(self, A: List[int], B: List[int]) -> int:
+        d, dA, dB = defaultdict(set), defaultdict(set), defaultdict(set)
+        for i, a in enumerate(A):
+            d[a].add(i)
+            d[B[i]].add(i)
+            dA[a].add(i)
+            dB[B[i]].add(i)
+        for i in range(1, 7):
+            if len(d[i]) == len(A):
+                return len(dB[i] - dA[i]) if len(dA[i]) > len(dB[i]) else len(dA[i] - dB[i])
         return -1
 
 
