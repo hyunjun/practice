@@ -6,11 +6,11 @@ import sys
 
 
 class Solution:
-    def minDepth(self, root):
+    def minDepth0(self, root):
         #return self.minDepthRecur(root)
         return self.minDepthIter(root)
 
-    #   99.23%
+    #   runtime; 52ms, 99.23%
     def minDepthRecur(self, node):
         if node is None:
             return 0
@@ -21,7 +21,7 @@ class Solution:
             return lDepth + 1
         return min(lDepth, rDepth) + 1
 
-    #   93.86%
+    #   runtime; 56ms, 93.86%
     def minDepthIter(self, node):
         if node is None:
             return 0
@@ -37,6 +37,24 @@ class Solution:
             if cur.right:
                 queue.append((cur.right, curLevel + 1))
         return minLevel
+
+    #   https://leetcode.com/explore/challenge/card/october-leetcoding-challenge/562/week-4-october-22nd-october-28th/3504
+    #   runtime; 648ms
+    #   memory; 49.7MB
+    def minDepth(self, root: TreeNode) -> int:
+        if root is None:
+            return 0
+        q, minDepth = [(root, 1)], float('inf')
+        while q:
+            n, d = q.pop(0)
+            if n.left is None and n.right is None:
+                minDepth = min(minDepth, d)
+                continue
+            if n.left:
+                q.append((n.left, d + 1))
+            if n.right:
+                q.append((n.right, d + 1))
+        return minDepth
 
 
 s = Solution()
