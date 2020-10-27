@@ -28,7 +28,7 @@ class Solution:
         return None
 
     #   17.86%
-    def detectCycle(self, head):
+    def detectCycle0(self, head):
         if head is None or head.next is None:
             return None
         s = set()
@@ -38,6 +38,18 @@ class Solution:
             cur = cur.next
             if cur in s:
                 return cur
+        return None
+
+    #   https://leetcode.com/explore/challenge/card/october-leetcoding-challenge/562/week-4-october-22nd-october-28th/3509
+    #   runtime; 52ms, 63.05%
+    #   memory; 17.4MB
+    def detectCycle(self, head: ListNode) -> ListNode:
+        n, visited = head, set()
+        while n:
+            if n in visited:
+                return n
+            visited.add(n)
+            n = n.next
         return None
 
 
