@@ -27,7 +27,7 @@ class Solution:
 
     #   runtime; 124ms, 48.34%
     #   memory; 12.5MB, 100.00%
-    def recoverTree(self, root):
+    def recoverTree1(self, root):
         if root is None:
             return
         n, stack, res = root, [], []
@@ -45,6 +45,26 @@ class Solution:
         for i, r in enumerate(res):
             r.val = vals[i]
 
+    #   https://leetcode.com/explore/challenge/card/october-leetcoding-challenge/563/week-5-october-29th-october-31st/3514
+    #   runtime; 72ms, 77.73
+    #   memory; 14.5MB
+    def recoverTree(self, root: TreeNode) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        node, stack, vals, nodes = root, [], [], []
+        while node or stack:
+            if node:
+                stack.append(node)
+                node = node.left
+            else:
+                node = stack.pop()
+                vals.append(node.val)
+                nodes.append(node)
+                node = node.right
+        vals.sort()
+        for i, node in enumerate(nodes):
+            node.val = vals[i]
 
 
 s = Solution()
