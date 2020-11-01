@@ -39,6 +39,16 @@ class Solution:
             node = node.next
         return int(''.join(bins), 2)
 
+    #   https://leetcode.com/explore/challenge/card/november-leetcoding-challenge/564/week-1-november-1st-november-7th/3516
+    #   runtime; 44ms, 8.28%
+    #   memory; 14.2MB
+    def getDecimalValue(self, head: ListNode) -> int:
+        n, bins = head, []
+        while n:
+            bins.append(n.val)
+            n = n.next
+        return int(''.join(str(b) for b in bins), 2)
+
 
 s = Solution()
 head1 = ListNode(1)
