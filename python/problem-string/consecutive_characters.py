@@ -22,7 +22,7 @@ class Solution:
 
     #   runtime; 56ms, 25.00%
     #   memory; 13.9MB, 100.00%
-    def maxPower(self, s: str) -> int:
+    def maxPower1(self, s: str) -> int:
         if s is None or not (1 <= len(s) <= 500):
             return 0
         sIdx, maxCnt = 0, 1
@@ -31,6 +31,35 @@ class Solution:
                 maxCnt = max(maxCnt, i - sIdx)
                 sIdx = i
         maxCnt = max(maxCnt, len(s) - sIdx)
+        return maxCnt
+
+    #   https://leetcode.com/explore/challenge/card/november-leetcoding-challenge/564/week-1-november-1st-november-7th/3518
+    #   runtime; 56ms, 15.42%
+    #   memory; 14.1MB
+    def maxPower2(self, s: str) -> int:
+        nums, maxCnt = [0] * len(s), 0
+        for i, c in enumerate(s):
+            if 0 == i:
+                nums[0], maxCnt = 1, 1
+                continue
+            if s[i - 1] == c:
+                nums[i] = nums[i - 1] + 1
+            else:
+                nums[i] = 1
+            maxCnt = max(maxCnt, nums[i])
+        return maxCnt
+
+    #   runtime; 44ms, 55.11%
+    #   memory; 14.2MB
+    def maxPower(self, s: str) -> int:
+        nums, maxCnt = [1] * len(s), 0
+        for i, c in enumerate(s):
+            if 0 == i:
+                nums[0], maxCnt = 1, 1
+                continue
+            if s[i - 1] == c:
+                nums[i] = nums[i - 1] + 1
+                maxCnt = max(maxCnt, nums[i])
         return maxCnt
 
 
