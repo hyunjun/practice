@@ -1,6 +1,9 @@
 #   https://leetcode.com/problems/populating-next-right-pointers-in-each-node
 
 
+from collections import defaultdict
+
+
 class TreeLinkNode:
     def __init__(self, x):
         self.val = x
@@ -12,7 +15,7 @@ class TreeLinkNode:
 class Solution:
     #   runtime; 52ms, 52.56%
     #   memory; 15.6MB, 0.97%
-    def connect(self, root):
+    def connect0(self, root):
         if root is None:
             return
         prevLv, prev, q = 0, None, [(1, root)]
@@ -25,6 +28,25 @@ class Solution:
                 q.append((lv + 1, node.left))
             if node.right:
                 q.append((lv + 1, node.right))
+
+    #   https://leetcode.com/explore/challenge/card/november-leetcoding-challenge/565/week-2-november-8th-november-14th/3529
+    #   runtime; 68ms, 33.59%
+    #   memory; 15.8MB
+    def connect(self, root: 'Node') -> 'Node':
+        if root is None:
+            return root
+        d, q = defaultdict(list), [(0, root)]
+        while q:
+            depth, node = q.pop(0)
+            d[depth].append(node)
+            if node.left:
+                q.append((depth + 1, node.left))
+            if node.right:
+                q.append((depth + 1, node.right))
+        for depth, nodes in d.items():
+            for i in range(1, len(nodes)):
+                nodes[i - 1].next = nodes[i]
+        return root
 
 
 s = Solution()
