@@ -30,7 +30,7 @@ class Solution:
             res[i - 1].right = r
         return res[0]
 
-    def increasingBST(self, root):
+    def increasingBST1(self, root):
         def inorder(node):
             if node:
                 yield from inorder(node.left)
@@ -42,6 +42,28 @@ class Solution:
             cur.right = TreeNode(v)
             cur = cur.right
         return ans.right
+
+    #   https://leetcode.com/explore/challenge/card/december-leetcoding-challenge/569/week-1-december-1st-december-7th/3553
+    #   runtime; 32ms, 59.42%
+    #   memory; 14.3MB, 21.82%
+    def increasingBST(self, root: TreeNode) -> TreeNode:
+        if root is None:
+            return None
+        node, stack, nodes = root, [], []
+        while node or stack:
+            if node:
+                stack.append(node)
+                node = node.left
+            else:
+                node = stack.pop()
+                nodes.append(node.val)
+                node = node.right
+        for i, val in enumerate(nodes):
+            nodes[i] = TreeNode(val)
+            if i == 0:
+                continue
+            nodes[i - 1].right = nodes[i]
+        return nodes[0]
 
 
 s = Solution()
