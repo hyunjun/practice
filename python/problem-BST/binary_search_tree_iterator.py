@@ -1,10 +1,10 @@
 #   https://leetcode.com/problems/binary-search-tree-iterator
-#   12.92%
 
 
 from TreeNode import TreeNode
 
 
+#   runtime; 12.92%
 class Solution:
     def __init__(self, root):
         self.cur = root
@@ -33,6 +33,31 @@ class Solution:
         return None
 
 
+#   https://leetcode.com/explore/challenge/card/december-leetcoding-challenge/570/week-2-december-8th-december-14th/3560
+#   runtime; 76ms, 56.40%
+#   memory; 20.4MB, 93.96%
+class BSTIterator:
+
+    def __init__(self, root: TreeNode):
+        self.nodes, node, stack = [], root, []
+        while node or stack:
+            if node:
+                stack.append(node)
+                node = node.left
+            else:
+                node = stack.pop()
+                self.nodes.append(node)
+                node = node.right
+
+    def next(self) -> int:
+        if self.hasNext():
+            return self.nodes.pop(0).val
+        return float('-inf')
+
+    def hasNext(self) -> bool:
+        return 0 < len(self.nodes)
+
+
 if __name__ == '__main__':
     '''
       10
@@ -47,6 +72,6 @@ if __name__ == '__main__':
     root.left.left = TreeNode(3)
     root.left.right = TreeNode(7)
 
-    s = Solution(root)
-    while s.hasNext():
-        print(s.next())
+    b = BSTIterator(root)
+    while b.hasNext():
+        print(b.next())
