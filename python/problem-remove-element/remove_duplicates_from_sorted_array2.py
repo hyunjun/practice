@@ -1,9 +1,12 @@
-#   https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/description/
+#   https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii
 
 
-class Solution(object):
+from typing import List
+
+
+class Solution:
     #   86.55%
-    def removeDuplicates(self, nums):
+    def removeDuplicates0(self, nums):
         """
         :type nums: List[int]
         :rtype: int
@@ -48,7 +51,7 @@ class Solution(object):
         '''
 
     #   https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/discuss/126376/Python-simple-Two-Pointers-solution-(beats-99)
-    def removeDuplicates0(self, nums):
+    def removeDuplicates1(self, nums):
         if not nums:
             return 0
         i = 0
@@ -58,6 +61,21 @@ class Solution(object):
                 nums[i] = nums[j]
         return i + 1
 
+    #   https://leetcode.com/explore/challenge/card/december-leetcoding-challenge/570/week-2-december-8th-december-14th/3562
+    #   runtime; 56ms, 44.46%
+    #   memory; 14.2MB, 34.56%
+    def removeDuplicates(self, nums: List[int]) -> int:
+        if len(nums) < 3:
+            return len(nums)
+        i = 1
+        while i < len(nums) - 1:
+            if nums[i - 1] == nums[i] == nums[i + 1]:
+                nums.pop(i)
+            else:
+                i += 1
+        return len(nums)
+
+
 s = Solution()
 data = [([1], 1),
         ([1, 2, 3], 3),
@@ -65,6 +83,6 @@ data = [([1], 1),
         ([0, 0, 1, 1, 2, 2, 3], 7),
         ([1, 1, 1, 2, 2, 2, 3, 3, 3, 4], 7)
        ]
-for nums, expected in data:
+for nums, expect in data:
   real = s.removeDuplicates(nums)
-  print('nums {}\texpected {}\treal {}\tresult {}'.format(nums, expected, real, expected == real))
+  print(f'{nums}\texpected {expect}\treal {real}\tresult {expect == real}')
