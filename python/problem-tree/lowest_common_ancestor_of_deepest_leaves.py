@@ -1,6 +1,8 @@
+#   https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes
 #   https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves
 
 
+from collections import defaultdict
 from TreeNode import TreeNode
 
 
@@ -35,6 +37,39 @@ class Solution:
                 return p
         return None
 
+    #   https://leetcode.com/explore/challenge/card/december-leetcoding-challenge/570/week-2-december-8th-december-14th/3563
+    #   runtime; 36ms, 56.10%
+    #   memory; 14.7MB
+    def subtreeWithAllDeepest(self, root: TreeNode) -> TreeNode:
+        if root is None:
+            return root
+        q, depthDict, pDict = [(root, 0)], defaultdict(list), {}
+        while q:
+            n, d = q.pop(0)
+            depthDict[d].append(n)
+            if n.left:
+                pDict[id(n.left)] = n
+                q.append((n.left, d + 1))
+            if n.right:
+                pDict[id(n.right)] = n
+                q.append((n.right, d + 1))
+        maxDepth = max(depthDict.keys())
+        deepestNodes = depthDict[maxDepth]
+        if 1 == len(deepestNodes):
+            return deepestNodes[0]
+        #print([n.val for n in deepestNodes])
+        allPDict = {}
+        for n in deepestNodes:
+            p, depth = n, maxDepth - 1
+            while id(p) in pDict:
+                p = pDict[id(p)]
+                if id(p) not in allPDict:
+                    allPDict[id(p)] = [p, depth, 0]
+                allPDict[id(p)][2] += 1
+                depth -= 1
+        #print(allPDict)
+        return sorted([(node, depth) for nodeId, (node, depth, cnt) in allPDict.items() if cnt == len(deepestNodes)], key=lambda t: -t[1])[0][0]
+
 
 s = Solution()
 '''
@@ -68,6 +103,23 @@ root3.left = TreeNode(2)
 root3.right = TreeNode(3)
 root3.left.left = TreeNode(4)
 root3.left.right = TreeNode(5)
-for r in [root1, root2, root3]:
+'''
+    1
+   / \
+  3   1
+ /   /
+4    2
+ \    \
+  6    5
+'''
+root4 = TreeNode(1)
+root4.left = TreeNode(3)
+root4.left.left = TreeNode(4)
+root4.left.left.right = TreeNode(6)
+root4.right = TreeNode(1)
+root4.right.left = TreeNode(2)
+root4.right.left.right = TreeNode(5)
+for r in [root1, root2, root3, root4]:
     print(r)
-    print(s.lcaDeepestLeaves(r))
+    #print(s.lcaDeepestLeaves(r))
+    print(s.subtreeWithAllDeepest(r))
