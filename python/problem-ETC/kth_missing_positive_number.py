@@ -7,7 +7,7 @@ from typing import List
 class Solution:
     #   runtime; 52ms, 82.48%
     #   memory; 14.1MB, 14.22%
-    def findKthPositive(self, arr: List[int], k: int) -> int:
+    def findKthPositive0(self, arr: List[int], k: int) -> int:
         i = 0
         for n in range(1, 1001):
             if i < len(arr) and n == arr[i]:
@@ -17,6 +17,19 @@ class Solution:
             if 0 == k:
                 return n
         return 1000 + k
+
+    #   https://leetcode.com/explore/challenge/card/january-leetcoding-challenge-2021/579/week-1-january-1st-january-7th/3594
+    #   runtime; 52ms, 64.07%
+    #   memory; 14.3MB, 63.22%
+    def findKthPositive(self, arr: List[int], k: int) -> int:
+        s = set(arr)
+        for i in range(1, 1001):
+            if i in s:
+                continue
+            if k == 1:
+                return i
+            k -= 1
+        return i + k
 
 
 s = Solution()
