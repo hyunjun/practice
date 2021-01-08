@@ -1,7 +1,5 @@
 #   https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent
 
-#   https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/discuss/1007290/Python-Faster-and-less-memory-O(min(n-m))-and-O(1)-vs-O(n%2Bm)-and-O(n%2Bm)
-
 
 from typing import List
 
@@ -38,10 +36,26 @@ class Solution:
     #   https://leetcode.com/explore/challenge/card/january-leetcoding-challenge-2021/580/week-2-january-8th-january-14th/3597
     #   runtime; 40ms, 19.73%
     #   memory; 14.3MB, 63.95%
-    def arrayStringsAreEqual(self, word1: List[str], word2: List[str]) -> bool:
+    def arrayStringsAreEqual2(self, word1: List[str], word2: List[str]) -> bool:
         if word1 is None or 0 == len(word2) or word2 is None or 0 == len(word2) or len(''.join(word1)) != len(''.join(word2)):
             return False
         return ''.join(word1) == ''.join(word2)
+
+    #   https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/discuss/1007290/Python-Faster-and-less-memory-O(min(n-m))-and-O(1)-vs-O(n%2Bm)-and-O(n%2Bm)
+    #   runtime; 64ms
+    #   memory; 14.2MB, 63.95%
+    def arrayStringsAreEqual(self, word1: List[str], word2: List[str]) -> bool:
+        for c1, c2 in zip(self.gen(word1), self.gen(word2)):
+            if c1 != c2:
+                return False
+        return True
+
+    def gen(self, word: List[str]):
+        for s in word:
+            for c in s:
+                yield c
+        # Ensure False when len(word1) != len(word2) 
+        yield None
 
 
 s = Solution()
