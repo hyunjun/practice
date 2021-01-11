@@ -38,8 +38,9 @@ class Solution:
             nodes[i].next = nodes[i + 1]
         return nodes[0]
 
-    #   runtime; 40ms, 36.19%
-    #   memory; 14.1MB
+    #   https://leetcode.com/explore/challenge/card/january-leetcoding-challenge-2021/579/week-1-january-1st-january-7th/3592
+    #   runtime; 40ms, 36.19% -> 28ms, 98.10%
+    #   memory; 14.1MB -> 14.3MB
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
         if l1 is None and l2 is None:
             return None
