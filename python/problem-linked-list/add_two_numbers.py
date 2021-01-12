@@ -1,5 +1,4 @@
 #   https://leetcode.com/problems/add-two-numbers
-#   81.07%
 
 
 from ListNode import ListNode
@@ -15,6 +14,7 @@ class Solution:
             carry = 1
         return val, carry
 
+    #   runtime; 81.07%
     def addTwoNumbers(self, l1, l2):
         if l1 is None:
             return l2
@@ -62,16 +62,69 @@ class Solution:
 
         return h
 
+    #   https://leetcode.com/explore/challenge/card/january-leetcoding-challenge-2021/580/week-2-january-8th-january-14th/3601
+    #   runtime; 72ms, 51.91%
+    #   memory; 14.3MB, 39.71%
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        if l1 is None:
+            return l2
+        if l2 is None:
+            return l1
+        vals, carry = [], 0
+        while l1 and l2:
+            val = l1.val + l2.val + carry
+            if 9 < val:
+                carry, val = 1, val - 10
+            else:
+                carry = 0
+            l1, l2 = l1.next, l2.next
+            vals.append(val)
+        while l1:
+            val = l1.val + carry
+            if 9 < val:
+                carry, val = 1, val - 10
+            else:
+                carry = 0
+            l1 = l1.next
+            vals.append(val)
+        while l2:
+            val = l2.val + carry
+            if 9 < val:
+                carry, val = 1, val - 10
+            else:
+                carry = 0
+            l2 = l2.next
+            vals.append(val)
+        if carry:
+            vals.append(1)
+        for i, val in enumerate(vals):
+            vals[i] = ListNode(val)
+            if 0 < i:
+                vals[i - 1].next = vals[i]
+        return vals[0]
+
+
+s = Solution()
+
 l1 = ListNode(2)
 l1.next = ListNode(4)
 l1.next.next = ListNode(3)
-print(l1)
 l2 = ListNode(5)
 l2.next = ListNode(6)
-l2.next.next = ListNode(6)
-l2.next.next.next = ListNode(6)
-print(l2)
+l2.next.next = ListNode(4)
+print(s.addTwoNumbers(l1, l2))  # 7 0 8
 
-s = Solution()
-r = s.addTwoNumbers(l1, l2)
-print(r)
+print(s.addTwoNumbers(ListNode(0), ListNode(0)))
+
+l1 = ListNode(9)
+l1.next = ListNode(9)
+l1.next.next = ListNode(9)
+l1.next.next.next = ListNode(9)
+l1.next.next.next.next = ListNode(9)
+l1.next.next.next.next.next = ListNode(9)
+l1.next.next.next.next.next.next = ListNode(9)
+l2 = ListNode(9)
+l2.next = ListNode(9)
+l2.next.next = ListNode(9)
+l2.next.next.next = ListNode(9)
+print(s.addTwoNumbers(l1, l2))  #  8 9 9 9 0 0 0 1
