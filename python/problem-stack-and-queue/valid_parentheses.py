@@ -29,7 +29,7 @@ class Solution(object):
 
     #   runtime; 24ms, 91.22%
     #   memory; 13.9MB, 5.22%
-    def isValid(self, s: str) -> bool:
+    def isValid1(self, s: str) -> bool:
         stack = []
         for c in s:
             if c in ['(', '{', '[']:
@@ -46,6 +46,25 @@ class Solution(object):
                     stack.append(c)
         return 0 == len(stack)
 
+    #   https://leetcode.com/explore/challenge/card/january-leetcoding-challenge-2021/581/week-3-january-15th-january-21st/3610
+    #   runtime; 28ms, 84.62%
+    #   memory; 14.4MB, 37.08%
+    def isValid(self, s: str) -> bool:
+        stack = []
+        for c in s:
+            if c in ['(', '[', '{']:
+                stack.append(c)
+            elif 0 < len(stack):
+                for _o, _c in [('(', ')'), ('{', '}'), ('[', ']')]:
+                    if c == _c:
+                        if stack[-1] == _o:
+                            stack.pop()
+                        else:
+                            stack.append(c)
+            else:
+                return False
+        return 0 == len(stack)
+
 
 cases = [("[", False),
          ("]", False),
@@ -57,6 +76,7 @@ cases = [("[", False),
          ("{[()]}", True),
          ("{[(])}", False),
          ("{{[[(())]]}}", True),
+         ("(])", False),
          ]
 s = Solution()
 for case, expected in cases:
