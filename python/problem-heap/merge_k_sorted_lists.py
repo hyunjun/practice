@@ -10,7 +10,7 @@ import sys
 
 class Solution:
     #   40.75%
-    def mergeKLists(self, lists):
+    def mergeKLists0(self, lists):
         if all([l is None for l in lists]):
             return None
         heap, lIdx, k, head, prev = [], 0, len(lists), None, None
@@ -42,6 +42,33 @@ class Solution:
                 prev.next = node
                 prev = node
         return head
+
+    #   https://leetcode.com/explore/challenge/card/january-leetcoding-challenge-2021/582/week-4-january-22nd-january-28th/3615
+    #   runtime; 92ms, 94.08%
+    #   memory; 17.6MB, 93.98%
+    def mergeKLists(self, lists):
+        if lists is None or 0 == len(lists):
+            return None
+        lists = [head for head in lists if head]
+        if 0 == len(lists):
+            return None
+        vals, lastNode = [], None
+        for head in lists:
+            if lastNode:
+                lastNode.next = head
+            node = head
+            while node:
+                vals.append(node.val)
+                if node.next is None:
+                    lastNode = node
+                node = node.next
+        vals.sort()
+        i, node = 0, lists[0]
+        while node:
+            node.val = vals[i]
+            i += 1
+            node = node.next
+        return lists[0]
 
 
 s = Solution()
