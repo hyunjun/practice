@@ -21,6 +21,21 @@ class Solution:
                     return False
         return True
 
+    #   https://leetcode.com/explore/challenge/card/january-leetcoding-challenge-2021/582/week-4-january-22nd-january-28th/3616
+    #   runtime; 588ms, 34.90%
+    #   memory; 20MB, 10.74%
+    def kLengthApart(self, nums: List[int], k: int) -> bool:
+        indices = []
+        for i, num in enumerate(nums):
+            if num == 1:
+                indices.append(i)
+        for i, idx in enumerate(indices):
+            if 0 == i:
+                continue
+            if idx - indices[i - 1] <= k:
+                return False
+        return True
+
 
 s = Solution()
 data = [([1,0,0,0,1,0,0,1], 2, True),
