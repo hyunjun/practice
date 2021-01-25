@@ -1,5 +1,7 @@
 #   https://leetcode.com/problems/kth-largest-element-in-an-array
-#   32.37%
+
+
+from typing import List
 
 
 class Solution:
@@ -46,7 +48,8 @@ class Solution:
         #print('peek', ret)
         return ret
 
-    def findKthLargest(self, nums, k):
+    #   32.37%
+    def findKthLargest0(self, nums, k):
         if nums is None or 0 == len(nums):
             return 0
 
@@ -58,10 +61,19 @@ class Solution:
 
         return self.peek()
 
+    #   https://leetcode.com/explore/challenge/card/january-leetcoding-challenge-2021/581/week-3-january-15th-january-21st/3606
+    #   runtime; 56ms, 96.14%
+    #   memory; 14.9MB, 93.46%
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        return sorted(nums)[-k]
 
-nums = [3, 2, 1, 5, 6, 4]
+
 s = Solution()
-print(s.findKthLargest(nums, 2))
-print(s.findKthLargest([99, 99], 1))
-print(s.findKthLargest([2, 1], 2))
-print(s.findKthLargest([-1, 2, 0], 2))
+data = [([3, 2, 1, 5, 6, 4], 2, 5),
+        ([99, 99], 1, 99),
+        ([2, 1], 2, 1),
+        ([-1, 2, 0], 2, 0),
+        ]
+for nums, k, expect in data:
+    real = s.findKthLargest(nums, k)
+    print(f'{nums} {k} expect {expect} real {real} result {expect == real}')
