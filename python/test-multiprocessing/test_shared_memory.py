@@ -1,9 +1,7 @@
-from multiprocessing import Process, Semaphore, shared_memory, Lock
+from multiprocessing import Process, Semaphore, shared_memory
 import numpy as np
 import time
 
-
-lock = Lock()
 
 #   https://docs.python.org/ko/3.10/library/multiprocessing.shared_memory.html
 class Reader(Process):
@@ -35,9 +33,7 @@ class Worker(Process):
 
     def run(self):            
         print('Worker run 0:', self.shm.name, self.b.shape, self.b)
-        lock.acquire()
         self.b[-1] = 888    #   This is NOT shared with Reader & main processes. Why?
-        lock.release()
         print('Worker run 1:', self.shm.name, self.b.shape, self.b)
         time.sleep(1)
         self.shm.close()
