@@ -186,7 +186,7 @@ class Solution:
         return None
 
     #   19.71%
-    def trimBST(self, root, L, R):
+    def trimBST5(self, root, L, R):
         if root is None:
             return None
 
@@ -218,6 +218,24 @@ class Solution:
             if cur.right:
                 queue.append(cur.right)
         return None
+
+    #   https://leetcode.com/explore/challenge/card/february-leetcoding-challenge-2021/584/week-1-february-1st-february-7th/3626
+    #   runtime; 100ms
+    #   memory; 18.3MB, 57.39%
+    def trimBST(self, root: TreeNode, low: int, high: int) -> TreeNode:
+        if root is None:
+            return None
+
+        if low <= root.val <= high:
+            root.left, root.right = self.trimBST(root.left, low, high), self.trimBST(root.right, low, high)
+            return root
+
+        lRet, rRet = self.trimBST(root.left, low, high), self.trimBST(root.right, low, high)
+
+        if lRet:
+            return lRet
+        return rRet
+
 
 s = Solution()
 
@@ -313,3 +331,10 @@ root = TreeNode(1)
 root.right = TreeNode(2)
 res = s.trimBST(root, 2, 4)
 print(str(res) == '( 2 )')
+
+root = TreeNode(3)
+root.left = TreeNode(2)
+root.left.left = TreeNode(1)
+root.right = TreeNode(4)
+res = s.trimBST(root, 1, 1)
+print(str(res) == '( 1 )')
