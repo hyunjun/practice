@@ -89,7 +89,7 @@ class Solution:
         return False
 
     #   https://leetcode.com/problems/132-pattern/solution
-    def find132pattern(self, nums):
+    def find132pattern3(self, nums):
         if nums is None or len(nums) < 3 or len(set(nums)) < 3:
             return False
         mins = [0] * len(nums)
@@ -106,6 +106,26 @@ class Solution:
                 if stack and stack[-1] < nums[i]:
                     return True
                 stack.append(nums[i])
+        return False
+
+    def find132pattern(self, nums):
+        if nums is None or len(nums) < 3 or len(set(nums)) < 3:
+            return False
+        iIdxes, jIdxes = [0] * len(nums), [0] * len(nums)
+        for k, n in enumerate(nums):
+            if k == 0:
+                continue
+            if n < nums[iIdxes[k - 1]]:
+                iIdxes[k] = k
+            else:
+                iIdxes[k] = iIdxes[k - 1]
+            if nums[jIdxes[k - 1]] <= n:
+                jIdxes[k] = k
+            else:
+                jIdxes[k] = jIdxes[k - 1]
+        for k, n in enumerate(nums):
+            if iIdxes[k] < jIdxes[k] < k and nums[iIdxes[k]] < n < nums[jIdxes[k]]:
+                return True
         return False
 
 

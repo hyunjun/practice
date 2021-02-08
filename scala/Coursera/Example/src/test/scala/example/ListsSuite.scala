@@ -25,7 +25,7 @@ import org.scalatest.junit.JUnitRunner
  */
  @RunWith(classOf[JUnitRunner])
   class ListsSuite extends FunSuite {
- 
+
   /**
    * Tests are written using the `test` operator which takes two arguments:
    *

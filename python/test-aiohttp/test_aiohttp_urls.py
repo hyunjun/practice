@@ -11,7 +11,7 @@ async def url2json3(logger, url):
   except:
     return '{} unresponsive'.format(url)
   assert response.status == 200
-  # result = await response.json()  # for json 
+  # result = await response.json()  # for json
   result = await response.text()
   response.close()
   return result
@@ -34,8 +34,8 @@ if __name__ == '__main__':
   ch = logging.StreamHandler(sys.stdout)
   ch = logging.NullHandler()
   logger.addHandler(ch)
-  
-  urls = ['http://daum.net', 'http://naver.com', 'http://google.com'] 
+
+  urls = ['http://daum.net', 'http://naver.com', 'http://google.com']
 
   result = []
   event_loop = asyncio.get_event_loop()

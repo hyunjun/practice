@@ -50,7 +50,7 @@ func get_httpstatus(s string) int {
 }
 
 //  This function does cleaning input url string
-//  For example, http://viki.com, https://viki.com, http://www.viki.com, and https://www.viki.com will return viki.com 
+//  For example, http://viki.com, https://viki.com, http://www.viki.com, and https://www.viki.com will return viki.com
 //  If input url string is not url pattern, return empty string
 func clean_url(cand string) string {
   //  TODO: url pattern should be refined

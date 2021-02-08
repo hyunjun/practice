@@ -9,7 +9,7 @@ import datetime
 class Solution(object):
     WEEKDAY = {0: 'Monday', 1: 'Tuesday', 2: 'Wednesday', 3: 'Thursday',
                4: 'Friday', 5: 'Saturday', 6: 'Sunday'}
-    
+
     #   runtime; 16ms, 67.68%
     #   memory; 11.8MB, 100.00%
     def dayOfTheWeek(self, day, month, year):

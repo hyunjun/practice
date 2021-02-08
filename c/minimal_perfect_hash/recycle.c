@@ -61,7 +61,7 @@ struct reroot *r;
    {  /* allocate a new block of nodes */
       r->numleft = r->size*((ub4)1<<r->logsize);
       if (r->numleft < REMAX) ++r->logsize;
-      temp = (recycle *)remalloc(sizeof(recycle) + r->numleft, 
+      temp = (recycle *)remalloc(sizeof(recycle) + r->numleft,
 				 "recycle.c, data");
       temp->next = r->list;
       r->list = temp;
@@ -78,7 +78,7 @@ char   *purpose;
   char *x = (char *)malloc(len);
   if (!x)
   {
-    fprintf(stderr, "malloc of %d failed for %s\n", 
+    fprintf(stderr, "malloc of %d failed for %s\n",
 	    len, purpose);
     exit(SUCCESS);
   }

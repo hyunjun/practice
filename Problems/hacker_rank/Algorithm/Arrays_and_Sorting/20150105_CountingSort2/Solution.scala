@@ -8,7 +8,7 @@ object Solution {
     var res: Array[Int] = Array()
     for ( (c, i) <- counts.zipWithIndex ) {
       if ( 0 < c )  {
-        res = res ++ Array.fill[Int](c)(i) 
+        res = res ++ Array.fill[Int](c)(i)
       }
     }
     res

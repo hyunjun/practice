@@ -8,7 +8,7 @@ def wordSnake0(board, word):
     if word is None or 0 == len(word):
         return True
     R, C = len(board), len(board[0])
-  
+
     def search(r, c, chars):
         q = [(r, c, chars, set())]
         while q:
@@ -22,7 +22,7 @@ def wordSnake0(board, word):
                     if 0 <= nn < R and 0 <= nm < C and board[nn][nm] == w[1] and (nn, nm) not in s:
                         q.append((nn, nm, w[1:], s))
         return False
-  
+
     for r in range(R):
         for c in range(C):
             if board[r][c] == word[0]:

@@ -46,7 +46,7 @@ class Solution:
     def backspaceCompare(self, S: str, T: str) -> bool:
         if not (1 <= len(S) <= 200) or not (1 <= len(T) <= 200):
             return False
-        
+
         def backspaced(s):
             stack = []
             for c in s:
@@ -56,7 +56,7 @@ class Solution:
                 else:
                     stack.append(c)
             return ''.join(stack)
-        
+
         return backspaced(S) == backspaced(T)
 
 

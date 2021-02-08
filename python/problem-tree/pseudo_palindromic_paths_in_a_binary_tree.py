@@ -11,7 +11,7 @@ class Solution:
     def pseudoPalindromicPaths (self, root: TreeNode) -> int:
         if root is None:
             return 0
-        
+
         def isPalindrome(arr, counter):
             oddVal, oddCnt = None, 0
             for n, cnt in counter.items():
@@ -21,9 +21,9 @@ class Solution:
                     if oddCnt > 1:
                         return False
             return True
-                
+
         self.cnt = 0
-        
+
         def getPaths(acc, counter, node):
             if node is None:
                 return
@@ -39,7 +39,7 @@ class Solution:
             counter[node.val] -= 1
 
         getPaths([], defaultdict(int), root)
-        
+
         return self.cnt
 
 

@@ -4,7 +4,7 @@ import static	org.junit.Assert.*;
 
 import org.junit.*;
 
-public class BinaryTreeTest 
+public class BinaryTreeTest
 {
 	//	4.1
 	@Test

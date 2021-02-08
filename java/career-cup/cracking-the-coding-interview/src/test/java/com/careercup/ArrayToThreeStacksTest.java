@@ -5,7 +5,7 @@ import static	org.junit.Assert.*;
 import org.junit.*;
 
 //	3.1
-public class ArrayToThreeStacksTest 
+public class ArrayToThreeStacksTest
 {
 	@Test
     public void testArrayToThreeStacks()

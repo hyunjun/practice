@@ -11,11 +11,11 @@ class Reader(Process):
         Process.__init__(self)
 
         self.shm = shared_memory.SharedMemory(name=shmName)
-        self.b = np.ndarray(a.shape, dtype=a.dtype, buffer=self.shm.buf) 
+        self.b = np.ndarray(a.shape, dtype=a.dtype, buffer=self.shm.buf)
         print('Reader init. name:', self.shm.name, self.b.shape, self.b)
         time.sleep(2)
 
-    def run(self):            
+    def run(self):
         print('Reader run 0:', self.shm.name, self.b.shape, self.b)
         time.sleep(2)
         print('Reader run 1:', self.shm.name, self.b.shape, self.b)
@@ -27,12 +27,12 @@ class Worker(Process):
     def __init__(self, a, shmName):
         Process.__init__(self)
 
-        self.shm = shared_memory.SharedMemory(name=shmName) 
-        self.b = np.ndarray(a.shape, dtype=a.dtype, buffer=self.shm.buf) 
+        self.shm = shared_memory.SharedMemory(name=shmName)
+        self.b = np.ndarray(a.shape, dtype=a.dtype, buffer=self.shm.buf)
         print('Worker init. name:', self.shm.name, self.b.shape, self.b)
         time.sleep(2)
 
-    def run(self):            
+    def run(self):
         print('Worker run 0:', self.shm.name, self.b.shape, self.b)
         self.b[-1] = 888    #   This is NOT shared with Reader & main processes. Why?
         print('Worker run 1:', self.shm.name, self.b.shape, self.b)

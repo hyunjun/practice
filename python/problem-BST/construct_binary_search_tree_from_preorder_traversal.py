@@ -65,7 +65,7 @@ class Solution:
     def bstFromPreorder(self, preorder: List[int]) -> TreeNode:
         if preorder is None or not (1 <= len(preorder) <= 100):
             return None
-        
+
         def getNode(arr):
             if 0 == len(arr):
                 return None

@@ -43,12 +43,23 @@ class Solution:
     #   https://leetcode.com/explore/challenge/card/october-leetcoding-challenge/562/week-4-october-22nd-october-28th/3509
     #   runtime; 52ms, 63.05%
     #   memory; 17.4MB
-    def detectCycle(self, head: ListNode) -> ListNode:
+    def detectCycle1(self, head: ListNode) -> ListNode:
         n, visited = head, set()
         while n:
             if n in visited:
                 return n
             visited.add(n)
+            n = n.next
+        return None
+
+    #   runtime; 48 ms, 83.29%
+    #   memory; 16.6 MB, 99.96%
+    def detectCycle(self, head: ListNode) -> ListNode:
+        n, i = head, id(head)
+        while n:
+            if n.val == i:
+                return n
+            n.val = i
             n = n.next
         return None
 

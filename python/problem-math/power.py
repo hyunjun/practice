@@ -10,7 +10,7 @@ def power(base, exponent):
     while exp > 0:
         res *= base
         exp -= 1
-    
+
     if exponent < 0:
         return 1 / res
     return res
@@ -22,7 +22,7 @@ def power2(base, exponent):
         return 1
 
     res = power_r(base, abs(exponent))
-    
+
     if exponent < 0:
         return 1 / res
     return res

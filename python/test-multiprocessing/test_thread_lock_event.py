@@ -32,7 +32,7 @@ class Foo(object):
         printSecond()
         self.second_done.set()
         self.first_done.clear()
-            
+
     def third(self, printThird):
         self.second_done.wait()
         printThird()

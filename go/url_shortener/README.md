@@ -8,7 +8,7 @@
 * flow
   * get the input url
   * is it valid? (validator function)
-    * exit if no 
+    * exit if no
   * clear it (cleaner)
   * check whether it exists in the dictionary which has the original url - the shortened url pairs
     * return the shortened url if it does

@@ -9,7 +9,7 @@ class Codec0:
 
     def serialize(self, root):
         """Encodes a tree to a single string.
-        
+
         :type root: TreeNode
         :rtype: str
         """
@@ -36,10 +36,10 @@ class Codec0:
             if node.right:
                 q.append((node.right, pos * 2 + 2))
         return '.'.join(l)
-        
+
     def deserialize(self, data):
         """Decodes your encoded data to tree.
-        
+
         :type data: str
         :rtype: TreeNode
         """
@@ -73,7 +73,7 @@ class Codec:
             if node.right:
                 q.append((node.right, pos * 2 + 2))
         return '.'.join(['{}:{}'.format(pos, val) for pos, val in d.items()])
-        
+
     def deserialize(self, data):
         if data is None or 0 == len(data):
             return None

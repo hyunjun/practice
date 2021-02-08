@@ -33,7 +33,7 @@ class Solution:
     #   Time Limit Exceeded
     def findWords0(self, board: List[List[str]], words: List[str]) -> List[str]:
         R, C = len(board), len(board[0])
-        
+
         def traverse(word, visited, r=-1, c=-1):
             if r == -1 and c == -1:
                 for r in range(R):
@@ -53,13 +53,13 @@ class Solution:
                             return True
                         visited.remove((nr, nc))
             return False
-        
+
         return [word for word in words if traverse(word, set())]
 
     #   Time Limit Exceeded
     def findWords1(self, board: List[List[str]], words: List[str]) -> List[str]:
         R, C = len(board), len(board[0])
-        
+
         d = {}
         def traverse(word, stack, visited, r, c):
             for nr, nc in [(r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)]:
@@ -74,7 +74,7 @@ class Solution:
                     visited.remove((nr, nc))
                     stack.pop()
             return False
-        
+
         self.res = set()
         for word in words:
             isCached = False
@@ -97,7 +97,7 @@ class Solution:
     #   Time Limit Exceeded
     def findWords2(self, board: List[List[str]], words: List[str]) -> List[str]:
         R, C = len(board), len(board[0])
-        
+
         def traverse(word, i, visited, r, c):
             if i == len(word):
                 return True
@@ -110,7 +110,7 @@ class Solution:
                         return True
                     visited[nr][nc] = False
             return False
-        
+
         self.res = set()
         for word in words:
             for r in range(R):
@@ -134,7 +134,7 @@ class Solution:
         #    print(word, trie.search(word))
 
         R, C, self.res = len(board), len(board[0]), set()
-        
+
         def traverse(acc, node, visited, r, c):
             if '*' in node and node['*']:
                 #print(acc, board[r][c], node['*'])
@@ -149,7 +149,7 @@ class Solution:
                     traverse(acc, node[nextLetter], visited, nr, nc)
                     acc.pop()
                     visited[nr][nc] = False
-        
+
         for r in range(R):
             for c in range(C):
                 letter = board[r][c]

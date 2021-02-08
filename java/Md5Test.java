@@ -10,7 +10,7 @@ import	org.apache.commons.codec.digest.DigestUtils;
 	<version>1.5</version>
 </dependency>
 
-javac -cp ~/.m2/repository/org/apache/commons/commons-codec/1.5/commons-codec-1.5.jar Md5Test.java 
+javac -cp ~/.m2/repository/org/apache/commons/commons-codec/1.5/commons-codec-1.5.jar Md5Test.java
 java -cp ~/.m2/repository/org/apache/commons/commons-codec/1.5/commons-codec-1.5.jar:. Md5Test [file path]
  */
 class Md5Test	{

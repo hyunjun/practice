@@ -9,11 +9,11 @@ class Solution:
             return b
         if b is None or 0 == len(b) or '0' == b:
             return a
-    
+
         result, longer, shorter = [], a[::-1], b[::-1]
         if len(a) < len(b):
             longer, shorter = shorter, longer
-    
+
         transfer = 0
         #print('shorter {}\tlonger {}'.format(shorter, longer))
         for i, c in enumerate(shorter):

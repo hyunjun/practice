@@ -24,12 +24,12 @@ class Solution:
     #   https://leetcode.com/explore/challenge/card/september-leetcoding-challenge/555/week-2-september-8th-september-14th/3459
     #   Time Limit Exceeded
     def rob1(self, nums: List[int]) -> int:
-        
+
         def getSum(acc, i):
             if len(nums) <= i:
                 return acc
             return max(getSum(acc + nums[i], i + 2), getSum(acc + nums[i], i + 3))
-        
+
         return max(getSum(0, 0), getSum(0, 1))
 
     #   runtime; 48ms, 16.71%

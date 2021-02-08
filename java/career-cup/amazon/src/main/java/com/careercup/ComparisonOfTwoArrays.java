@@ -3,7 +3,7 @@ package com.careercup;
 /**
  *	http://www.careercup.com/question?id=12469661
  */
-public class ComparisonOfTwoArrays 
+public class ComparisonOfTwoArrays
 {
 	public int[]	arr1;
 	public int[]	arr2;

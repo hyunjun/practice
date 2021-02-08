@@ -63,7 +63,7 @@ def last(h):
     while l.n is not None:
         l = l.n
     return l
-    
+
 def reverse(h):
     p = None
     c = h.n
@@ -78,7 +78,7 @@ def reverse(h):
     c.n = p
     h.n = c
     return h
-        
+
 if __name__ == '__main__':
     sll = SLL()
     sll.add(1)

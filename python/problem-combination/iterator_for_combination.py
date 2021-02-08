@@ -50,7 +50,7 @@ class CombinationIterator:
                 for n in self.combi(used, left - 1, s[i + 1:]):
                     yield c + n
                 used.remove(c)
-                
+
     def next(self) -> str:
         ret = None
         try:
@@ -61,7 +61,7 @@ class CombinationIterator:
         return ret
 
     def hasNext(self) -> bool:
-        return self.hasMore        
+        return self.hasMore
 
 
 # Your CombinationIterator object will be instantiated and called as such:

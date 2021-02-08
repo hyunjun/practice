@@ -51,7 +51,7 @@ class Solution:
                     prev.append(s[sIdx:eIdx + 1])
                     q.append((prev[::], nsIdx, neIdx))
                     prev.pop()
-        return res 
+        return res
 
     #   Time Limit Exceeded
     def wordBreak2(self, s, wordDict):

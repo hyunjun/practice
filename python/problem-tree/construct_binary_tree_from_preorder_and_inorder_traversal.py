@@ -7,7 +7,7 @@ class Solution:
     #   runtime; 220ms, 45.25%
     #   memory; 83.7MB, 5.22%
     def buildTree(self, preorder, inorder):
-        #   [3, 9, 20, 15, 7] -> 3, left, right 
+        #   [3, 9, 20, 15, 7] -> 3, left, right
         #   [9, 3, 15, 20, 7] -> left, 3, right
         #   left, right -> return node
 

@@ -46,7 +46,7 @@ class Solution:
             p.next = c
             p = c
             n1 = n1.next
-            
+
         while n2 is not None:
             curVal = n2.val
             curVal, carry = self.calcValAndCarry(curVal, carry)

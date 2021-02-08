@@ -13,7 +13,7 @@ class NumMatrix:
             self.sumMatrix = [[0] * self.col for _ in range(self.row)]
             for r in range(self.row):
                 for c in range(self.col):
-                    self.sumMatrix[r][c] = matrix[r][c] 
+                    self.sumMatrix[r][c] = matrix[r][c]
             #for r in range(self.row):
             #    print(self.sumMatrix[r])
             for r in range(1, self.row):

@@ -9,7 +9,7 @@ import	java.util.Map;
 /**
  * http://www.careercup.com/question?id=13054661
  */
-public class BiggestConsecutive 
+public class BiggestConsecutive
 {
 	private static Logger	log	=	Logger.getLogger(BiggestConsecutive.class);
 

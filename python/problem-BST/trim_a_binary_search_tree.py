@@ -240,7 +240,7 @@ class Solution:
 s = Solution()
 
 '''
-Input: 
+Input:
     1
    / \
   0   2
@@ -248,7 +248,7 @@ Input:
   L = 1
   R = 2
 
-Output: 
+Output:
     1
      \
       2
@@ -260,7 +260,7 @@ res = s.trimBST(root, 1, 2)
 print(str(res) == '(x 1 ( 2 ))')
 
 '''
-Input: 
+Input:
     3
    / \
   0   4
@@ -272,10 +272,10 @@ Input:
   L = 1
   R = 3
 
-Output: 
+Output:
       3
-     / 
-    2   
+     /
+    2
    /
   1
 '''

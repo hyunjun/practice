@@ -49,7 +49,7 @@ class Solution:
     #   memory; 38.9MB
     def pathSum(self, root: TreeNode, sum: int) -> int:
         self.cnt = 0
-        
+
         def getSum(acc, node):
             if node is None:
                 return
@@ -61,9 +61,9 @@ class Solution:
                     self.cnt += 1
             getSum(acc[:], node.left)
             getSum(acc[:], node.right)
-        
+
         getSum([], root)
-        
+
         return self.cnt
 
 

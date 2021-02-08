@@ -8,7 +8,7 @@ import	java.util.ArrayList;
 import	java.util.Enumeration;
 import	java.util.List;
 
-public class SingletonTest 
+public class SingletonTest
 {
 	public void a()	{
 		SingletonCounter	sc	=	SingletonCounter.getInstance();

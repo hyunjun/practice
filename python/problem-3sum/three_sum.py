@@ -24,7 +24,7 @@ class Solution:
                 else:
                     num_list.append(nums[j])
         return result
-    
+
     def threeSum2(nums):
         result = []
         nums = sorted(nums)
@@ -43,7 +43,7 @@ class Solution:
                 r = r - 1
                 print('minus r {}'.format(r))
         return result
-    
+
     def two_sum(arr, not_using_idx, expected):
         idx_dict, result = {}, []
         for i, a in enumerate(arr):
@@ -55,7 +55,7 @@ class Solution:
             else:
                 idx_dict[a] = i
         return result
-    
+
     def threeSum3(nums):
         result = []
         calculated_set = set()
@@ -70,7 +70,7 @@ class Solution:
                 if tmp_result not in result:
                     result.append(tmp_result)
         return result
-    
+
     def threeSum4(nums):
         nums = sorted(nums)
         len_nums = len(nums)
@@ -93,7 +93,7 @@ class Solution:
                 else:
                     r -= 1
         return result
-    
+
     def threeSum5(nums):
         nums.sort()
         len_nums = len(nums)
@@ -125,7 +125,7 @@ class Solution:
     #   Time Limit Exceeded
     def threeSum6(self, nums: List[int]) -> List[List[int]]:
         cntDict = Counter(nums)
-        
+
         res = set()
         for i, n in enumerate(nums):
             cntDict[n] -= 1

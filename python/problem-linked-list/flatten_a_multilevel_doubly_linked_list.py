@@ -33,7 +33,7 @@ class Solution:
             r.prev = res[i - 1]
             r.child = None
         res[-1].next = res[-1].child = None
-    
+
         return res[0]
 
 

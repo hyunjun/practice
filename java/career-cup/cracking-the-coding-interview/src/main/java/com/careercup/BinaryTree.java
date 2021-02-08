@@ -280,7 +280,7 @@ public class BinaryTree
 		if((l == null) && (r == null))
 			return true;
 
-		if(((l == null) && (r != null)) || 
+		if(((l == null) && (r != null)) ||
 				((l != null) && (r == null)))
 			return false;
 

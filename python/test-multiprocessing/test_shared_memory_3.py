@@ -26,7 +26,7 @@ class Reader(Process):
         print('Reader init:', *self.sharedArr)
         time.sleep(2)
 
-    def run(self):            
+    def run(self):
         print('Reader run 0:', *self.sharedArr)
         time.sleep(2)
         print('Reader run 1:', *self.sharedArr)
@@ -42,7 +42,7 @@ class Worker(Process):
         print('Worker init:', *self.sharedArr)
         time.sleep(2)
 
-    def run(self):            
+    def run(self):
         print('Worker run 0:', *self.sharedArr)
         self.sharedArr[-1] = 9
         print('Worker run 1:', *self.sharedArr)

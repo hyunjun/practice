@@ -4,7 +4,7 @@ import static	org.junit.Assert.*;
 
 import org.junit.*;
 
-public class FibonacciTest 
+public class FibonacciTest
 {
 	@Test
 	public void testRecur()	{

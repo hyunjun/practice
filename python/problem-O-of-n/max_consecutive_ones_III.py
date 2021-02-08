@@ -87,6 +87,6 @@ f, l = 2, 3 -> s = 5, l = 10 -> cnt = 10 - 5 + 1 = 6
 #           index = 0 or there is another 0 value index in left -> start index
 #           there is a 1 value index in left -> start index = anthoer 0 value index in left + 1
 #       2. last replaced zero
-#           index = len(A) - 1 or there is another 0 value index in right -> end index 
+#           index = len(A) - 1 or there is another 0 value index in right -> end index
 #           there is a 1 value index in right -> end index = another 0 value index in right - 1
 '''

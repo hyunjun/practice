@@ -3,7 +3,7 @@ package com.careercup;
 /**
  *	http://www.careercup.com/question?id=12468661
  */
-public class SumOfThreeNumbers 
+public class SumOfThreeNumbers
 {
 	public SumOfThreeNumbers(){}
 

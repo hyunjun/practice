@@ -8,7 +8,7 @@ class GetLineTest	{
 			reader	=	new LineNumberReader(new FileReader(args[0]));
 			while ( ( reader.readLine() ) != null );
 			System.out.println("total line: " +	reader.getLineNumber());
-		}	finally	{ 
+		}	finally	{
 			if ( reader != null )	reader.close();
 		}
 	}

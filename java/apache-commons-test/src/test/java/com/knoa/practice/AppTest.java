@@ -7,7 +7,7 @@ import	java.io.*;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.configuration.ConfigurationException;
 
-public class AppTest 
+public class AppTest
 {
 	@BeforeClass
 	public static void runBeforeClass()	{
@@ -15,7 +15,7 @@ public class AppTest
 
 	@AfterClass
 	public static void runAfterClass() {
-	} 
+	}
 
 	@Before
 	public void setup() throws IOException

@@ -22,7 +22,7 @@ class Solution:
       return -1
     return dp[-1]
 
-    
+
 coins = [1, 2, 3, 5]
 target = 9
 print(Solution().minimumCoin(coins, target))

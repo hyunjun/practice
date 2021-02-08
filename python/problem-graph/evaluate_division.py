@@ -57,7 +57,7 @@ class Solution:
             d[dst][src] = 1 / values[i]
             nodes.add(src)
             nodes.add(dst)
-            
+
         def getValue(src, dst):
             q, visited = [(src, 1.0)], set()
             while q:
@@ -70,7 +70,7 @@ class Solution:
                         continue
                     q.append((nn, vv * v))
             return -1.0
-            
+
         res = []
         for src, dst in queries:
             if src not in nodes or dst not in nodes:

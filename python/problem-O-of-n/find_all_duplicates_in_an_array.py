@@ -45,10 +45,10 @@ class Solution:
                 continue
             nums[i], nums[n - 1] = nums[n - 1], nums[i]
         return list(res)
-            
-            
+
+
 s = Solution()
-data = [([4, 3, 2, 7, 8, 2, 3, 1], [2, 3]), 
+data = [([4, 3, 2, 7, 8, 2, 3, 1], [2, 3]),
         ]
 for nums, expect in data:
     real = s.findDuplicates(nums)

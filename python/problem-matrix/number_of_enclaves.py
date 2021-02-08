@@ -60,7 +60,7 @@ class Solution:
                 for _r, _c in [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]:
                     q.append((_r, _c))
             return cnt
-        
+
         for c in range(1, C - 1):
             if A[0][c] == 1 and A[1][c] == 1:
                 bfs(1, c)
@@ -100,7 +100,7 @@ class Solution:
                 for _r, _c in [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]:
                     stack.append((_r, _c))
             return cnt
-        
+
         for c in range(1, C - 1):
             if A[0][c] == 1 and A[1][c] == 1:
                 dfs(1, c)

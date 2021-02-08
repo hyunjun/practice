@@ -1,4 +1,4 @@
-#   https://leetcode.com/problems/find-words-that-can-be-formed-by-characters   
+#   https://leetcode.com/problems/find-words-that-can-be-formed-by-characters
 
 #   https://leetcode.com/problems/find-words-that-can-be-formed-by-characters/discuss/360959/Python-One-line-solution
 

@@ -25,7 +25,7 @@ class Solution:
                 return None
             node.left, node.right = invert(node.right), invert(node.left)
             return node
-        
+
         return invert(root)
 
     #   runtime; 28ms, 75.61%

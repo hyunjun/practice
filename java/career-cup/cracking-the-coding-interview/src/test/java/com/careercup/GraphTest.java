@@ -4,7 +4,7 @@ import static	org.junit.Assert.*;
 
 import org.junit.*;
 
-public class GraphTest 
+public class GraphTest
 {
 	//	4.1
 	@Test

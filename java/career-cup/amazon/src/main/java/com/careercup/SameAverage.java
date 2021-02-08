@@ -8,7 +8,7 @@ import	java.util.List;
 /**
  *	http://www.careercup.com/question?id=12347514
  */
-public class SameAverage 
+public class SameAverage
 {
 	private Logger	log	=	Logger.getLogger(this.getClass());
 

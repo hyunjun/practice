@@ -8,7 +8,7 @@ import math
 class Solution:
     #   Time Limit Exceeded
     def numSquares0(self, n: int) -> int:
-        
+
         d = defaultdict(int)
         def squares(m):
             if m < 0:
@@ -29,7 +29,7 @@ class Solution:
                 subSum = 1 + nextSum
             d[m] = subSum
             return subSum
-        
+
         return squares(n)
 
     def numSquares1(self, n: int) -> int:

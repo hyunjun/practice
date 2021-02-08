@@ -35,16 +35,16 @@ class Solution:
     def isMonotonic(self, A: List[int]) -> bool:
         if A is None or not (1 <= len(A) <= 50000):
             return False
-        
+
         def isM(func, arr):
             return all(func(arr[i - 1], arr[i]) for i in range(1, len(arr)))
-        
+
         def isMInc(arr):
             return isM(lambda a, b: a <= b, arr)
-        
+
         def isMDec(arr):
             return isM(lambda a, b: a >= b, arr)
-        
+
         return isMInc(A) or isMDec(A)
 
 

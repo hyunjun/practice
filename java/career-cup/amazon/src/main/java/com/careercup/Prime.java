@@ -8,7 +8,7 @@ import	java.util.List;
 /**
  *	http://www.careercup.com/question?id=12342686
  */
-public class Prime 
+public class Prime
 {
 	private static Logger	log	=	Logger.getLogger(Prime.class);
 

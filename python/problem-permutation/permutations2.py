@@ -55,7 +55,7 @@ class Solution:
     #   runtime; 328ms, 22.26%
     #   memory; 14.7MB
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
-        
+
         self.res = set()
 
         def permutation(acc, arr):

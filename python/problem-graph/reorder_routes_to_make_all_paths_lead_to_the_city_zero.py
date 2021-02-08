@@ -13,7 +13,7 @@ class Solution:
         edgeDict = defaultdict(list)
         for s, d in connections:
             edgeDict[s].append(d)
-        
+
         def move(v):
             if v == 0:
                 return True
@@ -21,7 +21,7 @@ class Solution:
                 if move(nv):
                     return True
             return False
-        
+
         cnt = 0
         for i in range(n):
             for v in edgeDict.copy()[i]:

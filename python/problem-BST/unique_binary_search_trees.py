@@ -101,7 +101,7 @@ class Solution:
     def numTrees3(self, n: int) -> int:
         if n <= 0:
             return 0
-        
+
         d = {i: 0 for i in range(n + 1)}
         d[0] = d[1] = 1
         def numTree(arr):
@@ -111,7 +111,7 @@ class Solution:
             res = sum(numTree(arr[:i]) * numTree(arr[i + 1:]) for i, a in enumerate(arr))
             d[num] = res
             return res
-        
+
         return numTree([i for i in range(1, n + 1)])
 
     #   https://leetcode.com/explore/featured/card/june-leetcoding-challenge/542/week-4-june-22nd-june-28th/3370
@@ -120,7 +120,7 @@ class Solution:
     def numTrees(self, n: int) -> int:
         if n <= 0:
             return 0
-        
+
         d = {i: 0 for i in range(n + 1)}
         d[0] = d[1] = 1
         def numTree(m):
@@ -129,7 +129,7 @@ class Solution:
             res = sum(numTree(i) * numTree(m - (i + 1)) for i in range(m))
             d[m] = res
             return res
-        
+
         return numTree(n)
 
 

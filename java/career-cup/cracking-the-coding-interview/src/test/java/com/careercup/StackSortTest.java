@@ -5,7 +5,7 @@ import static	org.junit.Assert.*;
 import org.junit.*;
 
 //	3.6
-public class StackSortTest 
+public class StackSortTest
 {
 	@Test
     public void testStackSort()

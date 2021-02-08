@@ -55,7 +55,7 @@ def jamo2eng(jamo):
 
 def kor_char2jamos(char):
   code = ord(char)
-    
+
   # Hangul Syllables
   # http://jrgraphix.net/r/Unicode/AC00-D7AF
   if 0xAC00 <= code <= 0xD7A3:   # A full character

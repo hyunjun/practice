@@ -16,7 +16,7 @@ class Solution:
   def addUpToRecur(self, nums, target):
     if nums is None or 0 == len(nums):
       return []
-    
+
     nums.sort(reverse=True)
     self.recur([], nums, target)
     return self.result

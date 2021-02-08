@@ -66,7 +66,7 @@ class Solution:
                 a += 1
                 b += 1
         return res
-                
+
 
 
 s = Solution()

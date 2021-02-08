@@ -21,7 +21,7 @@ class Solution:
             node.val = node.next.val
             p, node = node, node.next
         p.next = None
-        
+
 
 s = Solution()
 h1 = ListNode(0)

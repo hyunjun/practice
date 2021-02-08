@@ -77,7 +77,7 @@ class Trie:
                 t[c] = {}
             t = t[c]
         t['$'] = True
-        
+
 
     def search(self, word: str) -> bool:
         """
@@ -90,7 +90,7 @@ class Trie:
             else:
                 return False
         return '$' in t and t['$'] == True
-        
+
 
     def startsWith(self, prefix: str) -> bool:
         """

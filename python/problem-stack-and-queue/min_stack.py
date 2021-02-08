@@ -62,7 +62,7 @@ class MinStack:
         if 0 < len(self.stack):
             return self.stack[-1]
         return None
-        
+
     def getMin(self) -> int:
         if 0 < len(self.stack):
             return self.mins[-1]

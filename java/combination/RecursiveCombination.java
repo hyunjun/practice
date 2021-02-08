@@ -61,7 +61,7 @@ class RecurCombi	{
 	public Set<Set<Integer>> getSet()	{
 		return	set;
 	}
-	
+
 	public static void main(final String[] args)	{
 		if ( 2 != args.length )	{
 			System.out.println("Usage: java RecurCombi [N] [R]");

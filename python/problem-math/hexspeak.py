@@ -32,7 +32,7 @@ class Solution:
                 else:
                     res[i] = str(r)
             return res
-            
+
         hexStr = numToHexStr(num)
         for c in hexStr:
             if c not in validHexNums.values():

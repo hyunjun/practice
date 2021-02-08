@@ -32,7 +32,7 @@ public class Solution8  {
       });
     });*/
     //IntStream.iterate(N + 1, i -> i - 1).limit(N + 2).filter(n -> n % 3 == 0)
-    //  .map(i -> IntStream.iterate(N + 1, i -> i - 1).limit(N + 2).filter(n -> n % 5 == 0).filter( 
+    //  .map(i -> IntStream.iterate(N + 1, i -> i - 1).limit(N + 2).filter(n -> n % 5 == 0).filter(
     for ( int f = fiveStart; f >= 0; f -= 3 ) {
       for ( int t = threeStart; t >= 0; t -= 5 )  {
         if ( f + t == N ) {

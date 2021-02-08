@@ -35,7 +35,7 @@ class Solution:
 
         def isSquare(r, c, n):
             return all(matrix[y][x] == 1 for y in range(r, r + n) for x in range(c, c + n))
-                    
+
         for n in range(N, 0, -1):
             for r in range(R - n + 1):
                 for c in range(C - n + 1):
@@ -55,7 +55,7 @@ class Solution:
 
         def isSquare(r, c, n):
             return all(matrix[y][x] == 1 for y in range(r, r + n) for x in range(c, c + n))
-                    
+
         for r in range(R):
             for c in range(C):
                 if matrix[r][c] == 0:

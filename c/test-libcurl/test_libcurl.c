@@ -30,7 +30,7 @@ static size_t curl_write_function(void* ptr, size_t size, size_t nmemb, curl_res
 	return size*nmemb;
 }
 
-curl_response_t* create_curl_response() 
+curl_response_t* create_curl_response()
 {
 	curl_response_t* res = malloc(sizeof(curl_response_t));
 	res->size = 0;
@@ -53,7 +53,7 @@ void destroy_curl_response(curl_response_t* res)
 	}
 }
 
-int curl_fetch(curl_response_t* res, char* url, int is_post, char* post_data) 
+int curl_fetch(curl_response_t* res, char* url, int is_post, char* post_data)
 {
 	int				status;
 	CURL*			curl;

@@ -14,7 +14,7 @@ def translate(phrase):
             i += 1
         else:
             i += 2
-    return ''.join(ret) 
+    return ''.join(ret)
 
 if __name__ == '__main__':
     #These "asserts" using only for self-checking and not necessary for auto-testing

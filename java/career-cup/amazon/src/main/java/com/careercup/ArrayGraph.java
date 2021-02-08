@@ -11,7 +11,7 @@ import	java.util.Set;
 /**
  * http://www.careercup.com/question?id=13072668
  */
-public class ArrayGraph 
+public class ArrayGraph
 {
 	private static Logger	log	=	Logger.getLogger(ArrayGraph.class);
 

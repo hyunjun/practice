@@ -23,19 +23,19 @@ PATTERN = re.compile('[^ a-zA-Z]')
 def word_count(s):
    if s is None or 0 == len(s):
       return None
-   
+
    # remove all the punctuations
    cleaned_s = re.sub(PATTERN, '', s.lower())
-   
+
    # split by whitespace
    splited_s = cleaned_s.split()
-   
+
    # Counter
    counter_s = Counter(splited_s)
-   
+
    # sort
    sorted_counter_s = sorted(counter_s.items(), key=lambda t: t[1], reverse=True)
-   
+
    return sorted_counter_s
 
 print(word_count("practice makes perfect. get perfect by practice. just practice!"))

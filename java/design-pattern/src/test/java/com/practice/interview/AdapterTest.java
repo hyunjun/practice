@@ -8,7 +8,7 @@ import	java.util.ArrayList;
 import	java.util.Enumeration;
 import	java.util.List;
 
-public class AdapterTest 
+public class AdapterTest
 {
 	public static void goodMethod(Enumeration<String> e)	{
 		while ( e.hasMoreElements() )	{

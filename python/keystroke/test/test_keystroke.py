@@ -19,7 +19,7 @@ def test_string2keystrokes():
   assert u'xptmxm' == string2keystrokes('테스트')
   assert u'xptmxm' == string2keystrokes(u'ㅌㅔ스트')
   assert u'xptmxm' == string2keystrokes(u'테스트')
-          
+
   assert u'xptmxm ab gkgk gl 012zz Rr9xrt"' == string2keystrokes('테스트 ab 하하 ㅎㅣ 012ㅋㅋ ㄲㄱ9ㅌㄱㅅ"')
   assert u'xptmxm ab gkgk gl 012zz Rr9xrt"' == string2keystrokes(u'테스트 ab 하하 ㅎㅣ 012ㅋㅋ ㄲㄱ9ㅌㄱㅅ"')
 

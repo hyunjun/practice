@@ -66,7 +66,7 @@ class Solution:
             for c in range(C):
                 if grid[r][c] == 0:
                     times[r][c] = 0
-        
+
         def makeRotten(r, c):
             stack = [(r, c, 0)]
             while stack:
@@ -91,7 +91,7 @@ class Solution:
                     makeRotten(r, c)
         #for ts in times:
         #    print(ts)
-                        
+
         maxTime = max((max(ts) for ts in times))
         if maxTime == float('inf'):
             return -1

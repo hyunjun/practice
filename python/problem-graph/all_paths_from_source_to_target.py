@@ -22,7 +22,7 @@ class Solution:
     #   memory; 15.4MB, 34.87%
     def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
         res = []
-        
+
         def paths(acc, n):
             if 0 < len(acc) and acc[0] == 0 and n == len(graph) - 1:
                 acc.append(n)

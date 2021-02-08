@@ -26,9 +26,9 @@ class Solution:
     def flipAndInvertImage(self, A: List[List[int]]) -> List[List[int]]:
         if len(A) < 1 or len(A[0]) < 1:
             return A
-        
+
         R, C = len(A), len(A[0])
-        
+
         def reverseAndInvert(arr):
             l, r = 0, C - 1
             while l <= r:
@@ -37,7 +37,7 @@ class Solution:
                 l += 1
                 r -= 1
             return arr
-            
+
         return reverseAndInvert(A)
 
 

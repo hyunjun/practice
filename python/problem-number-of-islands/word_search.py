@@ -120,7 +120,7 @@ class Solution(object):
     #   memory; 15.5MB, 16.28%
     def exist(self, board: List[List[str]], word: str) -> bool:
         R, C = len(board), len(board[0])
-        
+
         def getChar(w, r, c):
             if board[r][c] == w[0]:
                 if len(w) == 1:
@@ -132,7 +132,7 @@ class Solution(object):
                             return True
                 board[r][c] = w[0]
             return False
-        
+
         for r in range(R):
             for c in range(C):
                 if board[r][c] == word[0]:

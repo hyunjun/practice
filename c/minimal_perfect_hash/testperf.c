@@ -95,7 +95,7 @@ hashform *form;
     switch(form->mode)
     {
     case NORMAL_HM:
-      hash = phash(mykey->kname, mykey->klen);  
+      hash = phash(mykey->kname, mykey->klen);
       break;
     case INLINE_HM:
       hash = PHASHSALT;
@@ -166,7 +166,7 @@ char **argv;
     case 'd': case 'D':
     case 'a': case 'A':
     case 'b': case 'B':
-      if (mode_given == TRUE) 
+      if (mode_given == TRUE)
 	usage_error();
       switch(*c)
       {

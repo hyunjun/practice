@@ -8,7 +8,7 @@ import	java.util.List;
 /**
  *	http://www.careercup.com/question?id=13055672
  */
-public class ArrayProduct 
+public class ArrayProduct
 {
 	private static Logger	log	=	Logger.getLogger(ArrayProduct.class);
 

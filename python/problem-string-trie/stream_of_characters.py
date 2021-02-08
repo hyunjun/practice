@@ -22,7 +22,7 @@ class StreamChecker:
                 trie[c] = {}
             trie = trie[c]
         trie['$'] = True
-        
+
     def search(self, word):
         trie = self.trie
         for c in word:
@@ -32,7 +32,7 @@ class StreamChecker:
                 return False
             trie = trie[c]
         return '$' in trie and trie['$']
-    
+
     def query(self, letter: str) -> bool:
         if letter not in self.trie and letter not in self.wordSet:
             return False

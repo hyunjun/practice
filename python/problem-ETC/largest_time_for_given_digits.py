@@ -63,13 +63,13 @@ class Solution:
     #   memory; 13.8MB, 74.68%
     def largestTimeFromDigits(self, A):
         sortedA, m0, m1 = sorted(A), range(5, -1, -1), range(9, -1, -1)
-        
+
         def makeTime(h0, h1):
             for (((a, b), c), d) in product(product(product(h0, h1), m0), m1):
                 if sorted([a, b, c, d]) == sortedA:
                     return f'{a}{b}:{c}{d}'
             return ''
-        
+
         ret = makeTime([2], range(3, -1, -1))
         return ret if 0 < len(ret) else makeTime([1, 0], range(9, -1, -1))
 

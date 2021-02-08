@@ -24,7 +24,7 @@ class Solution:
     #   runtime; 104ms, 23.81%
     #   memory; 21.1MB
     def countNodes(self, root: TreeNode) -> int:
-        
+
         self.res = 0
         def count(node):
             if node is None:
@@ -32,7 +32,7 @@ class Solution:
             self.res += 1
             count(node.left)
             count(node.right)
-        
+
         count(root)
         return self.res
 

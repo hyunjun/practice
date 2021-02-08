@@ -22,7 +22,7 @@ class StockSpanner:
                 lessCnt += cnt
             self.stack.append((price, lessCnt + 1))
         return self.stack[-1][1]
-        
+
 
 obj = StockSpanner()
 data = [([100, 80, 60, 70, 60, 75, 85], [1, 1, 1, 2, 1, 4, 6]),

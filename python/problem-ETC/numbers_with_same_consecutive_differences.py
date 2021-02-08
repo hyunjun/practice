@@ -12,7 +12,7 @@ class Solution:
     #   memory; 14.2MB, 22.68%
     def numsSameConsecDiff(self, N: int, K: int) -> List[int]:
         self.res = set()
-        
+
         def getNumber(n, nums):
             if n <= 0:
                 self.res.add(int(''.join(str(n) for n in nums)))
@@ -33,7 +33,7 @@ class Solution:
             nums.append(i)
             getNumber(N - 1, nums)
             nums.pop()
-            
+
         return sorted(list(self.res))
 
 

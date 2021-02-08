@@ -96,7 +96,7 @@ for n, expected in data:
 4 3 2 1
 T F F F
 t 5 4 3 2 1
-T T T T 
+T T T T
 F   F F F
 T     T T T
 t 6 5 4 3 2 1

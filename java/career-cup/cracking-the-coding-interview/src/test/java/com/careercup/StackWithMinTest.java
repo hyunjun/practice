@@ -5,7 +5,7 @@ import static	org.junit.Assert.*;
 import org.junit.*;
 
 //	3.1
-public class StackWithMinTest 
+public class StackWithMinTest
 {
 	@Test
     public void testStackWithMin()

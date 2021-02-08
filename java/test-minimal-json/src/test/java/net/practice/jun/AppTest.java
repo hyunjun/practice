@@ -38,7 +38,7 @@ public class AppTest extends TestCase {
 
       String input = jsonObj.get("input").asString();
       System.out.println("input\t" + input);
-      
+
       JsonArray terms = jsonObj.get("terms").asArray();
       System.out.println("terms");
       for ( JsonValue tVal : terms )  {

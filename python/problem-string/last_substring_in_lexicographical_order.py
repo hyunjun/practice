@@ -48,7 +48,7 @@ class Solution:
     #def __init__(self):
     #    T = lambda: defaultdict(T)
     #    self.t = T()
-        
+
     def lastSubstring1(self, s):
         d = defaultdict(list)
         for i, c in enumerate(s):

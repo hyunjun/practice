@@ -12,4 +12,4 @@ public class Solution {
       System.out.println(s.size());
     }
   }
-} 
+}

@@ -12,7 +12,7 @@ class Solution:
             return 0
         board = [[0] * m for _ in range(n)]
         for i in range(1, n):
-            board[i][0] = 1            
+            board[i][0] = 1
         for j in range(1, m):
             board[0][j] = 1
         for i in range(1, n):

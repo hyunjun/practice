@@ -14,7 +14,7 @@ class Solution:
     def trap0(self, height: List[int]) -> int:
         if height is None or 0 == len(height):
             return 0
-        
+
         def evaluate(values):
             start = 0
             while start + 1 < len(values) and values[start] <= values[start + 1]:
@@ -42,7 +42,7 @@ class Solution:
                     continue
                 res += maxHeight - values[i]
             return res
-            
+
         stack, res = [], 0
         for h in height:
             stack.append(h)
@@ -186,8 +186,8 @@ rh                3     2  1
     3 2 3 1 2 3 2   0 1
 
     0 1 2 3 4 5 6 7
-    4 2 0 3 2 4 3 4 
-lh  4         
+    4 2 0 3 2 4 3 4
+lh  4
       2 4 1 2 0 1 0
 rh                4
       2 4 1 2 0 1

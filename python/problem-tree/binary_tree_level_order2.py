@@ -33,7 +33,7 @@ class Solution(object):
             return []
         queue, d = [(root, 1)], defaultdict(list)
         while queue:
-            node, depth = queue.pop(0)    
+            node, depth = queue.pop(0)
             d[depth].append(node.val)
             if node.left:
                 queue.append((node.left, depth + 1))
@@ -48,7 +48,7 @@ class Solution(object):
             return []
         queue, d = [(root, 1)], defaultdict(list)
         while queue:
-            node, depth = queue.pop(0)    
+            node, depth = queue.pop(0)
             d[depth].append(node.val)
             if node.left:
                 queue.append((node.left, depth + 1))

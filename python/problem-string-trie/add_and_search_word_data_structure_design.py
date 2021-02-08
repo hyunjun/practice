@@ -8,7 +8,7 @@ class WordDictionary:
 
     def __init__(self):
         self.trie = {}
-        
+
     def addWord(self, word: str) -> None:
         trie = self.trie
         for c in word:
@@ -19,7 +19,7 @@ class WordDictionary:
 
     def search(self, word: str) -> bool:
         return self._search(self.trie, word)
-    
+
     def _search(self, trie: dict, word: str) -> bool:
         if trie is True:
             if 0 == len(word):

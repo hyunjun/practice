@@ -5,7 +5,7 @@ import static	org.junit.Assert.*;
 import org.junit.*;
 
 //	3.5
-public class MyQueueTest 
+public class MyQueueTest
 {
 	@Test
     public void testMyQueue()

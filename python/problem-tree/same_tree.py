@@ -29,20 +29,20 @@ class Solution:
     #   runtime; 32ms, 60.40%
     #   memory; 13.8MB, 76.71%
     def isSameTree1(self, p: TreeNode, q: TreeNode) -> bool:
-        
+
         def isSameNode(l, r):
             if not l and not r:
                 return True
             if l and r and l.val == r.val:
                 return isSameNode(l.left, r.left) and isSameNode(l.right, r.right)
             return False
-        
+
         return isSameNode(p, q)
 
     #   runtime; 68ms
     #   memory; 13.6MB, 93.71%
     def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
-        
+
         pNode, pStack, qNode, qStack = p, [], q, []
         while (pNode or pStack) and (qNode or qStack):
             if pNode and qNode:

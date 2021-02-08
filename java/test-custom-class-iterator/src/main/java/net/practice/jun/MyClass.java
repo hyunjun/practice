@@ -53,13 +53,13 @@ class MyClassList<MyClass> implements Iterable<MyClass> {
 	public Iterator<MyClass> iterator() {
     Iterator<MyClass> it = new Iterator<MyClass>()  {
 		  private int cursor = 0;
-		
+
       @Override
 		  public boolean hasNext()  {
 		    //return this.cursor < currentSize && myClassList[cursor] != null;
 		    return this.cursor < currentSize && myClassList.get(cursor) != null;  // && this.listCursor < myClassList.get(cursor).strs.size() && myClassList.get(cursor).strs.(listCursor) != null;
 		  }
-		
+
       @Override
 		  public MyClass next() {
         //return myClassList[cursor++];

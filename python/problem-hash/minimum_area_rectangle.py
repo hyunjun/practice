@@ -54,7 +54,7 @@ class Solution:
         if minArea is None:
             return 0
         return minArea
-        
+
 
 s = Solution()
 data = [([[1,1],[1,3],[3,1],[3,3],[2,2]], 4),

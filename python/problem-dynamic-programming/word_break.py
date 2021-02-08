@@ -127,16 +127,16 @@ class Solution:
     #   https://leetcode.com/explore/challenge/card/september-leetcoding-challenge/558/week-5-september-29th-september-30th/3477
     #   Time Limit Exceeded
     def wordBreak3(self, s: str, wordDict: List[str]) -> bool:
-        
+
         t = lambda: defaultdict(t)
         trie = t()
-        
+
         for word in wordDict:
             _trie = trie
             for c in word:
                 _trie = _trie[c]
             _trie['$'] = True
-            
+
         def isIncluded(subStr):
             _trie = trie
             for c in subStr:
@@ -144,7 +144,7 @@ class Solution:
                     return False
                 _trie = _trie[c]
             return '$' in _trie and _trie['$'] == True
-        
+
         def consume(subStr):
             if 0 == len(subStr):
                 return True
@@ -153,7 +153,7 @@ class Solution:
                     if consume(subStr[i:]):
                         return True
             return False
-        
+
         return consume(s)
 
     #   runtime; 40ms, 71.18%

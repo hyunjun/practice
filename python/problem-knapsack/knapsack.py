@@ -47,7 +47,7 @@ def maximize_price2(price_weight_list, limit_weight):
     prices = []
     for combi in combinations:
         sum_of_price = sum([t[0] for i, t in enumerate(price_weight_list) if i in combi])
-        sum_of_weight = sum([t[1] for i, t in enumerate(price_weight_list) if i in combi]) 
+        sum_of_weight = sum([t[1] for i, t in enumerate(price_weight_list) if i in combi])
         if sum_of_weight <= limit_weight:
             prices.append(sum_of_price)
     return max(prices)

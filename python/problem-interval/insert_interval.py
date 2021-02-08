@@ -30,7 +30,7 @@ class Solution:
                 intervals[i] = [min(interval[0], newInterval[0]), max(interval[1], newInterval[1])]
                 p, isOverlapped = i, True
                 break
-        
+
         if not isOverlapped:
             intervals.insert(p, newInterval)
             return intervals
@@ -64,7 +64,7 @@ class Solution:
                 intervals[i][0], intervals[i][1] = min(intervals[i - 1][0], intervals[i][0]), max(intervals[i - 1][1], intervals[i][1])
                 intervals[i - 1] = [None, None]
         return [interval for interval in intervals if interval[0] is not None and interval[1] is not None]
-                
+
 
 s = Solution()
 data = [([[1,3],[6,9]], [2,5], [[1,5],[6,9]]),

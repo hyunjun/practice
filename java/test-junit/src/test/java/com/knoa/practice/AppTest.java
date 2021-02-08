@@ -5,7 +5,7 @@ import	org.junit.*;
 import	java.io.*;
 
 //	http://stackoverflow.com/questions/2597271/easy-to-get-a-test-file-into-junit
-public class AppTest 
+public class AppTest
 {
 	private static String	fileName;
 	private BufferedReader in = null;
@@ -21,7 +21,7 @@ public class AppTest
 	public static void runAfterClass() {
 		//	run for one time after all test cases
 		fileName	=	null;
-	} 
+	}
 
 	@Before
 	public void setup() throws IOException

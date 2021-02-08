@@ -10,18 +10,18 @@ class Solution(object):
         :rtype: int
         """
         R, C = len(grid), len(grid[0])
-        
+
         def isValid(r, c):
             if 0 <= r < R and 0 <= c < C:
                 return True
             return False
-        
+
         def hasNeighborOne(r, c):
             for nr, nc in [(r-1, c), (r+1, c), (r, c-1), (r, c+1)]:
                 if isValid(nr, nc) and grid[nr][nc] == 1:
                     return True
             return False
-        
+
         dist = [[0] * C for _ in range(R)]
         def getMinDist(r, c):
             minDist = float('inf')

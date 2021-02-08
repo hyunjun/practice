@@ -93,49 +93,49 @@ public class Sort
 	//	http://www.joinc.co.kr/modules/moniwiki/wiki.php/Site/Database/algorithm/Quick_Sort
 	/*
 	public static int[] quickSort(final int[] arr, final int start, final int end)	{
-		int	left	=	start; 
-		int	right	=	end; 
-		int pivot = arr[left]; // 0번째 원소를 피봇으로 선택 
+		int	left	=	start;
+		int	right	=	end;
+		int pivot = arr[left]; // 0번째 원소를 피봇으로 선택
 		log.debug("start: pivot = " + pivot + "\tstart = " + left + "\tend = " + right);
 		printArr(arr);
-		while (left < right) 
-		{ 
-			// 값이 선택한 피봇과 같거나 크다면, 이동할 필요가 없다 
-			while ((arr[right] >= pivot) && (left < right))	{ 
-				right --; 
+		while (left < right)
+		{
+			// 값이 선택한 피봇과 같거나 크다면, 이동할 필요가 없다
+			while ((arr[right] >= pivot) && (left < right))	{
+				right --;
 				log.debug("\tright: = " + right);
 			}
-			// 그렇지 않고 값이 피봇보다 작다면, 
-			// 피봇의 위치에 현재 값을 넣는다. 
-			if (left != right) { 
-				arr[left] = arr[right]; 
-			} 
-			// 왼쪽부터 현재 위치까지 값을 읽어들이면서 
-			// 피봇보다 큰 값이 있다면, 값을 이동한다. 
+			// 그렇지 않고 값이 피봇보다 작다면,
+			// 피봇의 위치에 현재 값을 넣는다.
+			if (left != right) {
+				arr[left] = arr[right];
+			}
+			// 왼쪽부터 현재 위치까지 값을 읽어들이면서
+			// 피봇보다 큰 값이 있다면, 값을 이동한다.
 			while ((arr[left] <= pivot) && (left < right)) 	{
-				left ++; 
+				left ++;
 				log.debug("\tleft: = " + left);
 			}
-			if (left != right) { 
-				arr[right] = arr[left]; 
-				right --; 
-			} 
-		} 
-		// 모든 스캔이 끝났다면, 피봇값을 현재 위치에 입력한다. 
-		// 이제 피봇을 기준으로 왼쪽에는 피봇보다 작거나 같은 값만 남았다. 
-		arr[left] = pivot; 
-		pivot = left; 
-		left = start; 
-		right = end; 
-		
-		// 재귀호출을 수행한다. 
+			if (left != right) {
+				arr[right] = arr[left];
+				right --;
+			}
+		}
+		// 모든 스캔이 끝났다면, 피봇값을 현재 위치에 입력한다.
+		// 이제 피봇을 기준으로 왼쪽에는 피봇보다 작거나 같은 값만 남았다.
+		arr[left] = pivot;
+		pivot = left;
+		left = start;
+		right = end;
+
+		// 재귀호출을 수행한다.
 		if (left < pivot)	{
 			log.debug("\trecursive call when left " + left + " < pivot " + pivot + ": start = " + left + "\tend = " + (pivot - 1));
-			quickSort(arr, left, pivot - 1); 
+			quickSort(arr, left, pivot - 1);
 		}
 		if (right > pivot) 	{
 			log.debug("\trecursive call when pivot " + pivot + " < right " + right + ": start = " + (pivot + 1) + "\tend = " + right);
-			quickSort(arr, pivot+1, right); 
+			quickSort(arr, pivot+1, right);
 		}
 		return	arr;
 	}

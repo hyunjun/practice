@@ -9,7 +9,7 @@ import junit.framework.TestSuite;
 
 //	http://commons.apache.org/proper/commons-lang/userguide.html
 //	http://commons.apache.org/proper/commons-lang/javadocs/api-release/org/apache/commons/lang3/time/FastDateFormat.html
-import org.apache.commons.lang3.time.FastDateFormat;	
+import org.apache.commons.lang3.time.FastDateFormat;
 
 //	http://yamoe.tistory.com/113
 public class AppTest extends TestCase	{

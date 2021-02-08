@@ -8,7 +8,7 @@ import	java.util.List;
 /**
  *	http://www.careercup.com/question?id=13032664
  */
-public class ReplacePercent20 
+public class ReplacePercent20
 {
 	private static Logger	log	=	Logger.getLogger(ReplacePercent20.class);
 

@@ -43,7 +43,7 @@ class MinHeap0:
             self.heap[pos], self.heap[cPos] = self.heap[cPos], self.heap[pos]
             pos = cPos
         return ret
-            
+
     def print(self):
         if 1 < len(self.heap):
             print(self.heap[1])
@@ -90,7 +90,7 @@ class MinHeap1:
                 cPos += 1
             self.heap[pos], self.heap[cPos] = self.heap[cPos], self.heap[pos]
             pos = cPos
-            
+
     def print(self):
         if 1 < len(self.heap):
             print(self.heap[1])
@@ -119,7 +119,7 @@ class MinHeap2:
         for t in tmp:
             heapq.heappush(self.heap, t)
         print(self.heap)
-            
+
     def print(self):
         if 0 < len(self.heap):
             print(self.heap[0])
@@ -142,7 +142,7 @@ class MinHeap:
         else:
             self.heap[idx] = self.heap.pop()
             heapq.heapify(self.heap)
-            
+
     def print(self):
         if 0 < len(self.heap):
             print(self.heap[0])

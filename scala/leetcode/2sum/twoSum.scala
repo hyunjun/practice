@@ -4,7 +4,7 @@ object Solution {
     //  runtime; 584ms, 30.25%
     //  memory; 60.4MB, 25.00%
     def twoSum(nums: Array[Int], target: Int): Array[Int] = {
-       //val m = nums.groupBy(identity).mapValues(_.size) 
+       //val m = nums.groupBy(identity).mapValues(_.size)
        val m = nums.zipWithIndex.groupMap(_._1)(_._2)
        for ( n <- m.keys )  {
          val t = target - n

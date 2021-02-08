@@ -35,10 +35,10 @@ class FizzBuzz(object):
                 printFizz()
                 self.cur += 1
             self.sem.release()
-            
+
             if self.cur > self.n:
                 break
-    	
+
 
     # printBuzz() outputs "buzz"
     def buzz(self, printBuzz):
@@ -55,7 +55,7 @@ class FizzBuzz(object):
 
             if self.cur > self.n:
                 break
-    	
+
 
     # printFizzBuzz() outputs "fizzbuzz"
     def fizzbuzz(self, printFizzBuzz):
@@ -69,10 +69,10 @@ class FizzBuzz(object):
                 printFizzBuzz()
                 self.cur += 1
             self.sem.release()
-            
+
             if self.cur > self.n:
                 break
-		
+
 
     # printNumber(x) outputs "x", where x is an integer.
     def number(self, printNumber):
@@ -81,12 +81,12 @@ class FizzBuzz(object):
         :rtype: void
         """
         while True:
-            self.sem.acquire()        
+            self.sem.acquire()
             if self.cur <= self.n and self.cur % 3 != 0 and self.cur % 5 != 0:
                 printNumber(self.cur)
                 self.cur += 1
             self.sem.release()
-            
+
             if self.cur > self.n:
                 break
 

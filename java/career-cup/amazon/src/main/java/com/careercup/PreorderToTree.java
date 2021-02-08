@@ -8,7 +8,7 @@ import	java.util.List;
 /**
  *	http://www.careercup.com/question?id=12477676
  */
-public class PreorderToTree 
+public class PreorderToTree
 {
 	private static Logger	log	=	Logger.getLogger(PreorderToTree.class);
 

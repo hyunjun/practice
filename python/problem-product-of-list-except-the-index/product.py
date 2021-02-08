@@ -6,7 +6,7 @@ def product(arr):
   acc = 1
   for i in range(1, len(arr)):
     acc *= arr[i - 1]
-    result[i] *= acc 
+    result[i] *= acc
   acc = 1
   for i in range(len(arr) - 2, -1, -1):
     acc *= arr[i + 1]

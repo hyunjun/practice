@@ -27,7 +27,7 @@ class Solution:
             if x[i] != y[i]:
                 cnt += 1
         return cnt
-            
+
 
 s = Solution()
 data = [(1, 4, 2),

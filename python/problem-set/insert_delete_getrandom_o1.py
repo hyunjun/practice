@@ -5,7 +5,7 @@
 class RandomizedSet0:
     def __init__(self):
         self.i, self.d, self.l = 0, {}, []
-        
+
     def insert(self, val: int) -> bool:
         if val in self.d:
             return False
@@ -32,7 +32,7 @@ class RandomizedSet0:
 class RandomizedSet:
     def __init__(self):
         self.i, self.d, self.l = 0, {}, []
-        
+
     def insert(self, val: int) -> bool:
         if val in self.d:
             return False

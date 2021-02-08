@@ -29,7 +29,7 @@ class Solution:
                 break
 
         return ''.join(result)
-            
+
 
 data = [(['c', 'c'], 'c'), (['aa', 'a'], 'a'), (['', ''], ''), (['a'], 'a'), (['flower', 'flow', 'flight'], 'fl'), (['dog', 'racecar', 'car'], '')]
 s = Solution()

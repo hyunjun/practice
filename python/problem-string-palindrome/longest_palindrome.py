@@ -45,7 +45,7 @@ class Solution:
         if hasOdd:
             return cnt + 1
         return cnt
-        
+
 
 
 solution = Solution()

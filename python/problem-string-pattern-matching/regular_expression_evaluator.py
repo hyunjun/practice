@@ -23,7 +23,7 @@ class Solution:
             if 1 < len(p) and '*' == p[1]:
                 return self.isMatchRecur(s, p[2:])
             return False
-    
+
         if 1 < len(p) and '*' == p[1]:
             ret = self.isMatchRecur(s, p[2:])
             if ret:

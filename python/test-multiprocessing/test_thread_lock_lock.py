@@ -66,7 +66,7 @@ class Foo:
             finally:
                 self.lock.release()
             sleep(0.1)
-        
+
 
 
 def threadExecutor(fooInstance, num):

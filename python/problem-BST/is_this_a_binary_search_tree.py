@@ -4,14 +4,14 @@
 
 
 def checkBST(root):
-    
+
     def isBST(node, _min, _max):
         if node is None or node.left is None and node.right is None and _min < node.data < _max:
             return True
         if node.left and node.left.data >= node.data or node.right and node.right.data <= node.data or node.data <= _min or _max <= node.data:
             return False
         return isBST(node.left, _min, node.data) and isBST(node.right, node.data, _max)
-    
+
     return isBST(root, -float('inf'), float('inf'))
 
 

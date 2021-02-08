@@ -4,7 +4,7 @@ import	java.util.ArrayList;
 import	java.util.Enumeration;
 import	java.util.Iterator;
 
-public class Adapter 
+public class Adapter
 {
     public static void main( String[] args )
     {

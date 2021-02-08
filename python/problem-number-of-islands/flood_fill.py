@@ -31,7 +31,7 @@ class Solution:
         if image is None or not (1 <= len(image) <= 50) or not (1 <= len(image[0]) <= 50) or not (0 <= sr < len(image)) or not (0 <= sc < len(image[0])):
             return [[]]
         R, C, COLOR, visited = len(image), len(image[0]), image[sr][sc], set()
-        
+
         def fill(r, c):
             if not (0 <= r < R) or not (0 <= c < C) or (r, c) in visited or image[r][c] != COLOR:
                 return
@@ -39,9 +39,9 @@ class Solution:
             image[r][c] = newColor
             for nr, nc in [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]:
                 fill(nr, nc)
-                
+
         fill(sr, sc)
-        
+
         return image
 
 

@@ -12,7 +12,7 @@ import	org.apache.commons.cli.PosixParser;
 /**
  *	http://commons.apache.org/cli/usage.html
  */
-public class App 
+public class App
 {
     public static void main( String[] args ) throws Exception
     {

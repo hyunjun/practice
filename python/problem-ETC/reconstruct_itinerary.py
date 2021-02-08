@@ -8,7 +8,7 @@ class Solution:
         d = defaultdict(list)
         for departure, arrival in tickets:
             d[departure].append(arrival)
-        
+
         self.res = []
         def chaining(acc, visited, airport):
             if len(visited) == len(tickets) or airport is None:
@@ -79,7 +79,7 @@ class Solution:
     #   memory; 14MB, 81.24%
     def findItinerary(self, tickets: List[List[str]]) -> List[str]:
         graph = {}
-        
+
         tickets.sort(key=lambda x: x[1])
 
         for u, v in tickets:
@@ -87,12 +87,12 @@ class Solution:
                 graph[u].append(v)
             else:
                 graph[u] = [v]
-        
+
         itinerary, stack = [], [("JFK")]
-        
+
         while stack:
             cur = stack[-1]
-            
+
             if cur in graph and len(graph[cur]) > 0:
                 stack.append(graph[cur].pop(0))
             else:

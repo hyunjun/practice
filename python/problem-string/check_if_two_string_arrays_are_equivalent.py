@@ -14,7 +14,7 @@ class Solution:
         word2.sort()
         return ''.join(word1) == ''.join(word2)
 
-    #   Time Limit Exceeded 
+    #   Time Limit Exceeded
     def arrayStringsAreEqual1(self, word1: List[str], word2: List[str]) -> bool:
         if word1 is None or 0 == len(word2) or word2 is None or 0 == len(word2) or len(''.join(word1)) != len(''.join(word2)):
             return False
@@ -54,7 +54,7 @@ class Solution:
         for s in word:
             for c in s:
                 yield c
-        # Ensure False when len(word1) != len(word2) 
+        # Ensure False when len(word1) != len(word2)
         yield None
 
 

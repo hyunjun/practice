@@ -58,7 +58,7 @@ class Solution(object):
             for i in range(s, s + c):
                 nums[i] = n
             s += c
-        
+
 
 s = Solution()
 data = [([0], [0]),

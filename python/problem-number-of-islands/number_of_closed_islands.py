@@ -29,7 +29,7 @@ class Solution:
             for c in range(C):
                 if grid[r][c] == 0:
                     fill(r, c, -1)
-        
+
         #   check the number of islands
         ret = 0
         for r in range(1, R - 1):

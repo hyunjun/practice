@@ -136,7 +136,7 @@ i   0 1 2                       {A:0 B:0 C:0}
     b b a a
     a b a
 
-    A D O B E C O D E B A  N C  d               s   e   cntDict               
+    A D O B E C O D E B A  N C  d               s   e   cntDict
     0     3   5       9 10  12  {A:1 B:1 C:1}   -1  -1  {A:0 B:0 C:0}
 i   0 1 2                                       0   0   {A:1 B:0 C:0}
           3 4                                   0   3   {A:1 B:1 C:0}
