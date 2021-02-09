@@ -45,6 +45,24 @@ class Solution:
 
         return root
 
+    #   https://leetcode.com/explore/challenge/card/february-leetcoding-challenge-2021/585/week-2-february-8th-february-14th/3634
+    #   runtime; 84ms, 58.79%
+    #   memory; 16.9MB, 31.18%
+    def convertBST(self, root: TreeNode) -> TreeNode:
+        if root is None:
+            return root
+        stack, node, nodes = [], root, []
+        while stack or node:
+            if node:
+                stack.append(node)
+                node = node.left
+            else:
+                node = stack.pop()
+                nodes.append(node)
+                node = node.right
+        for i in range(len(nodes) - 2, -1, -1):
+            nodes[i].val += nodes[i + 1].val
+        return root
 
 s = Solution()
 root = TreeNode(4)
