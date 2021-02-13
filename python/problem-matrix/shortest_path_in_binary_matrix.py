@@ -26,7 +26,7 @@ class Solution:
 
     #   runtime; 988ms, 6.38%
     #   memory; 15.3MB, 100.00%
-    def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
+    def shortestPathBinaryMatrix1(self, grid: List[List[int]]) -> int:
         if grid is None or 0 == len(grid) or 0 == len(grid[0]) or 1 == grid[0][0] or 1 == grid[-1][-1]:
             return -1
         N, ans, q, visited = len(grid), float('inf'), [(0, 0, 1)], set()
@@ -44,10 +44,30 @@ class Solution:
                 q.append((nr, nc, d + 1))
         return -1 if ans == float('inf') else ans
 
+    #   https://leetcode.com/explore/challenge/card/february-leetcoding-challenge-2021/585/week-2-february-8th-february-14th/3638
+    def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
+        if grid is None or 0 == len(grid) or 0 == len(grid[0]) or 1 == grid[0][0] or 1 == grid[-1][-1]:
+            return -1
+        N, q, ans, visited = len(grid), [(0, 0, 1)], float('inf'), set()
+        while q:
+            r, c, cnt = q.pop(0)
+            if (r, c) in visited:
+                continue
+            visited.add((r, c))
+            if r == c == N - 1:
+                ans = min(ans, cnt)
+                continue
+            for nr, nc in [(r - 1, c - 1), (r - 1, c + 1), (r + 1, c - 1), (r + 1, c + 1), (r - 1, c), (r, c - 1), (r, c + 1), (r + 1, c)]:
+                if not (0 <= nr < N) or not (0 <= nc < N) or grid[nr][nc] == 1:
+                    continue
+                q.append((nr, nc, cnt + 1))
+        return -1 if ans == float('inf') else ans
+
 
 s = Solution()
 data = [([[0, 1], [1, 0]], 2),
         ([[0, 0, 0], [1, 1, 0], [1, 1, 0]], 4),
+        ([[1, 0, 0], [1, 1, 0], [1, 1, 0]], -1),
         ([[0, 1, 0, 0, 1],[1, 0, 0, 1, 1], [1, 0, 0, 1, 0], [0, 0, 0, 1, 0], [1, 0, 1, 0, 0]], 6),
         ([[0, 1, 0, 0, 1, 1],[1, 0, 0, 0, 1, 1], [1, 0, 0, 0, 1, 0], [0, 0, 0, 1, 0, 0], [1, 1, 1, 0, 1, 1], [1, 1, 1, 1, 0, 0]] , 7),
         ([[0, 1, 1, 1, 0, 0, 0], [1, 0, 1, 1, 0, 1, 0], [1, 1, 0, 1, 0, 1, 0], [1, 1, 1, 0, 1, 1, 0], [1, 1, 1, 0, 1, 0, 1], [1, 1, 1, 0, 1, 0, 1], [0, 0, 0, 0, 1, 1, 0]], 13),
