@@ -1,4 +1,7 @@
 #   https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes
+
+#   https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/solution/
+
 #   https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves
 
 
@@ -40,7 +43,7 @@ class Solution:
     #   https://leetcode.com/explore/challenge/card/december-leetcoding-challenge/570/week-2-december-8th-december-14th/3563
     #   runtime; 36ms, 56.10%
     #   memory; 14.7MB
-    def subtreeWithAllDeepest(self, root: TreeNode) -> TreeNode:
+    def subtreeWithAllDeepest0(self, root: TreeNode) -> TreeNode:
         if root is None:
             return root
         q, depthDict, pDict = [(root, 0)], defaultdict(list), {}
@@ -69,6 +72,31 @@ class Solution:
                 depth -= 1
         #print(allPDict)
         return sorted([(node, depth) for nodeId, (node, depth, cnt) in allPDict.items() if cnt == len(deepestNodes)], key=lambda t: -t[1])[0][0]
+
+    #   runtime; 24ms, 98.87%
+    #   memory; 14.5MB, 31.19%
+    def subtreeWithAllDeepest(self, root: TreeNode) -> TreeNode:
+        if root is None:
+            return root
+
+        def getDeepestNodeAndDepth(node, depth):
+            if node is None:
+                return (node, depth)
+            lDeepest, lDepth = getDeepestNodeAndDepth(node.left, depth + 1)
+            rDeepest, rDepth = getDeepestNodeAndDepth(node.right, depth + 1)
+            if lDeepest is None and rDeepest is None:
+                return (node, depth)
+            if lDeepest is None:
+                return (rDeepest, rDepth)
+            if rDeepest is None:
+                return (lDeepest, lDepth)
+            if lDeepest and lDepth == rDepth:
+                return (node, lDepth)
+            if lDepth > rDepth:
+                return (lDeepest, lDepth)
+            return (rDeepest, rDepth)
+
+        return getDeepestNodeAndDepth(root, 0)[0]
 
 
 s = Solution()
@@ -119,7 +147,11 @@ root4.left.left.right = TreeNode(6)
 root4.right = TreeNode(1)
 root4.right.left = TreeNode(2)
 root4.right.left.right = TreeNode(5)
-for r in [root1, root2, root3, root4]:
-    print(r)
-    #print(s.lcaDeepestLeaves(r))
-    print(s.subtreeWithAllDeepest(r))
+data = [(root1, root1),
+        (root2, root2.left.left),
+        (root3, root3.left),
+        (root4, root4),
+        ]
+for root, expect in data:
+    real = s.subtreeWithAllDeepest(root)
+    print(f'{root} expect {expect} real {real} result {expect == real}')
