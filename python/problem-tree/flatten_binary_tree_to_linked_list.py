@@ -23,7 +23,7 @@ class Solution(object):
 
     #   runtime; 40ms, 53.89%
     #   memory; 15.2MB, 75.77%
-    def flatten(self, root: TreeNode) -> None:
+    def flatten1(self, root: TreeNode) -> None:
         if root is None:
             return None
 
@@ -44,6 +44,31 @@ class Solution(object):
             if i == 0:
                 continue
             self.nodes[i - 1].right = node
+
+    #   runtime; 40ms, 53.89%
+    #   memory; 15.3MB, 47.62%
+    def flatten(self, root: TreeNode) -> None:
+        if root is None:
+            return None
+
+        def recur(node):
+            if node is None:
+                return (None, None)
+            lRoot, lRightmost = recur(node.left)
+            rRoot, rRightmost = recur(node.right)
+            if lRoot is None and rRoot is None:
+                return (node, node)
+            if lRoot is None:
+                return (node, rRightmost)
+            if rRoot is None:
+                node.left, node.right = None, lRoot
+                return (node, lRightmost)
+            node.left, node.right = None, lRoot
+            if lRightmost:
+                lRightmost.right = rRoot
+            return (node, rRightmost)
+
+        recur(root)
 
 
 root = TreeNode(1)
