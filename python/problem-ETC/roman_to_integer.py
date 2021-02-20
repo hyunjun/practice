@@ -5,7 +5,7 @@
 
 class Solution:
     #   79.03%
-    def romanToInt(self, s):
+    def romanToInt0(self, s):
         i, cnt = 0, 0
         while i < len(s):
             if 'I' == s[i]:
@@ -52,6 +52,41 @@ class Solution:
                 i += 1
         return cnt
 
+    #   https://leetcode.com/explore/challenge/card/february-leetcoding-challenge-2021/586/week-3-february-15th-february-21st/3646/
+    #   runtime; 52ms, 46.95%
+    #   memory; 14.1MB, 85.09%
+    def romanToInt1(self, s: str) -> int:
+        twoNumDict = {'CM': 900, 'CD': 400, 'XC': 90, 'XL': 40, 'IX': 9, 'IV': 4}
+        numDict = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+        tot, i = 0, 0
+        while i < len(s):
+            if i + 1 < len(s):
+                if s[i:i + 2] in twoNumDict:
+                    tot += twoNumDict[s[i:i + 2]]
+                    i += 2
+                    continue
+            tot += numDict[s[i]]
+            i += 1
+        return tot
+
+    #   위와 동일. len(s)와 s[i:i + 2] 중복 호출만 제거
+    #   runtime; 40ms, 93.59%
+    #   memory; 14.4MB
+    def romanToInt(self, s: str) -> int:
+        twoNumDict = {'CM': 900, 'CD': 400, 'XC': 90, 'XL': 40, 'IX': 9, 'IV': 4}
+        numDict = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+        tot, i, lenS = 0, 0, len(s)
+        while i < lenS:
+            if i + 1 < lenS:
+                twoNums = s[i:i + 2]
+                if twoNums in twoNumDict:
+                    tot += twoNumDict[twoNums]
+                    i += 2
+                    continue
+            tot += numDict[s[i]]
+            i += 1
+        return tot
+
 
 s = Solution()
 data = [('III', 3),
@@ -60,6 +95,6 @@ data = [('III', 3),
         ('LVIII', 58),
         ('MCMXCIV', 1994),
         ]
-for roman, expected in data:
+for roman, expect in data:
     real = s.romanToInt(roman)
-    print('{}, expected {}, real {}, result {}'.format(roman, expected, real, expected == real))
+    print(f'{roman}, expect {expect}, real {real}, result {expect == real}')
