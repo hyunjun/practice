@@ -72,7 +72,7 @@ class Solution:
     #   위와 동일. len(s)와 s[i:i + 2] 중복 호출만 제거
     #   runtime; 40ms, 93.59%
     #   memory; 14.4MB
-    def romanToInt(self, s: str) -> int:
+    def romanToInt2(self, s: str) -> int:
         twoNumDict = {'CM': 900, 'CD': 400, 'XC': 90, 'XL': 40, 'IX': 9, 'IV': 4}
         numDict = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
         tot, i, lenS = 0, 0, len(s)
@@ -81,6 +81,23 @@ class Solution:
                 twoNums = s[i:i + 2]
                 if twoNums in twoNumDict:
                     tot += twoNumDict[twoNums]
+                    i += 2
+                    continue
+            tot += numDict[s[i]]
+            i += 1
+        return tot
+
+    #   위에서 두 개의 dict를 하나로 합쳐봄. 속도가 조금 느려짐
+    #   runtime; 44ms, 83.86%
+    #   memory; 14.4MB
+    def romanToInt(self, s: str) -> int:
+        numDict = {'CM': 900, 'CD': 400, 'XC': 90, 'XL': 40, 'IX': 9, 'IV': 4, 'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+        tot, i, lenS = 0, 0, len(s)
+        while i < lenS:
+            if i + 1 < lenS:
+                twoChNum = s[i:i + 2]
+                if twoChNum in numDict:
+                    tot += numDict[twoChNum]
                     i += 2
                     continue
             tot += numDict[s[i]]
