@@ -32,7 +32,7 @@ class Solution:
     #   https://leetcode.com/explore/challenge/card/march-leetcoding-challenge-2021/588/week-1-march-1st-march-7th/3658
     #   runtime: 188ms, 82.20%
     #   memory: 16MB, 31.95%
-    def findErrorNums(self, nums: List[int]) -> List[int]:
+    def findErrorNums1(self, nums: List[int]) -> List[int]:
         c, duplicated, missing = Counter(nums), -1, -1
         for i in range(1, len(nums) + 1):
             if i not in c:
@@ -40,6 +40,12 @@ class Solution:
             elif c[i] > 1:
                 duplicated = i
         return [duplicated, missing]
+
+    #   runtime; 200ms, 62.09%
+    #   memory, 16.9MB
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        c, s = Counter(nums), set([i for i in range(1, len(nums) + 1)])
+        return [[n for n, cnt in c.items() if cnt > 1][0], list(s - c.keys())[0]]
 
 
 s = Solution()
