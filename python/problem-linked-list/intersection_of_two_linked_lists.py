@@ -24,7 +24,7 @@ class Solution:
         return None
 
     #   83.31%  time O(A + B), space O(1)
-    def getIntersectionNode(self, headA, headB):
+    def getIntersectionNode1(self, headA, headB):
         if headA is None or headB is None:
             return None
         flagA, curA, flagB, curB = True, headA, True, headB
@@ -47,6 +47,21 @@ class Solution:
                 else:
                     curB = headB
                 flagB = not flagB
+        return None
+
+    #   https://leetcode.com/explore/challenge/card/march-leetcoding-challenge-2021/588/week-1-march-1st-march-7th/3660
+    #   runtime: 160ms, 76.92%
+    #   memory: 30.3MB
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        node, s = headA, set()
+        while node:
+            s.add(id(node))
+            node = node.next
+        node = headB
+        while node:
+            if id(node) in s:
+                return node
+            node = node.next
         return None
 
 
