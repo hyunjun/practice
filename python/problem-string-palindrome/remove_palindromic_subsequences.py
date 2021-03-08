@@ -69,13 +69,29 @@ class Solution:
 
     #   runtime; 32ms, 12.18%
     #   memory; 13.9MB, 100.00%
-    def removePalindromeSub(self, s: str) -> int:
+    def removePalindromeSub2(self, s: str) -> int:
         if s is None or 0 == len(s) or not (0 < len(s) <= 1000):
             return 0
 
         if s == s[::-1]:
             return 1
         return 2
+
+    #   https://leetcode.com/explore/challenge/card/march-leetcoding-challenge-2021/589/week-2-march-8th-march-14th/3665
+    #   runtime: 32ms, 58.63%
+    #   memory: 14.2MB, 70.20%
+    def removePalindromeSub(self, s: str) -> int:
+        if s is None or 0 == len(s) or not (0 < len(s) <= 1000):
+            return 0
+
+        l, r = 0, len(s) - 1
+        while l < r:
+            if s[l] != s[r]:
+                break
+            l += 1
+            r -= 1
+        return 1 if l == r or l - r == 1 else 2
+
 
 
 solution = Solution()
