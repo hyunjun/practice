@@ -8,7 +8,7 @@ from TreeNode import TreeNode
 class Solution:
     #   runtime; 40ms, 97.65%
     #   memory; 13.7MB, 0.00%
-    def addOneRow(self, root, v, d):
+    def addOneRow0(self, root, v, d):
         if root is None or d < 1:
             return None
         if 1 == d:
@@ -27,6 +27,33 @@ class Solution:
                 curLeft, curRight = node.left, node.right
                 node.left, node.right = TreeNode(v), TreeNode(v)
                 node.left.left, node.right.right = curLeft, curRight
+        return root
+
+    #   https://leetcode.com/explore/challenge/card/march-leetcoding-challenge-2021/589/week-2-march-8th-march-14th/3666
+    #   runtime: 52ms, 82.23%
+    #   memory: 16.1MB, 89.12%
+    def addOneRow(self, root: TreeNode, v: int, d: int) -> TreeNode:
+        if root is None or d < 1:
+            return None
+        if d == 1:
+            newNode = TreeNode(v)
+            newNode.left = root
+            return newNode
+        q = [(root, 1)]
+        while q:
+            n, depth = q.pop(0)
+            if depth == d - 1:
+                newNode = TreeNode(v)
+                newNode.left = n.left
+                n.left = newNode
+                newNode = TreeNode(v)
+                newNode.right = n.right
+                n.right = newNode
+            else:
+                if n.left:
+                    q.append((n.left, depth + 1))
+                if n.right:
+                    q.append((n.right, depth + 1))
         return root
 
 
