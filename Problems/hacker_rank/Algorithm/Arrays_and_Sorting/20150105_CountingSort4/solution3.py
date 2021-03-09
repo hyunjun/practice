@@ -3,7 +3,7 @@ def counting_sort(ar):
   for x, s in ar:
     res.setdefault(x, []).append(s)
   return ' '.join([' '.join(words) for x, words in res.items()])
-  
+
 if __name__ == '__main__':
   n, ar = int(input()), []
   for i in range(n):

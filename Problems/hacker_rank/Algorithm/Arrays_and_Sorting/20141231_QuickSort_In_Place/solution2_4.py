@@ -19,7 +19,7 @@ def quick_sort(ar, s, e):
   p = partition(ar, s, e)
   quick_sort(ar, s, p - 1)
   quick_sort(ar, p + 1, e)
-  
+
 if __name__ == '__main__':
   n = int(raw_input())
   ar = map(int, raw_input().split())

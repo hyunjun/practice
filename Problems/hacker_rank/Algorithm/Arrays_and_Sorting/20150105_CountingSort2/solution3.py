@@ -8,7 +8,7 @@ def counting_sort(ar):
       res.extend([i] * c)
   return res
 
-  
+
 if __name__ == '__main__':
   n = int(input())
   ar = list(map(int, input().split()))

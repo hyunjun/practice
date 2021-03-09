@@ -4,7 +4,7 @@ def fact(n):
       return prod
     return _fact(prod * n, n - 1)
   return _fact(1, n)
-  
+
 def sin(x):
   return x - x**3 / fact(3) + x**5 / fact(5) - x**7 / fact(7) + x**9 / fact(9)
 

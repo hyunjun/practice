@@ -1,6 +1,6 @@
 def print_ar(ar):
   print " ".join([str(a) for a in ar])
-  
+
 def partition(ar, l, r, p):
   # print '\n\nar {}\tl [{}] -> {}\tr [{}] -> {}\tp [{}] -> {}'.format(ar, l, ar[l], r, ar[r], p, ar[p])
   while -1 < l < r:
@@ -36,7 +36,7 @@ def quick_sort(ar):
       # print 'right split l {} r {} p {}'.format(p + 1, r, r)
       data.append((arr, p + 1, r, r))
 
-  
+
 if __name__ == '__main__':
   n = int(raw_input())
   ar = map(int, raw_input().split())

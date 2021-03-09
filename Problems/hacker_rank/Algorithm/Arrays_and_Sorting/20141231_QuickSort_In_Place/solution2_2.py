@@ -28,7 +28,7 @@ def quick_sort(ar):
     print_ar(ar)
     data.append((s, p - 2, p - 1))
     data.append((p + 1, e, e + 1))
-  
+
 if __name__ == '__main__':
   n = int(raw_input())
   ar = map(int, raw_input().split())

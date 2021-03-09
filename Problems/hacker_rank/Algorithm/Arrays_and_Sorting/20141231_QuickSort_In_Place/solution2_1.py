@@ -1,6 +1,6 @@
 def print_ar(ar):
   print " ".join([str(a) for a in ar])
-  
+
 
 def partition(ar, l, r):
   pivot_item = ar[l]
@@ -28,7 +28,7 @@ def quick_sort(ar):
       data.append((ar, l, m - 1))
     if m + 1 < r:
       data.append((ar, m + 1, r))
-  
+
 if __name__ == '__main__':
   n = int(raw_input())
   ar = map(int, raw_input().split())

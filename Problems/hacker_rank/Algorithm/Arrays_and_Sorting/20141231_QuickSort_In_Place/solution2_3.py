@@ -19,7 +19,7 @@ def quick_sort(ar):
     print_ar(ar)
     data.insert(0, (j + 1, e))
     data.insert(0, (s, j - 1))
-  
+
 if __name__ == '__main__':
   n = int(raw_input())
   ar = map(int, raw_input().split())

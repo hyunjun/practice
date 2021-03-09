@@ -9,7 +9,7 @@ def counting_sort(ar):
       counts[i] = counts[i - 1]
   return counts
 
-  
+
 if __name__ == '__main__':
   n, ar = int(input()), []
   for i in range(n):
