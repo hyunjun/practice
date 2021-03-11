@@ -46,7 +46,7 @@ class Solution:
 
     #   runtime; 64ms, 93.33%
     #   memory; 13.4MB, 5.14%
-    def intToRoman(self, num):
+    def intToRoman1(self, num):
         ret = []
         if 1000 <= num:
             ret.append('M' * (num // 1000))
@@ -63,6 +63,18 @@ class Solution:
                 else:
                     ret.append(nDict[1] * d)
                 num %= n
+        return ''.join(ret)
+
+    #   https://leetcode.com/explore/challenge/card/march-leetcoding-challenge-2021/589/week-2-march-8th-march-14th/3667
+    #   runtime: 44ms, 87.75%
+    #   memory: 14.1MB
+    def intToRoman(self, num):
+        ret, numRomanList = [], [(1000, 'M'), (900, 'CM'), (500, 'D'), (400, 'CD'), (100, 'C'), (90, 'XC'), (50, 'L'), (40, 'XL'), (10, 'X'), (9, 'IX'), (5, 'V'), (4, 'IV'), (1, 'I')]
+        for n, roman in numRomanList:
+            if num < n:
+                continue
+            ret.append((num // n) * roman)
+            num %= n
         return ''.join(ret)
 
 
