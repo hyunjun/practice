@@ -66,7 +66,7 @@ class Solution:
 
     #   runtime; 92ms, 75.37%
     #   memory; 16.2MB, 100.00%
-    def deepestLeavesSum(self, root: TreeNode) -> int:
+    def deepestLeavesSum3(self, root: TreeNode) -> int:
         if root is None:
             return 0
         d, q = defaultdict(int), [(0, root)]
@@ -79,6 +79,46 @@ class Solution:
             if n.right:
                 q.append((depth + 1, n.right))
         return sorted(d.items(), key=lambda t: t[0])[-1][1]
+
+    #   https://leetcode.com/explore/challenge/card/april-leetcoding-challenge-2021/594/week-2-april-8th-april-14th/3704
+    #   runtime: 104ms, 24.26%
+    #   memory usage: 17.9MB, 34.98%
+    def deepestLeavesSum4(self, root: TreeNode) -> int:
+        if root is None:
+            return 0
+        maxDepth, curSum, q = 0, 0, [(root, 1)]
+        while q:
+            n, d = q.pop(0)
+            if n.left is None and n.right is None:
+                if d > maxDepth:
+                    maxDepth, curSum = d, n.val
+                elif d == maxDepth:
+                    curSum += n.val
+            if n.left:
+                q.append((n.left, d + 1))
+            if n.right:
+                q.append((n.right, d + 1))
+        return curSum
+
+    #   runtime: 100ms, 33.35%
+    #   memory usage: 17.7MB, 88.56%
+    def deepestLeavesSum(self, root: TreeNode) -> int:
+        self.maxDepth, self.curSum = 0, 0
+
+        def traverseAndSum(node, depth):
+            if node is None:
+                return
+            if node.left is None and node.right is None:
+                if depth > self.maxDepth:
+                    self.maxDepth, self.curSum = depth, node.val
+                elif depth == self.maxDepth:
+                    self.curSum += node.val
+            traverseAndSum(node.left, depth + 1)
+            traverseAndSum(node.right, depth + 1)
+
+        traverseAndSum(root, 1)
+
+        return self.curSum
 
 
 s = Solution()
