@@ -73,6 +73,28 @@ class Solution:
                 stack.pop()
         return ''.join([ch * cnt for ch, cnt in stack])
 
+    #   https://leetcode.com/explore/challenge/card/april-leetcoding-challenge-2021/595/week-3-april-15th-april-21st/3710
+    #   RecursionError: maximum recursion depth exceeded while calling a Python object
+    def removeDuplicates3(self, s: str, k: int) -> str:
+        if s is None or not (1 <= len(s) <= 10 ** 5) or not (2 <= k <= 10 ** 4):
+            return ''
+
+        self.stack = []
+        def recur(i):
+            if i == len(s):
+                return
+            if 0 < len(self.stack) and self.stack[-1][0] == s[i]:
+                self.stack[-1][1] += 1
+            else:
+                self.stack.append([s[i], 1])
+            while 0 < len(self.stack) and self.stack[-1][1] == k:
+                self.stack.pop()
+            recur(i + 1)
+
+        recur(0)
+
+        return ''.join(c * cnt for c, cnt in self.stack)
+
 
 solution = Solution()
 data = [('abcd', 2, 'abcd'),
