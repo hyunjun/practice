@@ -5,7 +5,7 @@
 
 class Solution:
     #   5.52%
-    def countBinarySubstrings(self, s):
+    def countBinarySubstrings0(self, s):
         if s is None or 0 == len(s):
             return 0
         prev, d, count = '', {'0': 0, '1': 0}, 0
@@ -23,10 +23,29 @@ class Solution:
                 d['0'] -= 1
         return count
 
+    #   https://leetcode.com/explore/featured/card/april-leetcoding-challenge-2021/596/week-4-april-22nd-april-28th/3718
+    #   runtime; 376ms
+    #   memory; 14.6MB, 43.11% 
+    def countBinarySubstrings(self, s: str) -> int:
+        i, cnt = 0, 0
+        while i < len(s):
+            j = i + 1
+            while j < len(s) and s[j] == s[i]:
+                j += 1
+            aCnt = j - i
+            k = j
+            while k < len(s) and s[k] != s[i]:
+                k += 1
+            bCnt = k - j
+            cnt += min(aCnt, bCnt)
+            i = j
+        return cnt
+
 
 solution = Solution()
 data = [('00110011', 6),
         ('10101', 4),
+        ('00110', 3),
         ('00100', 2),
         ('000', 0),
         ('111', 0),
