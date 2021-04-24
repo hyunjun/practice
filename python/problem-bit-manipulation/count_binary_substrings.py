@@ -26,7 +26,7 @@ class Solution:
     #   https://leetcode.com/explore/featured/card/april-leetcoding-challenge-2021/596/week-4-april-22nd-april-28th/3718
     #   runtime; 376ms
     #   memory; 14.6MB, 43.11% 
-    def countBinarySubstrings(self, s: str) -> int:
+    def countBinarySubstrings1(self, s: str) -> int:
         i, cnt = 0, 0
         while i < len(s):
             j = i + 1
@@ -40,6 +40,18 @@ class Solution:
             cnt += min(aCnt, bCnt)
             i = j
         return cnt
+
+    #   runtime; 228ms, 16.60%
+    #   memory; 14.6MB, 74.01%
+    def countBinarySubstrings(self, s: str) -> int:
+        cnt, d = 0, {'0': 0, '1': 0}
+        for i, n in enumerate(s):
+            if 0 == i or s[i - 1] == n:
+                d[n] += 1
+            else:
+                cnt += min(d.values())
+                d[n] = 1
+        return cnt + min(d.values())
 
 
 solution = Solution()
