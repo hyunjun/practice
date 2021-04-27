@@ -25,6 +25,7 @@ brew "mas"
 #brew "mongodb/brew/mongodb-community"
 brew "jq"
 brew "postman"
+brew "openinterminal-lite"
 
 cask "anaconda"
 #cask "dbeaver-community"
