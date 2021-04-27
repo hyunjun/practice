@@ -1,3 +1,5 @@
+# https://github.com/pndurette/mac-setup/blob/master/.Brewfile
+
 tap "homebrew/cask-fonts"	#	test 더 필요
 tap "homebrew/bundle"
 tap "homebrew/cask"
@@ -21,10 +23,12 @@ brew "sbt"
 brew "zsh-completions"
 brew "mas"
 #brew "mongodb/brew/mongodb-community"
+brew "jq"
 
 cask "anaconda"
 #cask "dbeaver-community"
 #cask "font-hack-nerd-font"	#	failed
+cask "font-jetbrains-mono"
 cask "iterm2"
 cask "keepingyouawake"
 #cask "powershell"
@@ -37,8 +41,11 @@ cask "dropbox"
 #cask "onedrive"
 cask "jetbrains-toolbox"
 cask "docker"
+cask "dbeaver-community"
+
 mas "Xcode", id: 497799835
 mas "Calendar", id: 415181149
 mas "LINE", id: 539883307
 mas "KakaoTalk", id: 869223134
-#mas "Slack", id: 803453959
+#mas "Slack", id: 803453959 # failed, so used brew install slack
+#mas 'WhatsApp', id: 1147396723 # failed, so used brew install whatsapp
