@@ -24,6 +24,7 @@ brew "zsh-completions"
 brew "mas"
 #brew "mongodb/brew/mongodb-community"
 brew "jq"
+brew "postman"
 
 cask "anaconda"
 #cask "dbeaver-community"
