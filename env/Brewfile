@@ -28,7 +28,7 @@ brew "jq"
 cask "anaconda"
 #cask "dbeaver-community"
 #cask "font-hack-nerd-font"	#	failed
-cask "font-jetbrains-mono"
+cask "font-jetbrains-mono"  # https://github.com/JetBrains/JetBrainsMono
 cask "iterm2"
 cask "keepingyouawake"
 #cask "powershell"
