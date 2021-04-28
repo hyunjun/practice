@@ -43,7 +43,8 @@ cask "dropbox"
 #cask "onedrive"
 cask "jetbrains-toolbox"
 cask "docker"
-cask "dbeaver-community"
+#cask "dbeaver-community"
+#cask "adobe-acrobat-reader"
 
 mas "Xcode", id: 497799835
 mas "Calendar", id: 415181149
