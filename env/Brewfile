@@ -26,6 +26,7 @@ brew "mas"
 brew "jq"
 brew "postman"
 brew "openinterminal-lite"
+brew "ammonite-repl"
 
 cask "anaconda"
 #cask "dbeaver-community"
