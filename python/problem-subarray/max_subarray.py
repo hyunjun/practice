@@ -1,6 +1,9 @@
 #   https://leetcode.com/problems/maximum-subarray
 
 
+from typing import List
+
+
 class Solution:
     #   runtime; 48ms, 97.13%
     def maxSubArray0(self, nums):
@@ -50,7 +53,8 @@ data = [([1, 2], 3),
         ([-2, 1, -3, 4, -1, 2, 1, -5, 4], 6),
         ([1, 3, 2, -1, 4, 5], 14),
         ([1, 3, 2, -8, 2, 2], 6),
+        ([-3, -1, -2, -8], -1),
         ]
 for nums, expected in data:
     real = s.maxSubArray(nums)
-    print('{}, expected {}, real {}, result {}'.format(nums, expected, real, expected == real))
+    print(f'{nums}, expected {expected}, real {real}, result {expected == real}')
