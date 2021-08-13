@@ -28,6 +28,9 @@ brew "postman"
 #brew "mongodb/brew/mongodb-community"
 brew "openinterminal-lite"
 brew "mas"
+brew "itsycal"
+#brew "monosnap"  # Not exist
+#brew "iina"
 
 cask "anaconda"
 #cask "dbeaver-community"
