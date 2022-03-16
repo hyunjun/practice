@@ -9,8 +9,12 @@ tap "homebrew/services"
 tap "homebrew/neovim"
 #tap "mongodb/brew"
 
-brew "ffmpeg"
-#brew "drawio"
+brew "docker"
+brew "docker-machine", restart_service: true, link: false
+cask "docker-toolbox"
+
+brew "bat"
+brew "gh"
 brew "git"
 brew "git-lfs"
 brew "tig"
@@ -20,24 +24,29 @@ brew "neovim"
 brew "node"
 brew "p7zip"
 brew "sbt"
-#brew "tcl-tk"
-#brew "zsh"	#	Catalina는 default zsh
+brew "tcl-tk"
+brew "zsh"	#	Catalina는 default zsh
 brew "zsh-completions"
 brew "jq"
 brew "postman"
-#brew "ammonite-repl"
-#brew "mongodb/brew/mongodb-community"
+brew "ammonite-repl"
+brew "mongodb/brew/mongodb-community"
 brew "openinterminal-lite"
-brew "mas"
+cask "anaconda"
+#cask "dbeaver-community"
+cask "iterm2"
+
+brew "ffmpeg"
+brew "drawio"
 brew "itsycal"
 #brew "monosnap"  # Not exist
 #brew "iina"
+#brew "youtube-dl"
 
-cask "anaconda"
-#cask "dbeaver-community"
 #cask "font-hack-nerd-font"	#	failed
 cask "font-jetbrains-mono"  # https://github.com/JetBrains/JetBrainsMono
-cask "iterm2"
+cask "font-meslo-lg-nerd-font"
+
 cask "keepingyouawake"
 #cask "powershell"
 #cask "visual-studio-code"
@@ -47,14 +56,21 @@ cask "appcleaner"
 cask "spectacle"
 cask "dropbox"
 #cask "onedrive"
+#cask "xmind-zen"
 cask "jetbrains-toolbox"
-cask "docker"
-#cask "dbeaver-community"
 #cask "adobe-acrobat-reader"
+#cask "flutter"
+#cask "virtualbox"
+#cask "whatsapp"
 
-mas "Xcode", id: 497799835
-mas "Calendar", id: 415181149
-mas "LINE", id: 539883307
+brew "mas"
+
+#mas "Jira", id: 1475897096
+#mas "Calendar", id: 415181149
+#mas "LINE", id: 539883307
 mas "KakaoTalk", id: 869223134
 #mas "Slack", id: 803453959 # failed, so used brew install slack
 #mas 'WhatsApp', id: 1147396723 # failed, so used brew install whatsapp
+#mas "Monosnap", id: 540348655
+#mas "Screeny", id: 440991524
+#mas "Xcode", id: 497799835
