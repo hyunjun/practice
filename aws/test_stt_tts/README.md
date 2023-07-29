@@ -22,3 +22,18 @@ https://github.com/hyunjun/practice/assets/248764/670b73de-0ae1-4dd6-8de2-300383
   * [파이썬으로 AI 음성합성하기 Amazon Polly](https://digiconfactory.tistory.com/entry/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-AI-%EC%9D%8C%EC%84%B1%ED%95%A9%EC%84%B1%ED%95%98%EA%B8%B0-Amazon-Polly)
   * [boto3를 사용한 파일 업로드와 파일 다운로드](https://ahnjg.tistory.com/15)
   * [Amazon transcribe로 한국어 음성인식 Speech To Text(STT) 사용하기](https://daeunnniii.tistory.com/122)
+* console example
+
+  ```
+  ❯ aws polly synthesize-speech --output-format mp3 --voice-id Joanna --text "Acme products are of the very highest quality and lowest price." products.mp3
+  ❯ afplay products.mp3
+
+  ❯ aws polly synthesize-speech --output-format mp3 --voice-id Joanna --engine neural --text 'Acme products are of the very highest quality and lowest price.' products-neural.mp3
+  ❯ afplay products-neural.mp3
+
+  ❯ aws polly synthesize-speech --output-format mp3 --voice-id Joanna --engine neural --text-type ssml --text '<speak>Acme products are of the very highest quality and lowest price</speak>' products-neural-ssml.mp3
+  ❯ afplay products-neural-ssml.mp3
+  ```
+
+  * [Generating Speech from SSML Documents - Amazon Polly](https://docs.aws.amazon.com/polly/latest/dg/ssml.html)
+  * [Supported SSML Tags - Amazon Polly](https://docs.aws.amazon.com/polly/latest/dg/supportedtags.html)
