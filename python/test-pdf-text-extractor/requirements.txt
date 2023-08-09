@@ -1,3 +1,6 @@
 PyPDF2
 #PyMuPDF
 #fitz
+pdfminer.six
+pdfplumber
+tabula-py
