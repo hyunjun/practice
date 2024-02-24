@@ -1,0 +1,10 @@
+# Use the main rust Docker image(메인 rust 도커 이미지를 사용한다)
+FROM rust
+# copy app into docker image(app을 도커 이미지에 복사한다)
+COPY . /app
+# Set the workdirectory(작업 디렉터리를 설정한다)
+WORKDIR /app
+# build the app(앱을 빌드한다)
+RUN cargo build --release
+# start the application(애플리케이션을 시작한다)
+CMD ["./target/release/docker-rust"]
