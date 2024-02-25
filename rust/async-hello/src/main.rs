@@ -6,11 +6,11 @@ async fn main() {
     println!("Hello before reading file!");
 
     let h1 = tokio::spawn(async {
-        let file1_contents = read_from_file1();
+        let file1_contents = read_from_file1().await;
     });
 
     let h2 = tokio::spawn(async {
-        let file2_contents = read_from_file2();
+        let file2_contents = read_from_file2().await;
     });
 
     let _= tokio::join!(h1, h2);
