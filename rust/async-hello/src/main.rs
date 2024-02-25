@@ -13,7 +13,7 @@ impl Future for ReadFileFuture {
       Poll<Self::Output> {
         println!("Tokio! Stop polling me");
         cx.waker().wake_by_ref();
-        Poll::Pending
+        Poll::Ready(String::from("Hello, there from file 1"))
     }
 }
 
@@ -23,7 +23,7 @@ async fn main() {
 
     let h1 = tokio::spawn(async {
         let future1 = ReadFileFuture {};
-        future1.await
+        println!("{:?}", future1.await);
     });
 
     let h2 = tokio::spawn(async {
@@ -38,7 +38,6 @@ async fn main() {
 fn read_from_file2() -> impl Future<Output=String> {
     async {
         sleep(Duration::new(2, 0));
-        println!("{:?}", "Processing file 2");
         String::from("Hello, there from file 2")
     }
 }
