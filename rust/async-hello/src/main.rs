@@ -9,9 +9,10 @@ struct ReadFileFuture {}
 impl Future for ReadFileFuture {
     type Output = String;
 
-    fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) ->
+    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) ->
       Poll<Self::Output> {
         println!("Tokio! Stop polling me");
+        cx.waker().wake_by_ref();
         Poll::Pending
     }
 }
